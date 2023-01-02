@@ -1,25 +1,21 @@
 package hr.bp.aoc.day7;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Directory extends File {
 
-    private ArrayList<File> files;
-    private Directory parent;
+    private List<File> files;
+    private final Directory parent;
 
     public Directory(String name, Directory parent) {
         super(name, 0);
         this.parent = parent;
-        this.files = new ArrayList<File>();
+        this.files = new ArrayList<>();
     }
 
     public Directory getParent() {
         return parent;
-    }
-
-
-    public ArrayList<File> getFiles() {
-        return files;
     }
 
     public void addFile(File file) {
@@ -35,9 +31,9 @@ public class Directory extends File {
     }
 
     public Directory getDir(String directoryName) {
-        for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).getName().equals(directoryName)) {
-                return (Directory) files.get(i);
+        for (File file : files) {
+            if (file.getName().equals(directoryName)) {
+                return (Directory) file;
             }
 
         }
