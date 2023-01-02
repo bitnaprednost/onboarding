@@ -1,11 +1,11 @@
-package hr.bp.aoc.day8;
+package hr.bp.aoc;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class InputUtil {
-    static String[] readLines(String filePath) {
+public final class InputUtil {
+    public static String[] readLines(String filePath) {
         try {
             String input = new String(Files.readAllBytes(Paths.get(filePath)));
 
