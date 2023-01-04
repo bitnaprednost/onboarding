@@ -2,31 +2,55 @@ package hr.bp.aoc.day1;
 
 import hr.bp.aoc.InputUtil;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class CalorieCounting {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        String filePath = "src/hr/bp/aoc/day1/inputday1.txt";
+		if (args.length != 1) {
+			System.out.println("Missing part id argument... please pass [1] for part 1 or [2] for part 2");
+
+			System.exit(1);
+
+			return;
+		}
+
+		int part = validatePart(Integer.parseInt(args[0]));
+
+		Path inputFilePath = InputUtil.getPath(CalorieCounting.class, "inputday1.txt");
 
         List<String> lines = new ArrayList<>();
 
-        Collections.addAll(lines, InputUtil.readLines(filePath));
+		Path filePath = inputFilePath.toAbsolutePath();
+
+		Collections.addAll(lines, InputUtil.readLines(filePath.toString()));
 
         List<Integer> sumGroups = totalCaloriesCarriedByEachElf(lines);
 
-        //Part One
-        int maxCalories = maxCaloriesCarrying(sumGroups);
-        System.out.println("Elf is carrying " + maxCalories + " calories.");
+		if (part == 1) {
+			int maxCalories = maxCaloriesCarrying(sumGroups);
+			System.out.println("Elf is carrying " + maxCalories + " calories.");
 
-        //Part Two
+			System.exit(1);
+			return;
+		}
+
         int sumOfTopThreeElves = sumOfThreeElves(sumGroups);
         System.out.println("Top three Elves are carrying " + sumOfTopThreeElves + " calories");
 
-
+		System.exit(1);
     }
+
+	private static int validatePart(int part) {
+		if ((part < 1) || (part > 2)) {
+			throw new IllegalArgumentException("Part should be 1 or 2");
+		}
+
+		return part;
+	}
 
     private static List<Integer> totalCaloriesCarriedByEachElf(List<String> lines) {
         int sumCalories = 0;
