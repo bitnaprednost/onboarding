@@ -1,7 +1,10 @@
 package hr.bp.aoc;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public final class InputUtil {
@@ -18,4 +21,11 @@ public final class InputUtil {
 
         return new String[]{};
     }
+
+	public static Path getPath(Class clazz, String fileName) throws URISyntaxException {
+		URL fileURL = clazz.getResource(fileName);
+
+		return Paths.get(fileURL.toURI());
+	}
+
 }
