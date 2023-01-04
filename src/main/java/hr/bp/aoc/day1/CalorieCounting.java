@@ -19,75 +19,28 @@ public class CalorieCounting {
 			return;
 		}
 
-		int part = validatePart(Integer.parseInt(args[0]));
+		CalorieCounter calorieCounter = getCalorieCounter(Integer.parseInt(args[0]));
 
 		Path inputFilePath = InputUtil.getPath(CalorieCounting.class, "inputday1.txt");
 
 		Path filePath = inputFilePath.toAbsolutePath();
 
-
-		CalorieCounting calorieCounting = new CalorieCounting();
-
-		if (part == 1) {
-			System.out.printf(
-				"Elf is carrying %d calories.\n",
-				calorieCounting.maxCaloriesCarrying(
-					Arrays.asList(InputUtil.readLines(filePath.toString()))));
-
-			System.exit(1);
-			return;
-		}
+		int calories = calorieCounter.getCalories(Arrays.asList(InputUtil.readLines(filePath.toString())));
 
         System.out.printf(
-			"Top three Elves are carrying %d calories\n",
-			calorieCounting.sumOfThreeElves(
-				Arrays.asList(InputUtil.readLines(filePath.toString()))));
+			"%s carry %d calories\n", calorieCounter.getNumberOfElvesLabel(), calories);
 
 		System.exit(1);
     }
 
-	private static int validatePart(int part) {
-		if ((part < 1) || (part > 2)) {
-			throw new IllegalArgumentException("Part should be 1 or 2");
+	private static CalorieCounter getCalorieCounter(int metodology) {
+		if (metodology == 1) {
+			return new TotalCalorieCounterImpl();
+		} else if (metodology == 2) {
+			return new ThreeElvesCalorieCounterImpl();
 		}
 
-		return part;
+		throw new IllegalArgumentException("Part should be 1 or 2");
 	}
 
-    private List<Integer> totalCaloriesCarriedByEachElf(List<String> lines) {
-        int sumCalories = 0;
-        List<Integer> sumGroups = new ArrayList<>();
-        for (String line : lines) {
-            if (line.isBlank()) {
-                sumGroups.add(sumCalories);
-                sumCalories = 0;
-                continue;
-            }
-            sumCalories += Integer.parseInt(line);
-        }
-        sumGroups.add(sumCalories);
-        return sumGroups;
-    }
-
-    private int maxCaloriesCarrying(List<String> lines) {
-		List<Integer> sumGroups = totalCaloriesCarriedByEachElf(lines);
-
-        int maxCalories = 0;
-
-		for (Integer sumGroup : sumGroups) {
-            if (maxCalories < sumGroup) {
-                maxCalories = sumGroup;
-            }
-        }
-
-        return maxCalories;
-    }
-
-    private int sumOfThreeElves(List<String> lines) {
-		List<Integer> sumGroups = totalCaloriesCarriedByEachElf(lines);
-
-        sumGroups.sort(Collections.reverseOrder());
-
-		return sumGroups.get(0) + sumGroups.get(1) + sumGroups.get(2);
-    }
 }
