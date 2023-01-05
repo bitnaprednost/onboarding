@@ -22,10 +22,23 @@ public final class InputUtil {
         return new String[]{};
     }
 
-	public static Path getPath(Class clazz, String fileName) throws URISyntaxException {
-		URL fileURL = clazz.getResource(fileName);
+    public static Path getPath(Class clazz, String fileName) throws URISyntaxException {
+        URL fileURL = clazz.getResource(fileName);
 
-		return Paths.get(fileURL.toURI());
-	}
+        return Paths.get(fileURL.toURI());
+    }
+    public static String[] readLines(Path filePath) {
+        try {
+            String input = new String(Files.readAllBytes(filePath));
+
+            if ((input != null) && !input.isEmpty()) {
+                return input.split("\n");
+            }
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+        return new String[]{};
+    }
 
 }
