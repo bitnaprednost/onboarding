@@ -2,6 +2,7 @@ package hr.bp.aoc.day5;
 
 import hr.bp.aoc.InputUtil;
 
+import java.nio.file.Path;
 import java.util.*;
 import java.util.Collections;
 
@@ -9,8 +10,11 @@ import static hr.bp.aoc.day5.CratesUtil.*;
 
 public class SupplyStacks {
 
-    public static void main(String[] args) {
-        String filePath = "src/hr/bp/aoc/day5/inputday5.txt";
+    public static void main(String[] args) throws Exception {
+
+        Path inputFilePath = InputUtil.getPath(SupplyStacks.class, "inputday5.txt");
+        Path filePath = inputFilePath.toAbsolutePath();
+
         String[] input = InputUtil.readLines(filePath);
 
         List<String> crates = new ArrayList<>();

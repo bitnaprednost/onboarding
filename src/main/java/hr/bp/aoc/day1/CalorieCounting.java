@@ -1,12 +1,8 @@
 package hr.bp.aoc.day1;
 
 import hr.bp.aoc.InputUtil;
-
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class CalorieCounting {
     public static void main(String[] args) throws Exception {
@@ -25,10 +21,10 @@ public class CalorieCounting {
 
 		Path filePath = inputFilePath.toAbsolutePath();
 
-		int calories = calorieCounter.getCalories(Arrays.asList(InputUtil.readLines(filePath.toString())));
+		int calories = calorieCounter.getCalories(Arrays.asList(InputUtil.readLines(filePath)));
 
         System.out.printf(
-			"%s carry %d calories\n", calorieCounter.getNumberOfElvesLabel(), calories);
+			"%s carrying %d calories\n", calorieCounter.getNumberOfElvesLabel(), calories);
 
 		System.exit(1);
     }
@@ -39,7 +35,6 @@ public class CalorieCounting {
 		} else if (metodology == 2) {
 			return new ThreeElvesCalorieCounterImpl();
 		}
-
 		throw new IllegalArgumentException("Part should be 1 or 2");
 	}
 

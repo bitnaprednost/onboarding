@@ -1,14 +1,16 @@
 package hr.bp.aoc.day8;
 
 import hr.bp.aoc.InputUtil;
-
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TreetopTreeHouse {
-    public static void main(String[] args) {
-        String filePath = "src/hr/bp/aoc/day8/inputday8.txt";
+    public static void main(String[] args) throws Exception{
+
+        Path inputFilePath = InputUtil.getPath(TreetopTreeHouse.class, "inputday8.txt");
+        Path filePath = inputFilePath.toAbsolutePath();
 
         List<String> rows = new ArrayList<>(Arrays.asList(InputUtil.readLines(filePath)));
         int[][] treeArray = asArray(rows);

@@ -1,19 +1,21 @@
 package hr.bp.aoc.day9;
 
 import hr.bp.aoc.InputUtil;
-
+import java.nio.file.Path;
 import java.util.*;
 
 public class RopeBridge {
     private static final Map<String, Position> direction = new HashMap<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         direction.put("R", new Position(1, 0));
         direction.put("L", new Position(-1, 0));
         direction.put("U", new Position(0, 1));
         direction.put("D", new Position(0, -1));
 
-        String filePath = "src/hr/bp/aoc/day9/inputday9.txt";
+        Path inputFilePath = InputUtil.getPath(RopeBridge.class, "inputday9.txt");
+        Path filePath = inputFilePath.toAbsolutePath();
+
         List<String> moves = new ArrayList<>(Arrays.asList(InputUtil.readLines(filePath)));
 
         List<Position> tailPositionsPartOne = new LinkedList<>();

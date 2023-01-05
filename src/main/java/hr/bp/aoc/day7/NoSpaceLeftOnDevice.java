@@ -2,12 +2,16 @@ package hr.bp.aoc.day7;
 
 import hr.bp.aoc.InputUtil;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NoSpaceLeftOnDevice {
-    public static void main(String[] args) {
-        String filePath = "src/hr/bp/aoc/day7/inputday7.txt";
+    public static void main(String[] args) throws Exception{
+
+        Path inputFilePath = InputUtil.getPath(NoSpaceLeftOnDevice.class, "inputday7.txt");
+        Path filePath = inputFilePath.toAbsolutePath();
+
         String[] lines = InputUtil.readLines(filePath);
 
         Directory root = new Directory("/", null);

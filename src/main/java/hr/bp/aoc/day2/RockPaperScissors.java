@@ -2,14 +2,17 @@ package hr.bp.aoc.day2;
 
 import hr.bp.aoc.InputUtil;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class RockPaperScissors {
 
-    public static void main(String[] args) {
-        String filePath = "src/hr/bp/aoc/day2/inputday2.txt";
+    public static void main(String[] args) throws Exception {
+
+        Path inputFilePath = InputUtil.getPath(RockPaperScissors.class, "inputday2.txt");
+        Path filePath = inputFilePath.toAbsolutePath();
 
         List<String> lines = new ArrayList<>();
         Collections.addAll(lines, InputUtil.readLines(filePath));
