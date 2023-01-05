@@ -21,7 +21,7 @@ public class TotalCalorieCounterImpl extends BaseCalorieCounter {
 
 	@Override
 	public String getNumberOfElvesLabel() {
-		return "All elves";
+		return "Top elf is";
 	}
 
 }

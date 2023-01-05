@@ -16,7 +16,7 @@ public class ThreeElvesCalorieCounterImpl extends BaseCalorieCounter {
 
 	@Override
 	public String getNumberOfElvesLabel() {
-		return "Three elves";
+		return "Top three elves are";
 	}
 
 }
