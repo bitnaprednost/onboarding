@@ -1,10 +1,12 @@
 package hr.bp.aoc.day11;
 
-import java.util.List;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Monkey {
-    private List<Long> items = new ArrayList<>();
+    private List<BigInteger> items = new ArrayList<>();
     private final String[] operation;
     private final int test;
     private final int trueValue;
@@ -14,7 +16,7 @@ public class Monkey {
 
     public Monkey(List<String> items, String[] operation, String test, String trueValue, String falseValue) {
         for (String item : items) {
-            this.addItem(Integer.parseInt(item));
+            this.addItem(new BigInteger(item));
         }
         this.operation = operation;
         this.test = Integer.parseInt(test);
@@ -22,7 +24,7 @@ public class Monkey {
         this.falseValue = Integer.parseInt(falseValue);
     }
 
-    public void addItem(long item) {
+    public void addItem(BigInteger item) {
         items.add(item);
     }
 
@@ -31,7 +33,7 @@ public class Monkey {
         return numberOfInspections;
     }
 
-    public List<Long> getItems() {
+    public List<BigInteger> getItems() {
         return items;
     }
 
@@ -52,18 +54,18 @@ public class Monkey {
         return falseValue;
     }
 
-    public void setWorryLevel(long item, long worryLevel) {
+    public void setWorryLevel(BigInteger item, BigInteger worryLevel) {
         int index = this.items.indexOf(item);
         if (index >= 0) {
             this.items.set(index, worryLevel);
         }
     }
 
-    public void updateNumberOfInspections(){
-       numberOfInspections++;
+    public void updateNumberOfInspections() {
+        numberOfInspections++;
     }
 
-    public void removeItems(){
+    public void removeItems() {
         items.clear();
     }
 }

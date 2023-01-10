@@ -2,6 +2,7 @@ package hr.bp.aoc.day11;
 
 import hr.bp.aoc.InputUtil;
 
+import java.math.BigInteger;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,86 +11,127 @@ import java.util.List;
 
 public class MonkeyInTheMiddle {
 
+    private static final int numberOfRoundsPartOne = 20;
+    private static final int divisorPartOne = 3;
+    private static final int numberOfRoundsPartTwo = 10000;
+    private static final int divisorPartTwo = 1;
+
+    private static int mod;
+
+
     public static void main(String[] args) throws Exception {
 
         Path inputFilePath = InputUtil.getPath(MonkeyInTheMiddle.class, "inputday11.txt");
         Path filePath = inputFilePath.toAbsolutePath();
         List<String> input = new ArrayList<>(Arrays.asList(InputUtil.readLines(filePath)));
 
-        List<Monkey> monkeys = createListOfMonkeys(input);
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < monkeys.size(); j++) {
-                Monkey currentMonkey = monkeys.get(j);
-                for (Long item : currentMonkey.getItems()) {
-                    currentMonkey.updateNumberOfInspections();
-                    long newWorryLevel = recalculateWorryLevel(currentMonkey, item);
-                    currentMonkey.setWorryLevel(item, newWorryLevel);
-                    throwItem(newWorryLevel, currentMonkey, monkeys);
-                }
-                currentMonkey.removeItems();
-            }
-        }
-        List<Integer> monkeyBusiness = new ArrayList<>();
+        BigInteger resultOne = levelOfMonkeyBusiness(createListOfMonkeys(input), numberOfRoundsPartOne, divisorPartOne);
+        System.out.println(resultOne);
 
+        BigInteger resultTwo = levelOfMonkeyBusiness(createListOfMonkeys(input), numberOfRoundsPartTwo, divisorPartTwo);
+        System.out.println(resultTwo);
+    }
+
+    private static BigInteger levelOfMonkeyBusiness(List<Monkey> monkeys, int numberOfInspections, int divisor) {
+        inspection(numberOfInspections, monkeys, divisor);
+        List<Integer> monkeyBusiness = new ArrayList<>();
         for (Monkey monkey : monkeys) {
             monkeyBusiness.add(monkey.getNumberOfInspections());
         }
+        System.out.println(monkeyBusiness);
         monkeyBusiness.sort(Collections.reverseOrder());
-        System.out.println(monkeyBusiness.get(0) * monkeyBusiness.get(1));
+        BigInteger one = BigInteger.valueOf(monkeyBusiness.get(0));
+        BigInteger two = BigInteger.valueOf(monkeyBusiness.get(1));
+        return one.multiply(two);
     }
 
-    private static List<Monkey> createListOfMonkeys(List<String> input) {
-        List<Monkey> monkeys = new ArrayList<>();
-        for (int i = 0; i < input.size(); i += 7) {
-            String itemsLine = input.get(i + 1).replaceAll("[^0-9]", " ");
-            itemsLine = itemsLine.trim().replaceAll(" +", " ");
-
-            List<String> items = List.of(itemsLine.split(" "));
-
-            String[] operationLine = input.get(i + 2).trim().split(" ");
-            String[] operation = {operationLine[4], operationLine[5]};
-
-            String[] testLine = input.get(i + 3).trim().split(" ");
-            String test = testLine[3];
-
-            String[] trueLine = input.get(i + 4).trim().split(" ");
-            String trueValue = trueLine[5];
-
-            String[] falseLine = input.get(i + 5).trim().split(" ");
-            String falseValue = falseLine[5];
-
-            Monkey monkey = new Monkey(items, operation, test, trueValue, falseValue);
-            monkeys.add(monkey);
-
+    private static void inspection(int numberOfInspections, List<Monkey> monkeys, int divisor) {
+        for (int i = 0; i < numberOfInspections; i++) {
+            startRound(monkeys, divisor);
         }
-        return monkeys;
     }
 
-    private static long recalculateWorryLevel(Monkey monkey, long item) {
-        long newWorryLevel;
-        String[] operation = monkey.getOperation();
-        String arithmeticOperation = operation[0];
-        long operator;
+    private static void startRound(List<Monkey> monkeys, int divisor) {
+        for (int j = 0; j < monkeys.size(); j++) {
+            Monkey currentMonkey = monkeys.get(j);
+            String[] operation = currentMonkey.getOperation();
+            String arithmeticOperation = operation[0];
+            String operator = operation[1];
+            for (BigInteger item : currentMonkey.getItems()) {
+                currentMonkey.updateNumberOfInspections();
+                BigInteger newWorryLevel = recalculateWorryLevel(operator, arithmeticOperation, item, divisor);
+                currentMonkey.setWorryLevel(item, newWorryLevel);
+                throwItem(newWorryLevel, currentMonkey, monkeys);
+            }
+            currentMonkey.removeItems();
+        }
+    }
 
-        if (operation[1].equals("old")) {
-            operator = item;
-        } else operator = Integer.parseInt(operation[1]);
+    private static BigInteger recalculateWorryLevel(String operator, String arithmeticOperation, BigInteger item, int divisor) {
+        BigInteger newWorryLevel;
+        BigInteger element;
+
+        if (operator.equals("old")) {
+            element = item;
+        } else {
+            element = new BigInteger(operator);
+        }
 
         if (arithmeticOperation.equals("*")) {
-            newWorryLevel = item * operator;
+            newWorryLevel = item.multiply(element);
         } else {
-            newWorryLevel = item + operator;
+            newWorryLevel = item.add(element);
         }
 
-        newWorryLevel /= 3;
+        newWorryLevel = newWorryLevel.divide(BigInteger.valueOf(divisor));
+        newWorryLevel = (newWorryLevel.divideAndRemainder(BigInteger.valueOf(mod)))[1];
         return newWorryLevel;
     }
 
-    private static void throwItem(long newWorryLevel, Monkey currentMonkey, List<Monkey> monkeys) {
-        if (newWorryLevel % currentMonkey.getTest() == 0) {
+
+    private static void throwItem(BigInteger newWorryLevel, Monkey currentMonkey, List<Monkey> monkeys) {
+        BigInteger[] answer = newWorryLevel.divideAndRemainder(BigInteger.valueOf(currentMonkey.getTest()));
+        if (answer[1].equals(BigInteger.valueOf(0))) {
             monkeys.get(currentMonkey.getTrueValue()).addItem(newWorryLevel);
         } else {
             monkeys.get(currentMonkey.getFalseValue()).addItem(newWorryLevel);
         }
     }
+
+
+    private static List<Monkey> createListOfMonkeys(List<String> input) {
+        mod = 1;
+        List<Monkey> monkeys = new ArrayList<>();
+        for (int i = 0; i < input.size(); i += 7) {
+            List<String> monkeyInput = input.subList(i, i + 6);
+            monkeys.add(createMonkey(monkeyInput));
+        }
+
+        return monkeys;
+    }
+
+    private static Monkey createMonkey(List<String> monkeyInput) {
+
+        String itemsLine = monkeyInput.get(1).replaceAll("[^0-9]", " ");
+        itemsLine = itemsLine.trim().replaceAll(" +", " ");
+
+        List<String> items = List.of(itemsLine.split(" "));
+
+        String[] operationLine = monkeyInput.get(2).trim().split(" ");
+        String[] operation = {operationLine[4], operationLine[5]};
+
+        String[] testLine = monkeyInput.get(3).trim().split(" ");
+        String test = testLine[3];
+        mod *= Integer.parseInt(test);
+
+        String[] trueLine = monkeyInput.get(4).trim().split(" ");
+        String trueValue = trueLine[5];
+
+        String[] falseLine = monkeyInput.get(5).trim().split(" ");
+        String falseValue = falseLine[5];
+
+        return new Monkey(items, operation, test, trueValue, falseValue);
+    }
+
+
 }
