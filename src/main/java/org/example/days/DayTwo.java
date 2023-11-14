@@ -30,7 +30,7 @@ public class DayTwo {
         System.out.println(sum);
 
     }
-
+//TODO Mjenjaj Algoritam ASAP!!!!!
     private int calculateGamePointsSum(List<Game> games) {
         int sum = 0;
         for (Game game:games){

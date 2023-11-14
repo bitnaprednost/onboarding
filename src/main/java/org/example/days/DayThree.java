@@ -1,6 +1,7 @@
 package org.example.days;
 
 import org.example.days.model.Backpack;
+import org.example.days.model.Day;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,36 +12,34 @@ import java.util.List;
 /**
  * @author Luka Ljubić
  */
-public class DayThree {
-    public void executeDay(){
+public class DayThree implements Day {
 
+    final String backpackDataPath = "src/main/resources/backpackData.txt";
+    List<String> backpackDataList = readBackpackData(backpackDataPath);
+    List<Backpack> backpacksList = new ArrayList<>();
 
-        final String backpackDataPath = "/home/user/Downloads/LUKA/Java1_Exercise0506/AdventOfCode/src/main/resources/backpackData.txt";
-        List<String> backpackDataList = readBackpackData(backpackDataPath);
-        List<Backpack> backpacksList = new ArrayList<>();
-
+    @Override
+    public void executePartOne() {
         sliceAndCreateCompartments(backpackDataList, backpacksList);
-
 
         List<Character> duplicatesInBackpack = findDuplicates(backpacksList);
         int sum = calculateSumOfTheDuplicates(duplicatesInBackpack);
 
-        duplicatesInBackpack.forEach(System.out::println);
-
         System.out.println(sum);
+    }
 
-
+    @Override
+    public void executePartTwo() {
 
     }
 
     private int calculateSumOfTheDuplicates(List<Character> duplicatesInBackpack) {
         int sum = 0;
-        for (Character duplicate:duplicatesInBackpack){
-            if (Character.isUpperCase(duplicate)){
-                sum+=((int)duplicate - 38);
-            }
-            else{
-                sum+=((int)duplicate - 96);
+        for (Character duplicate : duplicatesInBackpack) {
+            if (Character.isUpperCase(duplicate)) {
+                sum += ((int) duplicate - 38);
+            } else {
+                sum += ((int) duplicate - 96);
             }
         }
         return sum;
@@ -48,14 +47,14 @@ public class DayThree {
 
     private ArrayList<Character> findDuplicates(List<Backpack> backpacksList) {
         ArrayList<Character> duplicates = new ArrayList<>();
-        for (Backpack backpack:backpacksList){
+        for (Backpack backpack : backpacksList) {
             String firstCompartmant = backpack.getFirstCompartment();
             String secondCompartmant = backpack.getSecondCompartment();
 
-            for (int i = 0; i<firstCompartmant.length();i++){
-                    if (firstCompartmant.contains(Character.toString(secondCompartmant.charAt(i)))){
-                        duplicates.add(secondCompartmant.charAt(i));
-                        break;
+            for (int i = 0; i < firstCompartmant.length(); i++) {
+                if (firstCompartmant.contains(Character.toString(secondCompartmant.charAt(i)))) {
+                    duplicates.add(secondCompartmant.charAt(i));
+                    break;
                 }
             }
         }
@@ -63,15 +62,15 @@ public class DayThree {
     }
 
     private void sliceAndCreateCompartments(List<String> backpackDataList, List<Backpack> backpacksList) {
-        for (String bacpackData:backpackDataList){
+        for (String bacpackData : backpackDataList) {
 
             char[] bacpackDataInChar = bacpackData.toCharArray();
-            int index = bacpackData.length()/2;
+            int index = bacpackData.length() / 2;
 
-            String firstCompartment = new String(bacpackDataInChar,0, index);
-            String secondCompartment = new String(bacpackDataInChar,index, bacpackData.length() - index);
+            String firstCompartment = new String(bacpackDataInChar, 0, index);
+            String secondCompartment = new String(bacpackDataInChar, index, bacpackData.length() - index);
 
-            backpacksList.add(new Backpack(firstCompartment,secondCompartment));
+            backpacksList.add(new Backpack(firstCompartment, secondCompartment));
 
         }
     }
@@ -85,4 +84,6 @@ public class DayThree {
         }
         return backpackDataList;
     }
+
+
 }
