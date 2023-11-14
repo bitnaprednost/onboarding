@@ -1,33 +1,12 @@
 package day4;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import util.Parser;
+
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Main {
-
-    private static String getTextFromFile(String file) throws IOException {
-        String everything = null;
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        try {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            everything = sb.toString();
-        } finally {
-            br.close();
-        }
-
-        return everything;
-    }
 
     private static List<List<List<Integer>>> textToListHell(String input) {
         List<List<List<Integer>>> result = new ArrayList<>();
@@ -43,7 +22,7 @@ public class Main {
     }
 
     public static void main(String args[]) throws IOException {
-        String input = getTextFromFile("Resources/day4Data.txt");
+        String input = Parser.getTextFromFile("Resources/day4Data.txt");
         List<List<List<Integer>>> lists = textToListHell(input);
 
         long result1 = lists.stream().map(array -> {
@@ -63,7 +42,6 @@ public class Main {
         }).filter(pred->pred).count();
 
         System.out.println(result2);
-        //test
     }
 
 
