@@ -14,7 +14,8 @@ public class Main {
         //DayTwo dayTwo = new DayTwo();
         //dayTwo.executeDay();
 
-        DayThree dayThree = new DayThree();
-        dayThree.executePartOne();
+       DayThree dayThree = new DayThree();
+        dayThree.executePartTwo();
     }
+
 }

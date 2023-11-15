@@ -4,6 +4,7 @@ import org.example.days.model.Day;
 import org.example.days.model.Elf;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;

@@ -11,6 +11,9 @@ public class Backpack {
         this.firstCompartment = firstCompartment;
         this.secondCompartment = secondCompartment;
     }
+    public String combineCompartments(){
+        return firstCompartment + secondCompartment;
+    }
 
     public String getFirstCompartment() {
         return firstCompartment;

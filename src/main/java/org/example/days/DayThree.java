@@ -2,6 +2,8 @@ package org.example.days;
 
 import org.example.days.model.Backpack;
 import org.example.days.model.Day;
+import org.example.days.model.Elf;
+import org.example.days.model.ElfGroup;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,7 +32,32 @@ public class DayThree implements Day {
 
     @Override
     public void executePartTwo() {
+        sliceAndCreateCompartments(backpackDataList, backpacksList);
 
+        ArrayList elfGroups = new ArrayList<>();
+        elfGroups = sliceDataAndCreateElfGroups();
+
+
+    }
+
+    private ArrayList sliceDataAndCreateElfGroups() {
+        ArrayList<ElfGroup> elfGroups = new ArrayList<>();
+        String tempLine;
+        List<String> tempList = new ArrayList<>();
+        int counter = 0;
+
+        for (Backpack backpack : backpacksList) {
+            tempLine = backpack.combineCompartments();
+            tempList.add(tempLine);
+            counter++;
+
+            if (counter == 3) {
+                elfGroups.add(ElfGroup.of(tempList));
+                tempList.clear();
+                counter = 0;
+            }
+        }
+        return elfGroups;
     }
 
     private int calculateSumOfTheDuplicates(List<Character> duplicatesInBackpack) {
