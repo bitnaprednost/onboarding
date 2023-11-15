@@ -34,13 +34,15 @@ public class DayThree implements Day {
     public void executePartTwo() {
         sliceAndCreateCompartments(backpackDataList, backpacksList);
 
-        ArrayList elfGroups = new ArrayList<>();
+        ArrayList<ElfGroup> elfGroups = new ArrayList<>();
         elfGroups = sliceDataAndCreateElfGroups();
+
+        elfGroups.forEach(elf -> System.out.println(elf.toString()));
 
 
     }
 
-    private ArrayList sliceDataAndCreateElfGroups() {
+    private ArrayList<ElfGroup> sliceDataAndCreateElfGroups() {
         ArrayList<ElfGroup> elfGroups = new ArrayList<>();
         String tempLine;
         List<String> tempList = new ArrayList<>();
