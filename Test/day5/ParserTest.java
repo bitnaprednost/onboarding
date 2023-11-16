@@ -10,13 +10,11 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
-    ParserDay5 parser;
     String boxesString;
     String commandsString;
 
     @BeforeEach
     void init(){
-        parser = new ParserDay5();
         boxesString = "    [D]\n" +
                         "[N] [C]\n" +
                         "[Z] [M] [P]\n" +
@@ -42,7 +40,7 @@ class ParserTest {
                 "\n" +
                 "move 1 from 2 to 1\n" +
                 "move 3 from 1 to 3";
-        String[] split = parser.splitInput(input);
+        String[] split = ParserDay5.splitInput(input);
 
         assertEquals(boxesString, split[0]);
         assertEquals(commandsString, split[1]);
@@ -51,7 +49,7 @@ class ParserTest {
     @Test
     public void parserCanExtractNumberOfBoxes() throws IOException {
         String boxStringLastLine = " 1   2   3 ";
-        int numberOfBoxes = parser.extractBoxNumber(boxStringLastLine);
+        int numberOfBoxes = ParserDay5.extractBoxNumber(boxStringLastLine);
 
         assertEquals(3, numberOfBoxes);
     }
@@ -59,7 +57,7 @@ class ParserTest {
     @Test
     public void parserMakesLotsOfStacks() throws IOException {
         int numberOfWantedBoxes = 3;
-        List<Stack<String>> stacks = parser.createStacks(numberOfWantedBoxes);
+        List<Stack<String>> stacks = ParserDay5.createStacks(numberOfWantedBoxes);
 
         Stack<String> stack1 = new Stack<>();
         Stack<String> stack2 = new Stack<>();
@@ -74,7 +72,7 @@ class ParserTest {
 
     @Test
     public void parserCanParseBoxes() throws IOException {
-        Map<Integer, Stack<String>> boxes = parser.parseBoxes(boxesString);
+        Map<Integer, Stack<String>> boxes = ParserDay5.parseBoxes(boxesString);
 
         Stack<String> stack1 = new Stack<>();
         stack1.push("Z");
@@ -95,7 +93,7 @@ class ParserTest {
 
     @Test
     public void parserCanParseCommands(){
-        String[] commands = parser.parseCommands(commandsString);
+        String[] commands = ParserDay5.parseCommands(commandsString);
 
         assertAll("Commands match",
                 () -> assertEquals("move 1 from 2 to 1", commands[0]),

@@ -8,7 +8,6 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //ParserDay5 parser = new ParserDay5();
         String textFromFile = Parser.getTextFromFile("Resources/day5Data.txt");
         String[] inputs = ParserDay5.splitInput(textFromFile);
         String[] commands = ParserDay5.parseCommands(inputs[1]);

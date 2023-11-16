@@ -21,8 +21,7 @@ class CraneTest {
                 "[N] [C]    \n" +
                 "[Z] [M] [P]\n" +
                 " 1   2   3 ";
-        ParserDay5 parser = new ParserDay5();
-        Map<Integer, Stack<String>> stacks = parser.parseBoxes(boxesString);
+        Map<Integer, Stack<String>> stacks = ParserDay5.parseBoxes(boxesString);
         crates = new Crates(stacks);
         crane9000 = new CrateMover9000(crates);
         crane9001 = new CrateMover9001(crates);
