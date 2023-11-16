@@ -8,13 +8,15 @@ import java.nio.file.Files;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class Parser {
+public interface Parser {
 
-    public static String getTextFromFile(String fileName) throws IOException {
+     static String getTextFromFile(String fileName) throws IOException {
         String everything = null;
         try (Stream<String> linesStream = Files.lines(new File(fileName).toPath())) {
             everything = linesStream.collect(Collectors.joining("\n"));
         }
         return everything;
     }
+
+
 }

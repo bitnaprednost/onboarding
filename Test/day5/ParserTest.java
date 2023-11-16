@@ -28,7 +28,7 @@ class ParserTest {
     @Test
     public void parserCanGetInitialInput() throws IOException {
         String path = "Resources/testData.txt";
-        String initialInput = ParserDay5.getTextFromFile(path);
+        String initialInput = Parser.getTextFromFile(path);
 
         assertEquals(initialInput, "Hello World\n" + "this is a test");
     }

@@ -4,18 +4,20 @@ import util.Parser;
 
 import java.util.*;
 
-public class ParserDay5 extends Parser {
+public class ParserDay5 implements Parser{
 
-    public String[] splitInput(String input) {
+    private ParserDay5(){}
+
+    public static String[] splitInput(String input) {
         return input.split("\n\n");
     }
 
-    public int extractBoxNumber(String boxStringLastLine) {
+    public static int extractBoxNumber(String boxStringLastLine) {
         String trimmed = boxStringLastLine.replaceAll("\s", "");
         return Integer.parseInt(trimmed.substring(trimmed.length()-1));
     }
 
-    public List<Stack<String>> createStacks(int numberOfWantedBoxes) {
+    public static List<Stack<String>> createStacks(int numberOfWantedBoxes) {
         List<Stack<String>> list = new ArrayList<>();
         for(int i=0;i<numberOfWantedBoxes;i++){
             list.add(new Stack<>());
@@ -23,7 +25,7 @@ public class ParserDay5 extends Parser {
         return list;
     }
 
-    private void fillStacksWithBoxes(String[] lines, List<Stack<String>> stacks) {
+    private static void fillStacksWithBoxes(String[] lines, List<Stack<String>> stacks) {
         for(int l=lines.length-2;l>=0;l--){
             for(int i=0;i<lines[l].length()/4+1;i++){
                 String value = extractValue(lines[l], i);
@@ -37,13 +39,13 @@ public class ParserDay5 extends Parser {
         return substring.substring(1, 2);
     }
 
-    private void fillMapWithStacks(Map<Integer, Stack<String>> map, List<Stack<String>> stacks) {
+    private static void fillMapWithStacks(Map<Integer, Stack<String>> map, List<Stack<String>> stacks) {
         for(Integer i = 1; i <= stacks.size(); i++){
             map.put(i, stacks.get(i-1));
         }
     }
 
-    public Map<Integer, Stack<String>> parseBoxes(String boxesString) {
+    public static Map<Integer, Stack<String>> parseBoxes(String boxesString) {
         Map<Integer, Stack<String>> map = new HashMap<>();
         String[] lines = boxesString.split("\n");
 
@@ -56,7 +58,7 @@ public class ParserDay5 extends Parser {
         return map;
     }
 
-    public String[] parseCommands(String commandsString) {
+    public static String[] parseCommands(String commandsString) {
         return commandsString.split("\n");
     }
 }
