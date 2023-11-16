@@ -1,7 +1,4 @@
-package org.example.days.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.example.days.day01.model;
 
 /**
  * @author Luka Ljubić

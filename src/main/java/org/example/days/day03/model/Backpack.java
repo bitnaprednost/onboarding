@@ -1,4 +1,4 @@
-package org.example.days.model;
+package org.example.days.day03.model;
 
 /**
  * @author Luka Ljubić

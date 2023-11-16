@@ -1,22 +1,23 @@
-package org.example.days;
+package org.example.days.day03;
 
-import org.example.days.model.Backpack;
+import org.example.days.day03.model.Backpack;
 import org.example.days.model.Day;
-import org.example.days.model.Elf;
-import org.example.days.model.ElfGroup;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author Luka Ljubić
  */
 public class DayThree implements Day {
 
-    final String backpackDataPath = "src/main/resources/backpackData.txt";
+    String backpackDataPath = "src/main/resources/backpackData.txt";
     List<String> backpackDataList = readBackpackData(backpackDataPath);
     List<Backpack> backpacksList = new ArrayList<>();
 
@@ -32,35 +33,18 @@ public class DayThree implements Day {
 
     @Override
     public void executePartTwo() {
-        sliceAndCreateCompartments(backpackDataList, backpacksList);
-
-        ArrayList<ElfGroup> elfGroups = new ArrayList<>();
-        elfGroups = sliceDataAndCreateElfGroups();
-
-        elfGroups.forEach(elf -> System.out.println(elf.toString()));
-
-
-    }
-
-    private ArrayList<ElfGroup> sliceDataAndCreateElfGroups() {
-        ArrayList<ElfGroup> elfGroups = new ArrayList<>();
-        String tempLine;
-        List<String> tempList = new ArrayList<>();
-        int counter = 0;
-
-        for (Backpack backpack : backpacksList) {
-            tempLine = backpack.combineCompartments();
-            tempList.add(tempLine);
-            counter++;
-
-            if (counter == 3) {
-                elfGroups.add(ElfGroup.of(tempList));
-                tempList.clear();
-                counter = 0;
-            }
+        try {
+            String input = Files.readString(Path.of("src/main/resources/backpackData.txt"));
+            var counter = IntStream.range(0, input.length()).iterator();
+            var sum2 = input.lines()
+                    .collect(Collectors.groupingBy(c -> counter.nextInt() / 3)).values().stream()
+                    .mapToInt(l -> commonPriority(l)).sum();
+            System.out.printf("part 2: %d\n", sum2);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return elfGroups;
     }
+
 
     private int calculateSumOfTheDuplicates(List<Character> duplicatesInBackpack) {
         int sum = 0;
@@ -114,5 +98,15 @@ public class DayThree implements Day {
         return backpackDataList;
     }
 
+    int commonPriority(List<String> strings) {
+        // common character in list of strings
+        var c = strings.stream().reduce((s1, s2) -> commonChars(s1, s2)).get().charAt(0);
+        return c < 'a' ? c - 'A' + 27 : c - 'a' + 1; // convert to priority
+    }
+
+    String commonChars(String a, String b) {
+        return a.chars().filter(i1 -> b.chars().anyMatch(i2 -> i1 == i2)).distinct()
+                .mapToObj(c -> Character.toString(c)).collect(Collectors.joining());
+    }
 
 }
