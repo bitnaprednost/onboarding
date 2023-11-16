@@ -2,6 +2,9 @@ package day2;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import day2.game.Game;
+import day2.game.GameImpl1;
+import day2.game.GameImpl2;
 import day2.player.Player;
 import day2.player.PlayerMe;
 import day2.player.PlayerOpponent;
@@ -20,7 +23,7 @@ class GameTest {
     void init(){
         me = new PlayerMe();
         opponent = new PlayerOpponent();
-        game = new Game(opponent, me);
+        game = new GameImpl1(opponent, me);
     }
 
     @Test
@@ -31,7 +34,26 @@ class GameTest {
     }
 
     @Test
-    public void canSimulateSingleGame(){
+    public void canSimulateSingleGame1(){
+        game.simulateGame('A', 'Y');
+        Integer score = game.getScore();
+
+        assertEquals(score, 8);
+    }
+
+    @Test
+    public void canSimulateMultipleGames1(){
+        game.simulateGame('A', 'Y');
+        game.simulateGame('B', 'X');
+        game.simulateGame('C', 'Z');
+        Integer score = game.getScore();
+
+        assertEquals(score, 15);
+    }
+
+    @Test
+    public void canSimulateSingleGame2(){
+        game = new GameImpl2(opponent, me);
         game.simulateGame('A', 'Y');
         Integer score = game.getScore();
 
@@ -39,13 +61,23 @@ class GameTest {
     }
 
     @Test
-    public void canSimulateMultipleGames(){
+    public void canSimulateMultipleGames2(){
+        game = new GameImpl2(opponent, me);
         game.simulateGame('A', 'Y');
         game.simulateGame('B', 'X');
         game.simulateGame('C', 'Z');
         Integer score = game.getScore();
 
         assertEquals(score, 12);
+    }
+
+    @Test
+    public void canResetScore(){
+        game.simulateGame('A', 'Y');
+        game.resetScore();
+        Integer score = game.getScore();
+
+        assertEquals(score, 0);
     }
 
 }

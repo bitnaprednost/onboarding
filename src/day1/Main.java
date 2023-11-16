@@ -11,8 +11,13 @@ public class Main {
         ElfManager manager = new ElfManager();
         String text = Parser.getTextFromFile("Resources/day1Data.txt");
         List<Elf> elves = manager.createElves(text);
-        List<Elf> elfMostCalories = manager.getElfMostCalories(elves, 3);
 
-        System.out.println(manager.sumCalories(elfMostCalories));
+        List<Elf> elfMostCalories = manager.getElfMostCalories(elves, 1);
+        int result1 = manager.sumCalories(elfMostCalories);
+        System.out.println(result1);
+
+        elfMostCalories = manager.getElfMostCalories(elves, 3);
+        int result2 = manager.sumCalories(elfMostCalories);
+        System.out.println(result2);
     }
 }

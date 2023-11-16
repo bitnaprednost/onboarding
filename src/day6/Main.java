@@ -9,27 +9,33 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Main {
+    public static int firstSolution(String textFromFile, int consecutive){
+        return IntStream.range(0, textFromFile.length() - consecutive)
+                .map(i -> textFromFile.substring(i).chars().limit(consecutive).distinct().count() == consecutive ? i + consecutive : -1)
+                .filter(i -> i > 0)
+                .findFirst().getAsInt();
+    }
+
+    public static int secondSolution(String textFromFile, int consecutive){
+        return IntStream.range(0, textFromFile.length() - consecutive)
+                .takeWhile(i -> textFromFile.substring(i).chars().limit(consecutive).distinct().count() < consecutive)
+                .max().getAsInt() + consecutive + 1;
+    }
+
+    public static int thirdSolution(String textFromFile, int consecutive){
+        return IntStream.range(0, textFromFile.length() - consecutive)
+                .dropWhile(i -> textFromFile.substring(i).chars().limit(consecutive).distinct().count() < consecutive)
+                .findFirst().getAsInt() + consecutive;
+    }
+
     public static void main(String[] args) throws IOException {
+
         String textFromFile = Parser.getTextFromFile("Resources/day6Data.txt");
 
-//        int result1 = IntStream.range(0, textFromFile.length() - 4)
-//                .map(i -> {
-//                    if (textFromFile.substring(i).chars().limit(4).distinct().count() == 4) return i + 4;
-//                    else return -1;
-//                }).filter(i -> i > 0).findFirst().getAsInt();
-
-        int result1 = IntStream.range(0, textFromFile.length() - 4)
-                .takeWhile(i -> textFromFile.substring(i).chars().limit(4).distinct().count() < 4)
-                .max().getAsInt() + 5;
-
-        System.out.println(result1);
-
-
-        int result2 = IntStream.range(0, textFromFile.length() - 14)
-                .takeWhile(i -> textFromFile.substring(i).chars().limit(14).distinct().count() < 14)
-                .max().getAsInt() + 15;
-
-        System.out.println(result2);
+        System.out.println(firstSolution(textFromFile, 4));
+        System.out.println(secondSolution(textFromFile, 4));
+        System.out.println(thirdSolution(textFromFile, 4));
+        System.out.println(thirdSolution(textFromFile, 15));
 
     }
 }

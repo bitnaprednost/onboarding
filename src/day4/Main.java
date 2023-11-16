@@ -4,6 +4,8 @@ import util.Parser;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class Main {
@@ -21,26 +23,23 @@ public class Main {
         return result;
     }
 
+    public static Boolean bifunctionPipeline(List<List<Integer>> array, BiFunction<List<Integer>, List<Integer>, Boolean> bifunction){
+        Iterator<List<Integer>> iterator = array.stream().iterator();
+        return bifunction.apply(iterator.next(), iterator.next());
+    }
+
     public static void main(String args[]) throws IOException {
         String input = Parser.getTextFromFile("Resources/day4Data.txt");
+        //format: [[[2,3,4],  [6,7,8]], [...], ...]
         List<List<List<Integer>>> lists = textToListHell(input);
 
-        long result1 = lists.stream().map(array -> {
-            Iterator<List<Integer>> iterator = array.stream().iterator();
-            List<Integer> first = iterator.next();
-            List<Integer> second = iterator.next();
-            return first.containsAll(second) || second.containsAll(first);
-        }).filter(pred->pred).count();
+        BiFunction<List<Integer>, List<Integer>, Boolean> bifunction1 = (first, second) -> first.containsAll(second) || second.containsAll(first);
+        BiFunction<List<Integer>, List<Integer>, Boolean> bifunction2 = (first, second) ->  first.stream().anyMatch(second::contains);
 
-        //System.out.println(result1);
+        long result1 = lists.stream().map((array) -> bifunctionPipeline(array, bifunction1)).filter(pred->pred).count();
+        System.out.println(result1);
 
-        long result2 = lists.stream().map(array -> {
-            Iterator<List<Integer>> iterator = array.iterator();
-            List<Integer> first = iterator.next();
-            List<Integer> second = iterator.next();
-            return first.stream().anyMatch(second::contains);
-        }).filter(pred->pred).count();
-
+        long result2 = lists.stream().map((array) -> bifunctionPipeline(array, bifunction2)).filter(pred->pred).count();
         System.out.println(result2);
     }
 

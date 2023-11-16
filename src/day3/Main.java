@@ -15,12 +15,12 @@ public class Main {
         // v => 118 - 22 = 96
         // t => 116 - 20 = 96
         // s => 115 - 19 = 96
-        int result1 = Arrays.stream(input.split("\n")).map(line -> {
-            String line1 = line.substring(0, line.length() / 2);
-            String line2 = line.substring(line.length() / 2);
-            return line1.chars().filter(l1 -> line2.chars().anyMatch(l2 -> l1 == l2))
-                    .map(ch -> ch > 90 ? ch - 96 : ch - 38).findFirst();
-        }).mapToInt(OptionalInt::getAsInt).sum();
+
+        int result1 = Arrays.stream(input.split("\n"))
+                .map(line -> line.substring(0, line.length() / 2).chars()
+                        .filter(l1 -> line.substring(line.length() / 2).chars().anyMatch(l2 -> l1 == l2))
+                        .map(ch -> ch > 90 ? ch - 96 : ch - 38).findFirst())
+                .mapToInt(OptionalInt::getAsInt).sum();
 
         System.out.println(result1);
 

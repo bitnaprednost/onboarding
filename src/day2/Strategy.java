@@ -1,5 +1,7 @@
 package day2;
 
+import day2.game.Game;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class Strategy {
     }
 
     public void runGames(String input) {
+        game.resetScore();
+
         List<char[]> parsedInputs = parseInputs(input);
         for (char[] round : parsedInputs) {
             game.simulateGame(round[0], round[1]);
