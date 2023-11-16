@@ -1,6 +1,6 @@
-package org.example.days;
+package org.example.days.day02;
 
-import org.example.days.model.Game;
+import org.example.days.day02.model.Game;
 
 import java.io.File;
 import java.io.FileNotFoundException;
