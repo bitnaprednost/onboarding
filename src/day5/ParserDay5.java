@@ -12,7 +12,7 @@ public class ParserDay5 implements Parser{
         return input.split("\n\n");
     }
 
-    public static int extractBoxNumber(String boxStringLastLine) {
+    private static int extractBoxNumber(String boxStringLastLine) {
         String trimmed = boxStringLastLine.replaceAll("\s", "");
         return Integer.parseInt(trimmed.substring(trimmed.length()-1));
     }

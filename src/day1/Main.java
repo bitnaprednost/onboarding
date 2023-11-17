@@ -12,12 +12,12 @@ public class Main {
         String text = Parser.getTextFromFile("Resources/day1Data.txt");
         List<Elf> elves = manager.createElves(text);
 
-        List<Elf> elfMostCalories = manager.getElfMostCalories(elves, 1);
-        int result1 = manager.sumCalories(elfMostCalories);
+        Elf elfMostCalories = manager.getElfMostCalories(elves);
+        int result1 = elfMostCalories.getCalories();
         System.out.println(result1);
 
-        elfMostCalories = manager.getElfMostCalories(elves, 3);
-        int result2 = manager.sumCalories(elfMostCalories);
+        List<Elf> elvesMostCalories = manager.getElfMostCalories(elves, 3);
+        int result2 = manager.sumCalories(elvesMostCalories);
         System.out.println(result2);
     }
 }

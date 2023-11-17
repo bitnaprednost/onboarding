@@ -25,8 +25,7 @@ public class ElfManager {
     }
 
     public List<Elf> getElfMostCalories(List<Elf> elves, int N) {
-        List<Elf> max = elves.stream().sorted(Comparator.comparing(Elf::getCalories).reversed()).limit(N).collect(Collectors.toList());
-        return max;
+        return elves.stream().sorted(Comparator.comparing(Elf::getCalories).reversed()).limit(N).collect(Collectors.toList());
     }
 
     public Elf getElfMostCalories(List<Elf> elves) {

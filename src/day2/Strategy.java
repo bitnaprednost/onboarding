@@ -11,19 +11,27 @@ public class Strategy {
         this.game=game;
     }
 
-    public boolean correctFormat(String input){
+    private String trimWhiteSpace(String game) {
+        return game.strip().trim().replace(" ", "");
+    }
+
+    private boolean checkCorrectFormat(String input){
         return input.matches("[ABC][XYZ]");
     }
 
-    public List<char[]> parseInputs(String input) {
+    private void addToList(List<char[]> inputs, String game) {
+        String parsedGame = trimWhiteSpace(game);
+        if(checkCorrectFormat(parsedGame)) {
+            inputs.add(parsedGame.toCharArray());
+        }
+    }
+
+    private List<char[]> parseInputs(String input) {
         List<char[]> inputs = new ArrayList<>();
 
         String[] split = input.split("\n");
         for(String game : split){
-            String parsedGame = game.strip().trim().replace(" ", "");
-            if(correctFormat(parsedGame)) {
-                inputs.add(parsedGame.toCharArray());
-            }
+            addToList(inputs, game);
         }
         return inputs;
     }
