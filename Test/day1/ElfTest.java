@@ -25,14 +25,6 @@ class ElfTest {
          assertFalse(elf.hasCalories());
      }
 
-//    @Test
-//    public void elfCanNotHaveNegativeCalories(){
-//        food = Food.from(-100);
-//        Elf elf = new Elf(food);
-//
-//        assertFalse(elf.hasCalories());
-//    }
-
     @Test
     public void elfCanCarryMultipleFood(){
         Food food1 = Food.from(100);
@@ -64,14 +56,5 @@ class ElfTest {
 
         assertEquals(elf.getCalories(), 1110);
     }
-
-//    @Test
-//    public void elfIgnoresNegativesInSumCalories(){
-//        Food food1 = Food.from(100);
-//        Food food2 = Food.from(0);
-//        Elf elf = new Elf(food, food1, food2);
-//
-//        assertEquals(elf.getCalories(), 1000);
-//    }
 
 }

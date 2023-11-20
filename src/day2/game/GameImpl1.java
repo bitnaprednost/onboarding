@@ -1,7 +1,6 @@
 package day2.game;
 
 import day2.Status;
-import day2.game.Game;
 import day2.player.Player;
 import day2.player.PlayerMe;
 import day2.shape.Shape;

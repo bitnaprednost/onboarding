@@ -46,14 +46,6 @@ class ParserTest {
         assertEquals(commandsString, split[1]);
     }
 
-//    @Test
-//    public void parserCanExtractNumberOfBoxes() throws IOException {
-//        String boxStringLastLine = " 1   2   3 ";
-//        int numberOfBoxes = ParserDay5.extractBoxNumber(boxStringLastLine);
-//
-//        assertEquals(3, numberOfBoxes);
-//    }
-
     @Test
     public void parserMakesLotsOfStacks() throws IOException {
         int numberOfWantedBoxes = 3;

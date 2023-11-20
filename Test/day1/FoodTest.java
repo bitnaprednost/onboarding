@@ -5,13 +5,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FoodTest {
-//    @Test
-//    public void foodHasToCarryCalories(){
-//        int calories = 1000;
-//        Food food = new Food();
-//
-//        assertFalse(food.hasCalories());
-//    }
 
     @Test
     public void foodHasCalories(){
