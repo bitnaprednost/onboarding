@@ -6,20 +6,20 @@ import java.util.List;
 public class Elf {
     private List<Food> foodList;
 
-    public Elf(){
+    private Elf(){
         foodList = new ArrayList<>();
     }
 
-    public Elf(Food... foods) {
+    private Elf(Food... foods) {
         foodList = List.of(foods);
     }
 
-    public Elf(int[] calories) {
-        foodList = new ArrayList<>();
+    Elf(List<Food> foodList) {
+        this.foodList = foodList;
+    }
 
-        for(int calorie : calories){
-            foodList.add(new Food(calorie));
-        }
+    public static Elf of(Food... foods){
+        return new Elf(foods);
     }
 
     public boolean hasCalories() {

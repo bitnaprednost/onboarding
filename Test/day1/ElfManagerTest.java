@@ -4,20 +4,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ElfManagerTest {
-    private ElfManager manager;
 
-    @BeforeEach
-    public void init(){
-        manager = new ElfManager();
-    }
     @Test
     public void ManagerCanCreateElf(){
         String calorie = "1000";
-        Elf elf = manager.createElf(calorie);
+        Elf elf = ElfManager.createElf(calorie);
 
         assertEquals(elf.getCalories().toString(), calorie);
     }
@@ -25,31 +21,31 @@ class ElfManagerTest {
     @Test
     public void ManagerConstructorPassesNull(){
         String calorie = null;
-        Elf elf = manager.createElf(calorie);
 
-        assertEquals(elf, null);
+        NullPointerException thrown = assertThrows(NullPointerException.class, ()-> {Elf elf = ElfManager.createElf(calorie);});
+        assertEquals("String input is null.", thrown.getMessage());
     }
 
     @Test
     public void ManagerConstructorPassesNonInteger(){
         String calorie = "a";
-        Elf elf = manager.createElf(calorie);
 
-        assertEquals(elf, null);
+        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, ()-> {Elf elf = ElfManager.createElf(calorie);});
+        assertEquals("Input is empty after filtering.", thrown.getMessage());
     }
 
     @Test
     public void ManagerConstructorPassesNegative(){
         String calorie = "-1000";
-        Elf elf = manager.createElf(calorie);
 
-        assertEquals(elf.getCalories().toString(), "0");
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()-> {Elf elf = ElfManager.createElf(calorie);});
+        assertEquals("Food can't contain negative calories.", thrown.getMessage());
     }
 
     @Test
     public void ManagerCanCreateElfWithMultipleFood(){
         String calories = "1000\n" + "2000\n" + "3000";
-        Elf elf = manager.createElf(calories);
+        Elf elf = ElfManager.createElf(calories);
 
         assertAll(
                 "Has all calories",
@@ -64,7 +60,7 @@ class ElfManagerTest {
         String calories = "1000\n" + "2000\n" + "3000\n" + "\n"
                             + "4000\n" + "\n"
                             + "5000\n" + "6000";
-        List<Elf> elves = manager.createElves(calories);
+        List<Elf> elves = ElfManager.createElves(calories);
 
         assertAll(
                 "Has all elves",
@@ -83,8 +79,8 @@ class ElfManagerTest {
         String calories = "1000\n" + "2000\n" + "3000\n" + "\n"
                 + "4000\n" + "\n"
                 + "5000\n" + "6000";
-        List<Elf> elves = manager.createElves(calories);
-        Elf topElf = manager.getElfMostCalories(elves);
+        List<Elf> elves = ElfManager.createElves(calories);
+        Elf topElf = ElfManager.getElfMostCalories(elves);
 
         assertAll(
                 "Elf matches",
@@ -100,8 +96,8 @@ class ElfManagerTest {
                             "5000\n" + "6000\n" + "\n" +
                             "7000\n" + "8000\n" + "9000\n" + "\n" +
                             "10000";
-        List<Elf> elves = manager.createElves(calories);
-        List<Elf> topElves = manager.getElfMostCalories(elves, 3);
+        List<Elf> elves = ElfManager.createElves(calories);
+        List<Elf> topElves = ElfManager.getElfMostCalories(elves, 3);
 
         assertAll(
                 "Has all top elves",
@@ -122,9 +118,9 @@ class ElfManagerTest {
                 "5000\n" + "6000\n" + "\n" +
                 "7000\n" + "8000\n" + "9000\n" + "\n" +
                 "10000";
-        List<Elf> elves = manager.createElves(calories);
-        List<Elf> topElves = manager.getElfMostCalories(elves, 3);
-        int sumCalories = manager.sumCalories(topElves);
+        List<Elf> elves = ElfManager.createElves(calories);
+        List<Elf> topElves = ElfManager.getElfMostCalories(elves, 3);
+        int sumCalories = ElfManager.sumCalories(topElves);
 
         assertEquals(sumCalories, 45000);
     }

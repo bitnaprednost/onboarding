@@ -10,34 +10,34 @@ class ElfTest {
 
     @BeforeEach
     void init(){
-        food = new Food(1000);
+        food = Food.from(1000);
     }
     @Test
     public void elfCanCarryFood(){
-        Elf elf = new Elf(food);
+        Elf elf = Elf.of(food);
 
         assertTrue(elf.hasCalories());
     }
     @Test
      public void elfHasToCarryCalories(){
-         Elf elf = new Elf();
+         Elf elf = Elf.of();
 
          assertFalse(elf.hasCalories());
      }
 
-    @Test
-    public void elfCanNotHaveNegativeCalories(){
-        food = new Food(-100);
-        Elf elf = new Elf(food);
-
-        assertFalse(elf.hasCalories());
-    }
+//    @Test
+//    public void elfCanNotHaveNegativeCalories(){
+//        food = Food.from(-100);
+//        Elf elf = new Elf(food);
+//
+//        assertFalse(elf.hasCalories());
+//    }
 
     @Test
     public void elfCanCarryMultipleFood(){
-        Food food1 = new Food(-100);
-        Food food2 = new Food(0);
-        Elf elf = new Elf(food, food1, food2);
+        Food food1 = Food.from(100);
+        Food food2 = Food.from(0);
+        Elf elf = Elf.of(food, food1, food2);
 
         assertAll(
                 "Has all Food",
@@ -49,29 +49,29 @@ class ElfTest {
 
     @Test
     public void elfHasCalories(){
-        Food food1 = new Food(-100);
-        Food food2 = new Food(0);
-        Elf elf = new Elf(food, food1, food2);
+        Food food1 = Food.from(100);
+        Food food2 = Food.from(0);
+        Elf elf = Elf.of(food, food1, food2);
 
         assertTrue(elf.hasCalories());
     }
 
     @Test
     public void elfCanGetSumCalories(){
-        Food food1 = new Food(100);
-        Food food2 = new Food(10);
-        Elf elf = new Elf(food, food1, food2);
+        Food food1 = Food.from(100);
+        Food food2 = Food.from(10);
+        Elf elf = Elf.of(food, food1, food2);
 
         assertEquals(elf.getCalories(), 1110);
     }
 
-    @Test
-    public void elfIgnoresNegativesInSumCalories(){
-        Food food1 = new Food(-100);
-        Food food2 = new Food(0);
-        Elf elf = new Elf(food, food1, food2);
-
-        assertEquals(elf.getCalories(), 1000);
-    }
+//    @Test
+//    public void elfIgnoresNegativesInSumCalories(){
+//        Food food1 = Food.from(100);
+//        Food food2 = Food.from(0);
+//        Elf elf = new Elf(food, food1, food2);
+//
+//        assertEquals(elf.getCalories(), 1000);
+//    }
 
 }

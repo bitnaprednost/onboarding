@@ -5,34 +5,41 @@ import java.util.stream.Collectors;
 
 public class ElfManager {
 
-    public Elf createElf(String calorie) {
-        if(calorie==null) return null;
-        calorie=calorie.replaceAll("[^\\d-\\n]", "");
-        if(calorie.isEmpty()) return null;
-
-        int[] calories = Arrays.stream(calorie.split("\n")).mapToInt(Integer::parseInt).toArray();
-        return new Elf(calories);
+    private static String filterOutFormat(String calorie) {
+        if(calorie == null) throw new NullPointerException("String input is null.");
+        calorie = calorie.replaceAll("[^\\d-\\n]", "");
+        if(calorie.isEmpty()) throw new NoSuchElementException("Input is empty after filtering.");
+        return calorie;
     }
 
-    public List<Elf> createElves(String calories) {
-        String[] split = calories.split("\n\n");
-        List<Elf> elves = new ArrayList<>();
+    public static Elf createElf(String calorie) {
+        calorie = filterOutFormat(calorie);
 
-        for(String calorie:split){
-            elves.add(createElf(calorie));
+        ElfBuilder elfBuilder = new ElfBuilder();
+        Arrays.stream(calorie.split("\n")).mapToInt(Integer::parseInt).forEach(elfBuilder::append);
+        return elfBuilder.build();
+    }
+
+    public static List<Elf> createElves(String calories) {
+        String[] split = calories.split("\n\n");
+
+        List<Elf> elves = new ArrayList<>();
+        for(String calorieString : split){
+            elves.add(createElf(calorieString));
         }
+
         return elves;
     }
 
-    public List<Elf> getElfMostCalories(List<Elf> elves, int N) {
+    public static List<Elf> getElfMostCalories(List<Elf> elves, int N) {
         return elves.stream().sorted(Comparator.comparing(Elf::getCalories).reversed()).limit(N).collect(Collectors.toList());
     }
 
-    public Elf getElfMostCalories(List<Elf> elves) {
+    public static Elf getElfMostCalories(List<Elf> elves) {
         return getElfMostCalories(elves, 1).iterator().next();
     }
 
-    public int sumCalories(List<Elf> topElves) {
+    public static int sumCalories(List<Elf> topElves) {
         return topElves.stream().mapToInt(Elf::getCalories).sum();
     }
 }
