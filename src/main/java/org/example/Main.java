@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.days.day03.DayThree;
 import org.example.days.day04.DayFour;
+import org.example.days.day05.DayFive;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,8 +21,11 @@ public class Main {
         /*DayThree dayThree = new DayThree();
         dayThree.executePartTwo();*/
 
-        DayFour dayFour = new DayFour();
-        dayFour.executePartTwo();
+       /* DayFour dayFour = new DayFour();
+        dayFour.executePartTwo();*/
+
+        DayFive dayFive = new DayFive();
+        dayFive.executePartOne();
     }
 
 
