@@ -4,10 +4,7 @@ import org.example.Utility.ParseUtility;
 import org.example.days.day05.model.Instruction;
 import org.example.days.model.Day;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author Luka Ljubić
@@ -29,7 +26,7 @@ public class DayFive implements Day {
 
         System.out.println("----------------------------------");
 
-        manipulateCratesWithInstructions();
+        manipulateCratesWithInstructionsOneByOne();
         listOfCrates.forEach(System.out::println);
     }
 
@@ -37,9 +34,33 @@ public class DayFive implements Day {
     @Override
     public void executePartTwo() {
 
+        fillCrates();
+
+        instructionList.forEach(System.out::println);
+        listOfCrates.forEach(System.out::println);
+
+        System.out.println("----------------------------------");
+
+
+        manipulateCratesWithInstructionsMultipleAtOnce();
+        listOfCrates.forEach(System.out::println);
+
     }
 
-    private void manipulateCratesWithInstructions() {
+    private void manipulateCratesWithInstructionsMultipleAtOnce() {
+        List<Character> temp = new ArrayList<>();
+
+        for (Instruction instruction : instructionList) {
+            for (int i = 0; i < instruction.getQuantity(); i++) {
+                temp.add(listOfCrates.get(instruction.getFromCrate() - 1).pop());
+            }
+            Collections.reverse(temp);
+            temp.forEach(item -> listOfCrates.get(instruction.getToCrate() - 1).add(item));
+            temp.clear();
+        }
+    }
+
+    private void manipulateCratesWithInstructionsOneByOne() {
         for (Instruction instruction : instructionList) {
             for (int i = 0; i < instruction.getQuantity(); i++) {
                 listOfCrates.get(instruction.getToCrate() - 1).
@@ -65,7 +86,6 @@ public class DayFive implements Day {
         Stack<Character> stack = new Stack<>();
         stack.addAll(chars);
         return stack;
-
     }
 
     private List<Instruction> parseAndFillInsructionList() {

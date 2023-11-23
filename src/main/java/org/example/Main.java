@@ -25,7 +25,7 @@ public class Main {
         dayFour.executePartTwo();*/
 
         DayFive dayFive = new DayFive();
-        dayFive.executePartOne();
+        dayFive.executePartTwo();
     }
 
 

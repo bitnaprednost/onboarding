@@ -22,12 +22,7 @@ public class Instruction {
         String numbersOnly = instruction.replaceAll("[^0-9]+", "");
 
         if (numbersOnly.length() == 4) {
-            StringBuilder temp = new StringBuilder();
-            temp.append(numbersOnly.charAt(0));
-            temp.append(numbersOnly.charAt(1));
-            this.quantity = Integer.parseInt(temp.toString());
-            this.fromCrate = parseIntAt(numbersOnly, 2);
-            this.toCrate = parseIntAt(numbersOnly, 3);
+            parseIfFirstIsDoubleDigit(numbersOnly);
         } else {
 
             this.quantity = parseIntAt(numbersOnly, 0);
@@ -35,6 +30,16 @@ public class Instruction {
             this.toCrate = parseIntAt(numbersOnly, 2);
         }
 
+    }
+
+    private void parseIfFirstIsDoubleDigit(String numbersOnly) {
+        StringBuilder temp = new StringBuilder();
+        temp.append(numbersOnly.charAt(0));
+        temp.append(numbersOnly.charAt(1));
+
+        this.quantity = Integer.parseInt(temp.toString());
+        this.fromCrate = parseIntAt(numbersOnly, 2);
+        this.toCrate = parseIntAt(numbersOnly, 3);
     }
 
     private int parseIntAt(String from, int index) {
