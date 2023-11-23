@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class DayFive implements Day {
     String instructionsPath = "src/main/resources/instructionList";
-    List<String> instructionDataList = ParseUtility.ParseFromPathToList(instructionsPath);
+    List<String> instructionDataList = ParseUtility.parseFromPathToList(instructionsPath);
     List<Stack<Character>> listOfCrates = new ArrayList<>();
     List<Instruction> instructionList = new ArrayList<>(parseAndFillInsructionList());
 
