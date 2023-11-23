@@ -16,7 +16,7 @@ public class DaySix implements Day {
 
     @Override
     public void executePartOne() {
-        Optional<Integer> positionInString = processBufferData(bufferData);
+        Optional<Integer> positionInString = processBufferData(bufferData, 4);
 
         if (positionInString.isPresent()){
             System.out.println(positionInString);
@@ -29,29 +29,34 @@ public class DaySix implements Day {
 
     @Override
     public void executePartTwo() {
+        Optional<Integer> positionInString = processBufferData(bufferData, 14);
 
+        if (positionInString.isPresent()){
+            System.out.println(positionInString);
+            System.out.println(bufferData.length());
+        }
+        else {
+            System.out.println("Integer je Optional.empty");
+        }
     }
 
-    private Optional<Integer> processBufferData(String bufferData) {
+    private Optional<Integer> processBufferData(String bufferData, int numberOfCharactersInASequence) {
         int tempPosition = 0;
 
-        List<Character> sequenceOfFour = new ArrayList<>();
+        List<Character> sequence = new ArrayList<>();
 
         for (int i = 0; i<bufferData.length(); i++){
-            if (i == bufferData.length()-3){
+            if (i == bufferData.length()-numberOfCharactersInASequence){
                 break;
             }
-            sequenceOfFour.add(bufferData.charAt(i));
-            sequenceOfFour.add(bufferData.charAt(i+ 1));
-            sequenceOfFour.add(bufferData.charAt(i +2));
-            sequenceOfFour.add(bufferData.charAt(i +3));
+            addToSequence(sequence, i, numberOfCharactersInASequence);
 
-            if(hasNoDuplicates(sequenceOfFour)){
-                tempPosition = i+4;
+            if(hasNoDuplicates(sequence)){
+                tempPosition = i+numberOfCharactersInASequence;
                 return Optional.of(tempPosition);
             }
             else{
-                sequenceOfFour.clear();
+                sequence.clear();
             }
 
         }
@@ -59,11 +64,17 @@ public class DaySix implements Day {
         return Optional.empty();
     }
 
-    private boolean hasNoDuplicates(List<Character> sequenceOfFour) {
-        List<Character> uniqueList = sequenceOfFour.stream()
+    private void addToSequence(List<Character> sequence, int index, int numberOfsequenceCharacters) {
+        for(int i = 0; i<numberOfsequenceCharacters; i++){
+            sequence.add(bufferData.charAt(index +i));
+        }
+    }
+
+    private boolean hasNoDuplicates(List<Character> sequence) {
+        List<Character> uniqueList = sequence.stream()
                 .distinct()
                 .collect(Collectors.toList());
 
-        return uniqueList.size() == sequenceOfFour.size();
+        return uniqueList.size() == sequence.size();
     }
 }

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) throws IOException {
         Day daySix = new DaySix();
-        daySix.executePartOne();
+        daySix.executePartTwo();
     }
 
 
