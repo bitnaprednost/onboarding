@@ -52,14 +52,15 @@ public class TreeBuilder {
         }
         else{
             if(height>other.height) {
-                if(other.directionsVisible[pos]) return true;
+                if(other.directionsVisible[pos] || height>other.directions[pos]) return true;
                 else {
                     directions[pos] = other.directions[pos];
                     return false;
                 }
             }
             else {
-                directions[pos] = other.height;
+                if(other.directionsVisible[pos]) directions[pos] = other.height;
+                else directions[pos] = other.directions[pos];
                 return false;
             }
         }
