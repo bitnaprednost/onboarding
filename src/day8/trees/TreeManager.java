@@ -1,4 +1,6 @@
-package day8;
+package day8.trees;
+
+import day8.trees.Tree;
 
 import java.util.List;
 
@@ -12,5 +14,9 @@ public class TreeManager {
             }
         }
         return count;
+    }
+
+    public static Integer calculateHighestScore(List<Tree> forest){
+        return forest.stream().mapToInt(Tree::getScenicScore).max().getAsInt();
     }
 }
