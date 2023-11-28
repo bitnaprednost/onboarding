@@ -1,4 +1,4 @@
-package org.example.days.day03.model;
+package org.example.days.D03_RucksackReorganization.model;
 
 /**
  * @author Luka Ljubić

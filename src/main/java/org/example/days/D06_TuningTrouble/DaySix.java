@@ -1,4 +1,4 @@
-package org.example.days.day06;
+package org.example.days.D06_TuningTrouble;
 
 import org.example.Utility.ParseUtility;
 import org.example.days.model.Day;

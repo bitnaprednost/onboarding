@@ -1,7 +1,4 @@
-package org.example.days.day05.model;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.example.days.D05_SupplyStacks.model;
 
 /**
  * @author Luka Ljubić

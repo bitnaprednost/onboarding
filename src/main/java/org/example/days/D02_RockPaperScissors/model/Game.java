@@ -1,4 +1,4 @@
-package org.example.days.day02.model;
+package org.example.days.D02_RockPaperScissors.model;
 
 /**
  * @author Luka Ljubić

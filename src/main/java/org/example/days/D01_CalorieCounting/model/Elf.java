@@ -1,4 +1,4 @@
-package org.example.days.day01.model;
+package org.example.days.D01_CalorieCounting.model;
 
 /**
  * @author Luka Ljubić

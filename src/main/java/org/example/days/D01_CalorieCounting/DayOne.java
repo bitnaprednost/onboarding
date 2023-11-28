@@ -1,7 +1,7 @@
-package org.example.days.day01;
+package org.example.days.D01_CalorieCounting;
 
 import org.example.days.model.Day;
-import org.example.days.day01.model.Elf;
+import org.example.days.D01_CalorieCounting.model.Elf;
 
 import java.io.IOException;
 import java.nio.file.Files;

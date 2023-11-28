@@ -1,6 +1,6 @@
-package org.example.days.day03;
+package org.example.days.D03_RucksackReorganization;
 
-import org.example.days.day03.model.Backpack;
+import org.example.days.D03_RucksackReorganization.model.Backpack;
 import org.example.days.model.Day;
 
 import java.io.IOException;

@@ -1,6 +1,6 @@
-package org.example.days.day04;
+package org.example.days.D04_CampCleanup;
 
-import org.example.days.day04.model.Pair;
+import org.example.days.D04_CampCleanup.model.Pair;
 import org.example.days.model.Day;
 
 import java.io.IOException;

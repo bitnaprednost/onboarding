@@ -1,7 +1,7 @@
-package org.example.days.day05;
+package org.example.days.D05_SupplyStacks;
 
 import org.example.Utility.ParseUtility;
-import org.example.days.day05.model.Instruction;
+import org.example.days.D05_SupplyStacks.model.Instruction;
 import org.example.days.model.Day;
 
 import java.util.*;

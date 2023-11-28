@@ -1,7 +1,6 @@
-package org.example.days.day04.model;
+package org.example.days.D04_CampCleanup.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
