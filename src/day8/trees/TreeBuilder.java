@@ -7,7 +7,7 @@ public class TreeBuilder {
     private int height;
     private final Boolean[] directionsVisible = new Boolean[4];
     private final Integer[] directions = new Integer[4];
-    private Integer[] directionCount = new Integer[4];
+    private final Integer[] directionCount = new Integer[4];
     public Tree build(){
         var directionVisibleList = Arrays.asList(directionsVisible);
         var directionCountList = Arrays.asList(directionCount);

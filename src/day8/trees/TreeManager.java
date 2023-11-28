@@ -1,7 +1,5 @@
 package day8.trees;
 
-import day8.trees.Tree;
-
 import java.util.List;
 
 public class TreeManager {
