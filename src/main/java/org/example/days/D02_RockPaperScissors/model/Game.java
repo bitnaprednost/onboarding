@@ -1,30 +1,14 @@
 package org.example.days.D02_RockPaperScissors.model;
 
-/**
- * @author Luka Ljubić
- */
-public final class Game {
-    private final String playerOneInput;
-    private final String playerTwoInput;
+import static org.example.days.D02_RockPaperScissors.model.Shape.*;
 
-    public Game(String playerOneInput, String playerTwoInput) {
-        this.playerOneInput = playerOneInput;
-        this.playerTwoInput = playerTwoInput;
-    }
-
-    public String getPlayerOneInput() {
-        return this.playerOneInput;
-    }
-
-    public String getPlayerTwoInput() {
-        return this.playerTwoInput;
-    }
-
-    @Override
-    public String toString() {
-        return "Game{" +
-                "playerOneInput=" + playerOneInput +
-                ", playerTwoInput=" + playerTwoInput +
-                '}';
+public record Game(String a, String b) {
+    private Shape getShape(String s) {
+        return switch (s) {
+            case "A", "X" -> ROCK;
+            case "B", "Y" -> PAPER;
+            case "C", "Z" -> SCISSOR;
+            default -> throw new RuntimeException(s);
+        };
     }
 }
