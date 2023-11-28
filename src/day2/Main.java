@@ -1,31 +1,28 @@
 package day2;
 
-import day2.game.Game;
-import day2.game.GameImpl1;
-import day2.game.GameImpl2;
+import day2.strategy.Strategy;
+import day2.strategy.StrategyImpl1;
+import day2.strategy.StrategyImpl2;
 import day2.player.Player;
 import day2.player.PlayerMe;
 import day2.player.PlayerOpponent;
-import util.Parser;
 
 import java.io.IOException;
 
 public class Main {
 
-    public static void main(String args[]) throws IOException {
-        String input = Parser.getTextFromFile("Resources/day2Data.txt");
-
+    public static void main(String[] args) throws IOException {
         PlayerMe me = new PlayerMe();
         Player opponent = new PlayerOpponent();
 
-        Game game = new GameImpl1(opponent, me);
-        Strategy strategy = new Strategy(game);
-        strategy.runGames(input);
-        System.out.println(strategy.evaluateStrategy());
+        Strategy strategy = new StrategyImpl1(opponent, me);
+        GameManager gameManager = new GameManager(strategy);
+        gameManager.runGames("Resources/day2Data.txt");
+        System.out.println(gameManager.getScore());
 
-        game = new GameImpl2(opponent, me);
-        strategy = new Strategy(game);
-        strategy.runGames(input);
-        System.out.println(strategy.evaluateStrategy());
+        strategy = new StrategyImpl2(opponent, me);
+        gameManager = new GameManager(strategy);
+        gameManager.runGames("Resources/day2Data.txt");
+        System.out.println(gameManager.getScore());
     }
 }

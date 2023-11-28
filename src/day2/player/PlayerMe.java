@@ -22,24 +22,20 @@ public class PlayerMe implements Player {
 
     @Override
     public Shape getShapeFromChar(char code) {
-        Shape shape;
-        switch (code){
-            case 'X' -> shape = new Rock();
-            case 'Y' -> shape = new Paper();
-            case 'Z' -> shape = new Scissors();
-            default -> shape = null;
-        }
-        return shape;
+        return switch (code){
+            case 'X' -> new Rock();
+            case 'Y' -> new Paper();
+            case 'Z' -> new Scissors();
+            default -> throw new UnsupportedOperationException();
+        };
     }
 
     public Status statusToShape(char code){
-        Status status;
-        switch (code){
-            case 'X' -> status = Status.LOSE;
-            case 'Y' -> status = Status.DRAW;
-            case 'Z' -> status = Status.WIN;
-            default -> status = null;
-        }
-        return status;
+        return switch (code){
+            case 'X' -> Status.LOSE;
+            case 'Y' -> Status.DRAW;
+            case 'Z' -> Status.WIN;
+            default -> throw new UnsupportedOperationException();
+        };
     }
 }

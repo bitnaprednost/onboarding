@@ -21,13 +21,11 @@ public class PlayerOpponent implements Player {
 
     @Override
     public Shape getShapeFromChar(char code) {
-        Shape shape;
-        switch (code){
-            case 'A' -> shape = new Rock();
-            case 'B' -> shape = new Paper();
-            case 'C' -> shape = new Scissors();
-            default -> shape = null;
-        }
-        return shape;
+        return switch (code){
+            case 'A' -> new Rock();
+            case 'B' -> new Paper();
+            case 'C' -> new Scissors();
+            default -> throw new UnsupportedOperationException();
+        };
     }
 }

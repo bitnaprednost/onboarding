@@ -15,8 +15,17 @@ public interface Parser {
         try (Stream<String> linesStream = Files.lines(new File(fileName).toPath())) {
             everything = linesStream.collect(Collectors.joining("\n"));
         }
+        //catch?
         return everything;
     }
 
+    static String[] getLinesFromFile(String fileName) throws IOException {
+        String[] everything = null;
+        try (Stream<String> linesStream = Files.lines(new File(fileName).toPath())) {
+            everything = linesStream.toArray(String[]::new);
+        }
+        //catch?
+        return everything;
+    }
 
 }

@@ -9,6 +9,9 @@ import util.Parser;
 import java.security.InvalidParameterException;
 
 public class ParserDay7 implements Parser {
+
+    private ParserDay7(){}
+
     private static void moveCursor(FileSystem fileSystem, String command) {
         String suffix = command.substring(5);
         switch (suffix) {

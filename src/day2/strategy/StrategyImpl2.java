@@ -1,12 +1,12 @@
-package day2.game;
+package day2.strategy;
 
 import day2.Status;
 import day2.player.Player;
 import day2.player.PlayerMe;
 import day2.shape.Shape;
 
-public class GameImpl2 extends Game {
-    public GameImpl2(Player opponent, PlayerMe me) {
+public class StrategyImpl2 extends Strategy {
+    public StrategyImpl2(Player opponent, PlayerMe me) {
         super(opponent, me);
     }
 
@@ -18,4 +18,9 @@ public class GameImpl2 extends Game {
 
         finalScore += myShape.getScore() + status.getScore();
     }
+
+    private Shape elfStrategy(Shape opponentShape, Status status) {
+        return opponentShape.elfStrategy(status);
+    }
+
 }

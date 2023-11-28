@@ -23,8 +23,8 @@ public class Main {
         return result;
     }
 
-    public static Boolean bifunctionPipeline(List<List<Integer>> array, BiFunction<List<Integer>, List<Integer>, Boolean> bifunction){
-        Iterator<List<Integer>> iterator = array.stream().iterator();
+    public static <T> Boolean bifunctionBoolean(List<List<T>> array, BiFunction<List<T>, List<T>, Boolean> bifunction){
+        Iterator<List<T>> iterator = array.stream().iterator();
         return bifunction.apply(iterator.next(), iterator.next());
     }
 
@@ -33,13 +33,13 @@ public class Main {
         //format: [[[2,3,4],  [6,7,8]], [...], ...]
         List<List<List<Integer>>> lists = textToListHell(input);
 
-        BiFunction<List<Integer>, List<Integer>, Boolean> bifunction1 = (first, second) -> first.containsAll(second) || second.containsAll(first);
-        BiFunction<List<Integer>, List<Integer>, Boolean> bifunction2 = (first, second) ->  first.stream().anyMatch(second::contains);
+        BiFunction<List<Integer>, List<Integer>, Boolean> containsEachOther = (first, second) -> first.containsAll(second) || second.containsAll(first);
+        BiFunction<List<Integer>, List<Integer>, Boolean> matchesOneElement = (first, second) ->  first.stream().anyMatch(second::contains);
 
-        long result1 = lists.stream().map((array) -> bifunctionPipeline(array, bifunction1)).filter(pred->pred).count();
+        long result1 = lists.stream().map((twoArrays) -> bifunctionBoolean(twoArrays, containsEachOther)).filter(pred->pred).count();
         System.out.println(result1);
 
-        long result2 = lists.stream().map((array) -> bifunctionPipeline(array, bifunction2)).filter(pred->pred).count();
+        long result2 = lists.stream().map((twoArrays) -> bifunctionBoolean(twoArrays, matchesOneElement)).filter(pred->pred).count();
         System.out.println(result2);
     }
 

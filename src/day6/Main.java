@@ -3,28 +3,34 @@ package day6;
 import util.Parser;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.OptionalInt;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class Main {
     public static int firstSolution(String textFromFile, int consecutive){
         return IntStream.range(0, textFromFile.length() - consecutive)
-                .map(i -> textFromFile.substring(i).chars().limit(consecutive).distinct().count() == consecutive ? i + consecutive : -1)
-                .filter(i -> i > 0)
+                .map(subStream -> textFromFile.substring(subStream).chars()
+                        .limit(consecutive)
+                        .distinct()
+                        .count() == consecutive ? subStream + consecutive : -1)
+                .filter(count -> count > 0)
                 .findFirst().getAsInt();
     }
 
     public static int secondSolution(String textFromFile, int consecutive){
         return IntStream.range(0, textFromFile.length() - consecutive)
-                .takeWhile(i -> textFromFile.substring(i).chars().limit(consecutive).distinct().count() < consecutive)
+                .takeWhile(subStream -> textFromFile.substring(subStream).chars()
+                        .limit(consecutive)
+                        .distinct()
+                        .count() < consecutive)
                 .max().getAsInt() + consecutive + 1;
     }
 
     public static int thirdSolution(String textFromFile, int consecutive){
         return IntStream.range(0, textFromFile.length() - consecutive)
-                .dropWhile(i -> textFromFile.substring(i).chars().limit(consecutive).distinct().count() < consecutive)
+                .dropWhile(subStream -> textFromFile.substring(subStream).chars()
+                        .limit(consecutive)
+                        .distinct()
+                        .count() < consecutive)
                 .findFirst().getAsInt() + consecutive;
     }
 

@@ -1,58 +1,83 @@
 package day2;
 
-import day2.game.Game;
-import day2.game.GameImpl1;
-import day2.game.GameImpl2;
+import static org.junit.jupiter.api.Assertions.*;
+
+import day2.strategy.Strategy;
+import day2.strategy.StrategyImpl1;
+import day2.strategy.StrategyImpl2;
 import day2.player.Player;
 import day2.player.PlayerMe;
 import day2.player.PlayerOpponent;
+import day2.shape.Paper;
+import day2.shape.Rock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class StrategyTest {
     private Strategy strategy;
-    private Strategy strategy2;
-    String input;
+    private PlayerMe me;
+    private Player opponent;
+
 
     @BeforeEach
     void init(){
-        PlayerMe me = new PlayerMe();
-        Player opponent = new PlayerOpponent();
-        Game game = new GameImpl1(opponent, me);
-        strategy = new Strategy(game);
-        Game game2 = new GameImpl2(opponent, me);
-        strategy2 = new Strategy(game2);
-
-        input = "A Y\n" +
-                "B X\n" +
-                "C Z";
+        me = new PlayerMe();
+        opponent = new PlayerOpponent();
+        strategy = new StrategyImpl1(opponent, me);
     }
+
+//    @Test
+//    void canCompareGame(){
+//        Status status = strategy.compareShapes(new Rock(), new Paper());
+//
+//        assertEquals(status, Status.WIN);
+//    }
+
     @Test
-    public void canEvaluateStrategy1(){
-        strategy.runGames(input);
-        int score = strategy.evaluateStrategy();
+    public void canSimulateSingleGame1(){
+        strategy.simulateGame('A', 'Y');
+        Integer score = strategy.getScore();
+
+        assertEquals(score, 8);
+    }
+
+    @Test
+    public void canSimulateMultipleGames1(){
+        strategy.simulateGame('A', 'Y');
+        strategy.simulateGame('B', 'X');
+        strategy.simulateGame('C', 'Z');
+        Integer score = strategy.getScore();
 
         assertEquals(score, 15);
     }
 
     @Test
-    public void canEvaluateStrategy2(){
-        strategy2.runGames(input);
-        int score = strategy2.evaluateStrategy();
+    public void canSimulateSingleGame2(){
+        strategy = new StrategyImpl2(opponent, me);
+        strategy.simulateGame('A', 'Y');
+        Integer score = strategy.getScore();
+
+        assertEquals(score, 4);
+    }
+
+    @Test
+    public void canSimulateMultipleGames2(){
+        strategy = new StrategyImpl2(opponent, me);
+        strategy.simulateGame('A', 'Y');
+        strategy.simulateGame('B', 'X');
+        strategy.simulateGame('C', 'Z');
+        Integer score = strategy.getScore();
 
         assertEquals(score, 12);
     }
 
     @Test
-    public void canSimulateConsecutively(){
-        strategy.runGames(input);
-        strategy.runGames(input);
-        int score = strategy.evaluateStrategy();
+    public void canResetScore(){
+        strategy.simulateGame('A', 'Y');
+        strategy.resetScore();
+        Integer score = strategy.getScore();
 
-        assertEquals(score, 15);
+        assertEquals(score, 0);
     }
 
 }

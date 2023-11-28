@@ -7,14 +7,12 @@ public class Paper implements Shape {
     private final static int score = 2;
     @Override
     public Status simulateAgainst(Shape shape) {
-        if (shape.getClass().equals(Rock.class)) {
-            return Status.WIN;
-        } else if (shape.getClass().equals(Paper.class)) {
-            return Status.DRAW;
-        } else if (shape.getClass().equals(Scissors.class)) {
-            return Status.LOSE;
-        }
-        return null;
+        return switch (shape) {
+            case Rock r -> Status.WIN;
+            case Paper p -> Status.DRAW;
+            case Scissors s -> Status.LOSE;
+            default -> throw new UnsupportedOperationException();
+        };
     }
 
     @Override
@@ -22,26 +20,24 @@ public class Paper implements Shape {
         return score;
     }
 
-    @Override
-    public Shape winingMove() {
+    private static Shape winingMove() {
         return new Scissors();
     }
 
-    @Override
-    public Shape losingMove() {
+    private static Shape losingMove() {
         return new Rock();
     }
 
-    @Override
-    public Shape drawingMove() {
+    private static Shape drawingMove() {
         return new Paper();
     }
 
     @Override
     public Shape elfStrategy(Status status) {
-        if(status==Status.WIN) return winingMove();
-        else if(status==Status.DRAW) return drawingMove();
-        else if(status==Status.LOSE) return losingMove();
-        return null;
+        return switch (status){
+            case WIN -> winingMove();
+            case LOSE -> losingMove();
+            case DRAW -> drawingMove();
+        };
     }
 }

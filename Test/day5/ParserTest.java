@@ -32,6 +32,15 @@ class ParserTest {
     }
 
     @Test
+    public void parserCanGetInitialInputSplit() throws IOException {
+        String path = "Resources/testData.txt";
+        String[] initialInput = Parser.getLinesFromFile(path);
+
+        assertEquals(initialInput[0], "Hello World");
+        assertEquals(initialInput[1], "this is a test");
+    }
+
+    @Test
     public void parserCanSplitInputIntoTwoSections() throws IOException {
         String input = "    [D]\n" +
                 "[N] [C]\n" +

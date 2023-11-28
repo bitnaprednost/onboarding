@@ -2,6 +2,7 @@ package day8;
 
 import day8.trees.Tree;
 import day8.trees.TreeBuilder;
+import util.Parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserDay8 {
+public class ParserDay8 implements Parser {
 
     private static <T>  List<LinkedList<T>> transposeArray(T[][] doubleArray) {
         List<LinkedList<T>> reversed = new ArrayList<>();
