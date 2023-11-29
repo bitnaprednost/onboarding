@@ -41,7 +41,7 @@ public class Directory implements File, Comparable<File>{
     private void findAll(List<File> list, Predicate<File> predicate){
         if(predicate.test(this)) list.add(this);
 
-        for(File file:files) {
+        for(File file : files) {
             if(file instanceof Directory) ((Directory) file).findAll(list, predicate);
             else if(predicate.test(file)) list.add(file);
         }
@@ -60,39 +60,32 @@ public class Directory implements File, Comparable<File>{
     public Directory findMinDirectory(long left, long capacity) {
         List<File> list = findAll((file)->file.getType().equals("directory") && file.getSize() + left > capacity);
         Optional<File> directory = list.stream().min(Comparable::compareTo);
-        return (Directory) directory.orElse(null);
+        return (Directory) directory.orElseThrow(NoSuchElementException::new);
     }
 
-    private File findFirst(String fileName, String type) {
-        if (name.equals(fileName) && type.equals(TYPE)) return this;
+    private Optional<File> findFirst(String fileName, String type) {
+        if (name.equals(fileName) && type.equals(TYPE)) return Optional.of(this);
 
         List<File> list = findAllSameName(fileName);
         for (File file : list) {
-            if (type.equals(file.getType())) return file;
+            if (type.equals(file.getType())) return Optional.of(file);
         }
-        throw new NoSuchElementException();
-    }
-
-    private Directory findFirst(Directory directory) {
-        if (this.equals(directory)) return this;
-
-        List<File> list = findAllSameName(directory.name);
-        for (File file : list) {
-            if (directory.equals(file)) return (Directory) file;
-        }
-        throw new NoSuchElementException();
-    }
-
-    public Directory findFirstDirectory(String fileName){
-        return (Directory) findFirst(fileName, "directory");
-    }
-
-    public Directory findFirstDirectory(Directory directory){
-        return findFirst(directory);
+        return Optional.empty();
     }
 
     public FileImpl findFirstFile(String fileName){
-        return (FileImpl) findFirst(fileName, "file");
+        Optional<File> file = findFirst(fileName, "file");
+        return (FileImpl) file.orElseThrow(NoSuchElementException::new);
+    }
+
+    public Directory findFirstDirectory(String fileName){
+        Optional<File> file = findFirst(fileName, "directory");
+        return (Directory) file.orElseThrow(NoSuchElementException::new);
+    }
+
+    public Directory findFirstDirectory(Directory directory){
+        Optional<File> file = findFirst(directory.name, "directory");
+        return (Directory) file.orElseThrow(NoSuchElementException::new);
     }
 
     public void addFile(File file) {
@@ -111,10 +104,10 @@ public class Directory implements File, Comparable<File>{
         return new Directory(this);
     }
 
-    public Directory getPreviousDirectory() {
-        if(previousDirectory==null) return null;
+    public Optional<Directory> getPreviousDirectory() {
+        if(previousDirectory==null) return Optional.empty();
 
-        return new Directory(previousDirectory);
+        return Optional.of(new Directory(previousDirectory));
     }
 
     void setPreviousDirectory(Directory previousDirectory) {
@@ -157,8 +150,6 @@ public class Directory implements File, Comparable<File>{
         long size1 = getSize();
         long size2 = file.getSize();
 
-        if(size1>size2) return 1;
-        else if(size1<size2) return -1;
-        else return 0;
+        return Long.compare(size1, size2);
     }
 }

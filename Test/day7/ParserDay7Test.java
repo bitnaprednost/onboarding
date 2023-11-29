@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserDay7Test {
     private String inputText;
+    private String[] split;
 
     @BeforeEach
     void init(){
@@ -35,6 +36,7 @@ public class ParserDay7Test {
                 $ ls
                 584 i
                 """;
+        split = inputText.split("\n");
     }
 
     @Test
@@ -47,7 +49,7 @@ public class ParserDay7Test {
 
     @Test
     public void canConvertTextIntoFileSystem() throws ExecutionControl.NotImplementedException {
-        FileSystem fileSystem = ParserDay7.createFileSystem(inputText, 70000);
+        FileSystem fileSystem = ParserDay7.createFileSystem(split, 70000);
 
         assertAll("All values are correct in current cursor",
                 () -> assertNotNull(fileSystem),
@@ -88,7 +90,22 @@ public class ParserDay7Test {
 
     @Test
     public void cantParseWrongStart(){
-        String testStr = "Hello World";
-        assertThrows(InvalidParameterException.class, ()->{FileSystem fileSystem = ParserDay7.createFileSystem(testStr, 70000);});
+        String[] testStr = {"Hello", "World"};
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()->{FileSystem fileSystem = ParserDay7.createFileSystem(testStr, 70000);});
+        assertEquals("First parameter doesn't start with $ cd.", thrown.getMessage());
+    }
+
+    @Test
+    public void cantParseWrongCommand(){
+        String[] testStr = {"$ cd /", "mirko"};
+        UnsupportedOperationException thrown = assertThrows(UnsupportedOperationException.class, ()->{FileSystem fileSystem = ParserDay7.createFileSystem(testStr, 70000);});
+        assertEquals("Command not implemented.", thrown.getMessage());
+    }
+
+    @Test
+    public void cantParseWrongCommandInls(){
+        String[] testStr = {"$ cd /", "$ ls", "mirko"};
+        UnsupportedOperationException thrown = assertThrows(UnsupportedOperationException.class, ()->{FileSystem fileSystem = ParserDay7.createFileSystem(testStr, 70000);});
+        assertEquals("After ls executed: command not implemented.", thrown.getMessage());
     }
 }

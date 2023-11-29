@@ -2,6 +2,7 @@ package day7.file;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class FileSystem {
     private final Directory root;
@@ -41,10 +42,8 @@ public class FileSystem {
     }
 
     public void moveCursorBackward() {
-        Directory parent = current.getPreviousDirectory();
-        if(parent==null) return;
-
-        current = root.findFirstDirectory(parent);
+        Optional<Directory> parent = current.getPreviousDirectory();
+        if(parent.isPresent()) current = root.findFirstDirectory(parent.get());
     }
 
     public void resetCursor() {
