@@ -1,4 +1,4 @@
-package hr.bitnaprednost.days.D03_RucksackReorganization.model;
+package hr.bp.aoc.days.rucksackReorganization.model;
 
 /**
  * @author Luka Ljubić

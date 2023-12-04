@@ -1,4 +1,4 @@
-package hr.bitnaprednost.Utility;
+package hr.bp.aoc.util;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * @author Luka Ljubić
  */
-public class ParseUtility {
-    private ParseUtility() {
+public class ParserUtil {
+    private ParserUtil() {
         throw new RuntimeException("Cannot instantiate class " + this.getClass().getName());
     }
 
