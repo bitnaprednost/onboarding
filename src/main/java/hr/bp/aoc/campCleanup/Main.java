@@ -7,6 +7,11 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 
+/**
+ * <p>Main class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Main {
 
     private static List<List<List<Integer>>> textToListHell(String input) {

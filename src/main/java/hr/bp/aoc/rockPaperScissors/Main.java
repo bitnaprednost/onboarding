@@ -9,6 +9,11 @@ import hr.bp.aoc.rockPaperScissors.player.PlayerOpponent;
 
 import java.io.IOException;
 
+/**
+ * <p>Main class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Main {
 
     public static void main(String[] args) throws IOException {

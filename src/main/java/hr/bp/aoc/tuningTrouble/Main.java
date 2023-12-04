@@ -5,6 +5,11 @@ import hr.bp.aoc.util.Parser;
 import java.io.IOException;
 import java.util.stream.IntStream;
 
+/**
+ * <p>Main class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Main {
     public static int firstSolution(String textFromFile, int consecutive){
         return IntStream.range(0, textFromFile.length() - consecutive)

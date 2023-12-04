@@ -6,6 +6,11 @@ import hr.bp.aoc.rockPaperScissors.shape.Rock;
 import hr.bp.aoc.rockPaperScissors.shape.Scissors;
 import hr.bp.aoc.rockPaperScissors.shape.Shape;
 
+/**
+ * <p>PlayerMe class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class PlayerMe implements Player {
     public Rock throwRock() {
         return new Rock();

@@ -1,5 +1,10 @@
 package hr.bp.aoc.calorieCounting;
 
+/**
+ * <p>Food class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Food {
     private Integer calories;
 

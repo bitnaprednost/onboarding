@@ -37,8 +37,8 @@
                     <version>3.6.3</version>
                     <configuration>
                         <fixTags>author</fixTags>
+                        <defaultAuthor>Marko Krišković</defaultAuthor>
                         <force>true</force>
-                        <fixClassComment>false</fixClassComment>
                         <fixFieldComment>false</fixFieldComment>
                         <fixMethodComment>false</fixMethodComment>
                     </configuration>

@@ -10,6 +10,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * <p>ParserDay8 class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ParserDay8 implements Parser {
 
     private static <T>  List<LinkedList<T>> transposeArray(T[][] doubleArray) {

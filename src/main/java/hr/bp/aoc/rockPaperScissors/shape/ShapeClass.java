@@ -2,6 +2,11 @@ package hr.bp.aoc.rockPaperScissors.shape;
 
 import hr.bp.aoc.rockPaperScissors.Status;
 
+/**
+ * <p>ShapeClass class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ShapeClass {
     private enum ShapeEnum {
         ROCK(1), PAPER(2), SCISSORS(3);

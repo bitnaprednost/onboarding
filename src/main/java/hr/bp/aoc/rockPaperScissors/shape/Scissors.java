@@ -2,6 +2,11 @@ package hr.bp.aoc.rockPaperScissors.shape;
 
 import hr.bp.aoc.rockPaperScissors.Status;
 
+/**
+ * <p>Scissors class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Scissors implements Shape {
     private final static int score = 3;
     @Override

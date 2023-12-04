@@ -6,6 +6,11 @@ import hr.bp.aoc.util.Parser;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * <p>GameManager class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class GameManager {
     private Strategy strategy;
     public GameManager(Strategy strategy) {

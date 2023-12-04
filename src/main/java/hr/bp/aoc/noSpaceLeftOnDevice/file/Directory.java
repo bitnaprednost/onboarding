@@ -3,6 +3,11 @@ package hr.bp.aoc.noSpaceLeftOnDevice.file;
 import java.util.*;
 import java.util.function.Predicate;
 
+/**
+ * <p>Directory class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Directory implements File, Comparable<File>{
     private final String name;
     private Set<File> files;

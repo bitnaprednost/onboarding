@@ -5,6 +5,11 @@ import hr.bp.aoc.rockPaperScissors.shape.Rock;
 import hr.bp.aoc.rockPaperScissors.shape.Scissors;
 import hr.bp.aoc.rockPaperScissors.shape.Shape;
 
+/**
+ * <p>Player interface.</p>
+ *
+ * @author Marko Krišković
+ */
 public interface Player {
     Rock throwRock();
     Paper throwPaper();

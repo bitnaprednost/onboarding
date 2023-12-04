@@ -4,6 +4,11 @@ import hr.bp.aoc.supplyStacks.Crates;
 
 import java.util.Arrays;
 
+/**
+ * <p>Abstract CrateMover class.</p>
+ *
+ * @author Marko Krišković
+ */
 public abstract class CrateMover {
     private Crates crates;
 

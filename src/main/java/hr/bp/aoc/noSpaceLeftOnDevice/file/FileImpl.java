@@ -1,5 +1,10 @@
 package hr.bp.aoc.noSpaceLeftOnDevice.file;
 
+/**
+ * <p>FileImpl class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class FileImpl implements File {
     private final String name;
     private final long size;

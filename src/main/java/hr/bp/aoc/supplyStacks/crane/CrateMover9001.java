@@ -4,6 +4,11 @@ import hr.bp.aoc.supplyStacks.Crates;
 
 import java.util.Stack;
 
+/**
+ * <p>CrateMover9001 class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class CrateMover9001 extends CrateMover implements Crane {
     private Crates crates;
 

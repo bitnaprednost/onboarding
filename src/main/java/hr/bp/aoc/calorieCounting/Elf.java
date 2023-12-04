@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Marko Kriskovic
+ * <p>Elf class.</p>
+ *
+ * @author Marko Krišković
  */
 public class Elf {
     private List<Food> foodList;

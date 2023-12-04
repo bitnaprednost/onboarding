@@ -3,6 +3,11 @@ package hr.bp.aoc.calorieCounting;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * <p>ElfManager class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ElfManager {
 
     private static String filterOutFormat(String calorie) {

@@ -5,6 +5,11 @@ import hr.bp.aoc.noSpaceLeftOnDevice.file.FileImpl;
 import hr.bp.aoc.noSpaceLeftOnDevice.file.FileSystem;
 import hr.bp.aoc.util.Parser;
 
+/**
+ * <p>ParserDay7 class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ParserDay7 implements Parser {
 
     private ParserDay7(){}

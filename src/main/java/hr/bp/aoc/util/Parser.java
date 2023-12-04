@@ -6,6 +6,11 @@ import java.nio.file.Files;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * <p>Parser interface.</p>
+ *
+ * @author Marko Krišković
+ */
 public interface Parser {
 
      static String getTextFromFile(String fileName) throws IOException {

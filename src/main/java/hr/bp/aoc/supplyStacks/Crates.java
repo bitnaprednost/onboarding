@@ -3,6 +3,11 @@ package hr.bp.aoc.supplyStacks;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * <p>Crates class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Crates {
     private Map<Integer, Stack<String>> stacks;
 

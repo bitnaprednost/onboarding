@@ -3,6 +3,11 @@ package hr.bp.aoc.treetopTreeHouse.trees;
 import java.util.Arrays;
 import java.util.Iterator;
 
+/**
+ * <p>TreeBuilder class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class TreeBuilder {
     private int height;
     private final Boolean[] directionsVisible = new Boolean[4];

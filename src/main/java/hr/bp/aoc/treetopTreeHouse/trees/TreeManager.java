@@ -2,6 +2,11 @@ package hr.bp.aoc.treetopTreeHouse.trees;
 
 import java.util.List;
 
+/**
+ * <p>TreeManager class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class TreeManager {
     public static int countVisibleTrees(List<Tree> forest){
         int count=0;

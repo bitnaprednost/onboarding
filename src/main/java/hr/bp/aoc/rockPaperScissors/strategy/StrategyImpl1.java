@@ -5,6 +5,11 @@ import hr.bp.aoc.rockPaperScissors.player.Player;
 import hr.bp.aoc.rockPaperScissors.player.PlayerMe;
 import hr.bp.aoc.rockPaperScissors.shape.Shape;
 
+/**
+ * <p>StrategyImpl1 class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class StrategyImpl1 extends Strategy {
     public StrategyImpl1(Player opponent, PlayerMe me) {
         super(opponent, me);

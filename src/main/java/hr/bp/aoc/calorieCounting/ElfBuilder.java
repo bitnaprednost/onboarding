@@ -3,6 +3,11 @@ package hr.bp.aoc.calorieCounting;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>ElfBuilder class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ElfBuilder {
     private List<Food> foodList;
     public ElfBuilder() {

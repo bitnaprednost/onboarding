@@ -5,6 +5,11 @@ import hr.bp.aoc.util.Parser;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * <p>Main class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Main {
     public static void main(String args[]) throws IOException {
         String input = Parser.getTextFromFile("Resources/day3Data.txt");

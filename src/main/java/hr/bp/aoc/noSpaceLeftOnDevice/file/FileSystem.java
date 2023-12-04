@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>FileSystem class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class FileSystem {
     private final Directory root;
     private final long distSpace;

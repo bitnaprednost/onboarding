@@ -4,6 +4,11 @@ import hr.bp.aoc.util.Parser;
 
 import java.util.*;
 
+/**
+ * <p>ParserDay5 class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ParserDay5 implements Parser {
 
     private ParserDay5(){}

@@ -2,6 +2,11 @@ package hr.bp.aoc.supplyStacks.crane;
 
 import hr.bp.aoc.supplyStacks.Crates;
 
+/**
+ * <p>CrateMover9000 class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class CrateMover9000 extends CrateMover implements Crane{
     private Crates crates;
 
