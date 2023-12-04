@@ -27,5 +27,24 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.6.3</version>
+                    <configuration>
+                        <fixTags>author</fixTags>
+                        <force>true</force>
+                        <fixClassComment>false</fixClassComment>
+                        <fixFieldComment>false</fixFieldComment>
+                        <fixMethodComment>false</fixMethodComment>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
     
 </project>
