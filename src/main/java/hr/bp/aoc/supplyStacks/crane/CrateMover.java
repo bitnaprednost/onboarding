@@ -22,7 +22,7 @@ public abstract class CrateMover {
 
     public void parseCommand(String command) {
         int[] split = Arrays.stream(command.split("[^0-9]"))
-                .filter(s->!s.equals(""))
+                .filter(s-> !s.isEmpty())
                 .mapToInt(Integer::parseInt).toArray();
         move(split[0], split[1], split[2]);
     }

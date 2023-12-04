@@ -1,5 +1,7 @@
 package hr.bp.aoc.calorieCounting;
 
+import org.apache.commons.lang3.Validate;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -10,15 +12,16 @@ import java.util.stream.Collectors;
  */
 public class ElfManager {
 
-    private static String filterOutFormat(String calorie) {
-        if(calorie == null) throw new NullPointerException("String input is null.");
+    private static String validate(String calorie) {
+        Validate.notNull(calorie, "String input is null.");
         calorie = calorie.replaceAll("[^\\d-\\n]", "");
-        if(calorie.isEmpty()) throw new NoSuchElementException("Input is empty after filtering.");
+        Validate.notEmpty(calorie, "Input is empty after filtering. Input is probably invalid."); //throws IllegalArgumentException, not customizable?
+
         return calorie;
     }
 
     public static Elf createElf(String calorie) {
-        calorie = filterOutFormat(calorie);
+        calorie = validate(calorie);
 
         ElfBuilder elfBuilder = new ElfBuilder();
         Arrays.stream(calorie.split("\n")).mapToInt(Integer::parseInt).forEach(elfBuilder::append);

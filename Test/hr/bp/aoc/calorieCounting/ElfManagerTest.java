@@ -29,8 +29,8 @@ class ElfManagerTest {
     public void ManagerConstructorPassesNonInteger(){
         String calorie = "a";
 
-        NoSuchElementException thrown = assertThrows(NoSuchElementException.class, ()-> {Elf elf = ElfManager.createElf(calorie);});
-        assertEquals("Input is empty after filtering.", thrown.getMessage());
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()-> {Elf elf = ElfManager.createElf(calorie);});
+        assertEquals("Input is empty after filtering. Input is probably invalid.", thrown.getMessage());
     }
 
     @Test

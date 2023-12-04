@@ -39,6 +39,8 @@ public class Elf {
     }
 
     public Integer getCalories() {
-        return foodList.stream().mapToInt(Food::getCalories).filter(a -> a >= 0).sum();
+        return foodList.stream().mapToInt(Food::getCalories)
+                .filter(a -> a >= 0)    //already checked in Food
+                .sum();
     }
 }

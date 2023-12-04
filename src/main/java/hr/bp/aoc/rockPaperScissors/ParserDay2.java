@@ -1,6 +1,7 @@
 package hr.bp.aoc.rockPaperScissors;
 
 import hr.bp.aoc.util.Parser;
+import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,11 +28,8 @@ public class ParserDay2 implements Parser {
 
         for(String input : inputs){
             input = trimWhiteSpace(input);
-
-            if(checkCorrectFormat(input)) {
-                list.add(input.toCharArray());
-            }
-            //else throw new IllegalArgumentException();
+            Validate.isTrue(checkCorrectFormat(input));
+            list.add(input.toCharArray());
         }
 
         return list;

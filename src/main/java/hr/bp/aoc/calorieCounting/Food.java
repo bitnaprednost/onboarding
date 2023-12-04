@@ -1,5 +1,7 @@
 package hr.bp.aoc.calorieCounting;
 
+import org.apache.commons.lang3.Validate;
+
 /**
  * <p>Food class.</p>
  *
@@ -13,19 +15,20 @@ public class Food {
     }
 
     public static Food from(int calories){
-        if(!hasCalories(calories)) throw new IllegalArgumentException("Food can't contain negative calories.");
+        Validate.isTrue(hasCalories(calories), "Food can't contain negative calories.");
+        //if(!hasCalories(calories)) throw new IllegalArgumentException("Food can't contain negative calories.");
 
         return new Food(calories);
     }
 
-    private static boolean hasCalories(int calories){
-        return calories >= 0;
-    }
-
     public boolean hasCalories() {
-        if(calories==null) return false;
+        Validate.notNull(calories, "Food calories is not initialized");
         
         return Food.hasCalories(calories);
+    }
+
+    private static boolean hasCalories(int calories){
+        return calories >= 0;
     }
 
     public Integer getCalories() {

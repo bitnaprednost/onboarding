@@ -10,7 +10,7 @@ import java.util.Stack;
  * @author Marko Krišković
  */
 public class CrateMover9001 extends CrateMover implements Crane {
-    private Crates crates;
+    private final Crates crates;
 
     public CrateMover9001(Crates crates) {
         super(crates);

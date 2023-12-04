@@ -8,7 +8,7 @@ import hr.bp.aoc.supplyStacks.Crates;
  * @author Marko Krišković
  */
 public class CrateMover9000 extends CrateMover implements Crane{
-    private Crates crates;
+    private final Crates crates;
 
     public CrateMover9000(Crates crates) {
         super(crates);
