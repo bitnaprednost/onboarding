@@ -3,6 +3,9 @@ package hr.bitnaPrednost.calorieCounting;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Marko Kriskovic
+ */
 public class Elf {
     private List<Food> foodList;
 
@@ -34,6 +37,6 @@ public class Elf {
     }
 
     public Integer getCalories() {
-        return foodList.stream().mapToInt(Food::getCalories).filter(a->a>=0).sum();
+        return foodList.stream().mapToInt(Food::getCalories).filter(a -> a >= 0).sum();
     }
 }
