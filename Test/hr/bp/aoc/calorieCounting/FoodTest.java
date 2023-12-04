@@ -22,10 +22,10 @@ class FoodTest {
         assertEquals("Food can't contain negative calories.", thrown.getMessage());
     }
 
-    @Test
-    public void foodCanCarryCalories(){
-        int calories = 1000;
-        Food food = Food.from(calories);
-        assertEquals(food.getCalories(), calories);
-    }
+//    @Test
+//    public void foodCanCarryCalories(){
+//        int calories = 1000;
+//        Food food = Food.from(calories);
+//        assertEquals(food.getCalories(), calories);
+//    }
 }

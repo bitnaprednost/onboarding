@@ -31,7 +31,11 @@ public class Food {
         return calories >= 0;
     }
 
-    public Integer getCalories() {
+    public int accept(ElfVisitor visitor){
+        return calories;
+    }
+
+    private Integer getCalories() {
         return calories;
     }
 }

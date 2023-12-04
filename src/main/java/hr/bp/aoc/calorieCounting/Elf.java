@@ -39,8 +39,7 @@ public class Elf {
     }
 
     public Integer getCalories() {
-        return foodList.stream().mapToInt(Food::getCalories)
-                .filter(a -> a >= 0)    //already checked in Food
-                .sum();
+        ElfVisitor visitor = new ElfVisitor();
+        return visitor.accept(foodList);
     }
 }
