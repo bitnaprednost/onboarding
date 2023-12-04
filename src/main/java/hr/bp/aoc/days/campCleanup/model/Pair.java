@@ -1,4 +1,4 @@
-package hr.bitnaprednost.days.D04_CampCleanup.model;
+package hr.bp.aoc.days.campCleanup.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.List;
  * @author Luka Ljubić
  */
 public final class Pair {
+
     private List<Integer> firstRange;
     private List<Integer> secondRange;
 

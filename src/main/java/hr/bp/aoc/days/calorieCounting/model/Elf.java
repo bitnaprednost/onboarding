@@ -1,4 +1,4 @@
-package hr.bitnaprednost.days.D01_CalorieCounting.model;
+package hr.bp.aoc.days.calorieCounting.model;
 
 /**
  * @author Luka Ljubić

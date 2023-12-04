@@ -1,7 +1,7 @@
-package hr.bitnaprednost.days.D01_CalorieCounting;
+package hr.bp.aoc.days.calorieCounting;
 
-import hr.bitnaprednost.days.model.Day;
-import hr.bitnaprednost.days.D01_CalorieCounting.model.Elf;
+import hr.bp.aoc.model.Day;
+import hr.bp.aoc.days.calorieCounting.model.Elf;
 
 import java.io.IOException;
 import java.nio.file.Files;

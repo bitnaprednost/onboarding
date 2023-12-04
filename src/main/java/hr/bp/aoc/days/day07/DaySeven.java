@@ -1,7 +1,7 @@
-package hr.bitnaprednost.days.day07;
+package hr.bp.aoc.days.day07;
 
-import hr.bitnaprednost.Utility.ParseUtility;
-import hr.bitnaprednost.days.model.Day;
+import hr.bp.aoc.util.ParserUtil;
+import hr.bp.aoc.model.Day;
 import java.util.List;
 
 /**
@@ -10,7 +10,7 @@ import java.util.List;
 public class DaySeven implements Day {
 
     String listOfCommandsPath = "src/main/resources/commandsData.txt";
-    List<String> listOfCommands = ParseUtility.parseFromPathToList(listOfCommandsPath);
+    List<String> listOfCommands = ParserUtil.parseFromPathToList(listOfCommandsPath);
 
 
     @Override

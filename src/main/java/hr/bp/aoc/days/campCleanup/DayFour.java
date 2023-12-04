@@ -1,7 +1,7 @@
-package hr.bitnaprednost.days.D04_CampCleanup;
+package hr.bp.aoc.days.campCleanup;
 
-import hr.bitnaprednost.days.D04_CampCleanup.model.Pair;
-import hr.bitnaprednost.days.model.Day;
+import hr.bp.aoc.days.campCleanup.model.Pair;
+import hr.bp.aoc.model.Day;
 
 import java.io.IOException;
 import java.nio.file.Files;

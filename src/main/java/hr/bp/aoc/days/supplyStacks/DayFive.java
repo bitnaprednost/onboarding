@@ -1,8 +1,8 @@
-package hr.bitnaprednost.days.D05_SupplyStacks;
+package hr.bp.aoc.days.supplyStacks;
 
-import hr.bitnaprednost.days.D05_SupplyStacks.model.Instruction;
-import hr.bitnaprednost.Utility.ParseUtility;
-import hr.bitnaprednost.days.model.Day;
+import hr.bp.aoc.days.supplyStacks.model.Instruction;
+import hr.bp.aoc.util.ParserUtil;
+import hr.bp.aoc.model.Day;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class DayFive implements Day {
     String instructionsPath = "src/main/resources/instructionList";
-    List<String> instructionDataList = ParseUtility.parseFromPathToList(instructionsPath);
+    List<String> instructionDataList = ParserUtil.parseFromPathToList(instructionsPath);
     List<Stack<Character>> listOfCrates = new ArrayList<>();
     List<Instruction> instructionList = new ArrayList<>(parseAndFillInsructionList());
 

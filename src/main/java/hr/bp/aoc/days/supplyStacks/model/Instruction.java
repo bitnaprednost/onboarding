@@ -1,4 +1,4 @@
-package hr.bitnaprednost.days.D05_SupplyStacks.model;
+package hr.bp.aoc.days.supplyStacks.model;
 
 /**
  * @author Luka Ljubić
