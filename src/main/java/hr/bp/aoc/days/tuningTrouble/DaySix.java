@@ -1,7 +1,7 @@
-package hr.bitnaprednost.days.D06_TuningTrouble;
+package hr.bp.aoc.days.tuningTrouble;
 
-import hr.bitnaprednost.Utility.ParseUtility;
-import hr.bitnaprednost.days.model.Day;
+import hr.bp.aoc.util.ParserUtil;
+import hr.bp.aoc.model.Day;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class DaySix implements Day {
 
     String getBufferDataPath = "src/main/resources/bufferData.txt";
-    String bufferData = ParseUtility.parseFromPath(getBufferDataPath);
+    String bufferData = ParserUtil.parseFromPath(getBufferDataPath);
 
     @Override
     public void executePartOne() {

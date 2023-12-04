@@ -1,4 +1,4 @@
-package hr.bitnaprednost.days.D02_RockPaperScissors.model;
+package hr.bp.aoc.days.rockPaperScissors.model;
 
 public record Game(String a, String b) {
     private Shape getShape(String s) {

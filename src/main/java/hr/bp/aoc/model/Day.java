@@ -1,4 +1,4 @@
-package hr.bitnaprednost.days.model;
+package hr.bp.aoc.model;
 
 public interface Day {
     void executePartOne();

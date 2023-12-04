@@ -1,7 +1,7 @@
-package hr.bitnaprednost.days.D02_RockPaperScissors;
+package hr.bp.aoc.days.rockPaperScissors;
 
-import hr.bitnaprednost.Utility.ParseUtility;
-import hr.bitnaprednost.days.model.Day;
+import hr.bp.aoc.util.ParserUtil;
+import hr.bp.aoc.model.Day;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DayTwo implements Day {
     String rockPaperScissorsDataPath = "src/main/resources/rockPaperScissorsData.txt";
-    List<String> rockPaperScissorsData = ParseUtility.parseFromPathToList(rockPaperScissorsDataPath);
+    List<String> rockPaperScissorsData = ParserUtil.parseFromPathToList(rockPaperScissorsDataPath);
 
 
     @Override

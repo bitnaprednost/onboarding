@@ -1,7 +1,7 @@
-package hr.bitnaprednost.days.D03_RucksackReorganization;
+package hr.bp.aoc.days.rucksackReorganization;
 
-import hr.bitnaprednost.days.D03_RucksackReorganization.model.Backpack;
-import hr.bitnaprednost.days.model.Day;
+import hr.bp.aoc.days.rucksackReorganization.model.Backpack;
+import hr.bp.aoc.model.Day;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -16,3 +16,4 @@
 #Unwanted folders
 .idea
 target
+targetdebug.log
