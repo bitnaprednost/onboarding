@@ -1,5 +1,6 @@
 package hr.bp.aoc.calorieCounting;
 
+import hr.bp.aoc.calorieCounting.visitor.FoodVisitor;
 import org.apache.commons.lang3.Validate;
 
 /**

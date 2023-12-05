@@ -1,5 +1,8 @@
 package hr.bp.aoc.calorieCounting;
 
+import hr.bp.aoc.calorieCounting.visitor.ElfVisitor;
+import hr.bp.aoc.calorieCounting.visitor.FoodVisitor;
+
 import java.util.ArrayList;
 import java.util.List;
 

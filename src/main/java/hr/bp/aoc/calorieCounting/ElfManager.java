@@ -1,5 +1,7 @@
 package hr.bp.aoc.calorieCounting;
 
+import hr.bp.aoc.calorieCounting.builder.ElfBuilder;
+import hr.bp.aoc.calorieCounting.visitor.ElfVisitor;
 import org.apache.commons.lang3.Validate;
 
 import java.util.*;

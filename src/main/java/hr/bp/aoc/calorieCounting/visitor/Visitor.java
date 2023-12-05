@@ -1,4 +1,4 @@
-package hr.bp.aoc.calorieCounting;
+package hr.bp.aoc.calorieCounting.visitor;
 
 import java.util.List;
 

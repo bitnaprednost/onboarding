@@ -1,4 +1,7 @@
-package hr.bp.aoc.calorieCounting;
+package hr.bp.aoc.calorieCounting.visitor;
+
+import hr.bp.aoc.calorieCounting.Elf;
+import hr.bp.aoc.calorieCounting.visitor.Visitor;
 
 import java.util.List;
 
@@ -7,7 +10,7 @@ import java.util.List;
  */
 
 //razdvoji u 2 faila
-public class ElfVisitor implements Visitor<Elf>{
+public class ElfVisitor implements Visitor<Elf> {
 
     public int visit(Elf elf) {
         return elf.accept(this);
