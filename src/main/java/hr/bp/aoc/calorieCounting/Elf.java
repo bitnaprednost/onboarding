@@ -39,11 +39,11 @@ public class Elf {
     }
 
     public Integer getCalories() {
-        ElfVisitor visitor = new ElfVisitor();
-        return visitor.getFoodSum(foodList);
+        FoodVisitor visitor = new FoodVisitor();
+        return visitor.getSum(foodList);
     }
 
     public int accept(ElfVisitor visitor){
-        return visitor.acceptElf(this);
+        return visitor.accept(this);
     }
 }

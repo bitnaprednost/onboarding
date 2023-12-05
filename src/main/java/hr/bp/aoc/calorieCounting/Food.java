@@ -31,8 +31,8 @@ public class Food {
         return calories >= 0;
     }
 
-    public int accept(ElfVisitor visitor){
-        return visitor.acceptFood(this);
+    public int accept(FoodVisitor visitor){
+        return visitor.accept(this);
     }
 
     public Integer getCalories() {

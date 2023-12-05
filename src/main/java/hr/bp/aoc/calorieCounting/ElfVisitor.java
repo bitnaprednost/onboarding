@@ -7,28 +7,17 @@ import java.util.List;
  */
 
 //razdvoji u 2 faila
-public class ElfVisitor {
+public class ElfVisitor implements Visitor<Elf>{
 
-    public int visitFood(Food food) {
-        return food.accept(this);
-    }
-    public int acceptFood(Food food){
-        return food.getCalories();
-    }
-
-    public int getFoodSum(List<Food> foodList){
-        return foodList.stream().mapToInt(this::visitFood).sum();
-    }
-
-    public int visitElf(Elf elf) {
+    public int visit(Elf elf) {
         return elf.accept(this);
     }
 
-    public int acceptElf(Elf elf){
+    public int accept(Elf elf){
         return elf.getCalories();
     }
 
-    public int getElfSum(List<Elf> foodList){
-        return foodList.stream().mapToInt(this::visitElf).sum();
+    public int getSum(List<Elf> foodList){
+        return foodList.stream().mapToInt(this::visit).sum();
     }
 }
