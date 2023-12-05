@@ -12,21 +12,24 @@ import java.util.*;
 public class DayFive implements Day {
     String instructionsPath = "src/main/resources/instructionList";
     List<String> instructionDataList = ParserUtil.parseFromPathToList(instructionsPath);
-    List<Stack<Character>> listOfCrates = new ArrayList<>();
     List<Instruction> instructionList = new ArrayList<>(parseAndFillInsructionList());
+
 
 
     @Override
     public void executePartOne() {
 
-        fillCrates();
 
+        List<Stack<Character>> listOfCrates = new ArrayList<>();
+        fillCrates(listOfCrates);
+
+        System.out.println("supplyStacks PART 1: ");
         instructionList.forEach(System.out::println);
         listOfCrates.forEach(System.out::println);
 
         System.out.println("----------------------------------");
 
-        manipulateCratesWithInstructionsOneByOne();
+        manipulateCratesWithInstructionsOneByOne(listOfCrates);
         listOfCrates.forEach(System.out::println);
     }
 
@@ -34,33 +37,36 @@ public class DayFive implements Day {
     @Override
     public void executePartTwo() {
 
-        fillCrates();
+        List<Stack<Character>> listOfCrates = new ArrayList<>();
+        fillCrates(listOfCrates);
 
+
+        System.out.println("supplyStacks PART 2: ");
         instructionList.forEach(System.out::println);
         listOfCrates.forEach(System.out::println);
 
         System.out.println("----------------------------------");
 
 
-        manipulateCratesWithInstructionsMultipleAtOnce();
+        manipulateCratesWithInstructionsMultipleAtOnce(listOfCrates);
         listOfCrates.forEach(System.out::println);
 
     }
 
-    private void manipulateCratesWithInstructionsMultipleAtOnce() {
+    private void manipulateCratesWithInstructionsMultipleAtOnce(List<Stack<Character>> listOfCrates) {
         List<Character> temp = new ArrayList<>();
 
         for (Instruction instruction : instructionList) {
             for (int i = 0; i < instruction.getQuantity(); i++) {
-                temp.add(listOfCrates.get(instruction.getFromCrate() - 1).pop());
+                temp.add(listOfCrates.get(instruction.getFromCrate()-1).pop());
             }
             Collections.reverse(temp);
-            temp.forEach(item -> listOfCrates.get(instruction.getToCrate() - 1).add(item));
+            temp.forEach(item -> listOfCrates.get(instruction.getToCrate()-1).add(item));
             temp.clear();
         }
     }
 
-    private void manipulateCratesWithInstructionsOneByOne() {
+    private void manipulateCratesWithInstructionsOneByOne(List<Stack<Character>> listOfCrates) {
         for (Instruction instruction : instructionList) {
             for (int i = 0; i < instruction.getQuantity(); i++) {
                 listOfCrates.get(instruction.getToCrate() - 1).
@@ -69,7 +75,7 @@ public class DayFive implements Day {
         }
     }
 
-    private void fillCrates() {
+    private void fillCrates(List<Stack<Character>> listOfCrates) {
         listOfCrates.add(createAStackWith('Z', 'J', 'N', 'W', 'P', 'S'));
         listOfCrates.add(createAStackWith('G', 'S', 'T'));
         listOfCrates.add(createAStackWith('V', 'Q', 'R', 'L', 'H'));
