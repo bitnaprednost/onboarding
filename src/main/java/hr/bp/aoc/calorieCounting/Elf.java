@@ -40,10 +40,10 @@ public class Elf {
 
     public Integer getCalories() {
         ElfVisitor visitor = new ElfVisitor();
-        return visitor.acceptFood(foodList);
+        return visitor.getFoodSum(foodList);
     }
 
     public int accept(ElfVisitor visitor){
-        return getCalories();
+        return visitor.acceptElf(this);
     }
 }

@@ -32,7 +32,7 @@ public class Food {
     }
 
     public int accept(ElfVisitor visitor){
-        return calories;
+        return visitor.acceptFood(this);
     }
 
     public Integer getCalories() {
