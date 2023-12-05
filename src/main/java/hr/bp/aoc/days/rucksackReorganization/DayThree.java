@@ -17,8 +17,8 @@ import java.util.stream.IntStream;
  */
 public class DayThree implements Day {
 
-    String backpackDataPath = "src/main/resources/backpackData.txt";
-    List<String> backpackDataList = readBackpackData(backpackDataPath);
+    static final String BACKPACK_DATA_PATH = "src/main/resources/backpackData.txt";
+    List<String> backpackDataList = readBackpackData(BACKPACK_DATA_PATH);
     List<Backpack> backpacksList = new ArrayList<>();
 
     @Override
@@ -34,11 +34,11 @@ public class DayThree implements Day {
     @Override
     public void executePartTwo() {
         try {
-            String input = Files.readString(Path.of("src/main/resources/backpackData.txt"));
+            String input = Files.readString(Path.of(BACKPACK_DATA_PATH));
             var counter = IntStream.range(0, input.length()).iterator();
             var sum2 = input.lines()
                     .collect(Collectors.groupingBy(c -> counter.nextInt() / 3)).values().stream()
-                    .mapToInt(l -> commonPriority(l)).sum();
+                    .mapToInt(this::commonPriority).sum();
             System.out.printf("rucksackReorganization PART 2: %d\n", sum2);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -61,12 +61,12 @@ public class DayThree implements Day {
     private ArrayList<Character> findDuplicates(List<Backpack> backpacksList) {
         ArrayList<Character> duplicates = new ArrayList<>();
         for (Backpack backpack : backpacksList) {
-            String firstCompartmant = backpack.getFirstCompartment();
-            String secondCompartmant = backpack.getSecondCompartment();
+            String firstCompartment = backpack.getFirstCompartment();
+            String secondCompartment = backpack.getSecondCompartment();
 
-            for (int i = 0; i < firstCompartmant.length(); i++) {
-                if (firstCompartmant.contains(Character.toString(secondCompartmant.charAt(i)))) {
-                    duplicates.add(secondCompartmant.charAt(i));
+            for (int i = 0; i < firstCompartment.length(); i++) {
+                if (firstCompartment.contains(Character.toString(secondCompartment.charAt(i)))) {
+                    duplicates.add(secondCompartment.charAt(i));
                     break;
                 }
             }
@@ -89,13 +89,13 @@ public class DayThree implements Day {
     }
 
     private List<String> readBackpackData(String backpackDataPath) {
-        List<String> backpackDataList = new ArrayList<>();
+        List<String> tempBackpackDataList = new ArrayList<>();
         try {
-            backpackDataList = Files.readAllLines(Paths.get(backpackDataPath));
+            tempBackpackDataList = Files.readAllLines(Paths.get(backpackDataPath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return backpackDataList;
+        return tempBackpackDataList;
     }
 
     int commonPriority(List<String> strings) {
