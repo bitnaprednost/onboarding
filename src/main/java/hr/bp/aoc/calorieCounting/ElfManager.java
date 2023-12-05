@@ -48,6 +48,9 @@ public class ElfManager {
     }
 
     public static int sumCalories(List<Elf> topElves) {
-        return topElves.stream().mapToInt(Elf::getCalories).sum();
+        ElfVisitor visitor = new ElfVisitor();
+        return visitor.acceptElf(topElves);
+        //return topElves.stream().mapToInt(Elf::getCalories).sum();
     }
+
 }

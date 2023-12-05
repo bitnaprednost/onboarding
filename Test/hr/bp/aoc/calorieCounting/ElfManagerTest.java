@@ -46,11 +46,14 @@ class ElfManagerTest {
 //        String calories = "1000\n" + "2000\n" + "3000";
 //        Elf elf = ElfManager.createElf(calories);
 //
+//        ElfVisitor elfVisitor = new ElfVisitor();
+//        elf.accept(elfVisitor);
+//
 //        assertAll(
 //                "Has all calories",
-//                () -> assertEquals(elf.getFood(0).getCalories().toString(), "1000"),
-//                () -> assertEquals(elf.getFood(1).getCalories().toString(), "2000"),
-//                () -> assertEquals(elf.getFood(2).getCalories().toString(), "3000")
+//                () -> assertEquals(elfVisitor.visitElf(elf), 1000),
+//                () -> assertEquals(elfVisitor.visitElf(elf), 2000),
+//                () -> assertEquals(elfVisitor.visitElf(elf), 3000)
 //        );
 //    }
 

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.Validate;
  * @author Marko Krišković
  */
 public class Food {
-    private Integer calories;
+    private final Integer calories;
 
     private Food(int calories) {
         this.calories=calories;
@@ -35,7 +35,7 @@ public class Food {
         return calories;
     }
 
-    private Integer getCalories() {
+    public Integer getCalories() {
         return calories;
     }
 }
