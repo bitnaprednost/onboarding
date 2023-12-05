@@ -2,6 +2,8 @@ package hr.bp.aoc;
 
 import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.days.campCleanup.DayFour;
+import hr.bp.aoc.days.supplyStacks.DayFive;
+import hr.bp.aoc.days.tuningTrouble.DaySix;
 import hr.bp.aoc.model.Day;
 import hr.bp.aoc.days.rucksackReorganization.DayThree;
 
@@ -17,6 +19,6 @@ public class Main {
     }
 
 	private static Day[] days = new Day[] {
-		new DayOne(), new DayThree(), new DayFour()
+		new DayOne(), new DayThree(), new DayFour(), new DayFive(), new DaySix()
 	};
 }
