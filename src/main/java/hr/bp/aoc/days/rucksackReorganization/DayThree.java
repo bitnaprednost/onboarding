@@ -27,7 +27,7 @@ public class DayThree implements Day {
 
         List<Character> duplicatesInBackpack = findDuplicates(backpacksList);
         int sum = calculateSumOfTheDuplicates(duplicatesInBackpack);
-
+        System.out.println("rucksackReorganization PART 1: ");
         System.out.println(sum);
     }
 
@@ -39,7 +39,7 @@ public class DayThree implements Day {
             var sum2 = input.lines()
                     .collect(Collectors.groupingBy(c -> counter.nextInt() / 3)).values().stream()
                     .mapToInt(l -> commonPriority(l)).sum();
-            System.out.printf("part 2: %d\n", sum2);
+            System.out.printf("rucksackReorganization PART 2: %d\n", sum2);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
