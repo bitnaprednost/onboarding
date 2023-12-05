@@ -22,18 +22,23 @@ public class DayFour implements Day {
     @Override
     public void executePartOne() {
         int fullyContainCounter = countRangesThatFullyContainTheOther();
+
+        System.out.println("campCleanup PART 1: ");
         System.out.println(fullyContainCounter);
     }
+
     @Override
     public void executePartTwo() {
         int overlapingCounter = coutRangesThatOverlap();
+
+        System.out.println("campCleanup PART 2: ");
         System.out.println(overlapingCounter);
     }
 
     private int coutRangesThatOverlap() {
         int counter = 0;
-        for (Pair pair : pairList){
-            if (pair.rangeOverlap()){
+        for (Pair pair : pairList) {
+            if (pair.rangeOverlap()) {
                 counter++;
             }
         }
@@ -43,8 +48,8 @@ public class DayFour implements Day {
 
     private int countRangesThatFullyContainTheOther() {
         int counter = 0;
-        for (Pair pair: pairList){
-            if (pair.rangeFullyContainOther()){
+        for (Pair pair : pairList) {
+            if (pair.rangeFullyContainOther()) {
                 counter++;
             }
         }
@@ -61,6 +66,7 @@ public class DayFour implements Day {
         }
         return pairsDataList;
     }
+
     private List<Pair> stringListToPairList(List<String> pairsDataList) {
         List<Pair> pairs = new ArrayList<>();
         pairsDataList.forEach(pair -> pairs.add(new Pair(pair)));
