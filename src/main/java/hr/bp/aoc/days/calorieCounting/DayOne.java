@@ -13,8 +13,8 @@ import java.util.*;
  */
 public class DayOne implements Day {
 
-    final String callorieDataPath = "src/main/resources/callorieData.txt";
-    final List<String> callorieData = new ArrayList<>(readCallorieData(callorieDataPath));
+    static final String CALORIE_DATA_PATH = "src/main/resources/callorieData.txt";
+    final List<String> calorieData = new ArrayList<>(readCalorieData(CALORIE_DATA_PATH));
     List<Elf> elvesList = new ArrayList<>();
 
     @Override
@@ -22,9 +22,11 @@ public class DayOne implements Day {
         if (!elvesList.isEmpty()) {
             elvesList.clear();
         }
-        calculateAndPushDataIntoList(elvesList, callorieData);
+        calculateAndPushDataIntoList(elvesList, calorieData);
         Elf elfWithTheMostCallories;
         elfWithTheMostCallories = getElfWithMostCallories(elvesList);
+
+        System.out.print("CalorieCounting PART 1: ");
         System.out.println(elfWithTheMostCallories);
     }
 
@@ -33,10 +35,12 @@ public class DayOne implements Day {
         if (!elvesList.isEmpty()) {
             elvesList.clear();
         }
-        calculateAndPushDataIntoList(elvesList, callorieData);
+        calculateAndPushDataIntoList(elvesList, calorieData);
         Collections.sort(elvesList);
 
         int firstThreeSum = calculateSum(elvesList, 3);
+
+        System.out.println("CalorieCounting PART 2: ");
         System.out.println(firstThreeSum);
     }
 
@@ -76,13 +80,13 @@ public class DayOne implements Day {
         }
     }
 
-    private List<String> readCallorieData(String callorieDataPath) {
-        List<String> callorieData;
+    private List<String> readCalorieData(String calorieDataPath) {
+        List<String> tempCalorieData;
         try {
-            callorieData = Files.readAllLines(Paths.get(callorieDataPath));
+            tempCalorieData = Files.readAllLines(Paths.get(calorieDataPath));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
-        return callorieData;
+        return tempCalorieData;
     }
 }
