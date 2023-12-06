@@ -1,10 +1,5 @@
 package hr.bp.aoc.calorieCounting.visitor;
 
-import hr.bp.aoc.calorieCounting.Elf;
-import hr.bp.aoc.calorieCounting.visitor.Visitor;
-
-import java.util.List;
-
 /**
  * @author Marko Krišković
  */

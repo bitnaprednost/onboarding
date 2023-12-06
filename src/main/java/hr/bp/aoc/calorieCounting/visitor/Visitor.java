@@ -1,7 +1,5 @@
 package hr.bp.aoc.calorieCounting.visitor;
 
-import java.util.List;
-
 /**
  * @author Marko Krišković
  */

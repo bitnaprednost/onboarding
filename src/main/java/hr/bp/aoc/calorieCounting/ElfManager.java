@@ -1,11 +1,12 @@
 package hr.bp.aoc.calorieCounting;
 
 import hr.bp.aoc.calorieCounting.visitor.ElfVisitor;
-import hr.bp.aoc.calorieCounting.visitor.Visitor;
 import org.apache.commons.lang3.Validate;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * <p>ElfManager class.</p>
@@ -13,6 +14,8 @@ import java.util.stream.Collectors;
  * @author Marko Krišković
  */
 public class ElfManager {
+
+    private ElfManager() {}
 
     private static String validate(String calorie) {
         Validate.notNull(calorie, "String input is null.");
@@ -42,7 +45,7 @@ public class ElfManager {
     }
 
     public static List<Elf> getElfMostCalories(List<Elf> elves, int N) {
-        return elves.stream().sorted(Comparator.comparing(Elf::getCalories).reversed()).limit(N).collect(Collectors.toList());
+        return elves.stream().sorted(Comparator.comparing(Elf::getCalories).reversed()).limit(N).toList();
     }
 
     public static Elf getElfMostCalories(List<Elf> elves) {

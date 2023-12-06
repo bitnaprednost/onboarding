@@ -1,6 +1,5 @@
 package hr.bp.aoc.calorieCounting;
 
-import hr.bp.aoc.calorieCounting.visitor.ElfVisitor;
 import hr.bp.aoc.calorieCounting.visitor.FoodVisitor;
 import hr.bp.aoc.calorieCounting.visitor.Visitor;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * @author Marko Krišković
  */
 public class Elf {
-    private List<Food> foodList;
+    private final List<Food> foodList;
 
     private Elf(){
         foodList = new ArrayList<>();

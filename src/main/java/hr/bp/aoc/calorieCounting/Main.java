@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String[] args) throws IOException {
         String text = Parser.getTextFromFile("Resources/day1Data.txt");
         List<Elf> elves = ElfManager.createElves(text);
 

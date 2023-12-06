@@ -18,7 +18,6 @@ public class Food {
 
     public static Food of(int calories){
         Validate.isTrue(hasCalories(calories), "Food can't contain negative calories.");
-        //if(!hasCalories(calories)) throw new IllegalArgumentException("Food can't contain negative calories.");
 
         return new Food(calories);
     }
