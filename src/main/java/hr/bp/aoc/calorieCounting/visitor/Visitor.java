@@ -6,8 +6,7 @@ import java.util.List;
  * @author Marko Krišković
  */
 public interface Visitor <T>{
-    int visit(T item);
-    int accept(T item);
+    void accept(int calories);
 
-    int getSum(List<T> itemList);
+    int getSum();
 }

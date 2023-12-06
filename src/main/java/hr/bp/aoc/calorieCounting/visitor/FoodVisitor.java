@@ -9,14 +9,13 @@ import java.util.List;
  * @author Marko Krišković
  */
 public class FoodVisitor implements Visitor<Food> {
-    public int visit(Food food) {
-        return food.accept(this);
-    }
-    public int accept(Food food){
-        return food.getCalories();
+
+    private int sum = 0;
+    public void accept(int calories){
+        sum += calories;
     }
 
-    public int getSum(List<Food> foodList){
-        return foodList.stream().mapToInt(this::visit).sum();
+    public int getSum(){
+        return sum;
     }
 }

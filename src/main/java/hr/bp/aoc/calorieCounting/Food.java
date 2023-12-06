@@ -32,11 +32,18 @@ public class Food {
         return calories >= 0;
     }
 
-    public int accept(FoodVisitor visitor){
-        return visitor.accept(this);
+    public void accept(FoodVisitor visitor){
+         visitor.accept(getCalories());
     }
 
     public Integer getCalories() {
         return calories;
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "calories=" + calories +
+                '}';
     }
 }

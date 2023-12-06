@@ -1,6 +1,7 @@
 package hr.bp.aoc.calorieCounting;
 
 import hr.bp.aoc.calorieCounting.visitor.ElfVisitor;
+import hr.bp.aoc.calorieCounting.visitor.Visitor;
 import org.apache.commons.lang3.Validate;
 
 import java.util.*;
@@ -41,7 +42,16 @@ public class ElfManager {
     }
 
     public static List<Elf> getElfMostCalories(List<Elf> elves, int N) {
-        return elves.stream().sorted(Comparator.comparing(Elf::getCalories).reversed()).limit(N).collect(Collectors.toList());
+        return elves.stream().sorted((o1, o2) -> {
+            Visitor elfVisitor1 = new ElfVisitor();
+            o1.accept(elfVisitor1);
+
+            Visitor elfVisitor2 = new ElfVisitor();
+            o2.accept(elfVisitor2);
+
+            return elfVisitor2.getSum() - elfVisitor1.getSum();
+
+        }).limit(N).collect(Collectors.toList());
     }
 
     public static Elf getElfMostCalories(List<Elf> elves) {
@@ -50,7 +60,12 @@ public class ElfManager {
 
     public static int sumCalories(List<Elf> topElves) {
         ElfVisitor visitor = new ElfVisitor();
-        return visitor.getSum(topElves);
+
+        for (Elf topElf : topElves) {
+            topElf.accept(visitor);
+        }
+
+        return visitor.getSum();
     }
 
 }

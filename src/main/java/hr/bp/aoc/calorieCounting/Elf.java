@@ -2,6 +2,7 @@ package hr.bp.aoc.calorieCounting;
 
 import hr.bp.aoc.calorieCounting.visitor.ElfVisitor;
 import hr.bp.aoc.calorieCounting.visitor.FoodVisitor;
+import hr.bp.aoc.calorieCounting.visitor.Visitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +43,24 @@ public class Elf {
     }
 
     public Integer getCalories() {
+        //returns calories
         FoodVisitor visitor = new FoodVisitor();
-        return visitor.getSum(foodList);
+
+        for (Food food : foodList) {
+            food.accept(visitor);
+        }
+
+        return visitor.getSum();
     }
 
-    public int accept(ElfVisitor visitor){
-        return visitor.accept(this);
+    public void accept(Visitor<Elf> visitor){
+        visitor.accept(this.getCalories());
+    }
+
+    @Override
+    public String toString() {
+        return "Elf{" +
+                "foodList=" + foodList +
+                '}';
     }
 }
