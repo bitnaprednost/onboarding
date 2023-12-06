@@ -20,7 +20,7 @@ public class ElfBuilder {
     }
 
     public ElfBuilder append(int food){
-        foodList.add(Food.from(food));
+        foodList.add(Food.of(food));
         return this;
     }
     

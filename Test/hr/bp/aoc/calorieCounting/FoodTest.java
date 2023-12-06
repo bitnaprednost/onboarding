@@ -9,7 +9,7 @@ class FoodTest {
     @Test
     public void foodHasCalories(){
         int calories = 0;
-        Food food = Food.from(calories);
+        Food food = Food.of(calories);
 
         assertTrue(food.hasCalories());
     }
@@ -18,14 +18,14 @@ class FoodTest {
     public void foodCantHaveNegativeCalories(){
         int calories = -100;
 
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()-> {Food food = Food.from(calories);});
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()-> {Food food = Food.of(calories);});
         assertEquals("Food can't contain negative calories.", thrown.getMessage());
     }
 
-//    @Test
-//    public void foodCanCarryCalories(){
-//        int calories = 1000;
-//        Food food = Food.from(calories);
-//        assertEquals(food.getCalories(), calories);
-//    }
+    @Test
+    public void foodCanCarryCalories(){
+        int calories = 1000;
+        Food food = Food.of(calories);
+        assertEquals(food.getCalories(), calories);
+    }
 }

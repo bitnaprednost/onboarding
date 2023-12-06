@@ -10,7 +10,7 @@ class ElfTest {
 
     @BeforeEach
     void init(){
-        food = Food.from(1000);
+        food = Food.of(1000);
     }
     @Test
     public void elfCanCarryFood(){
@@ -27,8 +27,8 @@ class ElfTest {
 
     @Test
     public void elfCanCarryMultipleFood(){
-        Food food1 = Food.from(100);
-        Food food2 = Food.from(0);
+        Food food1 = Food.of(100);
+        Food food2 = Food.of(0);
         Elf elf = Elf.of(food, food1, food2);
 
         assertAll(
@@ -41,8 +41,8 @@ class ElfTest {
 
     @Test
     public void elfHasCalories(){
-        Food food1 = Food.from(100);
-        Food food2 = Food.from(0);
+        Food food1 = Food.of(100);
+        Food food2 = Food.of(0);
         Elf elf = Elf.of(food, food1, food2);
 
         assertTrue(elf.hasCalories());
@@ -50,8 +50,8 @@ class ElfTest {
 
     @Test
     public void elfCanGetSumCalories(){
-        Food food1 = Food.from(100);
-        Food food2 = Food.from(10);
+        Food food1 = Food.of(100);
+        Food food2 = Food.of(10);
         Elf elf = Elf.of(food, food1, food2);
 
         assertEquals(elf.getCalories(), 1110);
