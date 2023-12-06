@@ -43,7 +43,6 @@ public class Elf {
     }
 
     public Integer getCalories() {
-        //returns calories
         FoodVisitor visitor = new FoodVisitor();
 
         for (Food food : foodList) {
@@ -53,7 +52,7 @@ public class Elf {
         return visitor.getSum();
     }
 
-    public void accept(Visitor<Elf> visitor){
+    public void accept(Visitor visitor){
         visitor.accept(this.getCalories());
     }
 

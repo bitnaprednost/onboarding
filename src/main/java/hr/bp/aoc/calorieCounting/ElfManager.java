@@ -50,7 +50,6 @@ public class ElfManager {
             o2.accept(elfVisitor2);
 
             return elfVisitor2.getSum() - elfVisitor1.getSum();
-
         }).limit(N).collect(Collectors.toList());
     }
 

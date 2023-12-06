@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @author Marko Krišković
  */
-public interface Visitor <T>{
+public interface Visitor{
     void accept(int calories);
 
     int getSum();

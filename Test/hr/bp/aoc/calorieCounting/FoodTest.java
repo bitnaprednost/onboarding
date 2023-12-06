@@ -26,6 +26,7 @@ class FoodTest {
     public void foodCanCarryCalories(){
         int calories = 1000;
         Food food = Food.of(calories);
+
         assertEquals(food.getCalories(), calories);
     }
 }

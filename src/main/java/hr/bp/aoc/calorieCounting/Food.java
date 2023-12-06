@@ -1,6 +1,7 @@
 package hr.bp.aoc.calorieCounting;
 
 import hr.bp.aoc.calorieCounting.visitor.FoodVisitor;
+import hr.bp.aoc.calorieCounting.visitor.Visitor;
 import org.apache.commons.lang3.Validate;
 
 /**
@@ -32,12 +33,14 @@ public class Food {
         return calories >= 0;
     }
 
-    public void accept(FoodVisitor visitor){
-         visitor.accept(getCalories());
+    public void accept(Visitor visitor){
+         visitor.accept(calories);
     }
 
     public Integer getCalories() {
-        return calories;
+        Visitor visitor = new FoodVisitor();
+        this.accept(visitor);
+        return visitor.getSum();
     }
 
     @Override
