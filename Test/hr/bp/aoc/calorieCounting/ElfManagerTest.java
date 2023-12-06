@@ -41,40 +41,40 @@ class ElfManagerTest {
         assertEquals("Food can't contain negative calories.", thrown.getMessage());
     }
 
-//    @Test
-//    public void ManagerCanCreateElfWithMultipleFood(){
-//        String calories = "1000\n" + "2000\n" + "3000";
-//        Elf elf = ElfManager.createElf(calories);
-//
+    @Test
+    public void ManagerCanCreateElfWithMultipleFood(){
+        String calories = "1000\n" + "2000\n" + "3000";
+        Elf elf = ElfManager.createElf(calories);
+
 //        ElfVisitor elfVisitor = new ElfVisitor();
 //        elf.accept(elfVisitor);
-//
-//        assertAll(
-//                "Has all calories",
-//                () -> assertEquals(elfVisitor.visitElf(elf), 1000),
-//                () -> assertEquals(elfVisitor.visitElf(elf), 2000),
-//                () -> assertEquals(elfVisitor.visitElf(elf), 3000)
-//        );
-//    }
 
-//    @Test
-//    public void ManagerConstructorPassesMultipleElves(){
-//        String calories = "1000\n" + "2000\n" + "3000\n" + "\n"
-//                            + "4000\n" + "\n"
-//                            + "5000\n" + "6000";
-//        List<Elf> elves = ElfManager.createElves(calories);
-//
-//        assertAll(
-//                "Has all elves",
-//                () -> assertEquals(elves.size(), 3),
-//                () -> assertEquals(elves.get(0).getFood(0).getCalories().toString(), "1000"),
-//                () -> assertEquals(elves.get(0).getFood(1).getCalories().toString(), "2000"),
-//                () -> assertEquals(elves.get(0).getFood(2).getCalories().toString(), "3000"),
-//                () -> assertEquals(elves.get(1).getFood(0).getCalories().toString(), "4000"),
-//                () -> assertEquals(elves.get(2).getFood(0).getCalories().toString(), "5000"),
-//                () -> assertEquals(elves.get(2).getFood(1).getCalories().toString(), "6000")
-//        );
-//    }
+        assertAll(
+                "Has all calories",
+                () -> assertEquals(elf.getFood(0).getCalories(), 1000),
+                () -> assertEquals(elf.getFood(1).getCalories(), 2000),
+                () -> assertEquals(elf.getFood(2).getCalories(), 3000)
+        );
+    }
+
+    @Test
+    public void ManagerConstructorPassesMultipleElves(){
+        String calories = "1000\n" + "2000\n" + "3000\n" + "\n"
+                            + "4000\n" + "\n"
+                            + "5000\n" + "6000";
+        List<Elf> elves = ElfManager.createElves(calories);
+
+        assertAll(
+                "Has all elves",
+                () -> assertEquals(elves.size(), 3),
+                () -> assertEquals(elves.get(0).getFood(0).getCalories().toString(), "1000"),
+                () -> assertEquals(elves.get(0).getFood(1).getCalories().toString(), "2000"),
+                () -> assertEquals(elves.get(0).getFood(2).getCalories().toString(), "3000"),
+                () -> assertEquals(elves.get(1).getFood(0).getCalories().toString(), "4000"),
+                () -> assertEquals(elves.get(2).getFood(0).getCalories().toString(), "5000"),
+                () -> assertEquals(elves.get(2).getFood(1).getCalories().toString(), "6000")
+        );
+    }
 
     @Test
     public void ManagerCanFindElfWithMostCalories(){

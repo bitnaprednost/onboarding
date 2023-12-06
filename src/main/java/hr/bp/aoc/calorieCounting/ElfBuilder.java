@@ -1,7 +1,4 @@
-package hr.bp.aoc.calorieCounting.builder;
-
-import hr.bp.aoc.calorieCounting.Elf;
-import hr.bp.aoc.calorieCounting.Food;
+package hr.bp.aoc.calorieCounting;
 
 import java.util.ArrayList;
 import java.util.List;
