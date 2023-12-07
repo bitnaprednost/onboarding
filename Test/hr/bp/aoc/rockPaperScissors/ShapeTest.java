@@ -1,6 +1,6 @@
 package hr.bp.aoc.rockPaperScissors;
 
-import hr.bp.aoc.rockPaperScissors.shape.ShapeClass;
+import hr.bp.aoc.rockPaperScissors.shape.ShapeWrapper;
 import hr.bp.aoc.rockPaperScissors.shape.Paper;
 import hr.bp.aoc.rockPaperScissors.shape.Rock;
 import hr.bp.aoc.rockPaperScissors.shape.Scissors;
@@ -56,9 +56,9 @@ class ShapeTest {
 
     @Test
     public void simulateRockStatusesEnum(){
-        Status statusScissors = ShapeClass.getRock().simulateAgainst(ShapeClass.getScissors());
-        Status statusPaper = ShapeClass.getRock().simulateAgainst(ShapeClass.getPaper());
-        Status statusRock = ShapeClass.getRock().simulateAgainst(ShapeClass.getRock());
+        Status statusScissors = ShapeWrapper.getRock().simulateAgainst(ShapeWrapper.getScissors());
+        Status statusPaper = ShapeWrapper.getRock().simulateAgainst(ShapeWrapper.getPaper());
+        Status statusRock = ShapeWrapper.getRock().simulateAgainst(ShapeWrapper.getRock());
 
         assertEquals(statusRock, Status.DRAW);
         assertEquals(statusPaper, Status.LOSE);
@@ -67,9 +67,9 @@ class ShapeTest {
 
     @Test
     public void simulatePaperStatusesEnum(){
-        Status statusScissors = ShapeClass.getPaper().simulateAgainst(ShapeClass.getScissors());
-        Status statusPaper = ShapeClass.getPaper().simulateAgainst(ShapeClass.getPaper());
-        Status statusRock = ShapeClass.getPaper().simulateAgainst(ShapeClass.getRock());
+        Status statusScissors = ShapeWrapper.getPaper().simulateAgainst(ShapeWrapper.getScissors());
+        Status statusPaper = ShapeWrapper.getPaper().simulateAgainst(ShapeWrapper.getPaper());
+        Status statusRock = ShapeWrapper.getPaper().simulateAgainst(ShapeWrapper.getRock());
 
         assertEquals(statusRock, Status.WIN);
         assertEquals(statusPaper, Status.DRAW);
@@ -78,9 +78,9 @@ class ShapeTest {
 
     @Test
     public void simulateScissorsStatusesEnum(){
-        Status statusScissors = ShapeClass.getScissors().simulateAgainst(ShapeClass.getScissors());
-        Status statusPaper = ShapeClass.getScissors().simulateAgainst(ShapeClass.getPaper());
-        Status statusRock = ShapeClass.getScissors().simulateAgainst(ShapeClass.getRock());
+        Status statusScissors = ShapeWrapper.getScissors().simulateAgainst(ShapeWrapper.getScissors());
+        Status statusPaper = ShapeWrapper.getScissors().simulateAgainst(ShapeWrapper.getPaper());
+        Status statusRock = ShapeWrapper.getScissors().simulateAgainst(ShapeWrapper.getRock());
 
         assertEquals(statusRock, Status.LOSE);
         assertEquals(statusPaper, Status.WIN);
