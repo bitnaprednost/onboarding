@@ -14,9 +14,7 @@ public class Addx implements Command {
     @Override
     public void execute() {
         clock.tick();
-        clock.afterTick();
         clock.tick();
-        clock.afterTick();
         clock.add(V);
     }
 }
