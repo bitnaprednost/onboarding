@@ -28,7 +28,7 @@ public class Rope {
         Point prev = null;
         for(Point current : ropePoints){
             if(current==ropePoints.getFirst()) current.x++;
-            else moveRight(prev, current);
+            else update(prev, current);
 
             prev = current;
         }
@@ -45,7 +45,7 @@ public class Rope {
         Point prev = null;
         for(Point current : ropePoints){
             if(current==ropePoints.getFirst()) current.x--;
-            else moveLeft(prev, current);
+            else update(prev, current);
 
             prev = current;
         }
@@ -62,7 +62,7 @@ public class Rope {
         Point prev = null;
         for(Point current : ropePoints){
             if(current==ropePoints.getFirst()) current.y++;
-            else moveUp(prev, current);
+            else update(prev, current);
 
             prev = current;
         }
@@ -79,7 +79,7 @@ public class Rope {
         Point prev = null;
         for(Point current : ropePoints){
             if(current==ropePoints.getFirst()) current.y--;
-            else moveDown(prev, current);
+            else update(prev, current);
 
             prev = current;
         }
@@ -90,5 +90,37 @@ public class Rope {
             current.y--;
             if(current.x != prev.x) current.x=prev.x;
         }
+    }
+
+    private void update(Point prev, Point current){
+        if(prev.x-current.x > 1){
+            current.x++;
+            if(current.y != prev.y) current.y=prev.y;
+        }
+        else if(current.x-prev.x > 1) {
+            current.x--;
+            if(current.y != prev.y) current.y=prev.y;
+        }
+        else if(prev.y-current.y > 1) {
+            current.y++;
+            if (current.x != prev.x) current.x = prev.x;
+        }
+        else if(current.y-prev.y > 1){
+            current.y--;
+            if(current.x != prev.x) current.x=prev.x;
+        }
+    }
+
+    public String print(int size){
+        StringBuilder sb = new StringBuilder();
+        for (int i=size;i>-size;i--){
+            for (int j=-size;j<size;j++){
+                if(i==0 && j==0) sb.append("s");
+                else if(ropePoints.contains(new Point(j, i))) sb.append("#");
+                else sb.append(".");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }

@@ -34,6 +34,7 @@ public class LongRopeTest {
         Point headPosition = new Point(5, 0);
         Point tailPosition = new Point(0, 0);
 
+//        System.out.println(rope.print(6));
         assertEquals(headPosition, rope.getHead());
         assertEquals(tailPosition, rope.getTail());
     }
@@ -96,6 +97,7 @@ public class LongRopeTest {
         Point headPosition = new Point(7, 0);
         Point tailPosition = new Point(2, 0);
 
+        //System.out.println(rope.print(8));
         assertEquals(headPosition, rope.getHead());
         assertEquals(tailPosition, rope.getTail());
     }
@@ -125,6 +127,7 @@ public class LongRopeTest {
         rope.moveRight();
         rope.moveRight();
         rope.moveRight();
+        //System.out.println(rope.print(8));
 
         rope.moveLeft();
         rope.moveLeft();
@@ -136,6 +139,7 @@ public class LongRopeTest {
         Point headPosition = new Point(0, 0);
         Point tailPosition = new Point(1, 0);
 
+        //System.out.println(rope.print(8));
         assertEquals(headPosition, rope.getHead());
         assertEquals(tailPosition, rope.getTail());
     }
@@ -171,13 +175,18 @@ public class LongRopeTest {
         rope.moveRight();
         rope.moveRight();
         rope.moveUp();
+        //System.out.println(rope.print(6));
         rope.moveUp();
+        //System.out.println(rope.print(6));
         rope.moveUp();
+        //System.out.println(rope.print(6));
         rope.moveUp();
+        //System.out.println(rope.print(6));
         rope.moveUp();
+        //System.out.println(rope.print(6));
 
         Point headPosition = new Point(5, 5);
-        Point tailPosition = new Point(0, 0);
+        Point tailPosition = new Point(2, 2);
 
         assertEquals(headPosition, rope.getHead());
         assertEquals(tailPosition, rope.getTail());
@@ -195,7 +204,7 @@ public class LongRopeTest {
         rope.moveUp();
 
         Point headPosition = new Point(3, 5);
-        Point tailPosition = new Point(0, 0);
+        Point tailPosition = new Point(1, 1);
 
         assertEquals(headPosition, rope.getHead());
         assertEquals(tailPosition, rope.getTail());
@@ -214,7 +223,50 @@ public class LongRopeTest {
         rope.moveUp();
 
         Point headPosition = new Point(3, 6);
-        Point tailPosition = new Point(3, 1);
+        Point tailPosition = new Point(2, 2);
+
+        assertEquals(headPosition, rope.getHead());
+        assertEquals(tailPosition, rope.getTail());
+    }
+
+    @Test
+    void canMoveRopeTailMovesDiagonally4(){
+        rope.moveRight();
+        rope.moveRight();
+        rope.moveRight();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveLeft();
+        rope.moveLeft();
+
+        Point headPosition = new Point(1, 5);
+        Point tailPosition = new Point(1, 1);
+
+        assertEquals(headPosition, rope.getHead());
+        assertEquals(tailPosition, rope.getTail());
+    }
+
+
+    @Test
+    void canMoveRopeTailMovesDiagonally5(){
+        rope.moveRight();
+        rope.moveRight();
+        rope.moveRight();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveUp();
+        rope.moveLeft();
+        rope.moveLeft();
+        rope.moveLeft();
+        rope.moveLeft();
+
+        Point headPosition = new Point(-1, 5);
+        Point tailPosition = new Point(1, 2);
 
         assertEquals(headPosition, rope.getHead());
         assertEquals(tailPosition, rope.getTail());
