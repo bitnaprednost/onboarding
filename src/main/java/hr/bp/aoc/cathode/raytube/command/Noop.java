@@ -11,5 +11,6 @@ public class Noop implements Command {
     @Override
     public void execute() {
         clock.tick();
+        clock.afterTick();
     }
 }

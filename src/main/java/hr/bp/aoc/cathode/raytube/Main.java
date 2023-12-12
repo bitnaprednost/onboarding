@@ -15,5 +15,6 @@ public class Main {
 
         int result = rayTube.getSignalSum();
         System.out.println(result);
+        rayTube.printMessage();
     }
 }
