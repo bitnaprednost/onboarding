@@ -67,11 +67,9 @@ public class RopeManager {
 
     private void updateTailTrail(){
         tailTrail.add(getTail());
-        //System.out.println(tailTrail + " " + getHead());
     }
 
     public int countTailTrail() {
-        //System.out.println(tailTrail);
         return tailTrail.size();
     }
 

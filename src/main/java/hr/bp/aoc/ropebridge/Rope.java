@@ -34,13 +34,6 @@ public class Rope {
         }
     }
 
-    private void moveRight(Point prev, Point current){
-        if(prev.x-current.x > 1){
-            current.x++;
-            if(current.y != prev.y) current.y=prev.y;
-        }
-    }
-
     public void moveLeft() {
         Point prev = null;
         for(Point current : ropePoints){
@@ -48,13 +41,6 @@ public class Rope {
             else update(prev, current);
 
             prev = current;
-        }
-    }
-
-    private void moveLeft(Point prev, Point current){
-        if(current.x-prev.x > 1) {
-            current.x--;
-            if(current.y != prev.y) current.y=prev.y;
         }
     }
 
@@ -68,13 +54,6 @@ public class Rope {
         }
     }
 
-    private void moveUp(Point prev, Point current){
-        if(prev.y-current.y > 1) {
-            current.y++;
-            if (current.x != prev.x) current.x = prev.x;
-        }
-    }
-
     public void moveDown() {
         Point prev = null;
         for(Point current : ropePoints){
@@ -82,13 +61,6 @@ public class Rope {
             else update(prev, current);
 
             prev = current;
-        }
-    }
-
-    private void moveDown(Point prev, Point current){
-        if(current.y-prev.y > 1){
-            current.y--;
-            if(current.x != prev.x) current.x=prev.x;
         }
     }
 
