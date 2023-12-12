@@ -16,3 +16,5 @@
 #Unwanted folders
 .idea
 target
+*.iml
+*.xml
