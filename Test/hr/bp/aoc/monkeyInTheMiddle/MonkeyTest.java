@@ -21,9 +21,9 @@ class MonkeyTest {
             }
 
             @Override
-            void test(int position) {
-                if(items.get(position)%23==0) throwToMonkey(position, monkey2);
-                else throwToMonkey(position, monkey3);
+            void test() {
+                if(items.getFirst()%23==0) throwToMonkey(monkey2);
+                else throwToMonkey(monkey3);
             }
         };
 
@@ -34,9 +34,9 @@ class MonkeyTest {
             }
 
             @Override
-            void test(int position) {
-                if(items.get(position)%19==0) throwToMonkey(position, monkey2);
-                else throwToMonkey(position, monkey0);
+            void test() {
+                if(items.getFirst()%19==0) throwToMonkey(monkey2);
+                else throwToMonkey(monkey0);
             }
         };
 
@@ -47,9 +47,9 @@ class MonkeyTest {
             }
 
             @Override
-            void test(int position) {
-                if(items.get(position)%13==0) throwToMonkey(position, monkey1);
-                else throwToMonkey(position, monkey3);
+            void test() {
+                if(items.getFirst()%13==0) throwToMonkey(monkey1);
+                else throwToMonkey(monkey3);
             }
         };
 
@@ -60,9 +60,9 @@ class MonkeyTest {
             }
 
             @Override
-            void test(int position) {
-                if(items.get(position)%17==0) throwToMonkey(position, monkey0);
-                else throwToMonkey(position, monkey1);
+            void test() {
+                if(items.getFirst()%17==0) throwToMonkey(monkey0);
+                else throwToMonkey(monkey1);
             }
         };
     }

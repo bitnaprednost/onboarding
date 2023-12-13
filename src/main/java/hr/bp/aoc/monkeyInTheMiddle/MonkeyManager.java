@@ -10,8 +10,8 @@ public class MonkeyManager {
         this.monkeys = List.of(monkeys);
     }
 
-    public static MonkeyManager of(Monkey monkey0, Monkey monkey1, Monkey monkey2, Monkey monkey3) {
-        return new MonkeyManager(monkey0, monkey1, monkey2, monkey3);
+    public static MonkeyManager of(Monkey... monkeys) {
+        return new MonkeyManager(monkeys);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MonkeyManager {
     }
 
     public List<Monkey> getTopActiveMonkeys(int limit) {
-        Validate.isTrue(limit > 0);
+        Validate.isTrue(limit > 0, "Argument must be a positive number");
 
         return monkeys.stream()
                 .sorted(Comparator.comparing(Monkey::getTimesInspectedItems).reversed())

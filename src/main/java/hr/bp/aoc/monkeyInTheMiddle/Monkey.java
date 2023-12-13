@@ -15,7 +15,7 @@ public abstract class Monkey {
     }
 
     abstract Integer operation(Integer old);
-    abstract void test(int position);
+    abstract void test();
 
     public void inspectItems(){
         int size = items.size();
@@ -23,13 +23,13 @@ public abstract class Monkey {
             Integer updatedWorryLevel = operation(items.getFirst()) / 3;
             items.set(0, updatedWorryLevel);
 
-            test(0);
+            test();
             timesInspectedItems++;
         }
     }
-    void throwToMonkey(int position, Monkey monkey){
-        Integer temp = items.get(position);
-        items.remove(position);
+    void throwToMonkey(Monkey monkey){
+        Integer temp = items.getFirst();
+        items.removeFirst();
         monkey.items.add(temp);
     }
 
