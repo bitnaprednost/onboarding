@@ -76,4 +76,17 @@ class MonkeyTest {
         assertEquals("Monkey 2: [79, 60, 97]", monkey2.toString());
         assertEquals("Monkey 3: [74, 500, 620]", monkey3.toString());
     }
+
+    @Test
+    void canGetNumberOfInspectedTimes(){
+        monkey0.inspectItems();
+        monkey1.inspectItems();
+        monkey2.inspectItems();
+        monkey3.inspectItems();
+
+        assertEquals(2, monkey0.getTimesInspectedItems());
+        assertEquals(4, monkey1.getTimesInspectedItems());
+        assertEquals(3, monkey2.getTimesInspectedItems());
+        assertEquals(5, monkey3.getTimesInspectedItems());
+    }
 }
