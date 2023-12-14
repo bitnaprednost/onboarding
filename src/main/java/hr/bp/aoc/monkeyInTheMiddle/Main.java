@@ -13,9 +13,10 @@ public class Main {
 
         Monkey[] monkeyList = MonkeyParser.parseToMonkies(textFromFile);
         MonkeyManager monkeyManager = MonkeyManager.of(monkeyList);
-        monkeyManager.simulateRounds(20);
+        //monkeyManager.simulateRounds(20);
+        monkeyManager.simulateRoundsNoRelief(10000);
 
-        Integer result = monkeyManager.getProductOfTopActiveMonkeys(2);
+        Long result = monkeyManager.getProductOfTopActiveMonkeys(2);
         System.out.println(result);
     }
 }

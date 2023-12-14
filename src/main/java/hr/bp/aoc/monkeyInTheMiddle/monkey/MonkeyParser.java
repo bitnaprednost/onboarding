@@ -6,6 +6,7 @@ import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.apache.commons.lang3.Validate;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,9 +30,9 @@ public class MonkeyParser{
         CombinedFunctionalInterface cfi = null;
 
         if(split[0].matches("\\d+")){
-            Long integer1 = Long.valueOf(split[0]);
+            Integer integer1 = Integer.valueOf(split[0]);
             if(split[2].matches("\\d+")) {
-                Long integer2 = Long.valueOf(split[2]);
+                Integer integer2 = Integer.valueOf(split[2]);
                 cfi = Operation.from(split[1]).initializeFunction(integer1, integer2, 0);
             }
             else if(split[2].matches("old")){
@@ -40,7 +41,7 @@ public class MonkeyParser{
         }
         else if(split[0].matches("old")){
             if(split[2].matches("\\d+")) {
-                Long integer2 = Long.valueOf(split[2]);
+                Integer integer2 = Integer.valueOf(split[2]);
                 cfi = Operation.from(split[1]).initializeFunction(integer2, null, 1);
             }
             else if(split[2].matches("old")){
@@ -56,7 +57,7 @@ public class MonkeyParser{
         validateForm(split);
 
         Integer id = Integer.valueOf(split[0].substring(0, split[0].length()-1).substring(7));
-        List<Long> items = Arrays.stream(split[1].trim().substring(16).split(", ")).mapToLong(Integer::valueOf).boxed().toList();
+        List<BigInteger> items = Arrays.stream(split[1].trim().substring(16).split(", ")).mapToInt(Integer::valueOf).boxed().map(BigInteger::valueOf).toList();
         CombinedFunctionalInterface function = parseFunction(split[2]);
         Integer divisibleBy = Integer.valueOf(split[3].trim().substring(19));
         Integer throwTrueId = Integer.valueOf(split[4].trim().substring(25));
@@ -65,7 +66,7 @@ public class MonkeyParser{
         return buildMonkey(id, items, function, divisibleBy, throwTrueId, throwFalseId);
     }
 
-    private static MonkeyBuilder buildMonkey(Integer id, List<Long> items, CombinedFunctionalInterface function, Integer divisibleBy, Integer throwTrueId, Integer throwFalseId) {
+    private static MonkeyBuilder buildMonkey(Integer id, List<BigInteger> items, CombinedFunctionalInterface function, Integer divisibleBy, Integer throwTrueId, Integer throwFalseId) {
         MonkeyBuilder builder = new MonkeyBuilder();
 
         return builder.setId(id)

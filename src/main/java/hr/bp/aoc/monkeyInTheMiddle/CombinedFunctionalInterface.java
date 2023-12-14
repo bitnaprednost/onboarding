@@ -1,9 +1,12 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
+import java.math.BigInteger;
+import java.util.function.Function;
 import java.util.function.LongSupplier;
 import java.util.function.LongUnaryOperator;
+import java.util.function.Supplier;
 
-public abstract class CombinedFunctionalInterface implements LongUnaryOperator, LongSupplier {
+public abstract class CombinedFunctionalInterface implements Function<BigInteger, BigInteger>, Supplier<BigInteger> {
     private int functionMode;
 
     protected CombinedFunctionalInterface(int functionMode) {
@@ -14,17 +17,17 @@ public abstract class CombinedFunctionalInterface implements LongUnaryOperator, 
         this.functionMode = functionMode;
     }
 
-    public long operation(Long old){
+    public BigInteger operation(BigInteger old){
         return switch (functionMode){
             // number +* number
-            case 0 -> getAsLong();
+            case 0 -> get();
             // old +* number
             case 1 ->  apply2(old);
             // old +* old
-            case 2 -> applyAsLong(old);
+            case 2 -> apply(old);
             default -> throw new UnsupportedOperationException();
         };
     }
 
-    abstract long apply2(long old);
+    abstract BigInteger apply2(BigInteger old);
 }

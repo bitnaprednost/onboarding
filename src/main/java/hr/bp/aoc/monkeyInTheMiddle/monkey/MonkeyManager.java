@@ -6,8 +6,11 @@ import java.util.*;
 
 public class MonkeyManager {
     private final List<Monkey> monkeys;
+    private final long magicNumber;
     private MonkeyManager(Monkey... monkeys) {
         this.monkeys = List.of(monkeys);
+
+        this.magicNumber = Arrays.stream(monkeys).mapToInt(Monkey::getDivisibleBy).reduce(1,(prod, elem)->prod*elem);
     }
 
     public static MonkeyManager of(Monkey... monkeys) {
@@ -27,15 +30,22 @@ public class MonkeyManager {
 
     public void simulateRounds(int rounds) {
         for(int i=0;i<rounds;i++) {
-            monkeys.forEach(Monkey::inspectItems);
+            monkeys.forEach(monkey -> monkey.inspectItems(magicNumber));
             //System.out.println(i + ". " + monkeys);
         }
     }
 
-    public int getTimesInspectedItems(int id) {
+    public void simulateRoundsNoRelief(int rounds) {
+        for(int i=0;i<rounds;i++) {
+            monkeys.forEach(monkey -> monkey.inspectItemsNoRelief(magicNumber));
+            //System.out.println(i + ". " + monkeys);
+        }
+    }
+
+    public long getTimesInspectedItems(int id) {
         return monkeys.stream()
                 .filter(m->m.getId()==id)
-                .mapToInt(Monkey::getTimesInspectedItems)
+                .mapToLong(Monkey::getTimesInspectedItems)
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
@@ -49,9 +59,9 @@ public class MonkeyManager {
                 .toList();
     }
 
-    public Integer getProductOfTopActiveMonkeys(int limit) {
+    public Long getProductOfTopActiveMonkeys(int limit) {
         return getTopActiveMonkeys(limit).stream()
-                .mapToInt(Monkey::getTimesInspectedItems)
+                .mapToLong(Monkey::getTimesInspectedItems)
                 .reduce(1, (total, element) -> total * element);
     }
 }

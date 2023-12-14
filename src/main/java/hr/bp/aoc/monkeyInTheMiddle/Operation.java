@@ -1,46 +1,47 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 public enum Operation {
     PLUS("+"){
         @Override
-        public CombinedFunctionalInterface initializeFunction(Long x1, Long x2, int mode) {
+        public CombinedFunctionalInterface initializeFunction(Integer x1, Integer x2, int mode) {
             return new CombinedFunctionalInterface(mode) {
                 @Override
-                public long applyAsLong(long old) {
-                    return old + old;
+                public BigInteger apply(BigInteger old) {
+                    return old.add(old);
                 }
 
                 @Override
-                public long apply2(long old) {
-                    return x1 + old;
+                public BigInteger apply2(BigInteger old) {
+                    return old.add(BigInteger.valueOf(x1));
                 }
 
                 @Override
-                public long getAsLong() {
-                    return x1 + x2;
+                public BigInteger get() {
+                    return BigInteger.valueOf((long) x1 + x2);
                 }
             };
         }
     },
     TIMES("*"){
         @Override
-        public CombinedFunctionalInterface initializeFunction(Long x1, Long x2, int mode) {
+        public CombinedFunctionalInterface initializeFunction(Integer x1, Integer x2, int mode) {
             return new CombinedFunctionalInterface(mode) {
                 @Override
-                public long applyAsLong(long old) {
-                    return old * old;
+                public BigInteger apply(BigInteger old) {
+                    return old.multiply(old);
                 }
 
                 @Override
-                public long apply2(long old) {
-                    return old * x1;
+                public BigInteger apply2(BigInteger old) {
+                    return old.multiply(BigInteger.valueOf(x1));
                 }
 
                 @Override
-                public long getAsLong() {
-                    return x1 * x2;
+                public BigInteger get() {
+                    return BigInteger.valueOf((long) x1 * x2);
                 }
             };
         }
@@ -51,7 +52,7 @@ public enum Operation {
         this.text=text;
     }
 
-    public abstract CombinedFunctionalInterface initializeFunction(Long x1, Long x2, int mode);
+    public abstract CombinedFunctionalInterface initializeFunction(Integer x1, Integer x2, int mode);
 
     public static Operation from(String str) {
         return Arrays.stream(values())

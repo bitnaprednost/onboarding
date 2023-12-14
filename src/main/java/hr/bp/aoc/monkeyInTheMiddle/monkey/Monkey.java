@@ -2,19 +2,20 @@ package hr.bp.aoc.monkeyInTheMiddle.monkey;
 
 import hr.bp.aoc.monkeyInTheMiddle.CombinedFunctionalInterface;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Monkey {
     private final int id;
     private final Integer divisibleBy;
-    private int timesInspectedItems = 0;
-    private final List<Long> items;
+    private long timesInspectedItems = 0;
+    private final List<BigInteger> items;
     private Monkey trueMonkey;
     private Monkey falseMonkey;
     private final CombinedFunctionalInterface function;
 
-    public Monkey(Integer id, List<Long> items, CombinedFunctionalInterface function, Integer divisibleBy) {
+    public Monkey(Integer id, List<BigInteger> items, CombinedFunctionalInterface function, Integer divisibleBy) {
         this.id = id;
         this.items = new ArrayList<>();
         this.items.addAll(items);
@@ -22,23 +23,33 @@ public class Monkey {
         this.divisibleBy = divisibleBy;
     }
 
-    private Long operation(Long old){
+    private BigInteger operation(BigInteger old){
         return function.operation(old);
     }
 
-    public void inspectItems(){
-        for (Long item : items){
-            Long updatedItem = Math.floorDiv(operation(item), 3);
+    public void inspectItems(long magicNumber){
+        inspectItems(magicNumber, true);
+    }
 
-            if(updatedItem%divisibleBy==0) throwToMonkey(trueMonkey, updatedItem);
-            else throwToMonkey(falseMonkey, updatedItem);
+    public void inspectItemsNoRelief(long magicNumber) {
+        inspectItems(magicNumber, false);
+    }
+
+    private void inspectItems(long magicNumber, boolean relief){
+        for (BigInteger item : items){
+            item = operation(item);
+            if(relief) item = item.divide(BigInteger.valueOf(3));
+            item = item.mod(BigInteger.valueOf(magicNumber));
+
+            if(item.mod(BigInteger.valueOf(divisibleBy)).equals(BigInteger.ZERO)) throwToMonkey(trueMonkey, item);
+            else throwToMonkey(falseMonkey, item);
 
             timesInspectedItems++;
         }
         items.clear();
     }
 
-    private void throwToMonkey(Monkey monkey, Long item){
+    private void throwToMonkey(Monkey monkey, BigInteger item){
         monkey.items.add(item);
     }
 
@@ -46,8 +57,12 @@ public class Monkey {
         return id;
     }
 
-    public int getTimesInspectedItems() {
+    public long getTimesInspectedItems() {
         return timesInspectedItems;
+    }
+
+    public Integer getDivisibleBy() {
+        return divisibleBy;
     }
 
     void setTrueMonkey(Monkey trueMonkey) {
@@ -60,6 +75,6 @@ public class Monkey {
 
     @Override
     public String toString() {
-        return "Monkey " + id + ": "  + items;// +   ", numOfInspected: "+ timesInspectedItems;
+        return "Monkey " + id + ": "  + items +   ", numOfInspected: "+ timesInspectedItems;
     }
 }

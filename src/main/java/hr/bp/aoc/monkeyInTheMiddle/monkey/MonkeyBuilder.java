@@ -3,6 +3,7 @@ package hr.bp.aoc.monkeyInTheMiddle.monkey;
 import hr.bp.aoc.monkeyInTheMiddle.CombinedFunctionalInterface;
 import org.apache.commons.lang3.Validate;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class MonkeyBuilder {
@@ -10,14 +11,14 @@ public class MonkeyBuilder {
     private Integer divisibleBy;
     private Integer monkeyTrueId;
     private Integer monkeyFalseId;
-    private List<Long> items;
+    private List<BigInteger> items;
     private CombinedFunctionalInterface function;
 
-    public List<Long> getItems() {
+    public List<BigInteger> getItems() {
         return items;
     }
 
-    public MonkeyBuilder setItems(List<Long> items) {
+    public MonkeyBuilder setItems(List<BigInteger> items) {
         this.items = items;
         return this;
     }
