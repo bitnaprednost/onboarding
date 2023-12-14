@@ -61,36 +61,31 @@ class MonkeyBuilderTest {
 
     @Test
     void canBuildMonkey(){
-        Monkey monkeyTrue = null;
-        Monkey monkeyFalse = null;
-        CombinedFunctionalInterface cfi = new CombinedFunctionalInterface() {
-            @Override
-            Integer apply2(Integer integer) {
-                return integer * 19;
-            }
-
-            @Override
-            public Integer apply(Integer integer, Integer integer2) {
-                return null;
-            }
-
-            @Override
-            public Integer get() {
-                return null;
-            }
-        };
-        cfi.setFunctionMode(1);
         
         builder.setId(0)
                 .setDivisibleBy(23)
-                .setFunction(cfi)
+                .setFunction(new CombinedFunctionalInterface(1) {
+                    @Override
+                    Integer apply2(Integer integer) {
+                        return integer * 19;
+                    }
+
+                    @Override
+                    public Integer apply(Integer integer) {
+                        return null;
+                    }
+
+                    @Override
+                    public Integer get() {
+                        return null;
+                    }
+                })
                 .setItems(List.of(79, 98))
-                .setMonkeyTrue(monkeyTrue)
-                .setMonkeyFalse(monkeyFalse);
+                .setMonkeyTrueId(2)
+                .setMonkeyFalseId(3);
 
         Monkey monkey = builder.build();
 
         assertEquals("Monkey 0: [79, 98]", monkey.toString());
-        assertEquals(1501, monkey.operation(monkey.items.getFirst()));
     }
 }

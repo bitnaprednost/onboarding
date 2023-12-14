@@ -3,15 +3,12 @@ package hr.bp.aoc.monkeyInTheMiddle;
 import org.apache.commons.lang3.Validate;
 
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class MonkeyBuilder {
     private Integer id;
     private Integer divisibleBy;
-    private Monkey monkeyTrue;
-    private Monkey monkeyFalse;
+    private Integer monkeyTrueId;
+    private Integer monkeyFalseId;
     private List<Integer> items;
     private CombinedFunctionalInterface function;
 
@@ -46,38 +43,30 @@ public class MonkeyBuilder {
         return this;
     }
 
-    public MonkeyBuilder setMonkeyTrue(Monkey monkeyTrue) {
-        this.monkeyTrue = monkeyTrue;
-        return this;
-    }
-
-    public MonkeyBuilder setMonkeyFalse(Monkey monkeyFalse) {
-        this.monkeyFalse = monkeyFalse;
-        return this;
-    }
-
     public MonkeyBuilder setFunction(CombinedFunctionalInterface function) {
         this.function = function;
         return this;
     }
 
-    public Monkey build() {
-        return new Monkey(id, items) {
-            @Override
-            Integer operation(Integer old) {
-                return switch (function.getFunctionMode()){
-                    case 0 -> function.get();
-                    case 1 ->  function.apply2(old);
-                    case 2 -> function.apply(old, old);
-                    default -> throw new UnsupportedOperationException();
-                };
-            }
+    public Integer getMonkeyTrueId() {
+        return monkeyTrueId;
+    }
 
-            @Override
-            void test() {
-                if(items.getFirst()%divisibleBy==0) throwToMonkey(monkeyTrue);
-                else throwToMonkey(monkeyFalse);
-            }
-        };
+    public MonkeyBuilder setMonkeyTrueId(Integer monkeyTrueId) {
+        this.monkeyTrueId = monkeyTrueId;
+        return this;
+    }
+
+    public Integer getMonkeyFalseId() {
+        return monkeyFalseId;
+    }
+
+    public MonkeyBuilder setMonkeyFalseId(Integer monkeyFalseId) {
+        this.monkeyFalseId = monkeyFalseId;
+        return this;
+    }
+
+    public Monkey build() {
+        return new Monkey(id, items, function, divisibleBy);
     }
 }

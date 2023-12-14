@@ -14,57 +14,112 @@ class MonkeyTest {
     private Monkey monkey3;
     @BeforeEach
     void setUp() {
-        monkey0 = new Monkey(0, List.of(79, 98)) {
-            @Override
-            Integer operation(Integer old) {
-                return old * 19;
-            }
+        MonkeyBuilder builder0 = new MonkeyBuilder();
 
-            @Override
-            void test() {
-                if(items.getFirst()%23==0) throwToMonkey(monkey2);
-                else throwToMonkey(monkey3);
-            }
-        };
+        monkey0 = builder0.setId(0)
+                .setItems(List.of(79, 98))
+                .setMonkeyTrueId(2)
+                .setMonkeyFalseId(3)
+                .setDivisibleBy(23)
+                .setFunction(new CombinedFunctionalInterface(1) {
+                    @Override
+                    Integer apply2(Integer integer) {
+                        return integer * 19;
+                    }
 
-        monkey1 = new Monkey(1, List.of(54, 65, 75, 74)) {
-            @Override
-            Integer operation(Integer old) {
-                return old + 6;
-            }
+                    @Override
+                    public Integer apply(Integer integer) {
+                        return null;
+                    }
 
-            @Override
-            void test() {
-                if(items.getFirst()%19==0) throwToMonkey(monkey2);
-                else throwToMonkey(monkey0);
-            }
-        };
+                    @Override
+                    public Integer get() {
+                        return null;
+                    }
+                })
+                .build();
 
-        monkey2 = new Monkey(2, List.of(79, 60, 97)) {
-            @Override
-            Integer operation(Integer old) {
-                return old * old;
-            }
+        MonkeyBuilder builder1 = new MonkeyBuilder();
 
-            @Override
-            void test() {
-                if(items.getFirst()%13==0) throwToMonkey(monkey1);
-                else throwToMonkey(monkey3);
-            }
-        };
+        monkey1 = builder1.setId(1)
+                .setItems(List.of(54, 65, 75, 74))
+                .setMonkeyTrueId(2)
+                .setMonkeyFalseId(0)
+                .setDivisibleBy(19)
+                .setFunction(new CombinedFunctionalInterface(1) {
+                    @Override
+                    Integer apply2(Integer integer) {
+                        return integer + 6;
+                    }
 
-        monkey3 = new Monkey(3, List.of(74)) {
-            @Override
-            Integer operation(Integer old) {
-                return old + 3;
-            }
+                    @Override
+                    public Integer apply(Integer integer) {
+                        return null;
+                    }
 
-            @Override
-            void test() {
-                if(items.getFirst()%17==0) throwToMonkey(monkey0);
-                else throwToMonkey(monkey1);
-            }
-        };
+                    @Override
+                    public Integer get() {
+                        return null;
+                    }
+                })
+                .build();
+
+        MonkeyBuilder builder2 = new MonkeyBuilder();
+
+        monkey2 = builder2.setId(2)
+                .setItems(List.of(79, 60, 97))
+                .setMonkeyTrueId(1)
+                .setMonkeyFalseId(3)
+                .setDivisibleBy(13)
+                .setFunction(new CombinedFunctionalInterface(2) {
+                    @Override
+                    Integer apply2(Integer integer) {
+                        return null;
+                    }
+
+                    @Override
+                    public Integer apply(Integer integer) {
+                        return integer * integer;
+                    }
+
+                    @Override
+                    public Integer get() {
+                        return null;
+                    }
+                })
+                .build();
+
+        MonkeyBuilder builder3 = new MonkeyBuilder();
+
+        monkey3 = builder3.setId(3)
+                .setItems(List.of(74))
+                .setMonkeyTrueId(0)
+                .setMonkeyFalseId(1)
+                .setDivisibleBy(17)
+                .setFunction(new CombinedFunctionalInterface(1) {
+                    @Override
+                    Integer apply2(Integer integer) {
+                        return integer + 3;
+                    }
+
+                    @Override
+                    public Integer apply(Integer integer) {
+                        return null;
+                    }
+
+                    @Override
+                    public Integer get() {
+                        return null;
+                    }
+                })
+                .build();
+
+        MonkeyBuilder[] builders = {builder0, builder1, builder2, builder3};
+        Monkey[] monkeys = {monkey0, monkey1, monkey2, monkey3};
+        for (int i=0;i<4;i++){
+            monkeys[i].setTrueMonkey(monkeys[builders[i].getMonkeyTrueId()]);
+            monkeys[i].setFalseMonkey(monkeys[builders[i].getMonkeyFalseId()]);
+        }
     }
 
     @Test

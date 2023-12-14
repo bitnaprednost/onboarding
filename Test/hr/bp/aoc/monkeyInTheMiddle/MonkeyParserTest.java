@@ -2,6 +2,7 @@ package hr.bp.aoc.monkeyInTheMiddle;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +41,7 @@ class MonkeyParserTest {
                     If false: throw to monkey 1
                 """;
 
-        List<Monkey> monkey = MonkeyParser.parseToMonkies(input);
+        List<Monkey> monkey = Arrays.stream(MonkeyParser.parseToMonkies(input)).toList();
 
         assertEquals("[Monkey 0: [79, 98], Monkey 1: [54, 65, 75, 74], Monkey 2: [79, 60, 97], Monkey 3: [74]]", monkey.toString());
     }

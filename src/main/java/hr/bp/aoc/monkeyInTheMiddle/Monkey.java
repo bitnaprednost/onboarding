@@ -3,34 +3,42 @@ package hr.bp.aoc.monkeyInTheMiddle;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Monkey {
+public class Monkey {
     private int id;
+    private Integer divisibleBy;
     private int timesInspectedItems = 0;
-    List<Integer> items;
+    private List<Integer> items;
+    private Monkey trueMonkey;
+    private Monkey falseMonkey;
+    private CombinedFunctionalInterface function;
 
-    protected Monkey(int id, List<Integer> items) {
+    public Monkey(Integer id, List<Integer> items, CombinedFunctionalInterface function, Integer divisibleBy) {
         this.id = id;
         this.items = new ArrayList<>();
         this.items.addAll(items);
+        this.function = function;
+        this.divisibleBy = divisibleBy;
     }
 
-    abstract Integer operation(Integer old);
-    abstract void test();
+    private Integer operation(Integer old){
+        return function.operation(old);
+    }
 
     public void inspectItems(){
-        int size = items.size();
-        for (int i=0;i<size;i++){
-            Integer updatedWorryLevel = operation(items.getFirst()) / 3;
-            items.set(0, updatedWorryLevel);
+        for (Integer item : items){
+            Integer updatedItem = operation(item);
+            updatedItem = Math.floorDiv(updatedItem, 3);
 
-            test();
+            if(updatedItem%divisibleBy==0) throwToMonkey(trueMonkey, updatedItem);
+            else throwToMonkey(falseMonkey, updatedItem);
+
             timesInspectedItems++;
         }
+        items.clear();
     }
-    void throwToMonkey(Monkey monkey){
-        Integer temp = items.getFirst();
-        items.removeFirst();
-        monkey.items.add(temp);
+
+    private void throwToMonkey(Monkey monkey, Integer item){
+        monkey.items.add(item);
     }
 
     public int getId() {
@@ -41,8 +49,16 @@ public abstract class Monkey {
         return timesInspectedItems;
     }
 
+    public void setTrueMonkey(Monkey trueMonkey) {
+        this.trueMonkey = trueMonkey;
+    }
+
+    public void setFalseMonkey(Monkey falseMonkey) {
+        this.falseMonkey = falseMonkey;
+    }
+
     @Override
     public String toString() {
-        return "Monkey " + id + ": " + items;
+        return "Monkey " + id + ": " + items +  ", numOfInspected: " + timesInspectedItems;
     }
 }

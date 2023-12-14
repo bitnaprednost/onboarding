@@ -2,10 +2,8 @@ package hr.bp.aoc.monkeyInTheMiddle;
 
 import org.apache.commons.lang3.Validate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 
 public class MonkeyParser{
 
@@ -22,38 +20,34 @@ public class MonkeyParser{
 
     private static CombinedFunctionalInterface parseFunction(String input) {
         String functionString = input.trim().substring(17);
-        String[] split = Arrays.stream(functionString.split("old|\\*|\\+|\\d+")).map(String::trim).toArray(String[]::new);
+        String[] split = Arrays.stream(functionString.split(" ")).map(String::trim).toArray(String[]::new);
 
         CombinedFunctionalInterface cfi = null;
 
-        if(split[0].matches("\\d")){
+        if(split[0].matches("\\d+")){
             Integer integer1 = Integer.valueOf(split[0]);
-            if(split[2].matches("\\d")) {
+            if(split[2].matches("\\d+")) {
                 Integer integer2 = Integer.valueOf(split[2]);
-                cfi = Operation.from(split[1]).initializeFunction(integer1, integer2);
-                cfi.setFunctionMode(2);
+                cfi = Operation.from(split[1]).initializeFunction(integer1, integer2, 0);
             }
             else if(split[2].matches("old")){
-                cfi = Operation.from(split[1]).initializeFunction(integer1, null);
-                cfi.setFunctionMode(1);
+                cfi = Operation.from(split[1]).initializeFunction(integer1, null, 1);
             }
         }
         else if(split[0].matches("old")){
-            if(split[2].matches("\\d")) {
+            if(split[2].matches("\\d+")) {
                 Integer integer2 = Integer.valueOf(split[2]);
-                cfi = Operation.from(split[1]).initializeFunction(integer2, null);
-                cfi.setFunctionMode(1);
+                cfi = Operation.from(split[1]).initializeFunction(integer2, null, 1);
             }
             else if(split[2].matches("old")){
-                cfi = Operation.from(split[1]).initializeFunction(null, null);
-                cfi.setFunctionMode(0);
+                cfi = Operation.from(split[1]).initializeFunction(null, null, 2);
             }
         }
 
         return cfi;
     }
 
-    private static Monkey parseToMonkey(String input, Monkey[] monekys) {
+    private static MonkeyBuilder parseToMonkey(String input) {
         String[] split = input.split("\n");
         validateForm(split);
 
@@ -64,29 +58,35 @@ public class MonkeyParser{
         Integer throwTrueId = Integer.valueOf(split[4].trim().substring(25));
         Integer throwFalseId = Integer.valueOf(split[5].trim().substring(26));
 
-        return buildMonkey(monekys, id, items, function, divisibleBy, throwTrueId, throwFalseId);
+        return buildMonkey(id, items, function, divisibleBy, throwTrueId, throwFalseId);
     }
 
-    private static Monkey buildMonkey(Monkey[] monekys, Integer id, List<Integer> items, CombinedFunctionalInterface function, Integer divisibleBy, Integer throwTrueId, Integer throwFalseId) {
+    private static MonkeyBuilder buildMonkey(Integer id, List<Integer> items, CombinedFunctionalInterface function, Integer divisibleBy, Integer throwTrueId, Integer throwFalseId) {
         MonkeyBuilder builder = new MonkeyBuilder();
 
         return builder.setId(id)
                 .setItems(items)
                 .setFunction(function)
-                .setDivisibleBy(divisibleBy)
-                .setMonkeyTrue(monekys[throwTrueId])
-                .setMonkeyFalse(monekys[throwFalseId])
-                .build();
+                .setMonkeyTrueId(throwTrueId)
+                .setMonkeyFalseId(throwFalseId)
+                .setDivisibleBy(divisibleBy);
     }
 
 
     public static Monkey[] parseToMonkies(String input) {
         String[] split = input.split("\n\n");
-        Monkey[] monkeys = new Monkey[split.length];
 
+        Monkey[] monkeys = new Monkey[split.length];
+        MonkeyBuilder[] monkeyBuildders = new MonkeyBuilder[split.length];
         for (int i=0;i<monkeys.length;i++){
-            Monkey monkey = parseToMonkey(split[i], monkeys);
-            monkeys[i] = monkey;
+            MonkeyBuilder monkey = parseToMonkey(split[i]);
+            monkeyBuildders[i] = monkey;
+            monkeys[i] = monkey.build();
+        }
+
+        for(int i=0;i<monkeys.length;i++){
+            monkeys[i].setTrueMonkey(monkeys[monkeyBuildders[i].getMonkeyTrueId()]);
+            monkeys[i].setFalseMonkey(monkeys[monkeyBuildders[i].getMonkeyFalseId()]);
         }
 
         return monkeys;

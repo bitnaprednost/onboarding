@@ -26,7 +26,10 @@ public class MonkeyManager {
     }
 
     public void simulateRounds(int rounds) {
-        for(int i=0;i<rounds;i++) monkeys.forEach(Monkey::inspectItems);
+        for(int i=0;i<rounds;i++) {
+            monkeys.forEach(Monkey::inspectItems);
+            System.out.println(i + ". " + monkeys);
+        }
     }
 
     public int getTimesInspectedItems(int id) {
@@ -50,12 +53,5 @@ public class MonkeyManager {
         return getTopActiveMonkeys(limit).stream()
                 .mapToInt(Monkey::getTimesInspectedItems)
                 .reduce(1, (total, element) -> total * element);
-
-//        return monkeys.stream()
-//                .mapToInt(Monkey::getTimesInspectedItems)
-//                .boxed()
-//                .sorted(Comparator.reverseOrder())
-//                .limit(limit)
-//                .reduce(1, (total, element) -> total * element);
     }
 }
