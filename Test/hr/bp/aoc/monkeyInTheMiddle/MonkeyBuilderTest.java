@@ -1,5 +1,7 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
+import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
+import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -53,7 +55,7 @@ class MonkeyBuilderTest {
 
     @Test
     void canSetItems(){
-        List<Integer> items = List.of(79, 98);
+        List<Long> items = List.of(79L, 98L);
         builder.setItems(items);
 
         assertEquals(items, builder.getItems());
@@ -66,21 +68,21 @@ class MonkeyBuilderTest {
                 .setDivisibleBy(23)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    Integer apply2(Integer integer) {
-                        return integer * 19;
+                    long apply2(long old) {
+                        return old * 19;
                     }
 
                     @Override
-                    public Integer apply(Integer integer) {
-                        return null;
+                    public long applyAsLong(long integer) {
+                        return -1;
                     }
 
                     @Override
-                    public Integer get() {
-                        return null;
+                    public long getAsLong() {
+                        return -1;
                     }
                 })
-                .setItems(List.of(79, 98))
+                .setItems(List.of(79L, 98L))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(3);
 

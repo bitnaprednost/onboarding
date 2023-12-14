@@ -1,5 +1,7 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
+import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
+import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyParser;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

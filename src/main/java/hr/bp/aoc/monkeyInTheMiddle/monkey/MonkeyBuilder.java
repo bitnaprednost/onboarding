@@ -1,5 +1,6 @@
-package hr.bp.aoc.monkeyInTheMiddle;
+package hr.bp.aoc.monkeyInTheMiddle.monkey;
 
+import hr.bp.aoc.monkeyInTheMiddle.CombinedFunctionalInterface;
 import org.apache.commons.lang3.Validate;
 
 import java.util.List;
@@ -9,14 +10,14 @@ public class MonkeyBuilder {
     private Integer divisibleBy;
     private Integer monkeyTrueId;
     private Integer monkeyFalseId;
-    private List<Integer> items;
+    private List<Long> items;
     private CombinedFunctionalInterface function;
 
-    public List<Integer> getItems() {
+    public List<Long> getItems() {
         return items;
     }
 
-    public MonkeyBuilder setItems(List<Integer> items) {
+    public MonkeyBuilder setItems(List<Long> items) {
         this.items = items;
         return this;
     }
@@ -68,5 +69,10 @@ public class MonkeyBuilder {
 
     public Monkey build() {
         return new Monkey(id, items, function, divisibleBy);
+    }
+
+    public void setThrowMonkeys(Monkey[] monkeys) {
+        monkeys[id].setTrueMonkey(monkeys[monkeyTrueId]);
+        monkeys[id].setFalseMonkey(monkeys[monkeyFalseId]);
     }
 }

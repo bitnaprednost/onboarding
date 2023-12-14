@@ -1,12 +1,12 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.LongSupplier;
+import java.util.function.LongUnaryOperator;
 
-public abstract class CombinedFunctionalInterface implements Function<Integer, Integer>, Supplier<Integer> {
+public abstract class CombinedFunctionalInterface implements LongUnaryOperator, LongSupplier {
     private int functionMode;
 
-    public CombinedFunctionalInterface(int functionMode) {
+    protected CombinedFunctionalInterface(int functionMode) {
         this.functionMode = functionMode;
     }
 
@@ -14,17 +14,17 @@ public abstract class CombinedFunctionalInterface implements Function<Integer, I
         this.functionMode = functionMode;
     }
 
-    public Integer operation(Integer old){
+    public long operation(Long old){
         return switch (functionMode){
             // number +* number
-            case 0 -> get();
+            case 0 -> getAsLong();
             // old +* number
             case 1 ->  apply2(old);
             // old +* old
-            case 2 -> apply(old);
+            case 2 -> applyAsLong(old);
             default -> throw new UnsupportedOperationException();
         };
     }
 
-    abstract Integer apply2(Integer integer);
+    abstract long apply2(long old);
 }

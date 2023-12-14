@@ -1,5 +1,8 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
+import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
+import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyManager;
+import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyParser;
 import hr.bp.aoc.util.Parser;
 
 import java.io.IOException;

@@ -1,5 +1,7 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
+import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
+import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,24 +19,24 @@ class MonkeyTest {
         MonkeyBuilder builder0 = new MonkeyBuilder();
 
         monkey0 = builder0.setId(0)
-                .setItems(List.of(79, 98))
+                .setItems(List.of(79L, 98L))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(3)
                 .setDivisibleBy(23)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    Integer apply2(Integer integer) {
-                        return integer * 19;
+                    long apply2(long old) {
+                        return old * 19;
                     }
 
                     @Override
-                    public Integer apply(Integer integer) {
-                        return null;
+                    public long applyAsLong(long old) {
+                        return -1;
                     }
 
                     @Override
-                    public Integer get() {
-                        return null;
+                    public long getAsLong() {
+                        return -1;
                     }
                 })
                 .build();
@@ -42,24 +44,24 @@ class MonkeyTest {
         MonkeyBuilder builder1 = new MonkeyBuilder();
 
         monkey1 = builder1.setId(1)
-                .setItems(List.of(54, 65, 75, 74))
+                .setItems(List.of(54L, 65L, 75L, 74L))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(0)
                 .setDivisibleBy(19)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    Integer apply2(Integer integer) {
-                        return integer + 6;
+                    long apply2(long old) {
+                        return old + 6;
                     }
 
                     @Override
-                    public Integer apply(Integer integer) {
-                        return null;
+                    public long applyAsLong(long old) {
+                        return -1;
                     }
 
                     @Override
-                    public Integer get() {
-                        return null;
+                    public long getAsLong() {
+                        return -1;
                     }
                 })
                 .build();
@@ -67,24 +69,24 @@ class MonkeyTest {
         MonkeyBuilder builder2 = new MonkeyBuilder();
 
         monkey2 = builder2.setId(2)
-                .setItems(List.of(79, 60, 97))
+                .setItems(List.of(79L, 60L, 97L))
                 .setMonkeyTrueId(1)
                 .setMonkeyFalseId(3)
                 .setDivisibleBy(13)
                 .setFunction(new CombinedFunctionalInterface(2) {
                     @Override
-                    Integer apply2(Integer integer) {
-                        return null;
+                    long apply2(long old) {
+                        return -1;
                     }
 
                     @Override
-                    public Integer apply(Integer integer) {
-                        return integer * integer;
+                    public long applyAsLong(long old) {
+                        return old * old;
                     }
 
                     @Override
-                    public Integer get() {
-                        return null;
+                    public long getAsLong() {
+                        return -1;
                     }
                 })
                 .build();
@@ -92,33 +94,33 @@ class MonkeyTest {
         MonkeyBuilder builder3 = new MonkeyBuilder();
 
         monkey3 = builder3.setId(3)
-                .setItems(List.of(74))
+                .setItems(List.of(74L))
                 .setMonkeyTrueId(0)
                 .setMonkeyFalseId(1)
                 .setDivisibleBy(17)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    Integer apply2(Integer integer) {
-                        return integer + 3;
+                    long apply2(long old) {
+                        return old + 3;
                     }
 
                     @Override
-                    public Integer apply(Integer integer) {
-                        return null;
+                    public long applyAsLong(long old) {
+                        return -1;
                     }
 
                     @Override
-                    public Integer get() {
-                        return null;
+                    public long getAsLong() {
+                        return -1;
                     }
                 })
                 .build();
 
         MonkeyBuilder[] builders = {builder0, builder1, builder2, builder3};
         Monkey[] monkeys = {monkey0, monkey1, monkey2, monkey3};
-        for (int i=0;i<4;i++){
-            monkeys[i].setTrueMonkey(monkeys[builders[i].getMonkeyTrueId()]);
-            monkeys[i].setFalseMonkey(monkeys[builders[i].getMonkeyFalseId()]);
+
+        for(MonkeyBuilder monkeyBuilder : builders){
+            monkeyBuilder.setThrowMonkeys(monkeys);
         }
     }
 

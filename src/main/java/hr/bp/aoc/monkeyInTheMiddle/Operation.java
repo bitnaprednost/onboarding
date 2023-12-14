@@ -5,20 +5,20 @@ import java.util.Arrays;
 public enum Operation {
     PLUS("+"){
         @Override
-        public CombinedFunctionalInterface initializeFunction(Integer x1, Integer x2, int mode) {
+        public CombinedFunctionalInterface initializeFunction(Long x1, Long x2, int mode) {
             return new CombinedFunctionalInterface(mode) {
                 @Override
-                public Integer apply(Integer integer) {
-                    return integer + integer;
+                public long applyAsLong(long old) {
+                    return old + old;
                 }
 
                 @Override
-                public Integer apply2(Integer integer) {
-                    return x1 + integer;
+                public long apply2(long old) {
+                    return x1 + old;
                 }
 
                 @Override
-                public Integer get() {
+                public long getAsLong() {
                     return x1 + x2;
                 }
             };
@@ -26,20 +26,20 @@ public enum Operation {
     },
     TIMES("*"){
         @Override
-        public CombinedFunctionalInterface initializeFunction(Integer x1, Integer x2, int mode) {
+        public CombinedFunctionalInterface initializeFunction(Long x1, Long x2, int mode) {
             return new CombinedFunctionalInterface(mode) {
                 @Override
-                public Integer apply(Integer integer) {
-                    return integer * integer;
+                public long applyAsLong(long old) {
+                    return old * old;
                 }
 
                 @Override
-                public Integer apply2(Integer integer) {
-                    return integer * x1;
+                public long apply2(long old) {
+                    return old * x1;
                 }
 
                 @Override
-                public Integer get() {
+                public long getAsLong() {
                     return x1 * x2;
                 }
             };
@@ -51,7 +51,7 @@ public enum Operation {
         this.text=text;
     }
 
-    public abstract CombinedFunctionalInterface initializeFunction(Integer x1, Integer x2, int mode);
+    public abstract CombinedFunctionalInterface initializeFunction(Long x1, Long x2, int mode);
 
     public static Operation from(String str) {
         return Arrays.stream(values())

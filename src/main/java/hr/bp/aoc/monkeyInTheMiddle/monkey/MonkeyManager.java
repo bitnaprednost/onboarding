@@ -1,11 +1,11 @@
-package hr.bp.aoc.monkeyInTheMiddle;
+package hr.bp.aoc.monkeyInTheMiddle.monkey;
 
 import org.apache.commons.lang3.Validate;
 
 import java.util.*;
 
 public class MonkeyManager {
-    private List<Monkey> monkeys;
+    private final List<Monkey> monkeys;
     private MonkeyManager(Monkey... monkeys) {
         this.monkeys = List.of(monkeys);
     }
@@ -28,7 +28,7 @@ public class MonkeyManager {
     public void simulateRounds(int rounds) {
         for(int i=0;i<rounds;i++) {
             monkeys.forEach(Monkey::inspectItems);
-            System.out.println(i + ". " + monkeys);
+            //System.out.println(i + ". " + monkeys);
         }
     }
 

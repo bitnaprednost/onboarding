@@ -1,5 +1,9 @@
-package hr.bp.aoc.monkeyInTheMiddle;
+package hr.bp.aoc.monkeyInTheMiddle.monkey;
 
+import hr.bp.aoc.monkeyInTheMiddle.CombinedFunctionalInterface;
+import hr.bp.aoc.monkeyInTheMiddle.Operation;
+import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
+import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.apache.commons.lang3.Validate;
 
 import java.util.Arrays;
@@ -25,9 +29,9 @@ public class MonkeyParser{
         CombinedFunctionalInterface cfi = null;
 
         if(split[0].matches("\\d+")){
-            Integer integer1 = Integer.valueOf(split[0]);
+            Long integer1 = Long.valueOf(split[0]);
             if(split[2].matches("\\d+")) {
-                Integer integer2 = Integer.valueOf(split[2]);
+                Long integer2 = Long.valueOf(split[2]);
                 cfi = Operation.from(split[1]).initializeFunction(integer1, integer2, 0);
             }
             else if(split[2].matches("old")){
@@ -36,7 +40,7 @@ public class MonkeyParser{
         }
         else if(split[0].matches("old")){
             if(split[2].matches("\\d+")) {
-                Integer integer2 = Integer.valueOf(split[2]);
+                Long integer2 = Long.valueOf(split[2]);
                 cfi = Operation.from(split[1]).initializeFunction(integer2, null, 1);
             }
             else if(split[2].matches("old")){
@@ -52,7 +56,7 @@ public class MonkeyParser{
         validateForm(split);
 
         Integer id = Integer.valueOf(split[0].substring(0, split[0].length()-1).substring(7));
-        List<Integer> items = Arrays.stream(split[1].trim().substring(16).split(", ")).mapToInt(Integer::valueOf).boxed().toList();
+        List<Long> items = Arrays.stream(split[1].trim().substring(16).split(", ")).mapToLong(Integer::valueOf).boxed().toList();
         CombinedFunctionalInterface function = parseFunction(split[2]);
         Integer divisibleBy = Integer.valueOf(split[3].trim().substring(19));
         Integer throwTrueId = Integer.valueOf(split[4].trim().substring(25));
@@ -61,7 +65,7 @@ public class MonkeyParser{
         return buildMonkey(id, items, function, divisibleBy, throwTrueId, throwFalseId);
     }
 
-    private static MonkeyBuilder buildMonkey(Integer id, List<Integer> items, CombinedFunctionalInterface function, Integer divisibleBy, Integer throwTrueId, Integer throwFalseId) {
+    private static MonkeyBuilder buildMonkey(Integer id, List<Long> items, CombinedFunctionalInterface function, Integer divisibleBy, Integer throwTrueId, Integer throwFalseId) {
         MonkeyBuilder builder = new MonkeyBuilder();
 
         return builder.setId(id)
@@ -77,16 +81,15 @@ public class MonkeyParser{
         String[] split = input.split("\n\n");
 
         Monkey[] monkeys = new Monkey[split.length];
-        MonkeyBuilder[] monkeyBuildders = new MonkeyBuilder[split.length];
+        MonkeyBuilder[] monkeyBuilders = new MonkeyBuilder[split.length];
         for (int i=0;i<monkeys.length;i++){
             MonkeyBuilder monkey = parseToMonkey(split[i]);
-            monkeyBuildders[i] = monkey;
+            monkeyBuilders[i] = monkey;
             monkeys[i] = monkey.build();
         }
 
-        for(int i=0;i<monkeys.length;i++){
-            monkeys[i].setTrueMonkey(monkeys[monkeyBuildders[i].getMonkeyTrueId()]);
-            monkeys[i].setFalseMonkey(monkeys[monkeyBuildders[i].getMonkeyFalseId()]);
+        for(MonkeyBuilder monkeyBuilder : monkeyBuilders){
+            monkeyBuilder.setThrowMonkeys(monkeys);
         }
 
         return monkeys;
