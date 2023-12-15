@@ -21,7 +21,7 @@ public class Main {
             manager2.parse(command);
         }
         int result2 = manager2.countTailTrail();
-        System.out.println(manager2.print(11));
+        System.out.println(manager2.print(150));
         System.out.println(result2);
     }
 }

@@ -3,9 +3,11 @@ package hr.bp.aoc.monkeyInTheMiddle;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyManager;
+import org.apache.commons.lang3.Validate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -19,24 +21,24 @@ class MonkeyManagerTest {
         MonkeyBuilder builder0 = new MonkeyBuilder();
 
         Monkey monkey0 = builder0.setId(0)
-                .setItems(List.of(79L, 98L))
+                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(98)))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(3)
                 .setDivisibleBy(23)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    long apply2(long old) {
-                        return old * 19;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return -1;
+                    public BigInteger apply(BigInteger old) {
+                        return null;
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return old.multiply(BigInteger.valueOf(19));
                     }
                 })
                 .build();
@@ -44,24 +46,24 @@ class MonkeyManagerTest {
         MonkeyBuilder builder1 = new MonkeyBuilder();
 
         Monkey monkey1 = builder1.setId(1)
-                .setItems(List.of(54L, 65L, 75L, 74L))
+                .setItems(List.of(BigInteger.valueOf(54), BigInteger.valueOf(65), BigInteger.valueOf(75), BigInteger.valueOf(74)))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(0)
                 .setDivisibleBy(19)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    long apply2(long old) {
-                        return old + 6;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return -1;
+                    public BigInteger apply(BigInteger bigInteger) {
+                        return null;
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return old.add(BigInteger.valueOf(6));
                     }
                 })
                 .build();
@@ -69,24 +71,24 @@ class MonkeyManagerTest {
         MonkeyBuilder builder2 = new MonkeyBuilder();
 
         Monkey monkey2 = builder2.setId(2)
-                .setItems(List.of(79L, 60L, 97L))
+                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(60), BigInteger.valueOf(97)))
                 .setMonkeyTrueId(1)
                 .setMonkeyFalseId(3)
                 .setDivisibleBy(13)
                 .setFunction(new CombinedFunctionalInterface(2) {
                     @Override
-                    long apply2(long old) {
-                        return -1;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return old * old;
+                    public BigInteger apply(BigInteger old) {
+                        return old.multiply(old);
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return null;
                     }
                 })
                 .build();
@@ -94,24 +96,24 @@ class MonkeyManagerTest {
         MonkeyBuilder builder3 = new MonkeyBuilder();
 
         Monkey monkey3 = builder3.setId(3)
-                .setItems(List.of(74L))
+                .setItems(List.of(BigInteger.valueOf(74)))
                 .setMonkeyTrueId(0)
                 .setMonkeyFalseId(1)
                 .setDivisibleBy(17)
                 .setFunction( new CombinedFunctionalInterface(1) {
                     @Override
-                    long apply2(long old) {
-                        return old + 3;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return -1;
+                    public BigInteger apply(BigInteger old) {
+                        return null;
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return old.add(BigInteger.valueOf(3));
                     }
                 })
                 .build();
@@ -196,7 +198,7 @@ class MonkeyManagerTest {
     void cantGetNumberOfInspectedTimesIncorrectId(){
         monkeyManager.simulateRounds(1);
 
-        assertThrows(NoSuchElementException.class, () -> {int lol = monkeyManager.getTimesInspectedItems(-1);});
+        assertThrows(NoSuchElementException.class, () -> {long lol = monkeyManager.getTimesInspectedItems(-1);});
     }
 
     @Test
@@ -221,8 +223,8 @@ class MonkeyManagerTest {
     @Test
     void canReturnProductOfTopTwoMonkeys(){
         monkeyManager.simulateRounds(20);
-        Integer product = monkeyManager.getProductOfTopActiveMonkeys(2);
+        Long product = monkeyManager.getProductOfTopActiveMonkeys(2);
 
-        assertEquals(10605, product);
+        assertEquals(10605L, product);
     }
 }

@@ -5,6 +5,7 @@ import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,24 +20,24 @@ class MonkeyTest {
         MonkeyBuilder builder0 = new MonkeyBuilder();
 
         monkey0 = builder0.setId(0)
-                .setItems(List.of(79L, 98L))
+                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(98)))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(3)
                 .setDivisibleBy(23)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    long apply2(long old) {
-                        return old * 19;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return -1;
+                    public BigInteger apply(BigInteger old) {
+                        return null;
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return old.multiply(BigInteger.valueOf(19));
                     }
                 })
                 .build();
@@ -44,24 +45,24 @@ class MonkeyTest {
         MonkeyBuilder builder1 = new MonkeyBuilder();
 
         monkey1 = builder1.setId(1)
-                .setItems(List.of(54L, 65L, 75L, 74L))
+                .setItems(List.of(BigInteger.valueOf(54), BigInteger.valueOf(65), BigInteger.valueOf(75), BigInteger.valueOf(74)))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(0)
                 .setDivisibleBy(19)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    long apply2(long old) {
-                        return old + 6;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return -1;
+                    public BigInteger apply(BigInteger old) {
+                        return null;
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return old.add(BigInteger.valueOf(6));
                     }
                 })
                 .build();
@@ -69,24 +70,24 @@ class MonkeyTest {
         MonkeyBuilder builder2 = new MonkeyBuilder();
 
         monkey2 = builder2.setId(2)
-                .setItems(List.of(79L, 60L, 97L))
+                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(60), BigInteger.valueOf(97)))
                 .setMonkeyTrueId(1)
                 .setMonkeyFalseId(3)
                 .setDivisibleBy(13)
                 .setFunction(new CombinedFunctionalInterface(2) {
                     @Override
-                    long apply2(long old) {
-                        return -1;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return old * old;
+                    public BigInteger apply(BigInteger old) {
+                        return old.multiply(old);
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return null;
                     }
                 })
                 .build();
@@ -94,24 +95,24 @@ class MonkeyTest {
         MonkeyBuilder builder3 = new MonkeyBuilder();
 
         monkey3 = builder3.setId(3)
-                .setItems(List.of(74L))
+                .setItems(List.of(BigInteger.valueOf(74)))
                 .setMonkeyTrueId(0)
                 .setMonkeyFalseId(1)
                 .setDivisibleBy(17)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    long apply2(long old) {
-                        return old + 3;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long old) {
-                        return -1;
+                    public BigInteger apply(BigInteger bigInteger) {
+                        return null;
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return old.add(BigInteger.valueOf(3));
                     }
                 })
                 .build();
@@ -126,7 +127,7 @@ class MonkeyTest {
 
     @Test
     void canInspectAllItems(){
-        monkey0.inspectItems();
+        monkey0.inspectItems(96577);
 
         assertEquals("Monkey 0: []", monkey0.toString());
         assertEquals("Monkey 1: [54, 65, 75, 74]", monkey1.toString());
@@ -136,10 +137,10 @@ class MonkeyTest {
 
     @Test
     void canGetNumberOfInspectedTimes(){
-        monkey0.inspectItems();
-        monkey1.inspectItems();
-        monkey2.inspectItems();
-        monkey3.inspectItems();
+        monkey0.inspectItems(96577);
+        monkey1.inspectItems(96577);
+        monkey2.inspectItems(96577);
+        monkey3.inspectItems(96577);
 
         assertEquals(2, monkey0.getTimesInspectedItems());
         assertEquals(4, monkey1.getTimesInspectedItems());

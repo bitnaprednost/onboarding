@@ -5,6 +5,7 @@ import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,7 +56,7 @@ class MonkeyBuilderTest {
 
     @Test
     void canSetItems(){
-        List<Long> items = List.of(79L, 98L);
+        List<BigInteger> items = List.of(BigInteger.valueOf(79), BigInteger.valueOf(98));
         builder.setItems(items);
 
         assertEquals(items, builder.getItems());
@@ -68,21 +69,21 @@ class MonkeyBuilderTest {
                 .setDivisibleBy(23)
                 .setFunction(new CombinedFunctionalInterface(1) {
                     @Override
-                    long apply2(long old) {
-                        return old * 19;
+                    public BigInteger get() {
+                        return null;
                     }
 
                     @Override
-                    public long applyAsLong(long integer) {
-                        return -1;
+                    public BigInteger apply(BigInteger old) {
+                        return null;
                     }
 
                     @Override
-                    public long getAsLong() {
-                        return -1;
+                    BigInteger apply2(BigInteger old) {
+                        return old.multiply(BigInteger.valueOf(19));
                     }
                 })
-                .setItems(List.of(79L, 98L))
+                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(98)))
                 .setMonkeyTrueId(2)
                 .setMonkeyFalseId(3);
 
