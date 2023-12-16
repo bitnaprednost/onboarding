@@ -8,10 +8,12 @@ import java.util.*;
 public class TabooSearch implements Algorithm{
     private Integer tenure;
     private List<Point> tabooList;
+    private int count;
 
     public TabooSearch(Integer tenure){
         this.tabooList = new ArrayList<>();
         this.tenure=tenure;
+        this.count=0;
     }
 
     private void updateList(Point point){
@@ -42,6 +44,7 @@ public class TabooSearch implements Algorithm{
                 changed = true;
             }
             updateList(currentState.getCurrentPosition());
+            count++;
         }while(changed);
 
         return currentState;
@@ -56,5 +59,10 @@ public class TabooSearch implements Algorithm{
         }
 
         return Optional.empty();
+    }
+
+    @Override
+    public int getCount() {
+        return count;
     }
 }

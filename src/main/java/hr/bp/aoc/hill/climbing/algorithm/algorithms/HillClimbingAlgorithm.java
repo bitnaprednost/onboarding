@@ -9,9 +9,11 @@ import java.util.Optional;
 
 public class HillClimbingAlgorithm implements Algorithm {
     private final char endFlag;
+    private int count;
 
     public HillClimbingAlgorithm(char endFlag) {
         this.endFlag = endFlag;
+        this.count = 0;
     }
 
     public State run(State initialState) {
@@ -29,8 +31,13 @@ public class HillClimbingAlgorithm implements Algorithm {
                 currentState = max.get();
                 changed = true;
             }
+            count++;
         }while(changed);
-
         return currentState;
+    }
+
+    @Override
+    public int getCount() {
+        return count;
     }
 }

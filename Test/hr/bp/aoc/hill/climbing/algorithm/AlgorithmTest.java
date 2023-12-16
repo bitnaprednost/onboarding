@@ -69,6 +69,7 @@ class AlgorithmTest {
                         """;
 
         assertEquals(result, endState.toString());
+        assertEquals(7, algorithm.getCount());
     }
 
     @Test
@@ -85,5 +86,6 @@ class AlgorithmTest {
                         """;
 
         assertEquals(result, endState.toString());
+        assertEquals(31, algorithm.getCount());
     }
 }
