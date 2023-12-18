@@ -14,11 +14,15 @@ public class TabooSearch implements Algorithm{
     private Integer tenure;
     private List<Point> tabooList;
     private int count;
+    private int bestCount;
+    private State bestState;
 
     public TabooSearch(Integer tenure){
         this.tabooList = new ArrayList<>();
         this.tenure=tenure;
+
         this.count=0;
+        this.bestCount = 100000;
     }
 
     private void updateList(Point point){
@@ -27,11 +31,28 @@ public class TabooSearch implements Algorithm{
     }
 
     @Override
-    public State run(State initialState) {
-        Random random = new Random();
+    public State runMultiple(State initialState, int times) {
         State currentState = initialState;
 
+        for(int i=0;i<times;i++){
+            count=0;
+            currentState = run(initialState);
+
+            if(currentState.endReached()) {
+                if(count < bestCount){
+                    bestCount = count;
+                    bestState = currentState;
+                }
+            }
+        }
+
+        return currentState;
+    }
+
+    @Override
+    public State run(State currentState) {
         boolean changed;
+
         do {
             if(currentState.getValue()=='{') break;
             changed = false;
@@ -40,14 +61,14 @@ public class TabooSearch implements Algorithm{
 
             List<State> filtered = neighbors.stream()
                     .filter(neighbor->!tabooList.contains(neighbor.getCurrentPosition()))
-                    .sorted(Comparator.comparing(State::getHeuristic).reversed())
                     .toList();
 
-            Optional<State> max = choose(filtered, random);
+            Optional<State> max = State.choose(filtered);
             if(max.isPresent()){
                 currentState = max.get();
                 changed = true;
             }
+
             updateList(currentState.getCurrentPosition());
             count++;
         }while(changed);
@@ -55,18 +76,9 @@ public class TabooSearch implements Algorithm{
         return currentState;
     }
 
-    private Optional<State> choose(List<State> list, Random random){
-        if(list.isEmpty()) return Optional.empty();
-
-        if(list.size() >= 2){
-            int randInt = random.nextInt(2);
-            return Optional.of(list.get(randInt));
-        }
-        else return Optional.of(list.getFirst());
-    }
-
     @Override
     public int getCount() {
-        return count;
+        if(bestState==null) return count;
+        else return bestCount;
     }
 }

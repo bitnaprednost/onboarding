@@ -2,7 +2,6 @@ package hr.bp.aoc.hill.climbing.algorithm.algorithms;
 
 import hr.bp.aoc.hill.climbing.algorithm.State;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,36 +11,58 @@ import java.util.Optional;
  * @author Marko Krišković
  */
 public class HillClimbingAlgorithm implements Algorithm {
-    private final char endFlag;
+    private int bestCount;
+    private State bestState;
     private int count;
 
-    public HillClimbingAlgorithm(char endFlag) {
-        this.endFlag = endFlag;
+    public HillClimbingAlgorithm() {
         this.count = 0;
+        this.bestCount = 100000;
     }
 
-    public State run(State initialState) {
+    @Override
+    public State runMultiple(State initialState, int times){
         State currentState = initialState;
 
+        for(int i=0;i<times;i++){
+            count=0;
+            currentState = run(initialState);
+
+            if(currentState.endReached()) {
+                if(count < bestCount){
+                    bestCount = count;
+                    bestState = currentState;
+                }
+            }
+        }
+
+        return currentState;
+    }
+
+    @Override
+    public State run(State currentState) {
         boolean changed;
+
         do{
-            if(currentState.getValue()==endFlag) break;
+            if(currentState.getValue()=='{') break;
             changed = false;
 
             List<State> neighbors = currentState.generateNeighbors();
 
-            Optional<State> max = neighbors.stream().max(Comparator.comparing(State::getHeuristic));
+            Optional<State> max = State.choose(neighbors);
             if(max.isPresent()){
                 currentState = max.get();
                 changed = true;
             }
             count++;
         }while(changed);
+
         return currentState;
     }
 
     @Override
     public int getCount() {
-        return count;
+        if(bestState==null) return count;
+        else return bestCount;
     }
 }

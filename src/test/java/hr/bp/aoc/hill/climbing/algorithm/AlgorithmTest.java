@@ -39,43 +39,7 @@ class AlgorithmTest {
 
     @Test
     void canRunHillClimbAlgorithm(){
-        char[][] map = new char[][]{
-                {'`', 'a', 'b', 'q'},
-                {'a', 'b', 'c', 'r'},
-                {'a', 'c', 'c', 's'},
-                {'a', 'c', 'c', 't'},
-                {'a', 'b', 'd', 'e'}
-        };
-
-        char[][] stringMap = new char[][]{
-                {'S', '.', '.', '.'},
-                {'.', '.', '.', '.'},
-                {'.', '.', '.', '.'},
-                {'.', '.', '.', '.'},
-                {'.', '.', '.', 'E'}
-        };
-
-        initialState = new State(map, new Point(0, 0), new Point(5, 2), stringMap);
-
-        //runs infinite loop on the real task
-        algorithm = new HillClimbingAlgorithm('e');
-        State endState = algorithm.run(initialState);
-
-        String result = """
-                        v...
-                        >v..
-                        .v..
-                        .>v.
-                        ..>e
-                        """;
-
-        assertEquals(result, endState.toString());
-        assertEquals(7, algorithm.getCount());
-    }
-
-    @Test
-    void canRunTabooSearchAlgorithm(){
-        algorithm = new TabooSearch(3);
+        algorithm = new HillClimbingAlgorithm();
         State endState = algorithm.run(initialState);
 
         String result = """
@@ -86,7 +50,40 @@ class AlgorithmTest {
                         ..>>>>>^
                         """;
 
+        assertEquals(31, algorithm.getCount());
         assertEquals(result, endState.toString());
+    }
+
+    @Test
+    void canRunTabooSearchAlgorithm(){
+        algorithm = new TabooSearch(5);
+        State endState = algorithm.run(initialState);
+
+        String result = """
+                        v..v<<<<
+                        >v.vv<<^
+                        .v.v>{^^
+                        .>v>>>^^
+                        ..>>>>>^
+                        """;
+
+        assertEquals(31, algorithm.getCount());
+        assertEquals(result, endState.toString());
+    }
+
+    @Test
+    void canRunMultipleHillClimbAlgorithm(){
+        algorithm = new HillClimbingAlgorithm();
+        State endState = algorithm.runMultiple(initialState, 100);
+
+        assertEquals(31, algorithm.getCount());
+    }
+
+    @Test
+    void canRunMultipleTabooSearchAlgorithm(){
+        algorithm = new TabooSearch(5);
+        State endState = algorithm.runMultiple(initialState, 100);
+
         assertEquals(31, algorithm.getCount());
     }
 }

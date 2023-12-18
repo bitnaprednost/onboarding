@@ -1,10 +1,9 @@
 package hr.bp.aoc.hill.climbing.algorithm;
 
+import org.w3c.dom.Entity;
+
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * <p>State class.</p>
@@ -17,10 +16,11 @@ public class State {
     private final Point currentPosition;
     private final Point startingPosition;
     private final Point endingPosition;
-    private final int heuristic;
+    private final double heuristic;
+    private static final Random random =  new Random();
 
 
-    public State(State prev, Point currentPosition, int heuristic, char[][] stringMap) {
+    public State(State prev, Point currentPosition, double heuristic, char[][] stringMap) {
         this.currentPosition = currentPosition;
         this.heuristic = heuristic;
         this.stringMap = stringMap;
@@ -42,10 +42,10 @@ public class State {
     public List<State> generateNeighbors(){
         List<State> neighbors = new ArrayList<>();
 
-        moveUp().ifPresent(neighbors::add);
-        moveDown().ifPresent(neighbors::add);
-        moveLeft().ifPresent(neighbors::add);
         moveRight().ifPresent(neighbors::add);
+        moveDown().ifPresent(neighbors::add);
+        moveUp().ifPresent(neighbors::add);
+        moveLeft().ifPresent(neighbors::add);
 
         return neighbors;
     }
@@ -75,23 +75,65 @@ public class State {
     }
 
     private Optional<State> move(int y, int x, char arrow) {
-        if (map[y][x] > map[currentPosition.y][currentPosition.x] + 1) return Optional.empty();
+        if (map[y][x] > map[currentPosition.y][currentPosition.x] + 1 || map[y][x] < map[currentPosition.y][currentPosition.x]) return Optional.empty();
         else {
             char[][] newStringMap = cloneArray(stringMap);
             newStringMap[currentPosition.y][currentPosition.x] = arrow;
 
-            int heuristicDiff = calculateHeuristic(y, x);
-            State state = new State(this, new Point(x, y), heuristic + heuristicDiff, newStringMap);
+            double heuristic = calculateHeuristic(y, x);
+            State state = new State(this, new Point(x, y), heuristic, newStringMap);
 
             return Optional.of(state);
         }
     }
 
-    private int calculateHeuristic(int y, int x) {
-        int letterDifference = map[y][x] - map[currentPosition.y][currentPosition.x];
-        double distanceFromStart = endingPosition.distance(x, y) * 10;
+    public static Optional<State> choose(List<State> list){
+        if(list.isEmpty()) return Optional.empty();
 
-        return letterDifference*100 - (int) distanceFromStart;
+        //if(list.size()>1) save(state)
+
+        return selectTournament(list);
+    }
+
+    private static Optional<State> selectRoulette(List<State> list) {
+        double sum = list.stream().mapToDouble(State::getHeuristic).sum();
+
+        Map<State, Double> map = new LinkedHashMap<>();
+        double initial = 0;
+        for(State state : list){
+            initial += state.heuristic / sum;
+            map.put(state, initial);
+        }
+
+        double rand = random.nextDouble();
+        for(Map.Entry<State, Double> entry : map.entrySet()){
+            if(rand <= entry.getValue()) return Optional.of(entry.getKey());
+        }
+
+        return Optional.empty();
+    }
+
+    private static Optional<State> selectTournament(List<State> list) {
+        return switch (list.size()){
+            case 1 -> Optional.of(list.getFirst());
+            case 2 -> Optional.of(versus(list.get(0), list.get(1)));
+            default -> {
+                int randInt1 = random.nextInt(list.size());
+                int randInt2 = random.nextInt(list.size());
+                yield Optional.of(versus(list.get(randInt1), list.get(randInt2)));
+            }
+        };
+    }
+
+    private static State versus(State state0, State state1) {
+        if(state0.heuristic >= state1.heuristic) return state0;
+        else return state1;
+    }
+
+    private double calculateHeuristic(int y, int x) {
+        double distanceFromStart = endingPosition.distance(x, y);
+
+        return 100 / (distanceFromStart+1);
     }
 
     private char[][] cloneArray(char[][] array){
@@ -102,7 +144,7 @@ public class State {
         return currentPosition;
     }
 
-    public int getHeuristic() {
+    public double getHeuristic() {
         return heuristic;
     }
 
@@ -110,6 +152,9 @@ public class State {
         return map[currentPosition.y][currentPosition.x];
     }
 
+    public boolean endReached(){
+        return currentPosition.equals(endingPosition);
+    }
 
     @Override
     public String toString() {
