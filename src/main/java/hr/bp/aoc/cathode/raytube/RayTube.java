@@ -4,8 +4,8 @@ import hr.bp.aoc.cathode.raytube.command.Addx;
 import hr.bp.aoc.cathode.raytube.command.Command;
 import hr.bp.aoc.cathode.raytube.command.Noop;
 import hr.bp.aoc.cathode.raytube.listener.DrawListener;
-import hr.bp.aoc.cathode.raytube.listener.SignalListener;
 import hr.bp.aoc.cathode.raytube.listener.Listener;
+import hr.bp.aoc.cathode.raytube.listener.SignalListener;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;

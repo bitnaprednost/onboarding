@@ -2,8 +2,6 @@ package hr.bp.aoc.monkeyInTheMiddle.monkey;
 
 import hr.bp.aoc.monkeyInTheMiddle.CombinedFunctionalInterface;
 import hr.bp.aoc.monkeyInTheMiddle.Operation;
-import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
-import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.apache.commons.lang3.Validate;
 
 import java.math.BigInteger;

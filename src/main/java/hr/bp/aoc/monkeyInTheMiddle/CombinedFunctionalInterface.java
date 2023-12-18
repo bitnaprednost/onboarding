@@ -2,8 +2,6 @@ package hr.bp.aoc.monkeyInTheMiddle;
 
 import java.math.BigInteger;
 import java.util.function.Function;
-import java.util.function.LongSupplier;
-import java.util.function.LongUnaryOperator;
 import java.util.function.Supplier;
 
 /**

@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        String textFromFile = Parser.getTextFromFile("Resources/day5Data.txt");
+        String textFromFile = Parser.getTextFromFile("src/main/resources/day5Data.txt");
         String[] inputs = ParserDay5.splitInput(textFromFile);
         String[] commands = ParserDay5.parseCommands(inputs[1]);
 

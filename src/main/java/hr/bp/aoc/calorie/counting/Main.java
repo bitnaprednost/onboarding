@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        String text = Parser.getTextFromFile("Resources/day1Data.txt");
+        String text = Parser.getTextFromFile("src/main/resources/day1Data.txt");
         List<Elf> elves = ElfManager.createElves(text);
 
         Elf elfMostCalories = ElfManager.getElfMostCalories(elves);

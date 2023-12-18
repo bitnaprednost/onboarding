@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException, ExecutionControl.NotImplementedException {
-        String[] textFromFile = Parser.getLinesFromFile("Resources/day7Data.txt");
+        String[] textFromFile = Parser.getLinesFromFile("src/main/resources/day7Data.txt");
 
         FileSystem fileSystem = ParserDay7.createFileSystem(textFromFile, 70000000);
         long size = fileSystem.sumDirectoriesWithMaxSizeOf(100000);

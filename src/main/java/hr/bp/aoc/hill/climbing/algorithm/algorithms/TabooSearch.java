@@ -62,8 +62,7 @@ public class TabooSearch implements Algorithm{
             int randInt = random.nextInt(2);
             return Optional.of(list.get(randInt));
         }
-
-        return Optional.empty();
+        else return Optional.of(list.getFirst());
     }
 
     @Override

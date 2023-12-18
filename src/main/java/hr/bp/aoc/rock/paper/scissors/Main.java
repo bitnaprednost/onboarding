@@ -3,8 +3,8 @@ package hr.bp.aoc.rock.paper.scissors;
 import hr.bp.aoc.rock.paper.scissors.player.Player;
 import hr.bp.aoc.rock.paper.scissors.player.PlayerMe;
 import hr.bp.aoc.rock.paper.scissors.player.PlayerOpponent;
-import hr.bp.aoc.rock.paper.scissors.strategy.StrategyImpl1;
 import hr.bp.aoc.rock.paper.scissors.strategy.Strategy;
+import hr.bp.aoc.rock.paper.scissors.strategy.StrategyImpl1;
 import hr.bp.aoc.rock.paper.scissors.strategy.StrategyImpl2;
 
 import java.io.IOException;
@@ -22,12 +22,12 @@ public class Main {
 
         Strategy strategy = new StrategyImpl1(opponent, me);
         GameManager gameManager = new GameManager(strategy);
-        gameManager.runGames("Resources/day2Data.txt");
+        gameManager.runGames("src/main/resources/day2Data.txt");
         System.out.println(gameManager.getScore());
 
         strategy = new StrategyImpl2(opponent, me);
         gameManager = new GameManager(strategy);
-        gameManager.runGames("Resources/day2Data.txt");
+        gameManager.runGames("src/main/resources/day2Data.txt");
         System.out.println(gameManager.getScore());
     }
 }

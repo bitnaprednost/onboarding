@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        String[] textFromFile = Parser.getLinesFromFile("Resources/day12Data.txt");
+        String[] textFromFile = Parser.getLinesFromFile("src/main/resources/day12Data.txt");
 
         Algorithm algorithm = new TabooSearch(15);
         State startingState = ParserDay12.parseStartingState(textFromFile);

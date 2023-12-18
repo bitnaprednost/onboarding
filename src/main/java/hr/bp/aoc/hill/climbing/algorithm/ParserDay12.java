@@ -24,7 +24,7 @@ public class ParserDay12 implements Parser {
         Point portEnd = null;
 
         for(int i = 0; i<textFromFile.length; i++){
-            for(int j=0;j<textFromFile[i].length();j++){
+            for(int j = 0;j<textFromFile[i].length();j++){
                 char letter = textFromFile[i].charAt(j);
 
                 if(letter == 'S') {

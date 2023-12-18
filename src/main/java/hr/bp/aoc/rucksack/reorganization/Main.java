@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Main {
     public static void main(String args[]) throws IOException {
-        String input = Parser.getTextFromFile("Resources/day3Data.txt");
+        String input = Parser.getTextFromFile("src/main/resources/day3Data.txt");
 
         // p => 112 - 16 = 96
         // L => 76 - 38 = 38

@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        String[] textFromFile = Parser.getLinesFromFile("Resources/day9Data.txt");
+        String[] textFromFile = Parser.getLinesFromFile("src/main/resources/day9Data.txt");
 
         RopeManager manager1 = new RopeManager(2);
 

@@ -41,7 +41,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        String textFromFile = Parser.getTextFromFile("Resources/day6Data.txt");
+        String textFromFile = Parser.getTextFromFile("src/main/resources/day6Data.txt");
 
         System.out.println(firstSolution(textFromFile, 4));
         System.out.println(secondSolution(textFromFile, 4));

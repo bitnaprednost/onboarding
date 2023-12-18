@@ -1,7 +1,6 @@
 package hr.bp.aoc.hill.climbing.algorithm.algorithms;
 
 import hr.bp.aoc.hill.climbing.algorithm.State;
-import hr.bp.aoc.hill.climbing.algorithm.algorithms.Algorithm;
 
 import java.util.Comparator;
 import java.util.List;

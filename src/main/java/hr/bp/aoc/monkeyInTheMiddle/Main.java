@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        String textFromFile = Parser.getTextFromFile("Resources/day11Data.txt");
+        String textFromFile = Parser.getTextFromFile("src/main/resources/day11Data.txt");
 
         Monkey[] monkeyList = MonkeyParser.parseToMonkies(textFromFile);
         MonkeyManager monkeyManager = MonkeyManager.of(monkeyList);

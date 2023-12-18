@@ -33,7 +33,7 @@ public class Main {
     }
 
     public static void main(String args[]) throws IOException {
-        String input = Parser.getTextFromFile("Resources/day4Data.txt");
+        String input = Parser.getTextFromFile("src/main/resources/day4Data.txt");
         //format: [[[2,3,4],  [6,7,8]], [...], ...]
         List<List<List<Integer>>> lists = textToListHell(input);
 
