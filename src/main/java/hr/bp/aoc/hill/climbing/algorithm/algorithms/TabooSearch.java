@@ -43,7 +43,7 @@ public class TabooSearch implements Algorithm{
                     .sorted(Comparator.comparing(State::getHeuristic).reversed())
                     .toList();
 
-            Optional<State> max = Optional.of(filtered.getFirst());//choose(filtered, random);
+            Optional<State> max = choose(filtered, random);
             if(max.isPresent()){
                 currentState = max.get();
                 changed = true;

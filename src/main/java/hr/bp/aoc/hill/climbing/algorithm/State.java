@@ -16,6 +16,7 @@ public class State {
     private final char[][] stringMap;
     private final Point currentPosition;
     private final Point startingPosition;
+    private final Point endingPosition;
     private final int heuristic;
 
 
@@ -26,14 +27,16 @@ public class State {
 
         this.map = prev.map;
         this.startingPosition = prev.startingPosition;
+        this.endingPosition = prev.endingPosition;
     }
 
-    public State(char[][] map,  Point startingPosition, char[][] stringMap) {
+    public State(char[][] map,  Point startingPosition, Point endingPosition, char[][] stringMap) {
         this.map = map;
         this.currentPosition = startingPosition;
         this.heuristic = 0;
         this.stringMap = stringMap;
         this.startingPosition = startingPosition;
+        this.endingPosition = endingPosition;
     }
 
     public List<State> generateNeighbors(){
@@ -86,9 +89,9 @@ public class State {
 
     private int calculateHeuristic(int y, int x) {
         int letterDifference = map[y][x] - map[currentPosition.y][currentPosition.x];
-        double distanceFromStart = startingPosition.distance(x, y) * 10;
+        double distanceFromStart = endingPosition.distance(x, y) * 10;
 
-        return letterDifference*100 + (int) distanceFromStart;
+        return letterDifference*100 - (int) distanceFromStart;
     }
 
     private char[][] cloneArray(char[][] array){

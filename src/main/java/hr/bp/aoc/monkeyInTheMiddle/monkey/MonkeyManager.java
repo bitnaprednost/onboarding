@@ -36,7 +36,7 @@ public class MonkeyManager {
     public void simulateRounds(int rounds) {
         for(int i=0;i<rounds;i++) {
             monkeys.forEach(monkey -> monkey.inspectItems(magicNumber));
-            //System.out.println(i + ". " + monkeys);
+            System.out.println(i + ". " + monkeys);
         }
     }
 
