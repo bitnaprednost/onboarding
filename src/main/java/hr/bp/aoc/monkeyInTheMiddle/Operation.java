@@ -3,6 +3,11 @@ package hr.bp.aoc.monkeyInTheMiddle;
 import java.math.BigInteger;
 import java.util.Arrays;
 
+/**
+ * <p>Operation class.</p>
+ *
+ * @author Marko Krišković
+ */
 public enum Operation {
     PLUS("+"){
         @Override

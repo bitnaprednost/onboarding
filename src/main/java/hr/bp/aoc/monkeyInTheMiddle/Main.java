@@ -7,6 +7,11 @@ import hr.bp.aoc.util.Parser;
 
 import java.io.IOException;
 
+/**
+ * <p>Main class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Main {
     public static void main(String[] args) throws IOException {
         String textFromFile = Parser.getTextFromFile("Resources/day11Data.txt");

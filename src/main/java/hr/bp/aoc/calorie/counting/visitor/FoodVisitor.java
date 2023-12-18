@@ -1,6 +1,8 @@
 package hr.bp.aoc.calorie.counting.visitor;
 
 /**
+ * <p>FoodVisitor class.</p>
+ *
  * @author Marko Krišković
  */
 public class FoodVisitor implements Visitor {

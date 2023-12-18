@@ -5,6 +5,11 @@ import hr.bp.aoc.hill.climbing.algorithm.State;
 import java.awt.Point;
 import java.util.*;
 
+/**
+ * <p>TabooSearch class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class TabooSearch implements Algorithm{
     private Integer tenure;
     private List<Point> tabooList;

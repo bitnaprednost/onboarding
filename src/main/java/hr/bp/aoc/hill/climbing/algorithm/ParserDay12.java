@@ -4,6 +4,11 @@ import hr.bp.aoc.util.Parser;
 
 import java.awt.*;
 
+/**
+ * <p>ParserDay12 class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ParserDay12 implements Parser {
     public static State parseStartingState(String[] textFromFile){
         char[][] map = new char[textFromFile.length][textFromFile[0].length()];

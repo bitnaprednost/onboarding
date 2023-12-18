@@ -11,6 +11,11 @@ import org.apache.commons.lang3.Validate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>RayTube class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class RayTube {
     private Command command;
     private Clock clock;

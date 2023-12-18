@@ -7,6 +7,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>HillClimbingAlgorithm class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class HillClimbingAlgorithm implements Algorithm {
     private final char endFlag;
     private int count;

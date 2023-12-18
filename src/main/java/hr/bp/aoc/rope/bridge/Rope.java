@@ -4,6 +4,11 @@ import java.awt.Point;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * <p>Rope class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Rope {
     private final List<Point> ropePoints;
 

@@ -6,6 +6,11 @@ import org.apache.commons.lang3.Validate;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * <p>MonkeyBuilder class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class MonkeyBuilder {
     private Integer id;
     private Integer divisibleBy;

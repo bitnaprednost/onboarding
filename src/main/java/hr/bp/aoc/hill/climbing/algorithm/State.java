@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>State class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class State {
     private final char[][] map;
     private final char[][] stringMap;

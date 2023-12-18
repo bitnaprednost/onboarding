@@ -6,6 +6,11 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>Monkey class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Monkey {
     private final int id;
     private final Integer divisibleBy;

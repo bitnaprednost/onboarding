@@ -4,6 +4,11 @@ import org.apache.commons.lang3.Validate;
 
 import java.util.*;
 
+/**
+ * <p>MonkeyManager class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class MonkeyManager {
     private final List<Monkey> monkeys;
     private final long magicNumber;

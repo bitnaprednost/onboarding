@@ -4,6 +4,11 @@ import hr.bp.aoc.cathode.raytube.Clock;
 
 import java.util.List;
 
+/**
+ * <p>SignalListener class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class SignalListener implements Listener {
     private final List<Integer> signals;
     public SignalListener(List<Integer> signals) {

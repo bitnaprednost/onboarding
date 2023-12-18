@@ -10,6 +10,11 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <p>MonkeyParser class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class MonkeyParser{
 
     private MonkeyParser(){}

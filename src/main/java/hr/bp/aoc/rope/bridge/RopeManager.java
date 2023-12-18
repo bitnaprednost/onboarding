@@ -6,6 +6,11 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>RopeManager class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class RopeManager {
     private final Rope rope;
     private final Set<Point> tailTrail;

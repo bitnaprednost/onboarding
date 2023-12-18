@@ -6,6 +6,11 @@ import java.util.function.LongSupplier;
 import java.util.function.LongUnaryOperator;
 import java.util.function.Supplier;
 
+/**
+ * <p>Abstract CombinedFunctionalInterface class.</p>
+ *
+ * @author Marko Krišković
+ */
 public abstract class CombinedFunctionalInterface implements Function<BigInteger, BigInteger>, Supplier<BigInteger> {
     private int functionMode;
 

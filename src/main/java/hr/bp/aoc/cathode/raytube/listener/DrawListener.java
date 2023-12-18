@@ -2,6 +2,11 @@ package hr.bp.aoc.cathode.raytube.listener;
 
 import hr.bp.aoc.cathode.raytube.Clock;
 
+/**
+ * <p>DrawListener class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class DrawListener implements Listener{
     private final StringBuilder stringBuilder;
 

@@ -2,6 +2,11 @@ package hr.bp.aoc.cathode.raytube;
 
 import hr.bp.aoc.cathode.raytube.listener.Listener;
 
+/**
+ * <p>Clock class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Clock {
     private Listener[] listeners;
     private int cycle = 0;

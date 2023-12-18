@@ -1,9 +1,10 @@
 package hr.bp.aoc.calorie.counting.visitor;
 
 /**
+ * <p>ElfVisitor class.</p>
+ *
  * @author Marko Krišković
  */
-
 public class ElfVisitor implements Visitor{
 
     private int sum = 0;

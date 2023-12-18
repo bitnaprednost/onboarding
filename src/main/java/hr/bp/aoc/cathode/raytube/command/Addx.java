@@ -2,6 +2,11 @@ package hr.bp.aoc.cathode.raytube.command;
 
 import hr.bp.aoc.cathode.raytube.Clock;
 
+/**
+ * <p>Addx class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Addx implements Command {
     private Clock clock;
     private Integer V;
