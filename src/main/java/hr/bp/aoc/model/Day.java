@@ -2,5 +2,6 @@ package hr.bp.aoc.model;
 
 public interface Day {
     void executePartOne();
-    void executePartTwo();
+	void executePartTwo();
+	String getDayOrderNumber();
 }
