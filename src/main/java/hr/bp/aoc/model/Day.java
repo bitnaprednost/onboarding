@@ -6,6 +6,10 @@ public interface Day {
 
 	void executePartTwo();
 
+
+	/**
+	 * @return This method returns current Advent Day Number
+	 */
 	String getDayOrderNumber();
 
 }
