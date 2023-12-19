@@ -18,8 +18,8 @@ public class Main {
 
         Monkey[] monkeyList = MonkeyParser.parseToMonkies(textFromFile);
         MonkeyManager monkeyManager = MonkeyManager.of(monkeyList);
-        monkeyManager.simulateRounds(20);
-        //monkeyManager.simulateRoundsNoRelief(10000);
+        //monkeyManager.simulateRounds(20);
+        monkeyManager.simulateRoundsNoRelief(10000);
 
         Long result = monkeyManager.getProductOfTopActiveMonkeys(2);
         System.out.println(result);

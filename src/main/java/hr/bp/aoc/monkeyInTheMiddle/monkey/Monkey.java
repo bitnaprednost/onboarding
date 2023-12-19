@@ -44,7 +44,7 @@ public class Monkey {
         for (BigInteger item : items){
             item = operation(item);
             if(relief) item = item.divide(BigInteger.valueOf(3));
-            item = item.mod(BigInteger.valueOf(magicNumber));
+            else item = item.mod(BigInteger.valueOf(magicNumber));
 
             if(item.mod(BigInteger.valueOf(divisibleBy)).equals(BigInteger.ZERO)) throwToMonkey(trueMonkey, item);
             else throwToMonkey(falseMonkey, item);
