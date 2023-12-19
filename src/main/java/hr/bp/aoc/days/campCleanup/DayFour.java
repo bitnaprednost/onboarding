@@ -35,6 +35,11 @@ public class DayFour implements Day {
         System.out.println(overlapingCounter);
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Four";
+    }
+
     private int coutRangesThatOverlap() {
         int counter = 0;
         for (Pair pair : pairList) {

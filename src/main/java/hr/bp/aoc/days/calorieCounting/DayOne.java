@@ -44,6 +44,11 @@ public class DayOne implements Day {
         System.out.println(firstThreeSum);
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day One";
+    }
+
 
     private int calculateSum(List<Elf> elvesList, int numberOfElves) {
         int sum = 0;

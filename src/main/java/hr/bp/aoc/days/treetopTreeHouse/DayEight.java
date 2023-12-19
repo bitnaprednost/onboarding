@@ -31,6 +31,11 @@ public class DayEight implements Day {
         System.out.printf("part 2: %s\n", highestScenicScore(map));
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Eight";
+    }
+
     int highestScenicScore(int[][] map) {
         return IntStream.range(0, map.length)
                 .flatMap(y -> IntStream.range(0, map[y].length)

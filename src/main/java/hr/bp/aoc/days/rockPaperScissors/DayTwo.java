@@ -22,4 +22,9 @@ public class DayTwo implements Day {
     public void executePartTwo() {
 
     }
+
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Two";
+    }
 }

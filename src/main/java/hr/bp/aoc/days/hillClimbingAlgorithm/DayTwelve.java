@@ -41,6 +41,11 @@ public class DayTwelve implements Day {
                 shortestPath(map, new HashMap<>(), end, dh -> dh >= -1, p -> map.get(p) == 'a'));
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Twelve";
+    }
+
     int shortestPath(Map<XY, Byte> map, Map<XY, Integer> visits, XY start,
                      Function<Byte, Boolean> ok, Function<XY, Boolean> target) {
         HashMap<XY, Integer> visited = new HashMap<XY, Integer>();

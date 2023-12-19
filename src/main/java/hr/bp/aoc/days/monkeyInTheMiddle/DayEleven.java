@@ -12,4 +12,9 @@ public class DayEleven implements Day {
     public void executePartTwo() {
 
     }
+
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Eleven";
+    }
 }

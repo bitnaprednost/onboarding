@@ -53,6 +53,11 @@ public class DayFive implements Day {
 
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Five";
+    }
+
     private void manipulateCratesWithInstructionsMultipleAtOnce(List<Stack<Character>> listOfCrates) {
         List<Character> temp = new ArrayList<>();
 

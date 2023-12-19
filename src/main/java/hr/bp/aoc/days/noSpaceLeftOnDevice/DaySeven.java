@@ -43,6 +43,11 @@ public class DaySeven implements Day {
         System.out.printf("part 2: %s\n", part2);
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Seven";
+    }
+
     private Node parseTerminal(String input) {
         Node root = new Node(0, null, new TreeMap<>());
         input.lines().reduce(root, (n, l) -> n.apply(l), (a,b) -> {return null;});

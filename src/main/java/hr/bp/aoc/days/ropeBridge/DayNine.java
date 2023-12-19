@@ -45,6 +45,11 @@ public class DayNine implements Day {
         System.out.printf("part 2: %s\n", nth(head, 9).history.stream().distinct().count());
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Nine";
+    }
+
     Knot nth(Knot k, int count) {
         return count == 0 ? k : nth(k.tail, count - 1);
     }

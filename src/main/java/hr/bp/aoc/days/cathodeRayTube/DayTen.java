@@ -33,6 +33,11 @@ public class DayTen implements Day {
         System.out.printf("part2:\n%s", part2(program));
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Ten";
+    }
+
     String part2(List<Instruction> program) {
         return IntStream.range(1, 6*40+1)
                 .mapToObj(cycle -> pixelAtCycle(cycle, program) + (cycle%40 == 0 ? "\n" : ""))

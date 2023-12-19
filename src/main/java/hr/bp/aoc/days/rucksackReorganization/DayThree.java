@@ -45,6 +45,11 @@ public class DayThree implements Day {
         }
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Three";
+    }
+
 
     private int calculateSumOfTheDuplicates(List<Character> duplicatesInBackpack) {
         int sum = 0;

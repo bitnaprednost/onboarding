@@ -40,6 +40,11 @@ public class DaySix implements Day {
         }
     }
 
+    @Override
+    public String getDayOrderNumber() {
+        return "Day Six";
+    }
+
     private Optional<Integer> processBufferData(String bufferData, int numberOfCharactersInASequence) {
         int tempPosition = 0;
 

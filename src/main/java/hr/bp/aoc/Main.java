@@ -18,6 +18,7 @@ import hr.bp.aoc.days.rucksackReorganization.DayThree;
 public class Main {
     public static void main(String[] args) {
 		for (Day day : days) {
+			System.out.println(day.getDayOrderNumber());
 			day.executePartOne();
 			day.executePartTwo();
 		}
