@@ -7,8 +7,8 @@ import hr.bp.aoc.hill.climbing.algorithm.State;
  *
  * @author Marko Krišković
  */
-public interface Algorithm {
-    State run(State initialState);
-    State runMultiple(State initialState, int times);
+public interface Algorithm <T> {
+    T run(T initialState);
+    T runMultiple(T initialState, int times);
     int getCount();
 }

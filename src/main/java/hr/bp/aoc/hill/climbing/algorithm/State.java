@@ -3,6 +3,7 @@ package hr.bp.aoc.hill.climbing.algorithm;
 import org.w3c.dom.Entity;
 
 import java.awt.Point;
+import java.awt.geom.Point2D;
 import java.util.*;
 
 /**
@@ -75,12 +76,12 @@ public class State {
     }
 
     private Optional<State> move(int y, int x, char arrow) {
-        if (map[y][x] > map[currentPosition.y][currentPosition.x] + 1 || map[y][x] < map[currentPosition.y][currentPosition.x]) return Optional.empty();
+        if (map[y][x] > map[currentPosition.y][currentPosition.x] + 1 || map[y][x] < map[currentPosition.y][currentPosition.x] - 2) return Optional.empty();
         else {
             char[][] newStringMap = cloneArray(stringMap);
             newStringMap[currentPosition.y][currentPosition.x] = arrow;
 
-            double heuristic = calculateHeuristic(y, x);
+            double heuristic = calculateHeuristic(y, x, 1000, 30, 10);
             State state = new State(this, new Point(x, y), heuristic, newStringMap);
 
             return Optional.of(state);
@@ -90,9 +91,15 @@ public class State {
     public static Optional<State> choose(List<State> list){
         if(list.isEmpty()) return Optional.empty();
 
-        //if(list.size()>1) save(state)
+        int randInt = random.nextInt(2);
+        return randInt == 0 ? selectTournament(list) : selectRoulette(list);
+    }
 
-        return selectTournament(list);
+    public boolean hasNextValue(List<State> list) {
+        for(State state : list){
+            if(state.getValue() > this.getValue()) return true;
+        }
+        return false;
     }
 
     private static Optional<State> selectRoulette(List<State> list) {
@@ -120,20 +127,45 @@ public class State {
             default -> {
                 int randInt1 = random.nextInt(list.size());
                 int randInt2 = random.nextInt(list.size());
+                while(randInt1==randInt2) randInt2 = random.nextInt(list.size());
+
                 yield Optional.of(versus(list.get(randInt1), list.get(randInt2)));
             }
         };
     }
 
     private static State versus(State state0, State state1) {
-        if(state0.heuristic >= state1.heuristic) return state0;
-        else return state1;
+        if(state0.heuristic > state1.heuristic) return state0;
+        else if(state0.heuristic < state1.heuristic) return state1;
+        else{
+            int randInt = random.nextInt(2);
+            return randInt == 0 ? state0 : state1;
+        }
     }
 
-    private double calculateHeuristic(int y, int x) {
-        double distanceFromStart = endingPosition.distance(x, y);
+    private double calculateHeuristic(int y, int x, double alpha, double beta, double gamma) {
+        double letterDifference = (map[y][x] - map[currentPosition.y][currentPosition.x] + 1) * alpha;
+        double distanceFromStart = endingPosition.distance(x, y) * beta + 1;
+        double distanceFromNextLetter = (approximateNextLetterPosition(getValue()).distance(x,y)) * gamma;
 
-        return 100 / (distanceFromStart+1);
+        return letterDifference / (distanceFromStart + distanceFromNextLetter);
+    }
+
+    private Point2D approximateNextLetterPosition(char value) {
+        int count = 0;
+        Point approximate = new Point(0, 0);
+        for(int i=0;i<map.length;i++){
+            for(int j=0;j<map[i].length;j++){
+                if(map[i][j] == value+1) {
+                    approximate.x += j;
+                    approximate.y += i;
+                    count++;
+                }
+            }
+        }
+        approximate.x /= count;
+        approximate.y /= count;
+        return approximate;
     }
 
     private char[][] cloneArray(char[][] array){
@@ -154,6 +186,33 @@ public class State {
 
     public boolean endReached(){
         return currentPosition.equals(endingPosition);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof State state)) return false;
+
+        if (Double.compare(heuristic, state.heuristic) != 0) return false;
+        if (!Arrays.deepEquals(map, state.map)) return false;
+        if (!Objects.equals(currentPosition, state.currentPosition))
+            return false;
+        if (!Objects.equals(startingPosition, state.startingPosition))
+            return false;
+        return Objects.equals(endingPosition, state.endingPosition);
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = Arrays.deepHashCode(map);
+        result = 31 * result + (currentPosition != null ? currentPosition.hashCode() : 0);
+        result = 31 * result + (startingPosition != null ? startingPosition.hashCode() : 0);
+        result = 31 * result + (endingPosition != null ? endingPosition.hashCode() : 0);
+        temp = Double.doubleToLongBits(heuristic);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
     @Override

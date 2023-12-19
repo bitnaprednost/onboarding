@@ -15,9 +15,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String[] textFromFile = Parser.getLinesFromFile("src/main/resources/day12Data.txt");
 
-        Algorithm algorithm = new TabooSearch(1);
+        Algorithm<State> algorithm = new TabooSearch(30);
         State startingState = ParserDay12.parseStartingState(textFromFile);
-        State endState = algorithm.runMultiple(startingState, 100);
+        State endState = algorithm.runMultiple(startingState, 1000);
 
         System.out.println(algorithm.getCount());
         System.out.println(endState);

@@ -42,16 +42,8 @@ class AlgorithmTest {
         algorithm = new HillClimbingAlgorithm();
         State endState = algorithm.run(initialState);
 
-        String result = """
-                        v..v<<<<
-                        >v.vv<<^
-                        .v.v>{^^
-                        .>v>>>^^
-                        ..>>>>>^
-                        """;
-
-        assertEquals(31, algorithm.getCount());
-        assertEquals(result, endState.toString());
+        assertTrue(endState.endReached());
+        //System.out.println(endState + "count: " + algorithm.getCount());
     }
 
     @Test
@@ -59,16 +51,7 @@ class AlgorithmTest {
         algorithm = new TabooSearch(5);
         State endState = algorithm.run(initialState);
 
-        String result = """
-                        v..v<<<<
-                        >v.vv<<^
-                        .v.v>{^^
-                        .>v>>>^^
-                        ..>>>>>^
-                        """;
-
-        assertEquals(31, algorithm.getCount());
-        assertEquals(result, endState.toString());
+        assertTrue(endState.endReached());
     }
 
     @Test

@@ -3,21 +3,29 @@ package hr.bp.aoc.hill.climbing.algorithm.algorithms;
 import hr.bp.aoc.hill.climbing.algorithm.State;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
- * <p>HillClimbingAlgorithm class.</p>
- *
  * @author Marko Krišković
  */
-public class HillClimbingAlgorithm implements Algorithm<State> {
+public class AntColonyAlgorithm implements Algorithm<State>{
+    private int count;
     private int bestCount;
     private State bestState;
-    private int count;
+    private int[][] pheromones;
+    private double[][] probabilities;
 
-    public HillClimbingAlgorithm() {
-        this.count = 0;
-        this.bestCount = 100000;
+    public AntColonyAlgorithm(int dimensionX, int dimensionY){
+        count=0;
+        bestCount=0;
+
+        pheromones = new int[dimensionY][dimensionX];
+        probabilities = new double[dimensionY][dimensionX];
+        for(int i=0;i<dimensionY;i++){
+            for(int j=0;j<dimensionX;j++){
+                pheromones[i][j] = 0;
+                probabilities[i][j] = 0.5;
+            }
+        }
     }
 
     @Override
@@ -38,26 +46,14 @@ public class HillClimbingAlgorithm implements Algorithm<State> {
 
         return currentState;
     }
-
     @Override
-    public State run(State currentState) {
-        boolean changed=true;
+    public State run(State initialState) {
+        List<State> population = generateAntPopulation(100);
+        calculateFitness(population);
+        State bestAnt = findBestAnts(population);
+        updatePheromones(population);
 
-        for(int i=0;i<5000 && changed;i++) {
-            if(currentState.getValue()=='{') break;
-            changed = false;
-
-            List<State> neighbors = currentState.generateNeighbors();
-
-            Optional<State> max = State.choose(neighbors);
-            if(max.isPresent()){
-                currentState = max.get();
-                changed = true;
-            }
-            count++;
-        }
-
-        return currentState;
+        return bestAnt;
     }
 
     @Override
