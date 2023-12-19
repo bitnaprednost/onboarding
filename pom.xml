@@ -14,6 +14,11 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+			<dependency>
+				<groupId>com.liferay</groupId>
+				<artifactId>com.liferay.source.formatter</artifactId>
+				<version>1.0.1367</version>
+			</dependency>
     </dependencies>
 
     <properties>
@@ -21,5 +26,26 @@
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.liferay</groupId>
+					<artifactId>com.liferay.source.formatter</artifactId>
+					<version>1.0.1367</version>
+					<configuration>
+						<maxLineLength>160</maxLineLength>
+						<checkNames>false</checkNames>
+						<failOnHasWarning>false</failOnHasWarning>
+						<printErrors>true</printErrors>
+						<baseDir>/Volumes/dev-bp/onboarding-luka/src/main/java/hr/bp/aoc/model/Day.java</baseDir>
+						<fileExtensions>java,xml,md</fileExtensions>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
 </project>
