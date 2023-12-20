@@ -7,73 +7,80 @@ import java.util.List;
 /**
  * @author Marko Krišković
  */
-public class AntColonyAlgorithm implements Algorithm<State>{
-    private int count;
-    private int bestCount;
-    private State bestState;
-    private int[][] pheromones;
-    private double[][] probabilities;
+public class AntColonyAlgorithm implements Algorithm<State> {
 
-    public AntColonyAlgorithm(int dimensionX, int dimensionY){
-        count=0;
-        bestCount=0;
+	private int count;
+	private int bestCount;
+	private State bestState;
+	private int[][] pheromones;
+	private double[][] probabilities;
 
-        pheromones = new int[dimensionY][dimensionX];
-        probabilities = new double[dimensionY][dimensionX];
-        for(int i=0;i<dimensionY;i++){
-            for(int j=0;j<dimensionX;j++){
-                pheromones[i][j] = 0;
-                probabilities[i][j] = 0.5;
-            }
-        }
-    }
+	public AntColonyAlgorithm(int dimensionX, int dimensionY) {
+		count = 0;
+		bestCount = 0;
 
-    @Override
-    public State runMultiple(State initialState, int times) {
-        State currentState = initialState;
+		pheromones = new int[dimensionY][dimensionX];
+		probabilities = new double[dimensionY][dimensionX];
 
-        for(int i=0;i<times;i++){
-            count=0;
-            currentState = run(initialState);
+		for (int i = 0; i < dimensionY; i++) {
+			for (int j = 0; j < dimensionX; j++) {
+				pheromones[i][j] = 0;
+				probabilities[i][j] = 0.5;
+			}
+		}
+	}
 
-            if(currentState.endReached()) {
-                if(count < bestCount){
-                    bestCount = count;
-                    bestState = currentState;
-                }
-            }
-        }
+	@Override
+	public State runMultiple(State initialState, int times) {
+		State currentState = initialState;
 
-        return currentState;
-    }
-    @Override
-    public State run(State initialState) {
-        List<State> population = generateAntPopulation(initialState, 100);
-        calculateFitness(population);
-        State bestAnt = findBestAnts(population);
-        updatePheromones(population);
+		for (int i = 0; i < times; i++) {
+			count = 0;
+			currentState = run(initialState);
 
-        return bestAnt;
-    }
+			if (currentState.endReached()) {
+				if (count < bestCount) {
+					bestCount = count;
+					bestState = currentState;
+				}
+			}
+		}
 
-    private void updatePheromones(List<State> population) {
-    }
+		return currentState;
+	}
 
-    private State findBestAnts(List<State> population) {
-        return null;
-    }
+	@Override
+	public State run(State initialState) {
+		List<State> population = generateAntPopulation(initialState, 100);
+		calculateFitness(population);
+		State bestAnt = findBestAnts(population);
+		updatePheromones(population);
 
-    private void calculateFitness(List<State> population) {
+		return bestAnt;
+	}
 
-    }
+	private void updatePheromones(List<State> population) {
+	}
 
-    private List<State> generateAntPopulation(State initialState, int i) {
-        return null;
-    }
+	private State findBestAnts(List<State> population) {
+		return null;
+	}
 
-    @Override
-    public int getCount() {
-        if(bestState==null) return count;
-        else return bestCount;
-    }
+	private void calculateFitness(List<State> population) {
+	}
+
+	private List<State> generateAntPopulation(State initialState, int i) {
+		return null;
+	}
+
+	@Override
+	public int getCount() {
+		if (bestState == null)
+
+			return count;
+			else
+
+			return bestCount;
+	}
+
 }

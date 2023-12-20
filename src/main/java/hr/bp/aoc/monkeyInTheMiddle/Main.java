@@ -13,15 +13,17 @@ import java.io.IOException;
  * @author Marko Krišković
  */
 public class Main {
-    public static void main(String[] args) throws IOException {
-        String textFromFile = Parser.getTextFromFile("src/main/resources/day11Data.txt");
 
-        Monkey[] monkeyList = MonkeyParser.parseToMonkies(textFromFile);
-        MonkeyManager monkeyManager = MonkeyManager.of(monkeyList);
-        //monkeyManager.simulateRounds(20);
-        monkeyManager.simulateRoundsNoRelief(10000);
+	public static void main(String[] args) throws IOException {
+		String textFromFile = Parser.getTextFromFile("src/main/resources/day11Data.txt");
 
-        Long result = monkeyManager.getProductOfTopActiveMonkeys(2);
-        System.out.println(result);
-    }
+		Monkey[] monkeyList = MonkeyParser.parseToMonkies(textFromFile);
+		MonkeyManager monkeyManager = MonkeyManager.of(monkeyList);
+		//monkeyManager.simulateRounds(20);
+		monkeyManager.simulateRoundsNoRelief(10000);
+
+		Long result = monkeyManager.getProductOfTopActiveMonkeys(2);
+		System.out.println(result);
+	}
+
 }

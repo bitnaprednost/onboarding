@@ -1,12 +1,13 @@
 package hr.bp.aoc.calorie.counting;
 
 import hr.bp.aoc.calorie.counting.visitor.ElfVisitor;
-import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
+import org.apache.commons.lang3.Validate;
 
 /**
  * <p>ElfManager class.</p>
@@ -15,51 +16,70 @@ import java.util.List;
  */
 public class ElfManager {
 
-    private ElfManager() {}
+	private ElfManager() {
+	}
 
-    private static String validate(String calorie) {
-        Validate.notNull(calorie, "String input is null.");
-        calorie = calorie.replaceAll("[^\\d-\\n]", "");
-        Validate.notEmpty(calorie, "Input is empty after filtering. Input is probably invalid."); //throws IllegalArgumentException, not customizable?
+	private static String validate(String calorie) {
+		Validate.notNull(calorie, "String input is null.");
+		calorie = calorie.replaceAll("[^\\d-\\n]", "");
+		Validate.notEmpty(calorie, "Input is empty after filtering. Input is probably invalid."); //throws IllegalArgumentException, not customizable?
 
-        return calorie;
-    }
+		return calorie;
+	}
 
-    public static Elf createElf(String calorie) {
-        calorie = validate(calorie);
+	public static Elf createElf(String calorie) {
+		calorie = validate(calorie);
 
-        ElfBuilder elfBuilder = new ElfBuilder();
-        Arrays.stream(calorie.split("\n")).mapToInt(Integer::parseInt).forEach(elfBuilder::append);
-        return elfBuilder.build();
-    }
+		ElfBuilder elfBuilder = new ElfBuilder();
+		Arrays.stream(
+			calorie.split("\n")
+		).mapToInt(
+			Integer::parseInt
+		).forEach(
+			elfBuilder::append
+		);
 
-    public static List<Elf> createElves(String calories) {
-        String[] split = calories.split("\n\n");
+		return elfBuilder.build();
+	}
 
-        List<Elf> elves = new ArrayList<>();
-        for(String calorieString : split){
-            elves.add(createElf(calorieString));
-        }
+	public static List<Elf> createElves(String calories) {
+		String[] split = calories.split("\n\n");
 
-        return elves;
-    }
+		List<Elf> elves = new ArrayList<>();
 
-    public static List<Elf> getElfMostCalories(List<Elf> elves, int N) {
-        return elves.stream().sorted(Comparator.comparing(Elf::getCalories).reversed()).limit(N).toList();
-    }
+		for (String calorieString : split) {
+			elves.add(createElf(calorieString));
+		}
 
-    public static Elf getElfMostCalories(List<Elf> elves) {
-        return getElfMostCalories(elves, 1).iterator().next();
-    }
+		return elves;
+	}
 
-    public static int sumCalories(List<Elf> topElves) {
-        ElfVisitor visitor = new ElfVisitor();
+	public static List<Elf> getElfMostCalories(List<Elf> elves, int N) {
+		return elves.stream(
+		).sorted(
+			Comparator.comparing(
+				Elf::getCalories
+			).reversed()
+		).limit(
+			N
+		).toList();
+	}
 
-        for (Elf topElf : topElves) {
-            topElf.accept(visitor);
-        }
+	public static Elf getElfMostCalories(List<Elf> elves) {
+		return getElfMostCalories(
+			elves, 1
+		).iterator(
+		).next();
+	}
 
-        return visitor.getSum();
-    }
+	public static int sumCalories(List<Elf> topElves) {
+		ElfVisitor visitor = new ElfVisitor();
+
+		for (Elf topElf : topElves) {
+			topElf.accept(visitor);
+		}
+
+		return visitor.getSum();
+	}
 
 }

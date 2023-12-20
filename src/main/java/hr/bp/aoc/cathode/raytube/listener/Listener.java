@@ -8,5 +8,7 @@ import hr.bp.aoc.cathode.raytube.Clock;
  * @author Marko Krišković
  */
 public interface Listener {
-    void update(Clock clock);
+
+	void update(Clock clock);
+
 }

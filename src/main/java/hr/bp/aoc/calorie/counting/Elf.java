@@ -12,53 +12,56 @@ import java.util.List;
  * @author Marko Krišković
  */
 public class Elf {
-    private final List<Food> foodList;
 
-    private Elf(){
-        foodList = new ArrayList<>();
-    }
+	private final List<Food> foodList;
 
-    private Elf(Food... foods) {
-        foodList = List.of(foods);
-    }
+	private Elf() {
+		foodList = new ArrayList<>();
+	}
 
-    Elf(List<Food> foodList) {
-        this.foodList = foodList;
-    }
+	private Elf(Food... foods) {
+		foodList = List.of(foods);
+	}
 
-    public static Elf of(Food... foods){
-        return new Elf(foods);
-    }
+	Elf(List<Food> foodList) {
+		this.foodList = foodList;
+	}
 
-    public boolean hasCalories() {
-        for(Food food : foodList) {
-            if(food.hasCalories()) return true;
-        }
-        return false;
-    }
+	public static Elf of(Food... foods) {
+		return new Elf(foods);
+	}
 
-    public Food getFood(int i) {
-        return foodList.get(i);
-    }
+	public boolean hasCalories() {
+		for (Food food : foodList) {
+			if (food.hasCalories())
 
-    public Integer getCalories() {
-        FoodVisitor visitor = new FoodVisitor();
+				return true;
+		}
 
-        for (Food food : foodList) {
-            food.accept(visitor);
-        }
+		return false;
+	}
 
-        return visitor.getSum();
-    }
+	public Food getFood(int i) {
+		return foodList.get(i);
+	}
 
-    public void accept(Visitor visitor){
-        visitor.accept(this.getCalories());
-    }
+	public Integer getCalories() {
+		FoodVisitor visitor = new FoodVisitor();
 
-    @Override
-    public String toString() {
-        return "Elf{" +
-                "foodList=" + foodList +
-                '}';
-    }
+		for (Food food : foodList) {
+			food.accept(visitor);
+		}
+
+		return visitor.getSum();
+	}
+
+	public void accept(Visitor visitor) {
+		visitor.accept(this.getCalories());
+	}
+
+	@Override
+	public String toString() {
+		return "Elf{" + "foodList=" + foodList + '}';
+	}
+
 }

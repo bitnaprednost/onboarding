@@ -6,5 +6,7 @@ package hr.bp.aoc.cathode.raytube.command;
  * @author Marko Krišković
  */
 public interface Command {
-    void execute();
+
+	void execute();
+
 }

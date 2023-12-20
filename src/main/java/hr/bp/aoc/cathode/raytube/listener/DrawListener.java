@@ -7,23 +7,28 @@ import hr.bp.aoc.cathode.raytube.Clock;
  *
  * @author Marko Krišković
  */
-public class DrawListener implements Listener{
-    private final StringBuilder stringBuilder;
+public class DrawListener implements Listener {
 
-    public DrawListener(StringBuilder stringBuilder) {
-        this.stringBuilder = stringBuilder;
-    }
+	private final StringBuilder stringBuilder;
 
-    @Override
-    public void update(Clock clock) {
-        int moddedCycle = clock.getCycle() % 40;
+	public DrawListener(StringBuilder stringBuilder) {
+		this.stringBuilder = stringBuilder;
+	}
 
-        if(moddedCycle >= clock.getX() && moddedCycle <= clock.getX()+2) stringBuilder.append("#");
-        else if(moddedCycle==0 && clock.getX()+2==40) stringBuilder.append("#");
-        else stringBuilder.append(".");
+	@Override
+	public void update(Clock clock) {
+		int moddedCycle = clock.getCycle() % 40;
 
-        if(moddedCycle == 0) {
-            stringBuilder.append("\n");
-        }
-    }
+		if ((moddedCycle >= clock.getX()) && (moddedCycle <= (clock.getX() + 2)))
+			stringBuilder.append("#");
+			else if ((moddedCycle == 0) && ((clock.getX() + 2) == 40))
+				stringBuilder.append("#");
+				else
+				stringBuilder.append(".");
+
+		if (moddedCycle == 0) {
+			stringBuilder.append("\n");
+		}
+	}
+
 }

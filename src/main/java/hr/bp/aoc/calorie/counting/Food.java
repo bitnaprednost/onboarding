@@ -2,6 +2,7 @@ package hr.bp.aoc.calorie.counting;
 
 import hr.bp.aoc.calorie.counting.visitor.FoodVisitor;
 import hr.bp.aoc.calorie.counting.visitor.Visitor;
+
 import org.apache.commons.lang3.Validate;
 
 /**
@@ -10,42 +11,43 @@ import org.apache.commons.lang3.Validate;
  * @author Marko Krišković
  */
 public class Food {
-    private final Integer calories;
 
-    private Food(int calories) {
-        this.calories=calories;
-    }
+	private final Integer calories;
 
-    public static Food of(int calories){
-        Validate.isTrue(hasCalories(calories), "Food can't contain negative calories.");
+	private Food(int calories) {
+		this.calories = calories;
+	}
 
-        return new Food(calories);
-    }
+	public static Food of(int calories) {
+		Validate.isTrue(hasCalories(calories), "Food can't contain negative calories.");
 
-    public boolean hasCalories() {
-        Validate.notNull(calories, "Food calories is not initialized");
-        
-        return Food.hasCalories(calories);
-    }
+		return new Food(calories);
+	}
 
-    private static boolean hasCalories(int calories){
-        return calories >= 0;
-    }
+	public boolean hasCalories() {
+		Validate.notNull(calories, "Food calories is not initialized");
 
-    public void accept(Visitor visitor){
-         visitor.accept(calories);
-    }
+		return Food.hasCalories(calories);
+	}
 
-    public Integer getCalories() {
-        Visitor visitor = new FoodVisitor();
-        this.accept(visitor);
-        return visitor.getSum();
-    }
+	private static boolean hasCalories(int calories) {
+		return calories >= 0;
+	}
 
-    @Override
-    public String toString() {
-        return "Food{" +
-                "calories=" + calories +
-                '}';
-    }
+	public void accept(Visitor visitor) {
+		visitor.accept(calories);
+	}
+
+	public Integer getCalories() {
+		Visitor visitor = new FoodVisitor();
+		this.accept(visitor);
+
+		return visitor.getSum();
+	}
+
+	@Override
+	public String toString() {
+		return "Food{" + "calories=" + calories + '}';
+	}
+
 }

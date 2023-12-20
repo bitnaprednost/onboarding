@@ -10,43 +10,44 @@ import java.awt.*;
  * @author Marko Krišković
  */
 public class ParserDay12 implements Parser {
-    public static State parseStartingState(String[] textFromFile){
-        char[][] map = new char[textFromFile.length][textFromFile[0].length()];
-        char[][] stringMap = new char[map.length][map[0].length];
 
-        Point[] points = fillMaps(textFromFile, map, stringMap);
+	public static State parseStartingState(String[] textFromFile) {
+		char[][] map = new char[textFromFile.length][textFromFile[0].length()];
+		char[][] stringMap = new char[map.length][map[0].length];
 
-        return new State(map, points[0], points[1], stringMap);
-    }
+		Point[] points = fillMaps(textFromFile, map, stringMap);
 
-    private static Point[] fillMaps(String[] textFromFile, char[][] map, char[][] stringMap) {
-        Point pointStart = null;
-        Point portEnd = null;
+		return new State(map, points[0], points[1], stringMap);
+	}
 
-        for(int i = 0; i<textFromFile.length; i++){
-            for(int j = 0;j<textFromFile[i].length();j++){
-                char letter = textFromFile[i].charAt(j);
+	private static Point[] fillMaps(String[] textFromFile, char[][] map, char[][] stringMap) {
+		Point pointStart = null;
+		Point portEnd = null;
 
-                if(letter == 'S') {
-                    map[i][j] = '`';
-                    stringMap[i][j] = letter;
+		for (int i = 0; i < textFromFile.length; i++) {
+			for (int j = 0; j < textFromFile[i].length(); j++) {
+				char letter = textFromFile[i].charAt(j);
 
-                    pointStart = new Point(j, i);
-                }
-                else if(letter == 'E'){
-                    map[i][j] = '{';
-                    stringMap[i][j] = letter;
+				if (letter == 'S') {
+					map[i][j] = '`';
+					stringMap[i][j] = letter;
 
-                    portEnd = new Point(j, i);
-                }
-                else{
-                    map[i][j] = letter;
-                    stringMap[i][j] = '.';
-                }
-            }
-        }
+					pointStart = new Point(j, i);
+				}
+				else if (letter == 'E') {
+					map[i][j] = '{';
+					stringMap[i][j] = letter;
 
-        return new Point[]{pointStart, portEnd};
-    }
+					portEnd = new Point(j, i);
+				}
+				else {
+					map[i][j] = letter;
+					stringMap[i][j] = '.';
+				}
+			}
+		}
+
+		return new Point[] {pointStart, portEnd};
+	}
 
 }

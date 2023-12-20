@@ -8,35 +8,38 @@ import hr.bp.aoc.cathode.raytube.listener.Listener;
  * @author Marko Krišković
  */
 public class Clock {
-    private Listener[] listeners;
-    private int cycle = 0;
-    private int X = 1;
 
-    public Clock(Listener... listeners) {
-        this.listeners = listeners;
-    }
+	private Listener[] listeners;
+	private int cycle = 0;
 
-    public int getCycle() {
-        return cycle;
-    }
+	private int X = 1;
 
-    public int getX() {
-        return X;
-    }
+	public Clock(Listener... listeners) {
+		this.listeners = listeners;
+	}
 
-    public void tick(){
-        cycle++;
+	public int getCycle() {
+		return cycle;
+	}
 
-        update();
-    }
+	public int getX() {
+		return X;
+	}
 
-    private void update(){
-        for(Listener listener : listeners){
-            listener.update(this);
-        }
-    }
+	public void tick() {
+		cycle++;
 
-    public void add(int V){
-        X += V;
-    }
+		update();
+	}
+
+	private void update() {
+		for (Listener listener : listeners) {
+			listener.update(this);
+		}
+	}
+
+	public void add(int V) {
+		X += V;
+	}
+
 }
