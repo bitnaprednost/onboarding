@@ -48,12 +48,27 @@ public class AntColonyAlgorithm implements Algorithm<State>{
     }
     @Override
     public State run(State initialState) {
-        List<State> population = generateAntPopulation(100);
+        List<State> population = generateAntPopulation(initialState, 100);
         calculateFitness(population);
         State bestAnt = findBestAnts(population);
         updatePheromones(population);
 
         return bestAnt;
+    }
+
+    private void updatePheromones(List<State> population) {
+    }
+
+    private State findBestAnts(List<State> population) {
+        return null;
+    }
+
+    private void calculateFitness(List<State> population) {
+
+    }
+
+    private List<State> generateAntPopulation(State initialState, int i) {
+        return null;
     }
 
     @Override
