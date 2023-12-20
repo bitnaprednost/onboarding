@@ -146,7 +146,7 @@ public class State {
     private double calculateHeuristic(int y, int x, double alpha, double beta, double gamma) {
         double letterDifference = (map[y][x] - map[currentPosition.y][currentPosition.x] + 1) * alpha;
         double distanceFromStart = endingPosition.distance(x, y) * beta + 1;
-        double distanceFromNextLetter = (approximateNextLetterPosition(getValue()).distance(x,y)) * gamma;
+        double distanceFromNextLetter = approximateNextLetterPosition(getValue()).distance(x,y) * gamma;
 
         return letterDifference / (distanceFromStart + distanceFromNextLetter);
     }
@@ -163,6 +163,8 @@ public class State {
                 }
             }
         }
+        if(count==0) return currentPosition;
+
         approximate.x /= count;
         approximate.y /= count;
         return approximate;

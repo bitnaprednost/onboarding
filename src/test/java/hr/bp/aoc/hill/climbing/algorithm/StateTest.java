@@ -69,8 +69,8 @@ class StateTest {
                             """;
 
         assertEquals(2, neighbors.size());
-        assertEquals(neighbor0, neighbors.get(0).toString());
-        assertEquals(neighbor1, neighbors.get(1).toString());
+        assertEquals(neighbor0, neighbors.get(1).toString());
+        assertEquals(neighbor1, neighbors.get(0).toString());
     }
 
     @Test
@@ -111,15 +111,17 @@ class StateTest {
                             """;
 
         assertEquals(4, neighbors.size());
-        assertEquals(neighbor0, neighbors.get(0).toString());
+        assertEquals(neighbor0, neighbors.get(2).toString());
         assertEquals(neighbor1, neighbors.get(1).toString());
-        assertEquals(neighbor2, neighbors.get(2).toString());
-        assertEquals(neighbor3, neighbors.get(3).toString());
+        assertEquals(neighbor2, neighbors.get(3).toString());
+        assertEquals(neighbor3, neighbors.get(0).toString());
     }
 
     @Test
     void canGetAllNeighborsEndEdgeCase(){
         map[3][3] = 'd';
+        map[4][3] = 'd';
+
         State state = new State(map, new Point(3, 4), new Point(3, 4), stringMap);
         List<State> neighbors = state.generateNeighbors();
 

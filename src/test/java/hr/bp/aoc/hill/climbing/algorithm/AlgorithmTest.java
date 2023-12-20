@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AlgorithmTest {
 
-    private Algorithm algorithm;
+    private Algorithm<State> algorithm;
     private State initialState;
 
     @BeforeEach
