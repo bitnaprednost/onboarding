@@ -95,7 +95,7 @@ public class Ant {
         return Math.pow(distanceFromStart, alpha) + Math.pow(letterDifference, beta);
     }
 
-    public double getDistanceFromEnd(){
+    public Double getDistanceFromEnd(){
         return state.getEndingPosition().distance(getCurrentPosition().x, getCurrentPosition().y);
     }
 

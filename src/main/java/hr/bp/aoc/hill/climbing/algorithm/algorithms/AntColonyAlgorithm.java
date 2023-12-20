@@ -3,6 +3,7 @@ package hr.bp.aoc.hill.climbing.algorithm.algorithms;
 import hr.bp.aoc.hill.climbing.algorithm.Ant;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Marko Krišković
@@ -13,7 +14,7 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 	private int bestCount;
 	private Ant bestAnt;
 	private int dimensionX;
-	private int dimensionY;
+	//private int dimensionY;
 	private Double[][] pheromones;
 
 	public AntColonyAlgorithm(int dimensionX, int dimensionY) {
@@ -21,9 +22,9 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		bestCount = 0;
 
 		this.dimensionX = dimensionX;
-		this.dimensionY = dimensionY;
-		this.pheromones = new Double[dimensionY*dimensionX][4];
+		//this.dimensionY = dimensionY;
 
+		this.pheromones = new Double[dimensionY*dimensionX][4];
 		for (int i = 0; i < dimensionY*dimensionX; i++) {
 			for (int j = 0; j < 4; j++) {
 				pheromones[i][j] = 0.25;
@@ -36,7 +37,6 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		Ant currentAnt = initialAnt;
 
 		for (int i = 0; i < times; i++) {
-			count = 0;
 			currentAnt = run(initialAnt);
 
 			if (currentAnt.endReached()) {
@@ -52,10 +52,11 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 
 	@Override
 	public Ant run(Ant initialAnt) {
-		Set<Ant> population = generateAntPopulation(initialAnt, 100);
-		updatePheromones(population, 0.3);
+		Map<Ant, Integer> population = generateAntPopulation(initialAnt, 100);
+		Map<Ant, Integer> bestAnts = findBestAnts(population, 20);
+		updatePheromones(bestAnts.keySet(), 0.3);
 
-		return findBestAnts(population);
+		return bestAnts.entrySet().iterator().next().getKey();
 	}
 
 	private void updatePheromones(Set<Ant> population, double evaporationRate) {
@@ -68,20 +69,14 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		}
 	}
 
-	private Ant findBestAnts(Set<Ant> population) {
-		Iterator<Ant> iterator = population.iterator();
-		Ant currentMin = iterator.next();
-		double min = currentMin.getDistanceFromEnd();
-
-		while (iterator.hasNext()){
-			Ant next = iterator.next();
-			if(next.getDistanceFromEnd() < min){
-				currentMin = next;
-				min = next.getDistanceFromEnd();
+	private Map<Ant, Integer> findBestAnts(Map<Ant, Integer> population, int top) {
+		return population.entrySet().stream().sorted(new Comparator<Map.Entry<Ant, Integer>>() {
+			@Override
+			public int compare(Map.Entry<Ant, Integer> o1, Map.Entry<Ant, Integer> o2) {
+				if(!Objects.equals(o1.getValue(), o2.getValue())) return o1.getValue().compareTo(o2.getValue());
+				else return o1.getKey().getDistanceFromEnd().compareTo(o2.getKey().getDistanceFromEnd());
 			}
-		}
-
-		return currentMin;
+		}).limit(top).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	}
 
 	private void calculateFitness(Set<Ant> population) {
@@ -102,16 +97,17 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		}
 	}
 
-	private Set<Ant> generateAntPopulation(Ant initialAnt, int times) {
-		Set<Ant> set = new HashSet<>();
+	private Map<Ant, Integer>  generateAntPopulation(Ant initialAnt, int times) {
+		Map<Ant, Integer> map = new HashMap<>();
 		for(int i=0;i<times;i++){
-			set.add(runAnt(initialAnt));
+			map.put(runAnt(initialAnt), count);
 		}
-		return set;
+		return map;
 	}
 
 	private Ant runAnt(Ant currentAnt) {
 		boolean changed=true;
+		count = 0;
 
 		for(int i=0;i<250 && changed;i++) {
 			if(currentAnt.getValue()=='{') break;
@@ -133,12 +129,8 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 
 	@Override
 	public int getCount() {
-		if (bestAnt == null)
-
-			return count;
-			else
-
-			return bestCount;
+		if (bestAnt == null) return count;
+		else return bestCount;
 	}
 
 }
