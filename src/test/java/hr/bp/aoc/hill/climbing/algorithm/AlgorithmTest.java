@@ -2,6 +2,7 @@ package hr.bp.aoc.hill.climbing.algorithm;
 
 import hr.bp.aoc.hill.climbing.algorithm.State;
 import hr.bp.aoc.hill.climbing.algorithm.algorithms.Algorithm;
+import hr.bp.aoc.hill.climbing.algorithm.algorithms.AntColonyAlgorithm;
 import hr.bp.aoc.hill.climbing.algorithm.algorithms.HillClimbingAlgorithm;
 import hr.bp.aoc.hill.climbing.algorithm.algorithms.TabooSearch;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +13,6 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AlgorithmTest {
-
-    private Algorithm<State> algorithm;
     private State initialState;
 
     @BeforeEach
@@ -39,7 +38,7 @@ class AlgorithmTest {
 
     @Test
     void canRunHillClimbAlgorithm(){
-        algorithm = new HillClimbingAlgorithm();
+        Algorithm<State> algorithm = new HillClimbingAlgorithm();
         State endState = algorithm.run(initialState);
 
         assertTrue(endState.endReached());
@@ -48,15 +47,24 @@ class AlgorithmTest {
 
     @Test
     void canRunTabooSearchAlgorithm(){
-        algorithm = new TabooSearch(5);
+        Algorithm<State> algorithm = new TabooSearch(5);
         State endState = algorithm.run(initialState);
 
         assertTrue(endState.endReached());
     }
 
     @Test
+    void canRunAntColonyAlgorithm(){
+        Algorithm<Ant> algorithm = new AntColonyAlgorithm(8, 5);
+        Ant initialAnt = new Ant(initialState);
+        Ant endState = algorithm.run(initialAnt);
+
+        assertTrue(endState.endReached());
+    }
+
+    @Test
     void canRunMultipleHillClimbAlgorithm(){
-        algorithm = new HillClimbingAlgorithm();
+        Algorithm<State> algorithm = new HillClimbingAlgorithm();
         State endState = algorithm.runMultiple(initialState, 100);
 
         assertEquals(31, algorithm.getCount());
@@ -64,8 +72,18 @@ class AlgorithmTest {
 
     @Test
     void canRunMultipleTabooSearchAlgorithm(){
-        algorithm = new TabooSearch(5);
+        Algorithm<State> algorithm = new TabooSearch(5);
         State endState = algorithm.runMultiple(initialState, 100);
+
+        assertEquals(31, algorithm.getCount());
+    }
+
+    @Test
+    void canRunMultipleAntColonyAlgorithm(){
+        char[][] map = initialState.getStringMap();
+        Ant initialAnt = new Ant(initialState);
+        Algorithm<Ant> algorithm = new AntColonyAlgorithm(map[0].length, map.length);
+        Ant endAnt = algorithm.runMultiple(initialAnt, 100);
 
         assertEquals(31, algorithm.getCount());
     }

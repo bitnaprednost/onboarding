@@ -43,13 +43,13 @@ public class HillClimbingAlgorithm implements Algorithm<State> {
     public State run(State currentState) {
         boolean changed=true;
 
-        for(int i=0;i<5000 && changed;i++) {
+        for(int i=0;i<300 && changed;i++) {
             if(currentState.getValue()=='{') break;
             changed = false;
 
             List<State> neighbors = currentState.generateNeighbors();
 
-            Optional<State> max = State.choose(neighbors);
+            Optional<State> max = State.choose(neighbors, SelectionEnum.ROULETTE);
             if(max.isPresent()){
                 currentState = max.get();
                 changed = true;

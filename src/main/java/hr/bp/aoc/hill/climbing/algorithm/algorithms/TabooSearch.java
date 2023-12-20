@@ -54,7 +54,7 @@ public class TabooSearch implements Algorithm<State>{
         boolean changed=true;
         int tenureCount = tabooList.size()-2;
 
-        for(int i=0;i<5000 && changed;i++) {
+        for(int i=0;i<300 && changed;i++) {
             if(currentState.getValue()=='{') break;
             changed = false;
 
@@ -69,7 +69,7 @@ public class TabooSearch implements Algorithm<State>{
                     .filter(neighbor->!tabooList.contains(neighbor))
                     .toList();
 
-            Optional<State> max = State.choose(filtered);
+            Optional<State> max = State.choose(filtered, SelectionEnum.MIXED);
             if(max.isPresent()){
                 currentState = max.get();
                 changed = true;

@@ -1,5 +1,7 @@
 package hr.bp.aoc.hill.climbing.algorithm;
 
+import hr.bp.aoc.hill.climbing.algorithm.algorithms.SelectionEnum;
+import net.sf.saxon.expr.Component;
 import org.w3c.dom.Entity;
 
 import java.awt.Point;
@@ -88,11 +90,10 @@ public class State {
         }
     }
 
-    public static Optional<State> choose(List<State> list){
+    public static Optional<State> choose(List<State> list, SelectionEnum selection){
         if(list.isEmpty()) return Optional.empty();
 
-        int randInt = random.nextInt(2);
-        return randInt == 0 ? selectTournament(list) : selectRoulette(list);
+        return selection.select(list);
     }
 
     public boolean hasNextValue(List<State> list) {
@@ -100,47 +101,6 @@ public class State {
             if(state.getValue() > this.getValue()) return true;
         }
         return false;
-    }
-
-    private static Optional<State> selectRoulette(List<State> list) {
-        double sum = list.stream().mapToDouble(State::getHeuristic).sum();
-
-        Map<State, Double> map = new LinkedHashMap<>();
-        double initial = 0;
-        for(State state : list){
-            initial += state.heuristic / sum;
-            map.put(state, initial);
-        }
-
-        double rand = random.nextDouble();
-        for(Map.Entry<State, Double> entry : map.entrySet()){
-            if(rand <= entry.getValue()) return Optional.of(entry.getKey());
-        }
-
-        return Optional.empty();
-    }
-
-    private static Optional<State> selectTournament(List<State> list) {
-        return switch (list.size()){
-            case 1 -> Optional.of(list.getFirst());
-            case 2 -> Optional.of(versus(list.get(0), list.get(1)));
-            default -> {
-                int randInt1 = random.nextInt(list.size());
-                int randInt2 = random.nextInt(list.size());
-                while(randInt1==randInt2) randInt2 = random.nextInt(list.size());
-
-                yield Optional.of(versus(list.get(randInt1), list.get(randInt2)));
-            }
-        };
-    }
-
-    private static State versus(State state0, State state1) {
-        if(state0.heuristic > state1.heuristic) return state0;
-        else if(state0.heuristic < state1.heuristic) return state1;
-        else{
-            int randInt = random.nextInt(2);
-            return randInt == 0 ? state0 : state1;
-        }
     }
 
     private double calculateHeuristic(int y, int x, double alpha, double beta, double gamma) {
@@ -170,7 +130,7 @@ public class State {
         return approximate;
     }
 
-    private char[][] cloneArray(char[][] array){
+    public char[][] cloneArray(char[][] array){
         return Arrays.stream(array).map(char[]::clone).toArray(char[][]::new);
     }
 
@@ -185,9 +145,24 @@ public class State {
     public char getValue(){
         return map[currentPosition.y][currentPosition.x];
     }
+    public char getValue(int x, int y){
+        return map[y][x];
+    }
 
     public boolean endReached(){
         return currentPosition.equals(endingPosition);
+    }
+
+    public char[][] getStringMap() {
+        return stringMap;
+    }
+
+    public char[][] getMap() {
+        return map;
+    }
+
+    public Point getEndingPosition() {
+        return endingPosition;
     }
 
     @Override

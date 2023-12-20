@@ -1,81 +1,139 @@
 package hr.bp.aoc.hill.climbing.algorithm.algorithms;
 
-import hr.bp.aoc.hill.climbing.algorithm.State;
+import hr.bp.aoc.hill.climbing.algorithm.Ant;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Marko Krišković
  */
-public class AntColonyAlgorithm implements Algorithm<State> {
+public class AntColonyAlgorithm implements Algorithm<Ant> {
 
 	private int count;
 	private int bestCount;
-	private State bestState;
-	private int[][] pheromones;
-	private double[][] probabilities;
+	private Ant bestAnt;
+	private int dimensionX;
+	private int dimensionY;
+	private Double[][] pheromones;
 
 	public AntColonyAlgorithm(int dimensionX, int dimensionY) {
 		count = 0;
 		bestCount = 0;
 
-		pheromones = new int[dimensionY][dimensionX];
-		probabilities = new double[dimensionY][dimensionX];
+		this.dimensionX = dimensionX;
+		this.dimensionY = dimensionY;
+		this.pheromones = new Double[dimensionY*dimensionX][4];
 
-		for (int i = 0; i < dimensionY; i++) {
-			for (int j = 0; j < dimensionX; j++) {
-				pheromones[i][j] = 0;
-				probabilities[i][j] = 0.5;
+		for (int i = 0; i < dimensionY*dimensionX; i++) {
+			for (int j = 0; j < 4; j++) {
+				pheromones[i][j] = 0.25;
 			}
 		}
 	}
 
 	@Override
-	public State runMultiple(State initialState, int times) {
-		State currentState = initialState;
+	public Ant runMultiple(Ant initialAnt, int times) {
+		Ant currentAnt = initialAnt;
 
 		for (int i = 0; i < times; i++) {
 			count = 0;
-			currentState = run(initialState);
+			currentAnt = run(initialAnt);
 
-			if (currentState.endReached()) {
+			if (currentAnt.endReached()) {
 				if (count < bestCount) {
 					bestCount = count;
-					bestState = currentState;
+					bestAnt = currentAnt;
 				}
 			}
 		}
 
-		return currentState;
+		return currentAnt;
 	}
 
 	@Override
-	public State run(State initialState) {
-		List<State> population = generateAntPopulation(initialState, 100);
+	public Ant run(Ant initialAnt) {
+		Set<Ant> population = generateAntPopulation(initialAnt, 100);
+		updatePheromones(population, 0.3);
+
+		return findBestAnts(population);
+	}
+
+	private void updatePheromones(Set<Ant> population, double evaporationRate) {
 		calculateFitness(population);
-		State bestAnt = findBestAnts(population);
-		updatePheromones(population);
 
-		return bestAnt;
+		for(int i=0;i<pheromones.length;i++){
+			for(int j=0;j<pheromones[i].length;j++){
+				pheromones[i][j] *= (1 - evaporationRate);
+			}
+		}
 	}
 
-	private void updatePheromones(List<State> population) {
+	private Ant findBestAnts(Set<Ant> population) {
+		Iterator<Ant> iterator = population.iterator();
+		Ant currentMin = iterator.next();
+		double min = currentMin.getDistanceFromEnd();
+
+		while (iterator.hasNext()){
+			Ant next = iterator.next();
+			if(next.getDistanceFromEnd() < min){
+				currentMin = next;
+				min = next.getDistanceFromEnd();
+			}
+		}
+
+		return currentMin;
 	}
 
-	private State findBestAnts(List<State> population) {
-		return null;
+	private void calculateFitness(Set<Ant> population) {
+		Double sumAnts = population.stream().mapToDouble(Ant::getFittness).sum();
+
+		for(Ant ant : population){
+			char[][] map = ant.getStringMap();
+			for(int i=0;i<map.length;i++){
+				for (int j=0;j<map[i].length;j++){
+					switch (map[i][j]){
+						case '>' -> pheromones[dimensionX*i+j][0] += ant.getFittness() / sumAnts;
+						case 'v' -> pheromones[dimensionX*i+j][1] += ant.getFittness() / sumAnts;
+						case '^' -> pheromones[dimensionX*i+j][2] += ant.getFittness() / sumAnts;
+						case '<' -> pheromones[dimensionX*i+j][3] += ant.getFittness() / sumAnts;
+					}
+				}
+			}
+		}
 	}
 
-	private void calculateFitness(List<State> population) {
+	private Set<Ant> generateAntPopulation(Ant initialAnt, int times) {
+		Set<Ant> set = new HashSet<>();
+		for(int i=0;i<times;i++){
+			set.add(runAnt(initialAnt));
+		}
+		return set;
 	}
 
-	private List<State> generateAntPopulation(State initialState, int i) {
-		return null;
+	private Ant runAnt(Ant currentAnt) {
+		boolean changed=true;
+
+		for(int i=0;i<250 && changed;i++) {
+			if(currentAnt.getValue()=='{') break;
+			changed = false;
+
+			Map<Ant, Double> neighbors = currentAnt.generateNeighbors(pheromones[dimensionX * currentAnt.getCurrentPosition().y + currentAnt.getCurrentPosition().x]);
+
+			Optional<Ant> max = Ant.choose(neighbors);
+			if(max.isPresent()){
+				currentAnt = max.get();
+				changed = true;
+			}
+
+			count++;
+		}
+
+		return currentAnt;
 	}
 
 	@Override
 	public int getCount() {
-		if (bestState == null)
+		if (bestAnt == null)
 
 			return count;
 			else
