@@ -165,6 +165,10 @@ public class State {
         return endingPosition;
     }
 
+    public Point getStartingPosition() {
+        return startingPosition;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

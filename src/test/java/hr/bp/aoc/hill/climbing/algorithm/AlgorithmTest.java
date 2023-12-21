@@ -1,6 +1,5 @@
 package hr.bp.aoc.hill.climbing.algorithm;
 
-import hr.bp.aoc.hill.climbing.algorithm.State;
 import hr.bp.aoc.hill.climbing.algorithm.algorithms.Algorithm;
 import hr.bp.aoc.hill.climbing.algorithm.algorithms.AntColonyAlgorithm;
 import hr.bp.aoc.hill.climbing.algorithm.algorithms.HillClimbingAlgorithm;
@@ -55,8 +54,8 @@ class AlgorithmTest {
 
     @Test
     void canRunAntColonyAlgorithm(){
-        Algorithm<Ant> algorithm = new AntColonyAlgorithm(8, 5);
         Ant initialAnt = new Ant(initialState);
+        Algorithm<Ant> algorithm = new AntColonyAlgorithm(initialAnt);
         Ant endState = algorithm.run(initialAnt);
 
         assertTrue(endState.endReached());
@@ -82,7 +81,7 @@ class AlgorithmTest {
     void canRunMultipleAntColonyAlgorithm(){
         char[][] map = initialState.getStringMap();
         Ant initialAnt = new Ant(initialState);
-        Algorithm<Ant> algorithm = new AntColonyAlgorithm(map[0].length, map.length);
+        Algorithm<Ant> algorithm = new AntColonyAlgorithm(initialAnt);
         Ant endAnt = algorithm.runMultiple(initialAnt, 100);
 
         assertEquals(31, algorithm.getCount());

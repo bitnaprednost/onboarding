@@ -53,10 +53,10 @@ public enum SelectionEnum {
         double sum = initialMap.values().stream().mapToDouble(a->a).sum();
 
         Map<Ant, Double> map = new LinkedHashMap<>();
-        double initial = 0;
+        double chance = 0;
         for(Map.Entry<Ant, Double> entry : initialMap.entrySet()){
-            initial += entry.getValue() / sum;
-            map.put(entry.getKey(), initial);
+            chance += entry.getValue() / sum;
+            map.put(entry.getKey(), chance);
         }
 
         double rand = random.nextDouble();
