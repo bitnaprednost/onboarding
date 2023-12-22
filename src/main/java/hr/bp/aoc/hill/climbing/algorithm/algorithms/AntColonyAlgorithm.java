@@ -57,8 +57,8 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 
 	@Override
 	public Ant run(Ant initialAnt) {
-		Map<Ant, Integer> population = generateAntPopulation(initialAnt, 1000, 1500);
-		population = findBestAnts(population, 200);
+		Map<Ant, Integer> population = generateAntPopulation(initialAnt, 10000, 1500);
+		population = findBestAnts(population, 2000);
 		updatePheromones(population.keySet(), 0.3);
 
 		Map.Entry<Ant, Integer> entry = population.entrySet().iterator().next();
