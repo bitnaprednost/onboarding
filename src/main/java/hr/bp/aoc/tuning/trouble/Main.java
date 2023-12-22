@@ -1,6 +1,8 @@
 package hr.bp.aoc.tuning.trouble;
 
 import hr.bp.aoc.util.Reader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,6 +14,7 @@ import java.util.stream.IntStream;
  * @author Marko Krišković
  */
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static int firstSolution(String textFromFile, int consecutive){
         return IntStream.range(0, textFromFile.length() - consecutive)
                 .map(subStream -> textFromFile.substring(subStream).chars()
@@ -44,10 +47,10 @@ public class Main {
         Path path = Path.of("src/main/resources/day6Data.txt");
         String textFromFile = Reader.getTextFromFile(path);
 
-        System.out.println(firstSolution(textFromFile, 4));
-        System.out.println(secondSolution(textFromFile, 4));
-        System.out.println(thirdSolution(textFromFile, 4));
-        System.out.println(thirdSolution(textFromFile, 15));
+        logger.info(String.valueOf(firstSolution(textFromFile, 4)));
+        logger.info(String.valueOf(secondSolution(textFromFile, 4)));
+        logger.info(String.valueOf(thirdSolution(textFromFile, 4)));
+        logger.info(String.valueOf(thirdSolution(textFromFile, 15)));
 
     }
 }

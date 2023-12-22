@@ -11,7 +11,7 @@ public class TreeManager {
     public static int countVisibleTrees(List<Tree> forest){
         int count=0;
         for(Tree tree : forest){
-            //System.out.println(tree);
+            //logger.info(tree);
             if(tree.isVisible()){
                 count++;
             }

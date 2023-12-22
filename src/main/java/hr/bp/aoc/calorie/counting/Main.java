@@ -1,6 +1,8 @@
 package hr.bp.aoc.calorie.counting;
 
 import hr.bp.aoc.util.Reader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -13,7 +15,7 @@ import java.util.List;
  * @author Marko Krišković
  */
 public class Main {
-
+	private static final Logger logger = LoggerFactory.getLogger(Main.class);
 	public static void main(String[] args) throws IOException {
 		Path path = Path.of("src/main/resources/day1Data.txt");
 		String text = Reader.getTextFromFile(path);
@@ -21,11 +23,11 @@ public class Main {
 
 		Elf elfMostCalories = ElfManager.getElfMostCalories(elves);
 		int result1 = elfMostCalories.getCalories();
-		System.out.println(result1);
+		logger.info(String.valueOf(result1));
 
 		List<Elf> elvesMostCalories = ElfManager.getElfMostCalories(elves, 3);
 		int result2 = ElfManager.sumCalories(elvesMostCalories);
-		System.out.println(result2);
+		logger.info(String.valueOf(result2));
 	}
 
 }

@@ -1,6 +1,9 @@
 package hr.bp.aoc.monkeyInTheMiddle.monkey;
 
+import hr.bp.aoc.hill.climbing.algorithm.Main;
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -10,6 +13,8 @@ import java.util.*;
  * @author Marko Krišković
  */
 public class MonkeyManager {
+    private static final Logger logger = LoggerFactory.getLogger(MonkeyManager.class);
+
     private final List<Monkey> monkeys;
     private final long magicNumber;
     private MonkeyManager(Monkey... monkeys) {
@@ -36,14 +41,14 @@ public class MonkeyManager {
     public void simulateRounds(int rounds) {
         for(int i=0;i<rounds;i++) {
             monkeys.forEach(monkey -> monkey.inspectItems(magicNumber));
-            System.out.println(i + ". " + monkeys);
+            //logger.info(i + ". " + monkeys);
         }
     }
 
     public void simulateRoundsNoRelief(int rounds) {
         for(int i=0;i<rounds;i++) {
             monkeys.forEach(monkey -> monkey.inspectItemsNoRelief(magicNumber));
-            //System.out.println(i + ". " + monkeys);
+            //logger.info(i + ". " + monkeys);
         }
     }
 

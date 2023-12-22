@@ -3,6 +3,8 @@ package hr.bp.aoc.supply.stacks;
 import hr.bp.aoc.supply.stacks.crane.Crane;
 import hr.bp.aoc.supply.stacks.crane.CrateMover9001;
 import hr.bp.aoc.util.Reader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,6 +15,7 @@ import java.nio.file.Path;
  * @author Marko Krišković
  */
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) throws IOException {
         Path path = Path.of("src/main/resources/day5Data.txt");
         String textFromFile = Reader.getTextFromFile(path);
@@ -27,6 +30,6 @@ public class Main {
         }
 
         String result = crates.getTops();
-        System.out.println(result);
+        logger.info(result);
     }
 }

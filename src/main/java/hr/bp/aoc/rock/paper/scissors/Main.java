@@ -6,6 +6,8 @@ import hr.bp.aoc.rock.paper.scissors.player.PlayerOpponent;
 import hr.bp.aoc.rock.paper.scissors.strategy.Strategy;
 import hr.bp.aoc.rock.paper.scissors.strategy.StrategyImpl1;
 import hr.bp.aoc.rock.paper.scissors.strategy.StrategyImpl2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -15,6 +17,7 @@ import java.io.IOException;
  * @author Marko Krišković
  */
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException {
         PlayerMe me = new PlayerMe();
@@ -23,11 +26,11 @@ public class Main {
         Strategy strategy = new StrategyImpl1(opponent, me);
         GameManager gameManager = new GameManager(strategy);
         gameManager.runGames("src/main/resources/day2Data.txt");
-        System.out.println(gameManager.getScore());
+        logger.info(String.valueOf(gameManager.getScore()));
 
         strategy = new StrategyImpl2(opponent, me);
         gameManager = new GameManager(strategy);
         gameManager.runGames("src/main/resources/day2Data.txt");
-        System.out.println(gameManager.getScore());
+        logger.info(String.valueOf(gameManager.getScore()));
     }
 }

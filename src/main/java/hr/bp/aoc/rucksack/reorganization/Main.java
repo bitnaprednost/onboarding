@@ -1,6 +1,8 @@
 package hr.bp.aoc.rucksack.reorganization;
 
 import hr.bp.aoc.util.Reader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,6 +14,7 @@ import java.util.*;
  * @author Marko Krišković
  */
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String args[]) throws IOException {
         Path path = Path.of("src/main/resources/day3Data.txt");
         String input = Reader.getTextFromFile(path);
@@ -29,7 +32,7 @@ public class Main {
                         .map(ch -> ch > 90 ? ch - 96 : ch - 38).findFirst())
                 .mapToInt(OptionalInt::getAsInt).sum();
 
-        System.out.println(result1);
+        logger.info(String.valueOf(result1));
 
         int result2 = Arrays.stream(input.concat("\n").split("\n(?=(?:.+\n.+\n.+\n)*$)")).map(line -> {
             String[] split = line.split("\n");
@@ -38,6 +41,6 @@ public class Main {
                     .map(ch -> ch > 90 ? ch - 96 : ch - 38).findFirst();
         }).mapToInt(OptionalInt::getAsInt).sum();
 
-        System.out.println(result2);
+        logger.info(String.valueOf(result2));
     }
 }

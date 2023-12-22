@@ -1,12 +1,14 @@
 package hr.bp.aoc.camp.cleanup;
 
 import hr.bp.aoc.util.Reader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 import java.nio.file.Path;
 import java.util.*;
-import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 import java.util.stream.IntStream;
 
 /**
@@ -15,6 +17,7 @@ import java.util.stream.IntStream;
  * @author Marko Krišković
  */
 public class Main {
+	private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
 	private static List<List<List<Integer>>> textToListHell(String input) {
 		List<List<List<Integer>>> result = new ArrayList<>();
@@ -41,11 +44,11 @@ public class Main {
 		return result;
 	}
 
-	public static <T> Boolean bifunctionBoolean(List<List<T>> array, BiFunction<List<T>, List<T>, Boolean> bifunction) {
+	public static <T> Boolean bifunctionBoolean(List<List<T>> array, BiPredicate<List<T>, List<T>> bifunction) {
 		Iterator<List<T>> iterator = array.stream(
 		).iterator();
 
-		return bifunction.apply(iterator.next(), iterator.next());
+		return bifunction.test(iterator.next(), iterator.next());
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -55,8 +58,8 @@ public class Main {
 		//format: [[[2,3,4],  [6,7,8]], [...], ...]
 		List<List<List<Integer>>> lists = textToListHell(input);
 
-		BiFunction<List<Integer>, List<Integer>, Boolean> containsEachOther = (first, second) -> first.containsAll(second) || second.containsAll(first);
-		BiFunction<List<Integer>, List<Integer>, Boolean> matchesOneElement = (first, second) -> first.stream(
+		BiPredicate<List<Integer>, List<Integer>> containsEachOther = (first, second) -> first.containsAll(second) || second.containsAll(first);
+		BiPredicate<List<Integer>, List<Integer>> matchesOneElement = (first, second) -> first.stream(
 		).anyMatch(
 			second::contains
 		);
@@ -67,7 +70,7 @@ public class Main {
 		).filter(
 			pred -> pred
 		).count();
-		System.out.println(result1);
+		logger.info(String.valueOf(result1));
 
 		long result2 = lists.stream(
 		).map(
@@ -75,7 +78,7 @@ public class Main {
 		).filter(
 			pred -> pred
 		).count();
-		System.out.println(result2);
+		logger.info(String.valueOf(result2));
 	}
 
 }

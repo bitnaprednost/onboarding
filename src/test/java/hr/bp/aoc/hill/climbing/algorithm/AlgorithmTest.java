@@ -41,7 +41,7 @@ class AlgorithmTest {
         State endState = algorithm.run(initialState);
 
         assertTrue(endState.endReached());
-        //System.out.println(endState + "count: " + algorithm.getCount());
+        //logger.info(endState + "count: " + algorithm.getCount());
     }
 
     @Test

@@ -6,7 +6,10 @@ import hr.bp.aoc.cathode.raytube.command.Noop;
 import hr.bp.aoc.cathode.raytube.listener.DrawListener;
 import hr.bp.aoc.cathode.raytube.listener.Listener;
 import hr.bp.aoc.cathode.raytube.listener.SignalListener;
+import hr.bp.aoc.hill.climbing.algorithm.Main;
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +20,8 @@ import java.util.List;
  * @author Marko Krišković
  */
 public class RayTube {
+    private static final Logger logger = LoggerFactory.getLogger(RayTube.class);
+
     private Command command;
     private Clock clock;
     private List<Integer> signals;
@@ -54,7 +59,7 @@ public class RayTube {
     }
 
     public void printMessage(){
-        System.out.println(stringBuilder.toString());
+        logger.info(stringBuilder.toString());
     }
 
 }
