@@ -1,6 +1,6 @@
 package hr.bp.aoc.hill.climbing.algorithm;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.awt.*;
 
@@ -9,9 +9,9 @@ import java.awt.*;
  *
  * @author Marko Krišković
  */
-public class ParserDay12 implements Parser {
+public class ReaderDay12 implements Reader {
 
-	public static State parseStartingState(String[] textFromFile) {
+	public static State createStartingState(String[] textFromFile) {
 		char[][] map = new char[textFromFile.length][textFromFile[0].length()];
 		char[][] stringMap = new char[map.length][map[0].length];
 

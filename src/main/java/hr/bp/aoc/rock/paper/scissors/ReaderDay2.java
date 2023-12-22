@@ -1,6 +1,6 @@
 package hr.bp.aoc.rock.paper.scissors;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 import org.apache.commons.lang3.Validate;
 
 import java.util.ArrayList;
@@ -11,9 +11,9 @@ import java.util.List;
  *
  * @author Marko Krišković
  */
-public class ParserDay2 implements Parser {
+public class ReaderDay2 implements Reader {
 
-    private ParserDay2(){}
+    private ReaderDay2(){}
 
     private static String trimWhiteSpace(String game) {
         return game.strip().trim().replace(" ", "");

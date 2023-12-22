@@ -3,9 +3,10 @@ package hr.bp.aoc.noSpaceLeftOnDevice;
 import hr.bp.aoc.noSpaceLeftOnDevice.file.Directory;
 import hr.bp.aoc.noSpaceLeftOnDevice.file.FileSystem;
 import jdk.jshell.spi.ExecutionControl;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * <p>Main class.</p>
@@ -14,9 +15,10 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException, ExecutionControl.NotImplementedException {
-        String[] textFromFile = Parser.getLinesFromFile("src/main/resources/day7Data.txt");
+        Path path = Path.of("src/main/resources/day7Data.txt");
+        String[] textFromFile = Reader.getLinesFromFile(path);
 
-        FileSystem fileSystem = ParserDay7.createFileSystem(textFromFile, 70000000);
+        FileSystem fileSystem = ReaderDay7.createFileSystem(textFromFile, 70000000);
         long size = fileSystem.sumDirectoriesWithMaxSizeOf(100000);
         System.out.println(size);
 

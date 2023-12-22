@@ -1,8 +1,9 @@
 package hr.bp.aoc.tuning.trouble;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.stream.IntStream;
 
 /**
@@ -40,8 +41,8 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-
-        String textFromFile = Parser.getTextFromFile("src/main/resources/day6Data.txt");
+        Path path = Path.of("src/main/resources/day6Data.txt");
+        String textFromFile = Reader.getTextFromFile(path);
 
         System.out.println(firstSolution(textFromFile, 4));
         System.out.println(secondSolution(textFromFile, 4));

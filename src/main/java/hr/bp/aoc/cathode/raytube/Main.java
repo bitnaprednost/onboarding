@@ -1,8 +1,9 @@
 package hr.bp.aoc.cathode.raytube;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * <p>Main class.</p>
@@ -12,7 +13,8 @@ import java.io.IOException;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		String[] textFromFile = Parser.getLinesFromFile("src/main/resources/day10Data.txt");
+		Path path = Path.of("src/main/resources/day10Data.txt");
+		String[] textFromFile = Reader.getLinesFromFile(path);
 
 		RayTube rayTube = new RayTube();
 

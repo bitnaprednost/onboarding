@@ -1,16 +1,15 @@
 package hr.bp.aoc.supply.stacks;
 
-import hr.bp.aoc.supply.stacks.ParserDay5;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ParserTest {
+class ReaderTest {
     String boxesString;
     String commandsString;
 
@@ -27,7 +26,7 @@ class ParserTest {
     @Test
     public void parserCanGetInitialInput() throws IOException {
         String path = "src/test/resources/testData.txt";
-        String initialInput = Parser.getTextFromFile(path);
+        String initialInput = Reader.getTextFromFile(path);
 
         assertEquals(initialInput, "Hello World\n" + "this is a test");
     }
@@ -35,7 +34,7 @@ class ParserTest {
     @Test
     public void parserCanGetInitialInputSplit() throws IOException {
         String path = "src/test/resources/testData.txt";
-        String[] initialInput = Parser.getLinesFromFile(path);
+        String[] initialInput = Reader.getLinesFromFile(path);
 
         assertEquals(initialInput[0], "Hello World");
         assertEquals(initialInput[1], "this is a test");
@@ -50,7 +49,7 @@ class ParserTest {
                 "\n" +
                 "move 1 from 2 to 1\n" +
                 "move 3 from 1 to 3";
-        String[] split = ParserDay5.splitInput(input);
+        String[] split = ReaderDay5.splitInput(input);
 
         assertEquals(boxesString, split[0]);
         assertEquals(commandsString, split[1]);
@@ -59,7 +58,7 @@ class ParserTest {
     @Test
     public void parserMakesLotsOfStacks() throws IOException {
         int numberOfWantedBoxes = 3;
-        List<Stack<String>> stacks = ParserDay5.createStacks(numberOfWantedBoxes);
+        List<Stack<String>> stacks = ReaderDay5.createStacks(numberOfWantedBoxes);
 
         Stack<String> stack1 = new Stack<>();
         Stack<String> stack2 = new Stack<>();
@@ -74,7 +73,7 @@ class ParserTest {
 
     @Test
     public void parserCanParseBoxes() throws IOException {
-        Map<Integer, Stack<String>> boxes = ParserDay5.parseBoxes(boxesString);
+        Map<Integer, Stack<String>> boxes = ReaderDay5.parseToBoxes(boxesString);
 
         Stack<String> stack1 = new Stack<>();
         stack1.push("Z");
@@ -95,7 +94,7 @@ class ParserTest {
 
     @Test
     public void parserCanParseCommands(){
-        String[] commands = ParserDay5.parseCommands(commandsString);
+        String[] commands = ReaderDay5.parseCommands(commandsString);
 
         assertAll("Commands match",
                 () -> assertEquals("move 1 from 2 to 1", commands[0]),

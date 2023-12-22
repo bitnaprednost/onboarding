@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MonkeyParserTest {
+class MonkeyReaderTest {
 
     @Test
     void canParseMonkeyes(){

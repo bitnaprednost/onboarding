@@ -1,17 +1,17 @@
 package hr.bp.aoc.noSpaceLeftOnDevice;
 
-import hr.bp.aoc.noSpaceLeftOnDevice.ParserDay7;
 import hr.bp.aoc.noSpaceLeftOnDevice.file.FileSystem;
 import jdk.jshell.spi.ExecutionControl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParserDay7Test {
+public class ReaderDay7Test {
     private String inputText;
     private String[] split;
 
@@ -41,15 +41,15 @@ public class ParserDay7Test {
 
     @Test
     public void parserCanGetInitialInput() throws IOException {
-        String path = "src/test/resources/testData.txt";
-        String initialInput = Parser.getTextFromFile(path);
+        Path path = Path.of("src/test/resources/testData.txt");
+        String initialInput = Reader.getTextFromFile(path);
 
         assertEquals(initialInput, "Hello World\n" + "this is a test");
     }
 
     @Test
     public void canConvertTextIntoFileSystem() throws ExecutionControl.NotImplementedException {
-        FileSystem fileSystem = ParserDay7.createFileSystem(split, 70000);
+        FileSystem fileSystem = ReaderDay7.createFileSystem(split, 70000);
 
         assertAll("All values are correct in current cursor",
                 () -> assertNotNull(fileSystem),
@@ -91,21 +91,21 @@ public class ParserDay7Test {
     @Test
     public void cantParseWrongStart(){
         String[] testStr = {"Hello", "World"};
-        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()->{FileSystem fileSystem = ParserDay7.createFileSystem(testStr, 70000);});
+        IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, ()->{FileSystem fileSystem = ReaderDay7.createFileSystem(testStr, 70000);});
         assertEquals("First parameter doesn't start with $ cd.", thrown.getMessage());
     }
 
     @Test
     public void cantParseWrongCommand(){
         String[] testStr = {"$ cd /", "mirko"};
-        UnsupportedOperationException thrown = assertThrows(UnsupportedOperationException.class, ()->{FileSystem fileSystem = ParserDay7.createFileSystem(testStr, 70000);});
+        UnsupportedOperationException thrown = assertThrows(UnsupportedOperationException.class, ()->{FileSystem fileSystem = ReaderDay7.createFileSystem(testStr, 70000);});
         assertEquals("Command not implemented.", thrown.getMessage());
     }
 
     @Test
     public void cantParseWrongCommandInls(){
         String[] testStr = {"$ cd /", "$ ls", "mirko"};
-        UnsupportedOperationException thrown = assertThrows(UnsupportedOperationException.class, ()->{FileSystem fileSystem = ParserDay7.createFileSystem(testStr, 70000);});
+        UnsupportedOperationException thrown = assertThrows(UnsupportedOperationException.class, ()->{FileSystem fileSystem = ReaderDay7.createFileSystem(testStr, 70000);});
         assertEquals("After ls executed: command not implemented.", thrown.getMessage());
     }
 }

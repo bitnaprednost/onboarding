@@ -1,7 +1,5 @@
 package hr.bp.aoc.supply.stacks;
 
-import hr.bp.aoc.supply.stacks.Crates;
-import hr.bp.aoc.supply.stacks.ParserDay5;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +18,7 @@ class CratesTest {
                 "[N] [C]    \n" +
                 "[Z] [M] [P]\n" +
                 " 1   2   3 ";
-        Map<Integer, Stack<String>> stacks = ParserDay5.parseBoxes(boxesString);
+        Map<Integer, Stack<String>> stacks = ReaderDay5.parseToBoxes(boxesString);
         crates = new Crates(stacks);
     }
     @Test

@@ -1,9 +1,10 @@
 package hr.bp.aoc.rock.paper.scissors;
 
 import hr.bp.aoc.rock.paper.scissors.strategy.Strategy;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -18,8 +19,9 @@ public class GameManager {
     }
 
     public void runGames(String input) throws IOException {
-        String[] linesFromFile = Parser.getLinesFromFile(input);
-        List<char[]> parsedInputs = ParserDay2.parseInputs(linesFromFile);
+        Path path = Path.of(input);
+        String[] linesFromFile = Reader.getLinesFromFile(path);
+        List<char[]> parsedInputs = ReaderDay2.parseInputs(linesFromFile);
 
         strategy.resetScore();
 

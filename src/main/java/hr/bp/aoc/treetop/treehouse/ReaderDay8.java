@@ -2,7 +2,7 @@ package hr.bp.aoc.treetop.treehouse;
 
 import hr.bp.aoc.treetop.treehouse.trees.Tree;
 import hr.bp.aoc.treetop.treehouse.trees.TreeBuilder;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  *
  * @author Marko Krišković
  */
-public class ParserDay8 implements Parser {
+public class ReaderDay8 implements Reader {
 
     private static <T>  List<LinkedList<T>> transposeArray(T[][] doubleArray) {
         List<LinkedList<T>> reversed = new ArrayList<>();

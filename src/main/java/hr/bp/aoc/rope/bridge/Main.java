@@ -1,8 +1,9 @@
 package hr.bp.aoc.rope.bridge;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * <p>Main class.</p>
@@ -11,7 +12,8 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        String[] textFromFile = Parser.getLinesFromFile("src/main/resources/day9Data.txt");
+        Path path = Path.of("src/main/resources/day9Data.txt");
+        String[] textFromFile = Reader.getLinesFromFile(path);
 
         RopeManager manager1 = new RopeManager(2);
 

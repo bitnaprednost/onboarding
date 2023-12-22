@@ -1,8 +1,9 @@
 package hr.bp.aoc.rucksack.reorganization;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
 
 /**
@@ -12,7 +13,8 @@ import java.util.*;
  */
 public class Main {
     public static void main(String args[]) throws IOException {
-        String input = Parser.getTextFromFile("src/main/resources/day3Data.txt");
+        Path path = Path.of("src/main/resources/day3Data.txt");
+        String input = Reader.getTextFromFile(path);
 
         // p => 112 - 16 = 96
         // L => 76 - 38 = 38

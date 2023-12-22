@@ -3,16 +3,16 @@ package hr.bp.aoc.noSpaceLeftOnDevice;
 import hr.bp.aoc.noSpaceLeftOnDevice.file.Directory;
 import hr.bp.aoc.noSpaceLeftOnDevice.file.FileImpl;
 import hr.bp.aoc.noSpaceLeftOnDevice.file.FileSystem;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 /**
  * <p>ParserDay7 class.</p>
  *
  * @author Marko Krišković
  */
-public class ParserDay7 implements Parser {
+public class ReaderDay7 implements Reader {
 
-    private ParserDay7(){}
+    private ReaderDay7(){}
 
     private static void moveCursor(FileSystem fileSystem, String command) {
         String directoryName = command.substring(5);
@@ -21,7 +21,6 @@ public class ParserDay7 implements Parser {
             case String s when s.matches("/") -> fileSystem.resetCursor();
             default -> fileSystem.moveCursorForward(directoryName);
         }
-
     }
 
     private static void addFileToFileSystem(FileSystem fileSystem, String command) {

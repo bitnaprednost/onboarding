@@ -1,6 +1,6 @@
 package hr.bp.aoc.supply.stacks;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.util.*;
 
@@ -9,9 +9,9 @@ import java.util.*;
  *
  * @author Marko Krišković
  */
-public class ParserDay5 implements Parser {
+public class ReaderDay5 implements Reader {
 
-    private ParserDay5(){}
+    private ReaderDay5(){}
 
     public static String[] splitInput(String input) {
         return input.split("\n\n");
@@ -50,7 +50,7 @@ public class ParserDay5 implements Parser {
         }
     }
 
-    public static Map<Integer, Stack<String>> parseBoxes(String boxesString) {
+    public static Map<Integer, Stack<String>> parseToBoxes(String boxesString) {
         Map<Integer, Stack<String>> map = new HashMap<>();
         String[] lines = boxesString.split("\n");
 

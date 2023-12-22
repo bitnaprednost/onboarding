@@ -1,7 +1,5 @@
 package hr.bp.aoc.supply.stacks;
 
-import hr.bp.aoc.supply.stacks.Crates;
-import hr.bp.aoc.supply.stacks.ParserDay5;
 import hr.bp.aoc.supply.stacks.crane.Crane;
 import hr.bp.aoc.supply.stacks.crane.CrateMover9000;
 import hr.bp.aoc.supply.stacks.crane.CrateMover9001;
@@ -23,7 +21,7 @@ class CraneTest {
                 "[N] [C]    \n" +
                 "[Z] [M] [P]\n" +
                 " 1   2   3 ";
-        Map<Integer, Stack<String>> stacks = ParserDay5.parseBoxes(boxesString);
+        Map<Integer, Stack<String>> stacks = ReaderDay5.parseToBoxes(boxesString);
         crates = new Crates(stacks);
         crane9000 = new CrateMover9000(crates);
         crane9001 = new CrateMover9001(crates);

@@ -1,9 +1,10 @@
 package hr.bp.aoc.calorie.counting;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
 
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -14,7 +15,8 @@ import java.util.List;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		String text = Parser.getTextFromFile("src/main/resources/day1Data.txt");
+		Path path = Path.of("src/main/resources/day1Data.txt");
+		String text = Reader.getTextFromFile(path);
 		List<Elf> elves = ElfManager.createElves(text);
 
 		Elf elfMostCalories = ElfManager.getElfMostCalories(elves);

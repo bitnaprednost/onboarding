@@ -1,9 +1,10 @@
 package hr.bp.aoc.camp.cleanup;
 
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
 
+import java.nio.file.Path;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.IntStream;
@@ -48,7 +49,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws IOException {
-		String input = Parser.getTextFromFile("src/main/resources/day4Data.txt");
+		Path path = Path.of("src/main/resources/day4Data.txt");
+		String input = Reader.getTextFromFile(path);
+
 		//format: [[[2,3,4],  [6,7,8]], [...], ...]
 		List<List<List<Integer>>> lists = textToListHell(input);
 

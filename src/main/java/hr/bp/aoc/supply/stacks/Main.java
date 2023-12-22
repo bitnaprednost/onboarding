@@ -2,9 +2,10 @@ package hr.bp.aoc.supply.stacks;
 
 import hr.bp.aoc.supply.stacks.crane.Crane;
 import hr.bp.aoc.supply.stacks.crane.CrateMover9001;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * <p>Main class.</p>
@@ -13,11 +14,12 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
-        String textFromFile = Parser.getTextFromFile("src/main/resources/day5Data.txt");
-        String[] inputs = ParserDay5.splitInput(textFromFile);
-        String[] commands = ParserDay5.parseCommands(inputs[1]);
+        Path path = Path.of("src/main/resources/day5Data.txt");
+        String textFromFile = Reader.getTextFromFile(path);
+        String[] inputs = ReaderDay5.splitInput(textFromFile);
+        String[] commands = ReaderDay5.parseCommands(inputs[1]);
 
-        Crates crates = new Crates(ParserDay5.parseBoxes(inputs[0]));
+        Crates crates = new Crates(ReaderDay5.parseToBoxes(inputs[0]));
         Crane crane9000 = new CrateMover9001(crates);
 
         for(String command : commands){

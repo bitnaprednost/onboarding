@@ -3,9 +3,10 @@ package hr.bp.aoc.monkeyInTheMiddle;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyManager;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyParser;
-import hr.bp.aoc.util.Parser;
+import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * <p>Main class.</p>
@@ -15,7 +16,8 @@ import java.io.IOException;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		String textFromFile = Parser.getTextFromFile("src/main/resources/day11Data.txt");
+		Path path = Path.of("src/main/resources/day11Data.txt");
+		String textFromFile = Reader.getTextFromFile(path);
 
 		Monkey[] monkeyList = MonkeyParser.parseToMonkies(textFromFile);
 		MonkeyManager monkeyManager = MonkeyManager.of(monkeyList);
