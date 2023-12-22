@@ -20,7 +20,7 @@ public class Main {
 		Ant startingAnt = new Ant(startingState);
 
 		Algorithm<Ant> algorithm = new AntColonyAlgorithm(startingAnt);
-		Ant endState = algorithm.runMultiple(startingAnt, 50);
+		Ant endState = algorithm.runMultiple(startingAnt, 200);
 
 		System.out.println(algorithm.getCount());
 		System.out.println(endState);

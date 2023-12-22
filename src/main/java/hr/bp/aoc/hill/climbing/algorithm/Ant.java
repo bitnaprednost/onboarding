@@ -23,6 +23,11 @@ public class Ant {
         this.fittness = fittness;
     }
 
+    public Ant(Ant ant){
+        this.state = ant.state;
+        fittness = new double[state.getStringMap().length][state.getStringMap()[0].length][4];
+    }
+
     public static Optional<Ant> choose(Map<Ant, Double> map) {
         if(map.isEmpty()) return Optional.empty();
 
@@ -44,41 +49,61 @@ public class Ant {
         if(state.getCurrentPosition().x==state.getMap()[0].length-1) return Optional.empty();
 
         Optional<Ant> ant = move(state.getCurrentPosition().y, state.getCurrentPosition().x + 1, '>');
-        ant.ifPresent(value -> fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][0] = value.state.getHeuristic());
-        return ant;
+
+        if (ant.isPresent() && fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][0] == 0) {
+            fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][0] = ant.get().state.getHeuristic();
+            return ant;
+        }
+
+        return Optional.empty();
     }
 
     private Optional<Ant> moveDown() {
         if(state.getCurrentPosition().y==state.getMap().length-1) return Optional.empty();
 
         Optional<Ant> ant = move(state.getCurrentPosition().y + 1, state.getCurrentPosition().x, 'v');
-        ant.ifPresent(value -> fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][1] = value.state.getHeuristic());
-        return ant;
+
+        if (ant.isPresent() && fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][1] == 0) {
+            fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][1] = ant.get().state.getHeuristic();
+            return ant;
+        }
+
+        return Optional.empty();
     }
 
     private Optional<Ant> moveUp() {
         if(state.getCurrentPosition().y==0) return Optional.empty();
 
         Optional<Ant> ant = move(state.getCurrentPosition().y - 1, state.getCurrentPosition().x, '^');
-        ant.ifPresent(value -> fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][2] = value.state.getHeuristic());
-        return ant;
+
+        if (ant.isPresent() && fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][2] == 0) {
+            fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][2] = ant.get().state.getHeuristic();
+            return ant;
+        }
+
+        return Optional.empty();
     }
 
     private Optional<Ant> moveLeft() {
         if(state.getCurrentPosition().x==0) return Optional.empty();
 
         Optional<Ant> ant = move(state.getCurrentPosition().y, state.getCurrentPosition().x - 1, '<');
-        ant.ifPresent(value -> fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][3] = value.state.getHeuristic());
-        return ant;
+
+        if (ant.isPresent() && fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][3] == 0) {
+            fittness[state.getCurrentPosition().y][state.getCurrentPosition().x][3] = ant.get().state.getHeuristic();
+            return ant;
+        }
+
+        return Optional.empty();
     }
 
     private Optional<Ant> move(int y, int x, char arrow) {
         if (state.getValue(x,y) > state.getValue() + 1 || state.getValue(x,y) < state.getValue() - 2) return Optional.empty();
         else {
             char[][] newStringMap = state.cloneArray(state.getStringMap());
-            newStringMap[state.getCurrentPosition().y][state.getCurrentPosition().x] = arrow;
+            newStringMap[state.getCurrentPosition().y][state.getCurrentPosition().x] = arrow; //getValue();
 
-            double heuristic = calculateHeuristic(y, x, 1, 0);
+            double heuristic = calculateHeuristic(y, x, -3, -2);
             State newState = new State(state, new Point(x, y), heuristic, newStringMap);
             Ant ant = new Ant(newState, fittness);
 
@@ -104,7 +129,7 @@ public class Ant {
 
     private double calculateHeuristic(int y, int x, double alpha, double beta) {
         double distanceFromEnd = state.getStartingPosition().distance(x, y) / (state.getEndingPosition().distance(x, y) + 1) + 1;
-        double letterDifference = (state.getValue(x, y) - state.getValue() + 2) / 3.0;
+        double letterDifference = (state.getValue(x, y) - state.getValue() + 2) / 3.0 + 1;
 
         return Math.pow(distanceFromEnd, alpha) * Math.pow(letterDifference, beta);
     }

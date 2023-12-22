@@ -59,7 +59,7 @@ public class MonkeyBuilder {
         return monkeyTrueId;
     }
 
-    public MonkeyBuilder setMonkeyTrueId(Integer monkeyTrueId) {
+    public MonkeyBuilder trueId(Integer monkeyTrueId) {
         this.monkeyTrueId = monkeyTrueId;
         return this;
     }
@@ -68,6 +68,10 @@ public class MonkeyBuilder {
         return monkeyFalseId;
     }
 
+    public MonkeyBuilder setMonkeyTrueId(Integer monkeyTrueId) {
+        this.monkeyTrueId = monkeyTrueId;
+        return this;
+    }
     public MonkeyBuilder setMonkeyFalseId(Integer monkeyFalseId) {
         this.monkeyFalseId = monkeyFalseId;
         return this;
