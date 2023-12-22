@@ -15,11 +15,11 @@ public class Elf {
 
 	private final List<Food> foodList;
 
-	private Elf() {
+	public Elf() {
 		foodList = new ArrayList<>();
 	}
 
-	private Elf(Food... foods) {
+	public Elf(Food... foods) {
 		foodList = List.of(foods);
 	}
 

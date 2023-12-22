@@ -72,12 +72,12 @@ public class MonkeyParser{
     private static MonkeyBuilder buildMonkey(Integer id, List<BigInteger> items, CombinedFunctionalInterface function, Integer divisibleBy, Integer throwTrueId, Integer throwFalseId) {
         MonkeyBuilder builder = new MonkeyBuilder();
 
-        return builder.setId(id)
-                .setItems(items)
-                .setFunction(function)
-                .setMonkeyTrueId(throwTrueId)
-                .setMonkeyFalseId(throwFalseId)
-                .setDivisibleBy(divisibleBy);
+        return builder.id(id)
+                .items(items)
+                .function(function)
+                .trueId(throwTrueId)
+                .falseId(throwFalseId)
+                .divisibleBy(divisibleBy);
     }
 
 
@@ -93,7 +93,7 @@ public class MonkeyParser{
         }
 
         for(MonkeyBuilder monkeyBuilder : monkeyBuilders){
-            monkeyBuilder.setThrowMonkeys(monkeys);
+            monkeyBuilder.monkeysToThrow(monkeys);
         }
 
         return monkeys;

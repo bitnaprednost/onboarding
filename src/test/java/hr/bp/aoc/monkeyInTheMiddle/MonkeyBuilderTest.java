@@ -1,6 +1,5 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
-import hr.bp.aoc.monkeyInTheMiddle.CombinedFunctionalInterface;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,53 +11,76 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MonkeyBuilderTest {
+    Monkey monkey;
     MonkeyBuilder builder;
     @BeforeEach
     void setUp() {
-        builder = new MonkeyBuilder();
+        builder = new MonkeyBuilder().id(0)
+            .divisibleBy(23)
+            .function(new CombinedFunctionalInterface(1) {
+                @Override
+                public BigInteger get() {
+                    return null;
+                }
+
+                @Override
+                public BigInteger apply(BigInteger old) {
+                    return null;
+                }
+
+                @Override
+                BigInteger apply2(BigInteger old) {
+                    return old.multiply(BigInteger.valueOf(19));
+                }
+            })
+            .items(List.of(BigInteger.valueOf(79), BigInteger.valueOf(98)))
+            .trueId(2)
+            .falseId(3);
+
+        monkey = builder.build();
     }
 
     @Test
     void canSetMonkeyId(){
         int id = 0;
-        builder.setId(id);
 
-        assertEquals(id, builder.getId());
+        assertEquals(id, monkey.getId());
     }
 
     @Test
     void cantSetNegativeMonkeyId(){
         int id = -1;
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->builder.setId(id));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->builder.id(id));
         assertEquals("Id must be positive", exception.getMessage());
     }
 
     @Test
     void canSetDivisibleBy(){
         int divisibleBy = 1;
-        builder.setDivisibleBy(divisibleBy);
+        builder.divisibleBy(divisibleBy);
+        Monkey monkey = builder.build();
 
-        assertEquals(divisibleBy, builder.getDivisibleBy());
+        assertEquals(divisibleBy, monkey.getDivisibleBy());
     }
 
     @Test
     void cantSetNonPositiveDivisibleBy(){
         int divisibleBy = -1;
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->builder.setDivisibleBy(divisibleBy));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, ()->builder.divisibleBy(divisibleBy));
         assertEquals("Divisible number must be positive", exception.getMessage());
 
         int divisibleBy2 = 0;
 
-        exception = assertThrows(IllegalArgumentException.class, ()->builder.setDivisibleBy(divisibleBy2));
+        exception = assertThrows(IllegalArgumentException.class, ()->builder.divisibleBy(divisibleBy2));
         assertEquals("Divisible number must be positive", exception.getMessage());
     }
 
     @Test
     void canSetItems(){
         List<BigInteger> items = List.of(BigInteger.valueOf(79), BigInteger.valueOf(98));
-        builder.setItems(items);
+        builder.items(items);
 
         assertEquals(items, builder.getItems());
     }
@@ -66,29 +88,7 @@ class MonkeyBuilderTest {
     @Test
     void canBuildMonkey(){
         
-        builder.setId(0)
-                .setDivisibleBy(23)
-                .setFunction(new CombinedFunctionalInterface(1) {
-                    @Override
-                    public BigInteger get() {
-                        return null;
-                    }
 
-                    @Override
-                    public BigInteger apply(BigInteger old) {
-                        return null;
-                    }
-
-                    @Override
-                    BigInteger apply2(BigInteger old) {
-                        return old.multiply(BigInteger.valueOf(19));
-                    }
-                })
-                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(98)))
-                .setMonkeyTrueId(2)
-                .setMonkeyFalseId(3);
-
-        Monkey monkey = builder.build();
 
         assertEquals("Monkey 0: [79, 98]", monkey.toString());
     }

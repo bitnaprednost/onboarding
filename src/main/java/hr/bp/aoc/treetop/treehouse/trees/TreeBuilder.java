@@ -19,55 +19,55 @@ public class TreeBuilder {
         return new Tree(height, directionVisibleList, directionCountList);
     }
 
-    public TreeBuilder setHeight(int height) {
+    public TreeBuilder height(int height) {
         this.height = height;
 
         return this;
     }
 
-    public TreeBuilder setTopVisible(Boolean top) {
+    public TreeBuilder topVisible(Boolean top) {
         directionsVisible[0] = top;
 
         return this;
     }
 
-    public TreeBuilder setLeftVisible(Boolean left) {
+    public TreeBuilder leftVisible(Boolean left) {
         directionsVisible[1] = left;
 
         return this;
     }
 
-    public TreeBuilder setBottomVisible(Boolean bottom) {
+    public TreeBuilder bottomVisible(Boolean bottom) {
         directionsVisible[2] = bottom;
 
         return this;
     }
 
-    public TreeBuilder setRightVisible(Boolean right) {
+    public TreeBuilder rightVisible(Boolean right) {
         directionsVisible[3] = right;
 
         return this;
     }
 
-    public TreeBuilder setTopCount(Integer top) {
+    public TreeBuilder topCount(Integer top) {
         directionCount[0] = top;
 
         return this;
     }
 
-    public TreeBuilder setLeftCount(Integer left) {
+    public TreeBuilder leftCount(Integer left) {
         directionCount[1] = left;
 
         return this;
     }
 
-    public TreeBuilder setBottomCount(Integer bottom) {
+    public TreeBuilder bottomCount(Integer bottom) {
         directionCount[2] = bottom;
 
         return this;
     }
 
-    public TreeBuilder setRightCount(Integer right) {
+    public TreeBuilder rightCount(Integer right) {
         directionCount[3] = right;
 
         return this;
@@ -83,7 +83,6 @@ public class TreeBuilder {
         }
         else{
             if(height>other.height) {
-                //directionCount[pos] = other.directionCount[pos] + 1;
                 if(other.directionsVisible[pos] || height>other.directions[pos]) return true;
                 else {
                     directions[pos] = other.directions[pos];

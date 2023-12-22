@@ -1,6 +1,5 @@
 package hr.bp.aoc.monkeyInTheMiddle;
 
-import hr.bp.aoc.monkeyInTheMiddle.CombinedFunctionalInterface;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.Monkey;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyBuilder;
 import hr.bp.aoc.monkeyInTheMiddle.monkey.MonkeyManager;
@@ -20,12 +19,12 @@ class MonkeyManagerTest {
     void setUp() {
         MonkeyBuilder builder0 = new MonkeyBuilder();
 
-        Monkey monkey0 = builder0.setId(0)
-                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(98)))
-                .setMonkeyTrueId(2)
-                .setMonkeyFalseId(3)
-                .setDivisibleBy(23)
-                .setFunction(new CombinedFunctionalInterface(1) {
+        Monkey monkey0 = builder0.id(0)
+                .items(List.of(BigInteger.valueOf(79), BigInteger.valueOf(98)))
+                .trueId(2)
+                .falseId(3)
+                .divisibleBy(23)
+                .function(new CombinedFunctionalInterface(1) {
                     @Override
                     public BigInteger get() {
                         return null;
@@ -45,12 +44,12 @@ class MonkeyManagerTest {
 
         MonkeyBuilder builder1 = new MonkeyBuilder();
 
-        Monkey monkey1 = builder1.setId(1)
-                .setItems(List.of(BigInteger.valueOf(54), BigInteger.valueOf(65), BigInteger.valueOf(75), BigInteger.valueOf(74)))
-                .setMonkeyTrueId(2)
-                .setMonkeyFalseId(0)
-                .setDivisibleBy(19)
-                .setFunction(new CombinedFunctionalInterface(1) {
+        Monkey monkey1 = builder1.id(1)
+                .items(List.of(BigInteger.valueOf(54), BigInteger.valueOf(65), BigInteger.valueOf(75), BigInteger.valueOf(74)))
+                .trueId(2)
+                .falseId(0)
+                .divisibleBy(19)
+                .function(new CombinedFunctionalInterface(1) {
                     @Override
                     public BigInteger get() {
                         return null;
@@ -70,12 +69,12 @@ class MonkeyManagerTest {
 
         MonkeyBuilder builder2 = new MonkeyBuilder();
 
-        Monkey monkey2 = builder2.setId(2)
-                .setItems(List.of(BigInteger.valueOf(79), BigInteger.valueOf(60), BigInteger.valueOf(97)))
-                .setMonkeyTrueId(1)
-                .setMonkeyFalseId(3)
-                .setDivisibleBy(13)
-                .setFunction(new CombinedFunctionalInterface(2) {
+        Monkey monkey2 = builder2.id(2)
+                .items(List.of(BigInteger.valueOf(79), BigInteger.valueOf(60), BigInteger.valueOf(97)))
+                .trueId(1)
+                .falseId(3)
+                .divisibleBy(13)
+                .function(new CombinedFunctionalInterface(2) {
                     @Override
                     public BigInteger get() {
                         return null;
@@ -95,12 +94,12 @@ class MonkeyManagerTest {
 
         MonkeyBuilder builder3 = new MonkeyBuilder();
 
-        Monkey monkey3 = builder3.setId(3)
-                .setItems(List.of(BigInteger.valueOf(74)))
-                .setMonkeyTrueId(0)
-                .setMonkeyFalseId(1)
-                .setDivisibleBy(17)
-                .setFunction( new CombinedFunctionalInterface(1) {
+        Monkey monkey3 = builder3.id(3)
+                .items(List.of(BigInteger.valueOf(74)))
+                .trueId(0)
+                .falseId(1)
+                .divisibleBy(17)
+                .function(new CombinedFunctionalInterface(1) {
                     @Override
                     public BigInteger get() {
                         return null;
@@ -122,7 +121,7 @@ class MonkeyManagerTest {
         Monkey[] monkeys = {monkey0, monkey1, monkey2, monkey3};
 
         for(MonkeyBuilder monkeyBuilder : builders){
-            monkeyBuilder.setThrowMonkeys(monkeys);
+            monkeyBuilder.monkeysToThrow(monkeys);
         }
 
         monkeyManager = MonkeyManager.of(monkeys);

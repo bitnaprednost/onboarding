@@ -30,16 +30,15 @@ public class ElfManager {
 	public static Elf createElf(String calorie) {
 		calorie = validate(calorie);
 
-		ElfBuilder elfBuilder = new ElfBuilder();
-		Arrays.stream(
-			calorie.split("\n")
+		List<Food> foodList = Arrays.stream(
+				calorie.split("\n")
 		).mapToInt(
-			Integer::parseInt
-		).forEach(
-			elfBuilder::append
-		);
+				Integer::parseInt
+		).mapToObj(
+				Food::of
+		).toList();
 
-		return elfBuilder.build();
+		return new Elf(foodList);
 	}
 
 	public static List<Elf> createElves(String calories) {

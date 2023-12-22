@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         String textFromFile = Parser.getTextFromFile("src/main/resources/day8Data.txt");
         List<Tree> forest = ParserDay8.generateForest(textFromFile);
+
         int count = TreeManager.countVisibleTrees(forest);
         System.out.println(count);
 

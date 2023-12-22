@@ -36,23 +36,23 @@ public class ParserDay8 implements Parser {
             for(int j = 0; j < treeIntegerMap[i].length; j++){
                 if(treeIntegerMap[i][j]<0 || treeIntegerMap[i][j]>9) throw new IllegalArgumentException();
 
-                TreeBuilder treeTempBuilder = Tree.builder().setHeight(treeIntegerMap[i][j]);
+                TreeBuilder treeTempBuilder = Tree.builder().height(treeIntegerMap[i][j]);
 
                 if(i!=0){
-                    treeTempBuilder.setTopVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i-1][j], 0));
+                    treeTempBuilder.topVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i-1][j], 0));
 
                     List<LinkedList<TreeBuilder>> transposedTreeBuilders = transposeArray(treeBuilders);
-                    treeTempBuilder.setTopCount(treeTempBuilder.calculateCount(transposedTreeBuilders.get(j).listIterator(), i));
+                    treeTempBuilder.topCount(treeTempBuilder.calculateCount(transposedTreeBuilders.get(j).listIterator(), i));
                 }
                 else{
-                    treeTempBuilder.setTopCount(0);
+                    treeTempBuilder.topCount(0);
                 }
                 if(j!=0){
-                    treeTempBuilder.setLeftVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i][j-1], 1));
-                    treeTempBuilder.setLeftCount(treeTempBuilder.calculateCount(Arrays.stream(treeBuilders[i]).iterator(), j));
+                    treeTempBuilder.leftVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i][j-1], 1));
+                    treeTempBuilder.leftCount(treeTempBuilder.calculateCount(Arrays.stream(treeBuilders[i]).iterator(), j));
                 }
                 else{
-                    treeTempBuilder.setLeftCount(0);
+                    treeTempBuilder.leftCount(0);
                 }
 
                 treeBuilders[i][j] = treeTempBuilder;
@@ -66,20 +66,20 @@ public class ParserDay8 implements Parser {
                 TreeBuilder treeTempBuilder = treeBuilders[i][j];
 
                 if(i != treeIntegerMap.length-1){
-                    treeTempBuilder.setBottomVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i+1][j], 2));
+                    treeTempBuilder.bottomVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i+1][j], 2));
 
                     List<LinkedList<TreeBuilder>> transposedTreeBuilders = transposeArray(treeBuilders);
-                    treeTempBuilder.setBottomCount(treeTempBuilder.calculateCount(transposedTreeBuilders.get(treeIntegerMap.length-1-j).descendingIterator(), treeIntegerMap.length-1-i));
+                    treeTempBuilder.bottomCount(treeTempBuilder.calculateCount(transposedTreeBuilders.get(treeIntegerMap.length-1-j).descendingIterator(), treeIntegerMap.length-1-i));
                 }
                 else{
-                    treeTempBuilder.setBottomCount(0);
+                    treeTempBuilder.bottomCount(0);
                 }
                 if(j != treeIntegerMap[i].length-1){
-                    treeTempBuilder.setRightVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i][j+1], 3));
-                    treeTempBuilder.setRightCount(treeTempBuilder.calculateCount(Arrays.stream(treeBuilders[i]).collect(Collectors.toCollection(LinkedList::new)).descendingIterator(), treeIntegerMap[i].length-1-j));
+                    treeTempBuilder.rightVisible(treeTempBuilder.isDirectionVisible(treeBuilders[i][j+1], 3));
+                    treeTempBuilder.rightCount(treeTempBuilder.calculateCount(Arrays.stream(treeBuilders[i]).collect(Collectors.toCollection(LinkedList::new)).descendingIterator(), treeIntegerMap[i].length-1-j));
                 }
                 else{
-                    treeTempBuilder.setRightCount(0);
+                    treeTempBuilder.rightCount(0);
                 }
 
                 treeBuilders[i][j] = treeTempBuilder;
