@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import hr.bp.aoc.util.Reader;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +26,7 @@ class ReaderTest {
 
     @Test
     public void parserCanGetInitialInput() throws IOException {
-        String path = "src/test/resources/testData.txt";
+        Path path = Path.of("src/test/resources/testData.txt");
         String initialInput = Reader.getTextFromFile(path);
 
         assertEquals(initialInput, "Hello World\n" + "this is a test");
@@ -33,7 +34,7 @@ class ReaderTest {
 
     @Test
     public void parserCanGetInitialInputSplit() throws IOException {
-        String path = "src/test/resources/testData.txt";
+        Path path = Path.of("src/test/resources/testData.txt");
         String[] initialInput = Reader.getLinesFromFile(path);
 
         assertEquals(initialInput[0], "Hello World");
