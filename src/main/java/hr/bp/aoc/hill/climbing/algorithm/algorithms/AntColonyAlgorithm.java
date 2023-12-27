@@ -28,7 +28,7 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		this.pheromones = new Double[dimensionY * dimensionX][4];
 		for (int i = 0; i < dimensionY * dimensionX; i++) {
 			for (int j = 0; j < 4; j++) {
-				pheromones[i][j] = 1.0;
+				pheromones[i][j] = 1.00;
 			}
 		}
 	}
@@ -40,7 +40,7 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		for (int i = 0; i < times; i++) {
 			currentAnt = run(initialAnt);
 
-			if(i%10==0){
+			if(i%100==0){
 				System.out.println(currentAnt);
 			}
 
@@ -55,11 +55,24 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		return bestAnt;
 	}
 
+	public void initialUpdatePharomones(State initialState, double pheromone) {
+		for(int i=0;i<dimensionY;i++){
+			for (int j=0;j<dimensionX;j++){
+				switch (initialState.getStringMap()[i][j]){
+					case '>' -> pheromones[dimensionX*i+j][0] += pheromone;
+					case 'v' -> pheromones[dimensionX*i+j][1] += pheromone;
+					case '^' -> pheromones[dimensionX*i+j][2] += pheromone;
+					case '<' -> pheromones[dimensionX*i+j][3] += pheromone;
+				}
+			}
+		}
+	}
+
 	@Override
 	public Ant run(Ant initialAnt) {
-		Map<Ant, Integer> population = generateAntPopulation(initialAnt, 10000, 1500);
-		population = findBestAnts(population, 2000);
-		updatePheromones(population.keySet(), 0.3);
+		Map<Ant, Integer> population = generateAntPopulation(initialAnt, 1000, 1500);
+		population = findBestAnts(population, 100);
+		updatePheromones(population, 0.05);
 
 		Map.Entry<Ant, Integer> entry = population.entrySet().iterator().next();
 		count = entry.getValue();
@@ -73,42 +86,41 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 				boolean firstEndReached = o1.getKey().endReached();
 				boolean secondEndReached = o2.getKey().endReached();
 
-				if(firstEndReached && secondEndReached) return o1.getKey().getDistanceFromEnd().compareTo(o2.getKey().getDistanceFromEnd());
-				else if(firstEndReached) return -1;
-				else if(secondEndReached) return 1;
+				if(firstEndReached && secondEndReached) return o1.getValue().compareTo(o2.getValue());				//returns shortest count
+				else if(firstEndReached) return -1;																	//returns first
+				else if(secondEndReached) return 1;																//returns second
 				else {
-					if (!o1.getValue().equals(o2.getValue())) return o2.getValue().compareTo(o1.getValue());
-					else return o1.getKey().getDistanceFromEnd().compareTo(o2.getKey().getDistanceFromEnd());
+					return o1.getKey().getDistanceFromEnd().compareTo(o2.getKey().getDistanceFromEnd());			//returns smallest heuristic
 				}
 			}
 		}).limit(top).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x,y)->x, LinkedHashMap::new));
 	}
 
-	private void updatePheromones(Set<Ant> population, double evaporationRate) {
-		for(Ant ant : population){
+	private void updatePheromones(Map<Ant, Integer> population, double evaporationRate) {
+		for(Map.Entry<Ant, Integer> entry : population.entrySet()){
 			for(int i=0;i<dimensionY;i++){
 				for (int j=0;j<dimensionX;j++){
-					for(int k=0;k<4;k++){
-						if(ant.getFittness(i, j, k)!=0) pheromones[dimensionX*i+j][k] += 1 / ant.getFittness(i, j, k); // pheromones[dimensionX*i+j][k];
-					}
-//					switch (ant.getStringMap()[i][j]){
-//						case '>' -> pheromones[dimensionX*i+j][0] += ant.getFittness(i, j, 0) / pheromones[dimensionX*i+j][0];
-//						case 'v' -> pheromones[dimensionX*i+j][1] += ant.getFittness(i, j, 1) / pheromones[dimensionX*i+j][1];
-//						case '^' -> pheromones[dimensionX*i+j][2] += ant.getFittness(i, j, 2) / pheromones[dimensionX*i+j][2];
-//						case '<' -> pheromones[dimensionX*i+j][3] += ant.getFittness(i, j, 3) / pheromones[dimensionX*i+j][3];
+//					for(int k=0;k<4;k++){
+//						if(ant.getFittness(i, j, k) != 0) pheromones[dimensionX*i+j][k] += 1 / ant.getFittness(i, j, k); // pheromones[dimensionX*i+j][k];
 //					}
+					switch (entry.getKey().getStringMap()[i][j]){
+						case '>' -> pheromones[dimensionX*i+j][0] += entry.getValue() / entry.getKey().getFittness(i, j, 0); // pheromones[dimensionX*i+j][0];
+						case 'v' -> pheromones[dimensionX*i+j][1] += entry.getValue() / entry.getKey().getFittness(i, j, 1); // pheromones[dimensionX*i+j][1];
+						case '^' -> pheromones[dimensionX*i+j][2] += entry.getValue() / entry.getKey().getFittness(i, j, 2); // pheromones[dimensionX*i+j][2];
+						case '<' -> pheromones[dimensionX*i+j][3] += entry.getValue() / entry.getKey().getFittness(i, j, 3); // pheromones[dimensionX*i+j][3];
+					}
 				}
 			}
 		}
 
-		evaporatePheromones(evaporationRate);
+		//if(endReached) evaporatePheromones(evaporationRate);
 	}
 
 	private void evaporatePheromones(double evaporationRate) {
 		for(int i=0;i<dimensionY;i++) {
 			for (int j=0;j<dimensionX;j++) {
 				for (int k=0;k<4;k++) {
-					pheromones[dimensionX*i+j][k] *= (1-evaporationRate);
+					pheromones[dimensionX*i+j][k] *= (1 - evaporationRate);
 				}
 			}
 		}

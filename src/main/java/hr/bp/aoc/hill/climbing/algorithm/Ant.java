@@ -103,7 +103,7 @@ public class Ant {
             char[][] newStringMap = state.cloneArray(state.getStringMap());
             newStringMap[state.getCurrentPosition().y][state.getCurrentPosition().x] = arrow; //getValue();
 
-            double heuristic = calculateHeuristic(y, x, -3, -2);
+            double heuristic = calculateHeuristic(y, x, 1, 2);
             State newState = new State(state, new Point(x, y), heuristic, newStringMap);
             Ant ant = new Ant(newState, fittness);
 
@@ -128,8 +128,8 @@ public class Ant {
     }
 
     private double calculateHeuristic(int y, int x, double alpha, double beta) {
-        double distanceFromEnd = state.getStartingPosition().distance(x, y) / (state.getEndingPosition().distance(x, y) + 1) + 1;
-        double letterDifference = (state.getValue(x, y) - state.getValue() + 2) / 3.0 + 1;
+        double distanceFromEnd = state.getEndingPosition().distance(x, y) + 1;
+        double letterDifference = 4 / (double)(state.getValue(x, y) - state.getValue() + 3);
 
         return Math.pow(distanceFromEnd, alpha) * Math.pow(letterDifference, beta);
     }
@@ -138,8 +138,25 @@ public class Ant {
         return state.getEndingPosition().distance(getCurrentPosition().x, getCurrentPosition().y);
     }
 
+    public Double getHeuristic(){
+        return Double.valueOf(state.getHeuristic());
+    }
+
     public double getFittness(int y, int x, int k){
         return fittness[y][x][k];
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ant ant = (Ant) o;
+        return Objects.equals(state, ant.state);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(state);
     }
 
     @Override

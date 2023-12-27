@@ -80,6 +80,6 @@ public class Monkey {
 
     @Override
     public String toString() {
-        return "Monkey " + id + ": "  + items;// +   ", numOfInspected: "+ timesInspectedItems;
+        return "Monkey " + id + ": "  + items +   ", numOfInspected: "+ timesInspectedItems;
     }
 }

@@ -78,7 +78,7 @@ public class State {
     }
 
     private Optional<State> move(int y, int x, char arrow) {
-        if (map[y][x] > map[currentPosition.y][currentPosition.x] + 1 || map[y][x] < map[currentPosition.y][currentPosition.x] - 2) return Optional.empty();
+        if (map[y][x] > map[currentPosition.y][currentPosition.x] + 1 || map[y][x] < map[currentPosition.y][currentPosition.x] - 1) return Optional.empty();
         else {
             char[][] newStringMap = cloneArray(stringMap);
             newStringMap[currentPosition.y][currentPosition.x] = arrow;

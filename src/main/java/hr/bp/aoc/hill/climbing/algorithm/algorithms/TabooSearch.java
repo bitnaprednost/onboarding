@@ -33,6 +33,7 @@ public class TabooSearch implements Algorithm<State>{
     @Override
     public State runMultiple(State initialState, int times) {
         State currentState = initialState;
+        bestState = initialState;
 
         for(int i=0;i<times;i++){
             count=0;
@@ -44,9 +45,15 @@ public class TabooSearch implements Algorithm<State>{
                     bestState = currentState;
                 }
             }
+            else{
+                if(currentState.getHeuristic() > bestState.getHeuristic()){
+                    bestCount = count;
+                    bestState = currentState;
+                }
+            }
         }
 
-        return currentState;
+        return bestState;
     }
 
     @Override

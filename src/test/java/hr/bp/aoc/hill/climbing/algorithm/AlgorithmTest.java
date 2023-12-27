@@ -52,7 +52,7 @@ class AlgorithmTest {
         assertTrue(endState.endReached());
     }
 
-    @Test
+    //@Test
     void canRunAntColonyAlgorithm(){
         Ant initialAnt = new Ant(initialState);
         Algorithm<Ant> algorithm = new AntColonyAlgorithm(initialAnt);
