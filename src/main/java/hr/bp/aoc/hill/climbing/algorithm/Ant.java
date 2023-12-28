@@ -103,7 +103,7 @@ public class Ant {
             char[][] newStringMap = state.cloneArray(state.getStringMap());
             newStringMap[state.getCurrentPosition().y][state.getCurrentPosition().x] = arrow; //getValue();
 
-            double heuristic = calculateHeuristic(y, x, 1, 1);
+            double heuristic = calculateHeuristic(y, x, 0.5, 1);
             State newState = new State(state, new Point(x, y), heuristic, newStringMap);
             Ant ant = new Ant(newState, fittness);
 
@@ -129,9 +129,10 @@ public class Ant {
 
     private double calculateHeuristic(int y, int x, double alpha, double beta) {
         double distanceFromEnd = state.getEndingPosition().distance(x, y) + 1;
-        double letterDifference = 4 / (double)(state.getValue(x, y) - state.getValue() + 3);
+        double distanceFromNextLetter = state.approximateNextLetterPosition(getValue()).distance(x, y);
+        double letterDifference = 4 / (double)(state.getValue(x, y) - getValue() + 3);
 
-        return Math.pow(distanceFromEnd, alpha) * Math.pow(letterDifference, beta);
+        return Math.pow(distanceFromEnd + distanceFromNextLetter, alpha) * Math.pow(letterDifference, beta);
     }
 
     public Double getDistanceFromEnd(){

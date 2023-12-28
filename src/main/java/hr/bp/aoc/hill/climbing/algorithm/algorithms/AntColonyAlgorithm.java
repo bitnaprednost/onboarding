@@ -49,7 +49,7 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		for (int i = 0; i < times; i++) {
 			currentAnt = run(initialAnt);
 
-			if(i%100==0){
+			if(i%10==0){
 				System.out.println(currentAnt);
 			}
 
@@ -122,7 +122,7 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 			}
 		}
 
-		//if(endReached) evaporatePheromones(evaporationRate);
+		//evaporatePheromones(evaporationRate);
 	}
 
 	private void evaporatePheromones(double evaporationRate) {

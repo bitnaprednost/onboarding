@@ -110,7 +110,7 @@ public class State {
         return letterDifference / (distanceFromStart + distanceFromNextLetter);// + map[y][x];
     }
 
-    private Point2D approximateNextLetterPosition(char value) {
+    public Point2D approximateNextLetterPosition(char value) {
         int count = 0;
         Point approximate = new Point(0, 0);
         for(int i=0;i<map.length;i++){
