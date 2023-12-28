@@ -91,7 +91,7 @@ public class TabooSearch implements Algorithm<State>{
 
         }
 
-        return currentState;
+        return tabooList.getLast();
     }
 
     @Override

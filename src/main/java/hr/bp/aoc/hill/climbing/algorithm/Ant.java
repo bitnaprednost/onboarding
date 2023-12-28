@@ -103,7 +103,7 @@ public class Ant {
             char[][] newStringMap = state.cloneArray(state.getStringMap());
             newStringMap[state.getCurrentPosition().y][state.getCurrentPosition().x] = arrow; //getValue();
 
-            double heuristic = calculateHeuristic(y, x, 1, 2);
+            double heuristic = calculateHeuristic(y, x, 1, 1);
             State newState = new State(state, new Point(x, y), heuristic, newStringMap);
             Ant ant = new Ant(newState, fittness);
 

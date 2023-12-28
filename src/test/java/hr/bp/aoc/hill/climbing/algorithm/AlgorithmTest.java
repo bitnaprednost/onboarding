@@ -55,7 +55,7 @@ class AlgorithmTest {
     //@Test
     void canRunAntColonyAlgorithm(){
         Ant initialAnt = new Ant(initialState);
-        Algorithm<Ant> algorithm = new AntColonyAlgorithm(initialAnt);
+        Algorithm<Ant> algorithm = new AntColonyAlgorithm(initialAnt, 1000, 200, 1000, 0.1);
         Ant endState = algorithm.run(initialAnt);
 
         assertTrue(endState.endReached());
@@ -81,7 +81,7 @@ class AlgorithmTest {
     void canRunMultipleAntColonyAlgorithm(){
         char[][] map = initialState.getStringMap();
         Ant initialAnt = new Ant(initialState);
-        Algorithm<Ant> algorithm = new AntColonyAlgorithm(initialAnt);
+        Algorithm<Ant> algorithm = new AntColonyAlgorithm(initialAnt, 200, 50, 100, 0.1);
         Ant endAnt = algorithm.runMultiple(initialAnt, 100);
 
         assertEquals(31, algorithm.getCount());

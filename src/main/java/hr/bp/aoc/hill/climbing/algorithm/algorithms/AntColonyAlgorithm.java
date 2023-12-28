@@ -17,8 +17,17 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 	private final int dimensionX;
 	private final int dimensionY;
 	private Double[][] pheromones;
+	private final int populationSize;
+	private final int filterSize;
+	private final int numOfMaxSteps;
+	private final double evaporationRate;
 
-	public AntColonyAlgorithm(Ant ant) {
+	public AntColonyAlgorithm(Ant ant, int populationSize, int filterSize, int numOfMaxSteps, double evaporationRate) {
+		this.populationSize=populationSize;
+		this.filterSize=filterSize;
+		this.numOfMaxSteps=numOfMaxSteps;
+		this.evaporationRate=evaporationRate;
+
 		count = 0;
 		bestCount = 100000;
 
@@ -55,14 +64,14 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		return bestAnt;
 	}
 
-	public void initialUpdatePharomones(State initialState, double pheromone) {
+	public void initialUpdatePharomones(State initialState, double initialPheromone) {
 		for(int i=0;i<dimensionY;i++){
 			for (int j=0;j<dimensionX;j++){
 				switch (initialState.getStringMap()[i][j]){
-					case '>' -> pheromones[dimensionX*i+j][0] += pheromone;
-					case 'v' -> pheromones[dimensionX*i+j][1] += pheromone;
-					case '^' -> pheromones[dimensionX*i+j][2] += pheromone;
-					case '<' -> pheromones[dimensionX*i+j][3] += pheromone;
+					case '>' -> pheromones[dimensionX*i+j][0] += initialPheromone;
+					case 'v' -> pheromones[dimensionX*i+j][1] += initialPheromone;
+					case '^' -> pheromones[dimensionX*i+j][2] += initialPheromone;
+					case '<' -> pheromones[dimensionX*i+j][3] += initialPheromone;
 				}
 			}
 		}
@@ -70,16 +79,16 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 
 	@Override
 	public Ant run(Ant initialAnt) {
-		Map<Ant, Integer> population = generateAntPopulation(initialAnt, 1000, 1500);
-		population = findBestAnts(population, 100);
-		updatePheromones(population, 0.05);
+		Map<Ant, Integer> population = generateAntPopulation(initialAnt);
+		population = findBestAnts(population);
+		updatePheromones(population);
 
 		Map.Entry<Ant, Integer> entry = population.entrySet().iterator().next();
 		count = entry.getValue();
 		return entry.getKey();
 	}
 
-	private Map<Ant, Integer> findBestAnts(Map<Ant, Integer> population, int top) {
+	private Map<Ant, Integer> findBestAnts(Map<Ant, Integer> population) {
 		return population.entrySet().stream().sorted(new Comparator<Map.Entry<Ant, Integer>>() {
 			@Override
 			public int compare(Map.Entry<Ant, Integer> o1, Map.Entry<Ant, Integer> o2) {
@@ -93,10 +102,10 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 					return o1.getKey().getDistanceFromEnd().compareTo(o2.getKey().getDistanceFromEnd());			//returns smallest heuristic
 				}
 			}
-		}).limit(top).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x,y)->x, LinkedHashMap::new));
+		}).limit(filterSize).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x,y)->x, LinkedHashMap::new));
 	}
 
-	private void updatePheromones(Map<Ant, Integer> population, double evaporationRate) {
+	private void updatePheromones(Map<Ant, Integer> population) {
 		for(Map.Entry<Ant, Integer> entry : population.entrySet()){
 			for(int i=0;i<dimensionY;i++){
 				for (int j=0;j<dimensionX;j++){
@@ -126,19 +135,19 @@ public class AntColonyAlgorithm implements Algorithm<Ant> {
 		}
 	}
 
-	private Map<Ant, Integer>  generateAntPopulation(Ant initialAnt, int times, int maxSteps) {
+	private Map<Ant, Integer> generateAntPopulation(Ant initialAnt) {
 		Map<Ant, Integer> map = new HashMap<>();
-		for(int i=0;i<times;i++){
-			map.put(runAnt(new Ant(initialAnt), maxSteps), count);
+		for(int i=0;i<populationSize;i++){
+			map.put(runAnt(new Ant(initialAnt)), count);
 		}
 		return map;
 	}
 
-	private Ant runAnt(Ant currentAnt, int maxSteps) {
+	private Ant runAnt(Ant currentAnt) {
 		boolean changed=true;
 		count = 0;
 
-		for(int i=0;i<maxSteps && changed;i++) {
+		for(int i=0;i<numOfMaxSteps && changed;i++) {
 			if(currentAnt.getValue()=='{') break;
 			changed = false;
 

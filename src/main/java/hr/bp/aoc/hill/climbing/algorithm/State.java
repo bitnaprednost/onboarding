@@ -20,7 +20,6 @@ public class State {
     private final Point startingPosition;
     private final Point endingPosition;
     private final double heuristic;
-    private static final Random random =  new Random();
 
 
     public State(State prev, Point currentPosition, double heuristic, char[][] stringMap) {
@@ -108,7 +107,7 @@ public class State {
         double distanceFromStart = endingPosition.distance(x, y) * beta + 1;
         double distanceFromNextLetter = approximateNextLetterPosition(getValue()).distance(x,y) * gamma;
 
-        return letterDifference / (distanceFromStart + distanceFromNextLetter);
+        return letterDifference / (distanceFromStart + distanceFromNextLetter);// + map[y][x];
     }
 
     private Point2D approximateNextLetterPosition(char value) {

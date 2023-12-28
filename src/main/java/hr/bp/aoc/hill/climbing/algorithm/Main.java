@@ -29,8 +29,8 @@ public class Main {
 		State endState = algorithmStarting.runMultiple(startingState, 2000);
 		logger.info(endState.toString());
 
-		AntColonyAlgorithm algorithm = new AntColonyAlgorithm(startingAnt);
-		algorithm.initialUpdatePharomones(endState, 10);
+		AntColonyAlgorithm algorithm = new AntColonyAlgorithm(startingAnt, 1000, 100, 500, 0.05);
+		algorithm.initialUpdatePharomones(endState, 5);
 		Ant endAnt = algorithm.runMultiple(startingAnt, 1000);
 
 		logger.info(String.valueOf(algorithm.getCount()));
