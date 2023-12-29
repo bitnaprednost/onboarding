@@ -1,6 +1,7 @@
 package hr.bp.aoc.distress.signal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,9 +86,23 @@ public class SignalParser {
     public static int sumCorrectSignals(List<Object[]> commands) {
         int sum = 0;
         for(int i=0;i<commands.size();i++){
-            Optional<Boolean> compared = IntegerComparator.compare(commands.get(i)[0], commands.get(i)[1]);
+            Optional<Boolean> compared = SignalComparator.compareObjects(commands.get(i)[0], commands.get(i)[1]);
             if(compared.isPresent() && Boolean.TRUE.equals(compared.get())) sum += i+1;
         }
         return sum;
+    }
+
+    public static List sortSignals(List<Object[]> commands) {
+        return commands.stream()
+                .flatMap(Arrays::stream)
+                .sorted(new SignalComparator())
+                .toList();
+    }
+
+    public static long calculateDecoderKey(List<Object> sorted, Object token1, Object token2) {
+        int indexOfFirst = sorted.indexOf(token1) + 1;
+        int indexOfSecond = sorted.indexOf(token2) + 1;
+
+        return (long) indexOfFirst * indexOfSecond;
     }
 }

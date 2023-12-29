@@ -16,7 +16,14 @@ public class Main {
 
         List<Object[]> signals = SignalParser.stringToCommands(textFromFile);
         int sum = SignalParser.sumCorrectSignals(signals);
-
         logger.info(String.valueOf(sum));
+
+        Object token1 = List.of(List.of(2));
+        Object token2 = List.of(List.of(6));
+        signals.add(new Object[] {token1, token2});
+
+        List<Object> sorted = SignalParser.sortSignals(signals);
+        long decoderKey = SignalParser.calculateDecoderKey(sorted, token1, token2);
+        logger.info(String.valueOf(decoderKey));
     }
 }

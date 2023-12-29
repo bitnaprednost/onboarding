@@ -84,4 +84,98 @@ class SignalParserTest {
         assertEquals(13, sum);
     }
 
+    @Test
+    void canSortElements(){
+        String text = """
+                [1,1,3,1,1]
+                [1,1,5,1,1]
+                
+                [[1],[2,3,4]]
+                [[1],4]
+                
+                [9]
+                [[8,7,6]]
+                
+                [[4,4],4,4]
+                [[4,4],4,4,4]
+                
+                [7,7,7,7]
+                [7,7,7]
+                
+                []
+                [3]
+                
+                [[[]]]
+                [[]]
+                
+                [[2]]
+                [[6]]
+                """;
+
+        List<Object> list = new ArrayList<>();
+
+        list.add(new ArrayList<>());
+        list.add(List.of(new ArrayList<>()));
+        list.add(List.of(List.of(new ArrayList<>())));
+        list.add(List.of(1,1,3,1,1));
+        list.add(List.of(1,1,5,1,1));
+        list.add(List.of(List.of(1),List.of(2,3,4)));
+        list.add(List.of(List.of(1),4));
+        list.add(List.of(List.of(2)));
+        list.add(List.of(3));
+        list.add(List.of(List.of(4,4),4,4));
+        list.add(List.of(List.of(4,4),4,4,4));
+        list.add(List.of(List.of(6)));
+        list.add(List.of(7,7,7));
+        list.add(List.of(7,7,7,7));
+        list.add(List.of(List.of(8,7,6)));
+        list.add(List.of(9));
+
+        List<Object[]> commands = SignalParser.stringToCommands(text);
+        List<Object> result = SignalParser.sortSignals(commands);
+
+        assertEquals(list.size(), result.size());
+        for(int i=0;i<list.size();i++){
+            assertEquals(list.get(i), result.get(i));
+        }
+    }
+
+    @Test
+    void canCalculateDecoredKey(){
+        String text = """
+                [1,1,3,1,1]
+                [1,1,5,1,1]
+                
+                [[1],[2,3,4]]
+                [[1],4]
+                
+                [9]
+                [[8,7,6]]
+                
+                [[4,4],4,4]
+                [[4,4],4,4,4]
+                
+                [7,7,7,7]
+                [7,7,7]
+                
+                []
+                [3]
+                
+                [[[]]]
+                [[]]
+                
+                [[2]]
+                [[6]]
+                """;
+
+        List<Object[]> commands = SignalParser.stringToCommands(text);
+        List<Object> sorted = SignalParser.sortSignals(commands);
+
+        Object token1 = List.of(List.of(2));
+        Object token2 = List.of(List.of(6));
+        long product = SignalParser.calculateDecoderKey(sorted, token1, token2);
+
+        assertEquals(96, product);
+    }
+
 }
