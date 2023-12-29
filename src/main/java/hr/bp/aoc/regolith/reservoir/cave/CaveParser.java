@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class CaveParser {
 
+    private CaveParser(){}
     public static CaveBuilder parseLine(CaveBuilder builder, String line) {
         String[] split = line.split(" -> ");
         List<Point> points = new ArrayList<>();
