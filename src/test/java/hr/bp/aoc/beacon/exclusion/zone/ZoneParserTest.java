@@ -1,16 +1,17 @@
 package hr.bp.aoc.beacon.exclusion.zone;
 
-import hr.bp.aoc.util.Reader;
+import hr.bp.aoc.beacon.exclusion.zone.zone.Zone;
+import hr.bp.aoc.beacon.exclusion.zone.zone.ZoneParser;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ZoneManagerTest {
-    @Test
-    void canCreateZone(){
+class ZoneParserTest {
+    private Zone zone;
+
+    @BeforeEach
+    void setUp() {
         String text = """
                 Sensor at x=2, y=18: closest beacon is at x=-2, y=15
                 Sensor at x=9, y=16: closest beacon is at x=10, y=16
@@ -27,10 +28,31 @@ class ZoneManagerTest {
                 Sensor at x=14, y=3: closest beacon is at x=15, y=3
                 Sensor at x=20, y=1: closest beacon is at x=15, y=3
                 """;
-        List<String> lines = Arrays.stream(text.split("\n")).toList();
+        String[] lines = text.split("\n");
+        zone = ZoneParser.createZone(lines);
+    }
 
-        Zone zone = ZoneParser.createZone(lines);
+    @Test
+    void canCreateZone(){
+        zone.calculateOccupiedPositions(10);
+        int count = zone.getOccupiedSize();
 
+        assertEquals(26, count);
+    }
 
+    @Test
+    void canFindBeacon(){
+        Beacon beacon = zone.findBeacon(20);
+        long frequency = beacon.calculateFrequency();
+
+        assertEquals(56000011, frequency);
+    }
+
+    @Test
+    void canFindBeaconWithLines(){
+        Beacon beacon = zone.findBeaconWithLines(20);
+        long frequency = beacon.calculateFrequency();
+
+        assertEquals(56000011, frequency);
     }
 }
