@@ -1,5 +1,6 @@
 package hr.bp.aoc.beacon.exclusion.zone;
 
+import hr.bp.aoc.beacon.exclusion.zone.util.LongPoint;
 import hr.bp.aoc.beacon.exclusion.zone.zone.Zone;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,10 +1,9 @@
 package hr.bp.aoc.beacon.exclusion.zone.zone;
 
 import hr.bp.aoc.beacon.exclusion.zone.Beacon;
-import hr.bp.aoc.beacon.exclusion.zone.Line;
-import hr.bp.aoc.beacon.exclusion.zone.LongPoint;
+import hr.bp.aoc.beacon.exclusion.zone.util.Line;
+import hr.bp.aoc.beacon.exclusion.zone.util.LongPoint;
 import hr.bp.aoc.beacon.exclusion.zone.Sensor;
-import org.apache.tools.ant.taskdefs.Manifest;
 
 import java.util.*;
 import java.util.stream.Collectors;

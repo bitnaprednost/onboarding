@@ -1,4 +1,4 @@
-package hr.bp.aoc.beacon.exclusion.zone;
+package hr.bp.aoc.beacon.exclusion.zone.util;
 
 import java.util.Optional;
 

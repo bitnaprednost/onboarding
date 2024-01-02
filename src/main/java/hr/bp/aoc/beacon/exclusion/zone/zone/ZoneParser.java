@@ -1,12 +1,10 @@
 package hr.bp.aoc.beacon.exclusion.zone.zone;
 
 import hr.bp.aoc.beacon.exclusion.zone.Beacon;
-import hr.bp.aoc.beacon.exclusion.zone.LongPoint;
+import hr.bp.aoc.beacon.exclusion.zone.util.LongPoint;
 import hr.bp.aoc.beacon.exclusion.zone.Sensor;
-import hr.bp.aoc.beacon.exclusion.zone.zone.Zone;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class ZoneParser {

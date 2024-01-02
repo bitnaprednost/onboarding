@@ -1,9 +1,10 @@
 package hr.bp.aoc.beacon.exclusion.zone;
 
+import hr.bp.aoc.beacon.exclusion.zone.util.Line;
+import hr.bp.aoc.beacon.exclusion.zone.util.LongPoint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
