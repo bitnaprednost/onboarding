@@ -1,7 +1,5 @@
 package hr.bp.aoc.days.noSpaceLeftOnDevice;
 
-import hr.bp.aoc.days.calorieCounting.DayOne;
-import hr.bp.aoc.util.ParserUtil;
 import hr.bp.aoc.model.Day;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.TreeMap;
 
 /**

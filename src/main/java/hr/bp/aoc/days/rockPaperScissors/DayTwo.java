@@ -1,6 +1,6 @@
 package hr.bp.aoc.days.rockPaperScissors;
 
-import hr.bp.aoc.util.ParserUtil;
+import hr.bp.aoc.util.ReaderUtil;
 import hr.bp.aoc.model.Day;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class DayTwo implements Day {
     String rockPaperScissorsDataPath = "src/main/resources/rockPaperScissorsData.txt";
-    List<String> rockPaperScissorsData = ParserUtil.parseFromPathToList(rockPaperScissorsDataPath);
+    List<String> rockPaperScissorsData = ReaderUtil.readFromPathToList(rockPaperScissorsDataPath);
 
 
     @Override

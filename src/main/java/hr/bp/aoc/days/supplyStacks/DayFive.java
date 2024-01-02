@@ -1,7 +1,7 @@
 package hr.bp.aoc.days.supplyStacks;
 
 import hr.bp.aoc.days.supplyStacks.model.Instruction;
-import hr.bp.aoc.util.ParserUtil;
+import hr.bp.aoc.util.ReaderUtil;
 import hr.bp.aoc.model.Day;
 
 import java.util.*;
@@ -13,7 +13,7 @@ public class DayFive implements Day {
 
     //Tu mi bas paše SOUT zbog printa stackova
     String instructionsPath = "src/main/resources/instructionList";
-    List<String> instructionDataList = ParserUtil.parseFromPathToList(instructionsPath);
+    List<String> instructionDataList = ReaderUtil.readFromPathToList(instructionsPath);
     List<Instruction> instructionList = new ArrayList<>(parseAndFillInsructionList());
 
 

@@ -8,12 +8,12 @@ import java.util.List;
 /**
  * @author Luka Ljubić
  */
-public class ParserUtil {
-    private ParserUtil() {
+public class ReaderUtil {
+    private ReaderUtil() {
         throw new RuntimeException("Cannot instantiate class " + this.getClass().getName());
     }
 
-    public static List<String> parseFromPathToList(String path){
+    public static List<String> readFromPathToList(String path){
         List<String> DataList;
         try {
             DataList = Files.readAllLines(Paths.get(path));
@@ -23,7 +23,7 @@ public class ParserUtil {
         return DataList;
     }
 
-    public static String parseFromPath(String path){
+    public static String readFromPath(String path){
         String temp;
         try {
             temp = Files.readString(Paths.get(path));

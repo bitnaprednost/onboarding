@@ -1,7 +1,6 @@
 package hr.bp.aoc.days.tuningTrouble;
 
-import hr.bp.aoc.days.calorieCounting.DayOne;
-import hr.bp.aoc.util.ParserUtil;
+import hr.bp.aoc.util.ReaderUtil;
 import hr.bp.aoc.model.Day;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,7 @@ public class DaySix implements Day {
     public static final Logger logger = LoggerFactory.getLogger(DaySix.class);
 
     String getBufferDataPath = "src/main/resources/bufferData.txt";
-    String bufferData = ParserUtil.parseFromPath(getBufferDataPath);
+    String bufferData = ReaderUtil.readFromPath(getBufferDataPath);
 
     @Override
     public void executePartOne() {
