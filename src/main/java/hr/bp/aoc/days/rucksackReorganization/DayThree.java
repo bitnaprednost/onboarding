@@ -1,7 +1,10 @@
 package hr.bp.aoc.days.rucksackReorganization;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.days.rucksackReorganization.model.Backpack;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +20,7 @@ import java.util.stream.IntStream;
  */
 public class DayThree implements Day {
 
+    public static final Logger logger = LoggerFactory.getLogger(DayThree.class);
     static final String BACKPACK_DATA_PATH = "src/main/resources/backpackData.txt";
     List<String> backpackDataList = readBackpackData(BACKPACK_DATA_PATH);
     List<Backpack> backpacksList = new ArrayList<>();
@@ -27,8 +31,8 @@ public class DayThree implements Day {
 
         List<Character> duplicatesInBackpack = findDuplicates(backpacksList);
         int sum = calculateSumOfTheDuplicates(duplicatesInBackpack);
-        System.out.println("rucksackReorganization PART 1: ");
-        System.out.println(sum);
+
+        logger.info("rucksackReorganization PART 1: {}", sum);
     }
 
     @Override
@@ -39,9 +43,9 @@ public class DayThree implements Day {
             var sum2 = input.lines()
                     .collect(Collectors.groupingBy(c -> counter.nextInt() / 3)).values().stream()
                     .mapToInt(this::commonPriority).sum();
-            System.out.printf("rucksackReorganization PART 2: %d\n", sum2);
+            logger.info("rucksackReorganization PART 2: {}", sum2);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Cannot read String from path");
         }
     }
 
@@ -98,7 +102,7 @@ public class DayThree implements Day {
         try {
             tempBackpackDataList = Files.readAllLines(Paths.get(backpackDataPath));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Cannot read lines from PATH");
         }
         return tempBackpackDataList;
     }

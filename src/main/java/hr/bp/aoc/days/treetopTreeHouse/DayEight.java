@@ -1,6 +1,9 @@
 package hr.bp.aoc.days.treetopTreeHouse;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,24 +14,26 @@ import java.util.stream.Stream;
 
 public class DayEight implements Day {
 
+    public static final Logger logger = LoggerFactory.getLogger(DayEight.class);
+
     int[][] map;
 
     {
         try {
             map = parseMap(Files.readString(Path.of("src/main/resources/treetopTreeHouse.txt")));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Cannot read String from PATH");
         }
     }
 
     @Override
     public void executePartOne() {
-        System.out.printf("part 1: %s\n", countVisible(map));
+        logger.info("treetopTreeHouse PART 1: {}", countVisible(map));
     }
 
     @Override
     public void executePartTwo() {
-        System.out.printf("part 2: %s\n", highestScenicScore(map));
+        logger.info("treetopTreeHouse PART 2: {}", highestScenicScore(map));
     }
 
     @Override
@@ -51,7 +56,7 @@ public class DayEight implements Day {
         return up * down * left * right;
     }
 
-    int visibleTrees(int[][] map, Point op, Function<Point,Point> move) {
+    int visibleTrees(int[][] map, Point op, Function<Point, Point> move) {
         int count = 0;
         for (var p = move.apply(op); p.inside(map); p = move.apply(p)) {
             count++;
@@ -68,17 +73,18 @@ public class DayEight implements Day {
     }
 
     boolean visible(int[][] map, int y, int x) {
-        if (y == 0 || y == map.length-1 || x == 0 || x == map[y].length-1) {
+        if (y == 0 || y == map.length - 1 || x == 0 || x == map[y].length - 1) {
             return true; // edge cases
         }
         var height = map[y][x];
         return Stream.of(
                         IntStream.of(map[y]).limit(x).max(), // left max height
-                        IntStream.of(map[y]).skip(x+1).max(), // right max
-                        IntStream.of(col(map,x)).limit(y).max(), // up
-                        IntStream.of(col(map,x)).skip(y+1).max()) // down
+                        IntStream.of(map[y]).skip(x + 1).max(), // right max
+                        IntStream.of(col(map, x)).limit(y).max(), // up
+                        IntStream.of(col(map, x)).skip(y + 1).max()) // down
                 .mapToInt(m -> m.getAsInt()).anyMatch(h -> h < height); // any shorter than given tree
     }
+
     int[] col(int[][] map, int x) {
         return IntStream.range(0, map.length).map(y -> map[y][x]).toArray();
     }

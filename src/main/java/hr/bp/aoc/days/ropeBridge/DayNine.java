@@ -1,6 +1,9 @@
 package hr.bp.aoc.days.ropeBridge;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,36 +16,25 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class DayNine implements Day {
+    public static final Logger logger = LoggerFactory.getLogger(DayNine.class);
     List<Move> moves;
     Knot head;
-
 
 
     @Override
     public void executePartOne() {
 
-        try {
-            moves = parseMoves(Files.readString(Path.of("src/main/resources/ropeBridgeData.txt")));
-            head = tieKnots(10);
-            head = runMoves(moves, head);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        init();
 
-        System.out.printf("part 1: %s\n", nth(head, 1).history.stream().distinct().count());
+        logger.info("ropeBridge PART 1: {}", nth(head, 1).history.stream().distinct().count());
+
     }
 
     @Override
     public void executePartTwo() {
-        try {
-            moves = parseMoves(Files.readString(Path.of("src/main/resources/ropeBridgeData.txt")));
-            head = tieKnots(10);
-            head = runMoves(moves, head);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        System.out.printf("part 2: %s\n", nth(head, 9).history.stream().distinct().count());
+        init();
+        logger.info("ropeBridge PART 2: {}", nth(head, 9).history.stream().distinct().count());
     }
 
     @Override
@@ -50,12 +42,24 @@ public class DayNine implements Day {
         return "Day Nine";
     }
 
+    private void init() {
+        try {
+            moves = parseMoves(Files.readString(Path.of("src/main/resources/ropeBridgeData.txt")));
+        } catch (IOException e) {
+            logger.error("The initial method cant read String from path");
+        }
+        head = tieKnots(10);
+        head = runMoves(moves, head);
+    }
+
     Knot nth(Knot k, int count) {
         return count == 0 ? k : nth(k.tail, count - 1);
     }
 
     Knot runMoves(List<Move> moves, Knot head) {
-        return moves.stream().reduce(head, (k, m) -> k.apply(m), (a,b) -> {return a;});
+        return moves.stream().reduce(head, (k, m) -> k.apply(m), (a, b) -> {
+            return a;
+        });
     }
 
     Knot tieKnots(int count) {
@@ -71,7 +75,9 @@ public class DayNine implements Day {
     record Knot(XY pos, Set<XY> history, Knot tail) {
         Knot apply(Move m) {
             return IntStream.range(0, m.steps).mapToObj(i -> m)
-                    .reduce(this, (k, move) -> k.move(move.vector), (a,b) -> {return a;});
+                    .reduce(this, (k, move) -> k.move(move.vector), (a, b) -> {
+                        return a;
+                    });
         }
 
         Knot move(XY vector) {
@@ -84,22 +90,25 @@ public class DayNine implements Day {
             if (head.touching(pos)) {
                 return this;
             }
-            int dx = (head.x-pos.x)/2 + (head.x-pos.x)%2;
-            int dy = (head.y-pos.y)/2 + (head.y-pos.y)%2;
+            int dx = (head.x - pos.x) / 2 + (head.x - pos.x) % 2;
+            int dy = (head.y - pos.y) / 2 + (head.y - pos.y) % 2;
             return move(new XY(dx, dy));
         }
     }
 
-    record Move(XY vector, int steps) {}
+    record Move(XY vector, int steps) {
+    }
 
     record XY(int x, int y) {
         XY move(XY vector) {
             return new XY(x + vector.x, y + vector.y);
         }
+
         boolean touching(XY o) {
-            return Math.abs(x-o.x) <= 1 && Math.abs(y-o.y) <= 1;
+            return Math.abs(x - o.x) <= 1 && Math.abs(y - o.y) <= 1;
         }
     }
+
     Map<Character, XY> vector = Map.of(
             'U', new XY(0, -1), 'D', new XY(0, +1),
             'L', new XY(-1, 0), 'R', new XY(+1, 0));

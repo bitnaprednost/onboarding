@@ -1,7 +1,10 @@
 package hr.bp.aoc.days.campCleanup;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.days.campCleanup.model.Pair;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,6 +17,8 @@ import java.util.List;
  */
 public class DayFour implements Day {
 
+    public static final Logger logger = LoggerFactory.getLogger(DayFour.class);
+
     String pairsDataPath = "src/main/resources/PairsAndTheirRange.txt";
     List<String> pairsDataList = readPairsToList(pairsDataPath);
     List<Pair> pairList = new ArrayList<>(stringListToPairList(pairsDataList));
@@ -23,16 +28,14 @@ public class DayFour implements Day {
     public void executePartOne() {
         int fullyContainCounter = countRangesThatFullyContainTheOther();
 
-        System.out.println("campCleanup PART 1: ");
-        System.out.println(fullyContainCounter);
+        logger.info("campCleanup PART 1: {}", fullyContainCounter);
     }
 
     @Override
     public void executePartTwo() {
         int overlapingCounter = coutRangesThatOverlap();
 
-        System.out.println("campCleanup PART 2: ");
-        System.out.println(overlapingCounter);
+        logger.info("campCleanup PART 2: @{}", overlapingCounter);
     }
 
     @Override
@@ -67,7 +70,8 @@ public class DayFour implements Day {
         try {
             pairsDataList = Files.readAllLines(Paths.get(pairsDataPath));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("PairsData not readable from path");
+            pairsDataList = null;
         }
         return pairsDataList;
     }

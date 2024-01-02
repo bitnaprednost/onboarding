@@ -1,6 +1,9 @@
 package hr.bp.aoc.days.cathodeRayTube;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,25 +15,26 @@ import java.util.stream.IntStream;
 
 public class DayTen implements Day {
 
+    public static final Logger logger = LoggerFactory.getLogger(DayTen.class);
     List<Instruction> program;
 
     {
         try {
             program = parseProgram(Files.readString(Path.of("src/main/resources/cathodeRayTube.txt")));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Unable to parse program from Path");
         }
     }
 
 
     @Override
     public void executePartOne() {
-        System.out.printf("part1: %d\n", part1(program));
+        logger.info("cathodeRayTube PART 1: {}", part1(program));
     }
 
     @Override
     public void executePartTwo() {
-        System.out.printf("part2:\n%s", part2(program));
+        logger.info("cathodeRayTube PART 2: {}", part2(program));
     }
 
     @Override
@@ -39,19 +43,19 @@ public class DayTen implements Day {
     }
 
     String part2(List<Instruction> program) {
-        return IntStream.range(1, 6*40+1)
-                .mapToObj(cycle -> pixelAtCycle(cycle, program) + (cycle%40 == 0 ? "\n" : ""))
+        return IntStream.range(1, 6 * 40 + 1)
+                .mapToObj(cycle -> pixelAtCycle(cycle, program) + (cycle % 40 == 0 ? "\n" : ""))
                 .collect(Collectors.joining());
     }
 
     String pixelAtCycle(int cycle, List<Instruction> program) {
         int middle = getState(cycle, program).x;
-        Set<Integer> sprite = Set.of(middle, middle-1, middle+1);
-        return sprite.contains((cycle-1) % 40) ? "#" : " ";
+        Set<Integer> sprite = Set.of(middle, middle - 1, middle + 1);
+        return sprite.contains((cycle - 1) % 40) ? "#" : " ";
     }
 
     int part1(List<Instruction> program) {
-        return IntStream.of(20,60,100,140,180,220).map(c -> c * getState(c, program).x).sum();
+        return IntStream.of(20, 60, 100, 140, 180, 220).map(c -> c * getState(c, program).x).sum();
     }
 
     State getState(int atCycle, List<Instruction> program) {
@@ -68,8 +72,8 @@ public class DayTen implements Day {
 
     State run(Instruction i, State state) {
         return switch (i.op) {
-            case "noop" -> new State(state.cycle+1, state.x);
-            case "addx" -> new State(state.cycle+2, state.x + i.value);
+            case "noop" -> new State(state.cycle + 1, state.x);
+            case "addx" -> new State(state.cycle + 2, state.x + i.value);
             default -> throw new IllegalArgumentException("invalid operation");
         };
     }
@@ -78,9 +82,11 @@ public class DayTen implements Day {
         return input.lines().map(l -> Instruction.parse(l.split(" "))).toList();
     }
 
-    record State(int cycle, int x) {}
+    record State(int cycle, int x) {
+    }
+
     record Instruction(String op, int value) {
-        static Instruction parse(String ... parts) {
+        static Instruction parse(String... parts) {
             return new Instruction(parts[0], parts[0].equals("noop") ? 0 : Integer.parseInt(parts[1]));
         }
     }

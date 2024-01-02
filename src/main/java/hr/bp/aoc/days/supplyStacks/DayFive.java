@@ -10,6 +10,8 @@ import java.util.*;
  * @author Luka Ljubić
  */
 public class DayFive implements Day {
+
+    //Tu mi bas paše SOUT zbog printa stackova
     String instructionsPath = "src/main/resources/instructionList";
     List<String> instructionDataList = ParserUtil.parseFromPathToList(instructionsPath);
     List<Instruction> instructionList = new ArrayList<>(parseAndFillInsructionList());

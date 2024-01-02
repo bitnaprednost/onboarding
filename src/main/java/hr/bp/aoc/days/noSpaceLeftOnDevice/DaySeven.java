@@ -1,7 +1,10 @@
 package hr.bp.aoc.days.noSpaceLeftOnDevice;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.util.ParserUtil;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,13 +17,14 @@ import java.util.TreeMap;
  */
 public class DaySeven implements Day {
 
+    public static final Logger logger = LoggerFactory.getLogger(DaySeven.class);
     Node root;
 
     {
         try {
             root = parseTerminal(Files.readString(Path.of("src/main/resources/noSpaceLeftOnDeviceData.txt")));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("root cannot be parsed from path");
         }
     }
 
@@ -30,7 +34,8 @@ public class DaySeven implements Day {
         int part1 = root.dirs()
                 .filter(n -> n.size() <= 100000)
                 .mapToInt(n -> n.size()).sum();
-        System.out.printf("part 1: %s\n", part1);
+
+        logger.info("noSpaceLeftOnDevice PART 1: {}", part1);
 
     }
 
@@ -40,7 +45,8 @@ public class DaySeven implements Day {
         int part2 = root.dirs()
                 .filter(n -> n.size() >= needed)
                 .mapToInt(n -> n.size()).sorted().findFirst().getAsInt();
-        System.out.printf("part 2: %s\n", part2);
+
+        logger.info("noSpaceLeftOnDevice PART 2: {}", part2);
     }
 
     @Override
@@ -50,7 +56,9 @@ public class DaySeven implements Day {
 
     private Node parseTerminal(String input) {
         Node root = new Node(0, null, new TreeMap<>());
-        input.lines().reduce(root, (n, l) -> n.apply(l), (a,b) -> {return null;});
+        input.lines().reduce(root, (n, l) -> n.apply(l), (a, b) -> {
+            return null;
+        });
         return root;
     }
 }

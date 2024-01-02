@@ -1,6 +1,9 @@
 package hr.bp.aoc.days.hillClimbingAlgorithm;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,37 +16,41 @@ import java.util.function.Function;
 
 public class DayTwelve implements Day {
 
+    public static final Logger logger = LoggerFactory.getLogger(DayTwelve.class);
+
     Map<XY, Byte> map;
     XY start;
     XY end;
 
     {
         try {
-            map = readMap(Files.readString(Path.of("src/main/resources/hillClimbingAlgorithm.txt")));
-            start = map.keySet().stream().filter(k -> map.get(k) == 'S').findFirst().get();
-            end = map.keySet().stream().filter(k -> map.get(k) == 'E').findFirst().get();
-            map.put(start,(byte)'a');
-            map.put(end,(byte)'z');
+            init();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error("Initial method broke down");
         }
     }
 
     @Override
     public void executePartOne() {
-        System.out.printf("part1: %d\n",
-                shortestPath(map, new HashMap<>(), start, dh -> dh <= 1, p -> p.equals(end)));
+        logger.info("hillClimbingAlgorithm PART 1: {}", shortestPath(map, new HashMap<>(), start, dh -> dh <= 1, p -> p.equals(end)));
     }
 
     @Override
     public void executePartTwo() {
-        System.out.printf("part2: %d\n",
-                shortestPath(map, new HashMap<>(), end, dh -> dh >= -1, p -> map.get(p) == 'a'));
+        logger.info("hillClimbingAlgorithm PART 1: {}",shortestPath(map, new HashMap<>(), end, dh -> dh >= -1, p -> map.get(p) == 'a') );
     }
 
     @Override
     public String getDayOrderNumber() {
         return "Day Twelve";
+    }
+
+    private void init() throws IOException {
+        map = readMap(Files.readString(Path.of("src/main/resources/hillClimbingAlgorithm.txt")));
+        start = map.keySet().stream().filter(k -> map.get(k) == 'S').findFirst().get();
+        end = map.keySet().stream().filter(k -> map.get(k) == 'E').findFirst().get();
+        map.put(start, (byte) 'a');
+        map.put(end, (byte) 'z');
     }
 
     int shortestPath(Map<XY, Byte> map, Map<XY, Integer> visits, XY start,

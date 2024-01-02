@@ -2,6 +2,8 @@ package hr.bp.aoc.days.calorieCounting;
 
 import hr.bp.aoc.model.Day;
 import hr.bp.aoc.days.calorieCounting.model.Elf;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +14,8 @@ import java.util.*;
  * @author Luka Ljubić
  */
 public class DayOne implements Day {
+
+    public static final Logger logger = LoggerFactory.getLogger(DayOne.class);
 
     static final String CALORIE_DATA_PATH = "src/main/resources/callorieData.txt";
     final List<String> calorieData = new ArrayList<>(readCalorieData(CALORIE_DATA_PATH));
@@ -26,8 +30,7 @@ public class DayOne implements Day {
         Elf elfWithTheMostCallories;
         elfWithTheMostCallories = getElfWithMostCallories(elvesList);
 
-        System.out.print("CalorieCounting PART 1: ");
-        System.out.println(elfWithTheMostCallories);
+        logger.info("CalorieCounting PART 1: {}", elfWithTheMostCallories);
     }
 
     @Override
@@ -40,8 +43,7 @@ public class DayOne implements Day {
 
         int firstThreeSum = calculateSum(elvesList, 3);
 
-        System.out.println("CalorieCounting PART 2: ");
-        System.out.println(firstThreeSum);
+        logger.info("CalorieCounting PART 2: {}", firstThreeSum);
     }
 
     @Override
@@ -90,7 +92,8 @@ public class DayOne implements Day {
         try {
             tempCalorieData = Files.readAllLines(Paths.get(calorieDataPath));
         } catch (IOException e) {
-            throw new RuntimeException();
+            logger.error("Callorie Data Not readable");
+            tempCalorieData = null;
         }
         return tempCalorieData;
     }

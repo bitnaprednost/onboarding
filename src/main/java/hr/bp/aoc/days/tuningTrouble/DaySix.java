@@ -1,7 +1,10 @@
 package hr.bp.aoc.days.tuningTrouble;
 
+import hr.bp.aoc.days.calorieCounting.DayOne;
 import hr.bp.aoc.util.ParserUtil;
 import hr.bp.aoc.model.Day;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,6 +14,8 @@ import java.util.stream.Collectors;
  */
 public class DaySix implements Day {
 
+    public static final Logger logger = LoggerFactory.getLogger(DaySix.class);
+
     String getBufferDataPath = "src/main/resources/bufferData.txt";
     String bufferData = ParserUtil.parseFromPath(getBufferDataPath);
 
@@ -19,11 +24,10 @@ public class DaySix implements Day {
         Optional<Integer> positionInString = processBufferData(bufferData, 4);
 
         if (positionInString.isPresent()){
-            System.out.println(positionInString);
-            System.out.println(bufferData.length());
+            logger.info("tuningTrouble PART 1: {}",positionInString );
         }
         else {
-            System.out.println("Integer je Optional.empty");
+            logger.error("Integer je Optional.empty");
         }
     }
 
@@ -32,11 +36,10 @@ public class DaySix implements Day {
         Optional<Integer> positionInString = processBufferData(bufferData, 14);
 
         if (positionInString.isPresent()){
-            System.out.println(positionInString);
-            System.out.println(bufferData.length());
+            logger.info("tuningTrouble PART 2: {}",positionInString );
         }
         else {
-            System.out.println("Integer je Optional.empty");
+            logger.error("Integer je Optional.empty");
         }
     }
 
