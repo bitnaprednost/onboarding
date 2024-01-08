@@ -50,7 +50,7 @@ public class Main {
         logger.info(String.valueOf(firstSolution(textFromFile, 4)));
         logger.info(String.valueOf(secondSolution(textFromFile, 4)));
         logger.info(String.valueOf(thirdSolution(textFromFile, 4)));
-        logger.info(String.valueOf(thirdSolution(textFromFile, 15)));
+        logger.info(String.valueOf(thirdSolution(textFromFile, 14)));
 
     }
 }
