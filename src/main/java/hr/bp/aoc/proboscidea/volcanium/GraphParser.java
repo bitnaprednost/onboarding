@@ -5,6 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * <p>GraphParser class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class GraphParser {
 
     public static Graph parseGraph(String[] lines) {

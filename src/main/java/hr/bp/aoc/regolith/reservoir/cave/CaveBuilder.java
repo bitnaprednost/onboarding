@@ -9,6 +9,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * <p>CaveBuilder class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class CaveBuilder {
     private final Set<Rock> rocks;
     private boolean bottomless;

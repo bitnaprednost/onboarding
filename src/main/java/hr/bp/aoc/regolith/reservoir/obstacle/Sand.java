@@ -3,6 +3,11 @@ package hr.bp.aoc.regolith.reservoir.obstacle;
 import java.awt.*;
 import java.util.Objects;
 
+/**
+ * <p>Sand class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Sand implements Obsticle{
     private Point point;
     public Sand(Point point) {

@@ -10,6 +10,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
+/**
+ * <p>Algorithm class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Algorithm {
     private static final Logger logger = LoggerFactory.getLogger(Algorithm.class);
     private VulcanoManager manager;

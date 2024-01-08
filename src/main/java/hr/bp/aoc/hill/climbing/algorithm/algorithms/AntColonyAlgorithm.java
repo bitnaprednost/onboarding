@@ -7,6 +7,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * <p>AntColonyAlgorithm class.</p>
+ *
  * @author Marko Krišković
  */
 public class AntColonyAlgorithm implements Algorithm<Ant> {

@@ -9,6 +9,11 @@ import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>Cave class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Cave {
     private final Point sandSource;
     private Set<Obsticle> obsticles;

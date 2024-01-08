@@ -4,6 +4,11 @@ import java.awt.Point;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * <p>CaveParser class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class CaveParser {
 
     private CaveParser(){}

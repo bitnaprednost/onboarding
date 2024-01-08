@@ -6,6 +6,8 @@ import hr.bp.aoc.hill.climbing.algorithm.State;
 import java.util.*;
 
 /**
+ * <p>SelectionEnum class.</p>
+ *
  * @author Marko Krišković
  */
 public enum SelectionEnum {

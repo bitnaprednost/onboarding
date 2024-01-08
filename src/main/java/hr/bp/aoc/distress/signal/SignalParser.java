@@ -5,6 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * <p>SignalParser class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class SignalParser {
 
     private static int countBrackets(String source){

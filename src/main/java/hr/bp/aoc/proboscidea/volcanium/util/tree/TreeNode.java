@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * <p>TreeNode class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class TreeNode<T> {
 
     public T data;

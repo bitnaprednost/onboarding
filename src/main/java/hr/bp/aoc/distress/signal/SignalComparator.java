@@ -2,6 +2,11 @@ package hr.bp.aoc.distress.signal;
 
 import java.util.*;
 
+/**
+ * <p>SignalComparator class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class SignalComparator implements Comparator<Object> {
 
     public static Optional<Boolean> compareIntegers(Integer integer1, Integer integer2) {

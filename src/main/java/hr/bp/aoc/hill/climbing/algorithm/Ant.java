@@ -8,6 +8,8 @@ import java.util.*;
 import java.util.List;
 
 /**
+ * <p>Ant class.</p>
+ *
  * @author Marko Krišković
  */
 public class Ant {

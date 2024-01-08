@@ -2,6 +2,11 @@ package hr.bp.aoc.proboscidea.volcanium;
 
 import java.util.List;
 
+/**
+ * <p>VulcanoManager class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class VulcanoManager {
     private Valve current;
     private final Graph graph;

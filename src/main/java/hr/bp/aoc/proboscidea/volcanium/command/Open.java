@@ -4,6 +4,11 @@ import hr.bp.aoc.proboscidea.volcanium.Graph;
 import hr.bp.aoc.proboscidea.volcanium.Valve;
 import hr.bp.aoc.proboscidea.volcanium.VulcanoManager;
 
+/**
+ * <p>Open class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Open implements Command {
     private Valve valve;
     private VulcanoManager manager;

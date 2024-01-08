@@ -7,6 +7,11 @@ import hr.bp.aoc.beacon.exclusion.zone.Sensor;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>ZoneParser class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class ZoneParser {
     private ZoneParser(){}
 

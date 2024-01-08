@@ -8,6 +8,11 @@ import hr.bp.aoc.beacon.exclusion.zone.Sensor;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * <p>Zone class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Zone {
     private final Set<Sensor> sensors;
     private final Set<Beacon> beacons;

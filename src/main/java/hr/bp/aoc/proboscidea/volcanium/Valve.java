@@ -3,6 +3,11 @@ package hr.bp.aoc.proboscidea.volcanium;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * <p>Valve class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Valve {
     private final String name;
     private int rate;

@@ -5,6 +5,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * <p>Graph class.</p>
+ *
+ * @author Marko Krišković
+ */
 public class Graph {
     private Set<Valve> valves;
 
