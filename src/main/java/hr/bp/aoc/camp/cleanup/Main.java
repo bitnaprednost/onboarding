@@ -45,10 +45,18 @@ public class Main {
 	}
 
 	public static <T> Boolean bifunctionBoolean(List<List<T>> array, BiPredicate<List<T>, List<T>> bifunction) {
-		Iterator<List<T>> iterator = array.stream(
-		).iterator();
+		Iterator<List<T>> iterator = array.stream().iterator();
 
 		return bifunction.test(iterator.next(), iterator.next());
+	}
+
+	private static long getCountIf(List<List<List<Integer>>> lists, BiPredicate<List<Integer>, List<Integer>> biPredicate) {
+		return lists.stream(
+		).map(
+				twoArrays -> bifunctionBoolean(twoArrays, biPredicate)
+		).filter(
+				pred -> pred
+		).count();
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -64,20 +72,10 @@ public class Main {
 			second::contains
 		);
 
-		long result1 = lists.stream(
-		).map(
-			twoArrays -> bifunctionBoolean(twoArrays, containsEachOther)
-		).filter(
-			pred -> pred
-		).count();
+		long result1 = getCountIf(lists, containsEachOther);
 		logger.info(String.valueOf(result1));
 
-		long result2 = lists.stream(
-		).map(
-			twoArrays -> bifunctionBoolean(twoArrays, matchesOneElement)
-		).filter(
-			pred -> pred
-		).count();
+		long result2 = getCountIf(lists, matchesOneElement);
 		logger.info(String.valueOf(result2));
 	}
 
