@@ -26,7 +26,7 @@ public class CalibrationDocumentTest {
     @Test
     public void testSimpleInput() {
         CalibrationDocument calibrationDocument = createCalibrationDocument("1ii5mgiiiiip3","jgj7mkmf8","1131131","ffg9123i5");
-        int expectedValue = 197;
+        int expectedValue = 13 + 78 + 11 + 95;
 
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
@@ -36,7 +36,7 @@ public class CalibrationDocumentTest {
     @Test
     public void testSimpleInputTwo() {
         CalibrationDocument calibrationDocument = createCalibrationDocument("22","5ttttt","a2");
-        int expectedValue = 99;
+        int expectedValue = 22 + 55 + 22;
 
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
@@ -56,7 +56,7 @@ public class CalibrationDocumentTest {
     public void testOnlyOneNumberPerLine() {
         CalibrationDocument calibrationDocument = createCalibrationDocument("aaa3","3eeijgjut","okkto9ngrjgrg","r4");
 
-        int expectedValue = 209;
+        int expectedValue = 33 + 33 + 99 + 44;
 
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
@@ -67,7 +67,7 @@ public class CalibrationDocumentTest {
     public void testOnlyNumbersPerLine() {
         CalibrationDocument calibrationDocument = createCalibrationDocument("1359854","1346916","19339431","11");
 
-        int expectedValue = 52;
+        int expectedValue = 14 + 16 + 11 + 11;
 
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
@@ -99,6 +99,17 @@ public class CalibrationDocumentTest {
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             calibrationDocument.calculateCalibrationValuesSum();
         });
+    }
+
+    @Test
+    public void testNumbersAsLetters() {
+        CalibrationDocument calibrationDocument = createCalibrationDocument("onehjgfaq4", "oneoneonetwo", "4141two", "1", "two");
+
+        int expectedValue = 14 + 12 + 42 + 11 + 22;
+
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
+
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 
     private CalibrationDocument createCalibrationDocument(String... lines) {
