@@ -113,10 +113,15 @@ public class CalibrationDocumentTest {
     }
 
     private CalibrationDocument createSimpleCalibrationDocument(String... lines) {
-        return new CalibrationDocument(Arrays.asList(lines), new SimpleCalibrationValueExtractionStrategy());
+        CalibrationValueExtractionStrategy simpleStrategy = new SimpleCalibrationValueExtractionStrategy();
+
+        return new CalibrationDocument(Arrays.asList(lines), simpleStrategy);
     }
 
     private CalibrationDocument createAdvancedCalibrationDocument(String... lines) {
-        return new CalibrationDocument(Arrays.asList(lines), new AdvancedCalibrationValueExtractionStrategy());
+        CalibrationValueExtractionStrategy simpleStrategy = new SimpleCalibrationValueExtractionStrategy();
+        CalibrationValueExtractionStrategy advancedStrategy = new WordsToNumbersDecorator(simpleStrategy);
+
+        return new CalibrationDocument(Arrays.asList(lines), advancedStrategy);
     }
 }

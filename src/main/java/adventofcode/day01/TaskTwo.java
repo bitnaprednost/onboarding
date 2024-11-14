@@ -6,8 +6,12 @@ public class TaskTwo {
     public static void main(String[] args) {
         List<String> lines = Utils.readUserInput();
 
-        CalibrationDocument simpleCalibrationDocument = new CalibrationDocument(lines, new AdvancedCalibrationValueExtractionStrategy());
-        int sum = simpleCalibrationDocument.calculateCalibrationValuesSum();
+        CalibrationValueExtractionStrategy simpleStrategy = new SimpleCalibrationValueExtractionStrategy();
+        CalibrationValueExtractionStrategy advancedStrategy = new WordsToNumbersDecorator(simpleStrategy);
+
+        CalibrationDocument advancedCalibrationDocument = new CalibrationDocument(lines, advancedStrategy);
+
+        int sum = advancedCalibrationDocument.calculateCalibrationValuesSum();
         Utils.displayCalibrationValuesSum(sum);
     }
 }
