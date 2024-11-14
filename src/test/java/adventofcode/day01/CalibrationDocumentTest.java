@@ -27,4 +27,15 @@ public class CalibrationDocumentTest {
         String inputString= "1ii5mgiiiiip3\njgj7mkmf8\n1131131\nffg9123i5";
         calibrationDocument.setLinesFromInputString(inputString);
     }
+
+    @Test
+    public void testSimpleInput() {
+        String inputString= "1ii5mgiiiiip3\njgj7mkmf8\n1131131\nffg9123i5";
+        int expectedValue = 197;
+
+        calibrationDocument.setLinesFromInputString(inputString);
+        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
 }
