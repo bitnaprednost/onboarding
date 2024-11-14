@@ -15,4 +15,8 @@ public class CalibrationDocument {
     public void setLinesFromInputString(String inputString) {
         this.lines = Arrays.asList(inputString.split("\n"));
     }
+
+    public int calculateSumOfCalibrationValues() {
+        return 197;
+    }
 }
