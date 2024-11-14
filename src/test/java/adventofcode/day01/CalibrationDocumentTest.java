@@ -1,39 +1,25 @@
 package adventofcode.day01;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class CalibrationDocumentTest {
-
-    private CalibrationDocument calibrationDocument;
-
-    @BeforeEach
-    public void setUp() {
-        this.calibrationDocument = new CalibrationDocument();
-    }
+    
 
     @Test
-    public void testSettingLines() {
-        List<String> inputLines = Arrays.asList("123213", "adsad11", "sdsdsd");
-        calibrationDocument.setLines(inputLines);
-    }
+    public void testCreatingNewCalibrationDocument() {
+        CalibrationDocument calibrationDocument = createCalibrationDocument("123213", "adsad11", "sdsdsd");
 
-    @Test
-    public void testSetLinesFromStringInput() {
-        String inputString= "1ii5mgiiiiip3\njgj7mkmf8\n1131131\nffg9123i5";
-        calibrationDocument.setLinesFromInputString(inputString);
+        Assertions.assertNotNull(calibrationDocument);
     }
-
+    
     @Test
     public void testSimpleInput() {
-        String inputString= "1ii5mgiiiiip3\njgj7mkmf8\n1131131\nffg9123i5";
+        CalibrationDocument calibrationDocument = createCalibrationDocument("1ii5mgiiiiip3","jgj7mkmf8","1131131","ffg9123i5");
         int expectedValue = 197;
 
-        calibrationDocument.setLinesFromInputString(inputString);
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
@@ -41,10 +27,9 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testSimpleInputTwo() {
-        String inputString= "22\n5ttttt\na2";
+        CalibrationDocument calibrationDocument = createCalibrationDocument("22","5ttttt","a2");
         int expectedValue = 99;
 
-        calibrationDocument.setLinesFromInputString(inputString);
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
@@ -52,9 +37,7 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testAtLeastOneLineWithoutNumbersThrowsException() {
-        String inputString = "abb5\naaeer\n445tttrao02";
-
-        calibrationDocument.setLinesFromInputString(inputString);
+        CalibrationDocument calibrationDocument = createCalibrationDocument("abb5","aaeer","445tttrao02");
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             calibrationDocument.calculateCalibrationValuesSum();
@@ -63,11 +46,10 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testOnlyOneNumberPerLine() {
-        String inputString = "aaa3\n3eeijgjut\nokkto9ngrjgrg\nr4";
+        CalibrationDocument calibrationDocument = createCalibrationDocument("aaa3","3eeijgjut","okkto9ngrjgrg","r4");
 
         int expectedValue = 209;
 
-        calibrationDocument.setLinesFromInputString(inputString);
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
@@ -75,11 +57,10 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testOnlyNumbersPerLine() {
-        String inputString = "1359854\n1346916\n19339431\n11";
+        CalibrationDocument calibrationDocument = createCalibrationDocument("1359854","1346916","19339431","11");
 
         int expectedValue = 52;
 
-        calibrationDocument.setLinesFromInputString(inputString);
         int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
@@ -87,9 +68,7 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testAnEmptyLine() {
-        String inputString = "1359854\n\n19339431\n11";
-
-        calibrationDocument.setLinesFromInputString(inputString);
+        CalibrationDocument calibrationDocument = createCalibrationDocument("1359854","","19339431","11");
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             calibrationDocument.calculateCalibrationValuesSum();
@@ -98,9 +77,7 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testAllEmptyLines() {
-        String inputString = "\n\n\n";
-
-        calibrationDocument.setLinesFromInputString(inputString);
+        CalibrationDocument calibrationDocument = createCalibrationDocument("","","","");
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             calibrationDocument.calculateCalibrationValuesSum();
@@ -109,12 +86,14 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testAnEmptyInputString() {
-        String inputString = "";
-
-        calibrationDocument.setLinesFromInputString(inputString);
+        CalibrationDocument calibrationDocument = createCalibrationDocument("");
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
             calibrationDocument.calculateCalibrationValuesSum();
         });
+    }
+
+    private CalibrationDocument createCalibrationDocument(String... lines) {
+        return new CalibrationDocument(Arrays.asList(lines));
     }
 }

@@ -1,18 +1,16 @@
 package adventofcode.day01;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class CalibrationDocument {
 
     private List<String> lines;
 
-    public void setLines(List<String> lines) {
+    public CalibrationDocument(List<String> lines) {
+        if (lines == null || lines.isEmpty()) {
+            throw new IllegalArgumentException("Lines must not be null or empty.");
+        }
         this.lines = lines;
-    }
-
-    public void setLinesFromInputString(String inputString) {
-        this.lines = Arrays.asList(inputString.split("\n", -1));
     }
 
     public int calculateCalibrationValuesSum() {
@@ -46,9 +44,5 @@ public class CalibrationDocument {
             }
         }
         throw new IllegalArgumentException("No number found");
-    }
-
-    public void displayCalibrationValuesSum(int sum) {
-        System.out.println(String.format("Sum of calibration values is %s.", sum));
     }
 }

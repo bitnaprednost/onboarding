@@ -18,9 +18,12 @@ public class TaskOne {
             lines.add(inputLine);
         }
 
-        CalibrationDocument calibrationDocument = new CalibrationDocument();
-        calibrationDocument.setLines(lines);
+        CalibrationDocument calibrationDocument = new CalibrationDocument(lines);
         int sum = calibrationDocument.calculateCalibrationValuesSum();
-        calibrationDocument.displayCalibrationValuesSum(sum);
+        displayCalibrationValuesSum(sum);
+    }
+
+    public static void displayCalibrationValuesSum(int sum) {
+        System.out.printf("Sum of calibration values is %s.%n", sum);
     }
 }
