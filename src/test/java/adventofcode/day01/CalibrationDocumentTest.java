@@ -14,7 +14,15 @@ public class CalibrationDocumentTest {
 
         Assertions.assertNotNull(calibrationDocument);
     }
-    
+
+    @Test
+    public void testCreatingNewCalibrationDocumentWithEmptyListThrowsException() {
+
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            createCalibrationDocument();
+        });
+    }
+
     @Test
     public void testSimpleInput() {
         CalibrationDocument calibrationDocument = createCalibrationDocument("1ii5mgiiiiip3","jgj7mkmf8","1131131","ffg9123i5");

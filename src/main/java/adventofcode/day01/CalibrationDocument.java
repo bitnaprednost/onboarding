@@ -4,7 +4,7 @@ import java.util.List;
 
 public class CalibrationDocument {
 
-    private List<String> lines;
+    private final List<String> lines;
 
     public CalibrationDocument(List<String> lines) {
         if (lines == null || lines.isEmpty()) {
