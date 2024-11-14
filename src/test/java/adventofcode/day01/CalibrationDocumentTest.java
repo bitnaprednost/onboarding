@@ -34,7 +34,7 @@ public class CalibrationDocumentTest {
         int expectedValue = 197;
 
         calibrationDocument.setLinesFromInputString(inputString);
-        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
@@ -45,7 +45,7 @@ public class CalibrationDocumentTest {
         int expectedValue = 99;
 
         calibrationDocument.setLinesFromInputString(inputString);
-        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
@@ -57,7 +57,7 @@ public class CalibrationDocumentTest {
         calibrationDocument.setLinesFromInputString(inputString);
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
-            calibrationDocument.calculateSumOfCalibrationValues();
+            calibrationDocument.calculateCalibrationValuesSum();
         });
     }
 
@@ -68,7 +68,7 @@ public class CalibrationDocumentTest {
         int expectedValue = 209;
 
         calibrationDocument.setLinesFromInputString(inputString);
-        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
@@ -80,7 +80,7 @@ public class CalibrationDocumentTest {
         int expectedValue = 52;
 
         calibrationDocument.setLinesFromInputString(inputString);
-        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
@@ -92,7 +92,7 @@ public class CalibrationDocumentTest {
         calibrationDocument.setLinesFromInputString(inputString);
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
-            calibrationDocument.calculateSumOfCalibrationValues();
+            calibrationDocument.calculateCalibrationValuesSum();
         });
     }
 
@@ -103,7 +103,7 @@ public class CalibrationDocumentTest {
         calibrationDocument.setLinesFromInputString(inputString);
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
-            calibrationDocument.calculateSumOfCalibrationValues();
+            calibrationDocument.calculateCalibrationValuesSum();
         });
     }
 
@@ -114,7 +114,7 @@ public class CalibrationDocumentTest {
         calibrationDocument.setLinesFromInputString(inputString);
 
         Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
-            calibrationDocument.calculateSumOfCalibrationValues();
+            calibrationDocument.calculateCalibrationValuesSum();
         });
     }
 }
