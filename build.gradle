@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group = 'adventofcode'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.named('test') {
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED'
+    }
+}
