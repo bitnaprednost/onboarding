@@ -84,4 +84,15 @@ public class CalibrationDocumentTest {
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
+
+    @Test
+    public void testAnEmptyLine() {
+        String inputString = "1359854\n\n19339431\n11";
+
+        calibrationDocument.setLinesFromInputString(inputString);
+
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            calibrationDocument.calculateSumOfCalibrationValues();
+        });
+    }
 }
