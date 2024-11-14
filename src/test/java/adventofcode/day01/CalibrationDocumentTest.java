@@ -21,4 +21,10 @@ public class CalibrationDocumentTest {
         List<String> inputLines = Arrays.asList("123213", "adsad11", "sdsdsd");
         calibrationDocument.setLines(inputLines);
     }
+
+    @Test
+    public void testSetLinesFromStringInput() {
+        String inputString= "1ii5mgiiiiip3\njgj7mkmf8\n1131131\nffg9123i5";
+        calibrationDocument.setLinesFromInputString(inputString);
+    }
 }
