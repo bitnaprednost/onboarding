@@ -103,7 +103,7 @@ public class CalibrationDocumentTest {
 
     @Test
     public void testNumbersAsLetters() {
-        CalibrationDocument calibrationDocument = createSimpleCalibrationDocument("onehjgfaq4", "oneoneonetwo", "4141two", "1", "two");
+        CalibrationDocument calibrationDocument = createAdvancedCalibrationDocument("onehjgfaq4", "oneoneonetwo", "4141two", "1", "two");
 
         int expectedValue = 14 + 12 + 42 + 11 + 22;
 
@@ -114,5 +114,9 @@ public class CalibrationDocumentTest {
 
     private CalibrationDocument createSimpleCalibrationDocument(String... lines) {
         return new CalibrationDocument(Arrays.asList(lines), new SimpleCalibrationValueExtractionStrategy());
+    }
+
+    private CalibrationDocument createAdvancedCalibrationDocument(String... lines) {
+        return new CalibrationDocument(Arrays.asList(lines), new AdvancedCalibrationValueExtractionStrategy());
     }
 }

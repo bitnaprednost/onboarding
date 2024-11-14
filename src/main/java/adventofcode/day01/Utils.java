@@ -18,7 +18,6 @@ public class Utils {
         return lines;
     }
 
-
     public static void displayCalibrationValuesSum(int sum) {
         System.out.printf("Sum of calibration values is %s.%n", sum);
     }
