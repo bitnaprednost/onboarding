@@ -12,7 +12,7 @@ public class CalibrationDocument {
     }
 
     public void setLinesFromInputString(String inputString) {
-        this.lines = Arrays.asList(inputString.split("\n"));
+        this.lines = Arrays.asList(inputString.split("\n", -1));
     }
 
     public int calculateSumOfCalibrationValues() {

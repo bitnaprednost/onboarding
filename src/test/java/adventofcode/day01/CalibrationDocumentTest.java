@@ -95,4 +95,15 @@ public class CalibrationDocumentTest {
             calibrationDocument.calculateSumOfCalibrationValues();
         });
     }
+
+    @Test
+    public void testAllEmptyLines() {
+        String inputString = "\n\n\n";
+
+        calibrationDocument.setLinesFromInputString(inputString);
+
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            calibrationDocument.calculateSumOfCalibrationValues();
+        });
+    }
 }
