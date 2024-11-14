@@ -1,5 +1,9 @@
 package adventofcode.day01;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum NumberAsLetter {
 
     ONE(1),
@@ -25,6 +29,10 @@ public enum NumberAsLetter {
     @Override
     public String toString() {
         return this.name().toLowerCase();
+    }
+
+    public static List<String> getValuesAsLowercase() {
+        return Arrays.stream(values()).map(a -> a.name().toLowerCase()).toList();
     }
 
 }

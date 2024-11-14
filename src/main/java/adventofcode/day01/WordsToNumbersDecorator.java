@@ -13,9 +13,23 @@ public class WordsToNumbersDecorator extends ExtractionStrategyDecorator {
     }
 
     private String preprocessLine(String line) {
-        for (NumberAsLetter numberAsLetter : NumberAsLetter.values()) {
-            line = line.replaceAll(numberAsLetter.toString(), Integer.toString(numberAsLetter.getIntValue()));
+        String newLine = "";
+        StringBuilder potentialNumberAsString = new StringBuilder();
+        for (int i = 0; i < line.length(); i++) {
+            if (Character.isDigit(line.charAt(i))) {
+                newLine += line.charAt(i);
+            } else {
+                potentialNumberAsString.append(line.charAt(i));
+                for (int j = i+1; j < line.length() && j < i+5; j++) {
+                    potentialNumberAsString.append(line.charAt(j));
+                    if (NumberAsLetter.getValuesAsLowercase().contains(potentialNumberAsString.toString())) {
+                        newLine += NumberAsLetter.valueOf(potentialNumberAsString.toString().toUpperCase()).getIntValue();
+                        break;
+                    }
+                }
+                potentialNumberAsString = new StringBuilder();
+            }
         }
-        return line;
+        return newLine;
     }
 }
