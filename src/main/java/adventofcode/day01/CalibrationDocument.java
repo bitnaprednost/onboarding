@@ -37,7 +37,7 @@ public class CalibrationDocument {
                 return Integer.parseInt(Character.toString(character));
             }
         }
-        return Integer.MIN_VALUE;
+        throw new IllegalArgumentException(String.format("Line '%s' contains no numbers", line));
     }
 
     private int getRightNumber(String line) {
@@ -48,6 +48,6 @@ public class CalibrationDocument {
                 return Integer.parseInt(Character.toString(character));
             }
         }
-        return Integer.MIN_VALUE;
+        throw new IllegalArgumentException(String.format("Line '%s' contains no numbers", line));
     }
 }
