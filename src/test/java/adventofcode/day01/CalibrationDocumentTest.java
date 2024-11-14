@@ -38,4 +38,15 @@ public class CalibrationDocumentTest {
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
+
+    @Test
+    public void testSimpleInputTwo() {
+        String inputString= "22\n5ttttt\na2";
+        int expectedValue = 99;
+
+        calibrationDocument.setLinesFromInputString(inputString);
+        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
 }
