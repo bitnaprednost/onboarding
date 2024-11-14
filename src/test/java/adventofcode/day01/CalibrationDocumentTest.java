@@ -49,4 +49,15 @@ public class CalibrationDocumentTest {
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
+
+    @Test
+    public void testAtLeastOneLineWithoutNumbersThrowsException() {
+        String inputString = "abb5\naaeer\n445tttrao02";
+
+        calibrationDocument.setLinesFromInputString(inputString);
+
+        Assertions.assertThrowsExactly(IllegalArgumentException.class, () -> {
+            calibrationDocument.calculateSumOfCalibrationValues();
+        });
+    }
 }
