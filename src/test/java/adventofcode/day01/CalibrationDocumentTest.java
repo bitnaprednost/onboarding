@@ -60,4 +60,28 @@ public class CalibrationDocumentTest {
             calibrationDocument.calculateSumOfCalibrationValues();
         });
     }
+
+    @Test
+    public void testOnlyOneNumberPerLine() {
+        String inputString = "aaa3\n3eeijgjut\nokkto9ngrjgrg\nr4";
+
+        int expectedValue = 209;
+
+        calibrationDocument.setLinesFromInputString(inputString);
+        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void testOnlyNumbersPerLine() {
+        String inputString = "1359854\n1346916\n19339431\n11";
+
+        int expectedValue = 52;
+
+        calibrationDocument.setLinesFromInputString(inputString);
+        int actualValue = calibrationDocument.calculateSumOfCalibrationValues();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
 }
