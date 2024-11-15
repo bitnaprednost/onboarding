@@ -4,24 +4,29 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-import java.util.Map;
-
-import static adventofcode.day02.TestUtils.getShortGameInformation;
+import static adventofcode.day02.TestUtils.getShortInput;
 
 public class GameRunnerTest {
 
+    private GameRunner gameRunner;
+    private InputParser inputParser;
+
+    @BeforeEach
+    public void setUp() {
+        inputParser = new InputParser();
+        gameRunner = new GameRunner(inputParser);
+    }
+
     @Test
     public void testSmallMap() {
-        Map<Integer, List<Map<ColorEnum, Integer>>> inputGameInformation = getShortGameInformation();
-        GameRunner gameRunner = new GameRunner(inputGameInformation);
+        String input = getShortInput();
+        Integer expectedIdSum = 8;
 
-        Integer expectedIdSum = 5;
+        Bag bag = new Bag(12, 13, 14);
 
-        Integer actualIdSum = gameRunner.runGame();
+        Integer actualIdSum = gameRunner.calculateSumOfPossibleGameIds(input, bag);
 
         Assertions.assertEquals(expectedIdSum, actualIdSum);
-
     }
 
 }
