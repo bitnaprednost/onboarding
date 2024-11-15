@@ -25,13 +25,13 @@ public class Utils {
 
         while (true) {
             String line = scanner.nextLine();
-            if (line.isBlank()) { // Break the loop if the user enters a blank line
+            if (line.isBlank()) {
                 break;
             }
             if (inputBuilder.length() > 0) {
-                inputBuilder.append("\n"); // Add newline before appending the next line
+                inputBuilder.append("\n");
             }
-            inputBuilder.append(line); // Append the user input to the builder
+            inputBuilder.append(line);
         }
 
         return inputBuilder.toString();
