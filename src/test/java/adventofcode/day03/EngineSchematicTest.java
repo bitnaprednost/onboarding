@@ -12,10 +12,22 @@ public class EngineSchematicTest {
         String input = getTestOneInput();
         EngineSchematic engineSchematic = new EngineSchematic();
 
-        int exptectedSum = 4361;
+        int expectedSum = 4361;
 
         int actualSum = engineSchematic.calculateSum(input);
 
-        Assertions.assertEquals(exptectedSum, actualSum);
+        Assertions.assertEquals(expectedSum, actualSum);
+    }
+
+    @Test
+    public void testAdjacentToSymbol() {
+        String input = getTestOneInput();
+        EngineSchematic engineSchematic = new EngineSchematic();
+
+        boolean expectedValue = true;
+
+        boolean actualValue = engineSchematic.isAdjacentToSymbol(2, 2, 3);
+
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 }
