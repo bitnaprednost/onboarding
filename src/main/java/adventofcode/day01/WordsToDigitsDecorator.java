@@ -1,11 +1,9 @@
 package adventofcode.day01;
 
-public class WordsToDigitsDecorator extends LineProcessingDecorator {
+public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
 
-    private final LineProcessingDecorator strategy;
-
-    public WordsToDigitsDecorator(LineProcessingDecorator strategy) {
-        this.strategy = strategy;
+    public WordsToDigitsDecorator(CalibrationValueExtractionStrategy strategy) {
+        super(strategy);
     }
 
     @Override
