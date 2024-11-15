@@ -112,6 +112,40 @@ public class CalibrationDocumentTest {
         Assertions.assertEquals(expectedValue, actualValue);
     }
 
+
+    @Test
+    public void testNumbersAsLettersTwo() {
+        CalibrationDocument calibrationDocument = createAdvancedCalibrationDocument("oneoneoneoneone", "twoonetwoonetwo", "4eighthreeight", "twone1", "two");
+
+        int expectedValue = 11 + 22 + 48 + 21 + 22;
+
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void testNumbersAsLettersThree() {
+        CalibrationDocument calibrationDocument = createAdvancedCalibrationDocument("threeeee", "four1", "eght23", "one97945979684three", "1");
+
+        int expectedValue = 33 + 41 + 23 + 13 + 11;
+
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void testNumbersAsLettersFour() {
+        CalibrationDocument calibrationDocument = createAdvancedCalibrationDocument("213", "123", "2222", "9", "66767676767676767");
+
+        int expectedValue = 23 + 13 + 22 + 99 + 67;
+
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
+
     private CalibrationDocument createSimpleCalibrationDocument(String... lines) {
         CalibrationValueExtractionStrategy simpleStrategy = new SimpleCalibrationValueExtractionStrategy();
 
