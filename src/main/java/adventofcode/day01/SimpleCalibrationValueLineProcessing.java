@@ -1,12 +1,11 @@
 package adventofcode.day01;
 
-public class SimpleCalibrationValueExtractionStrategy implements CalibrationValueExtractionStrategy {
+public class SimpleCalibrationValueLineProcessing extends LineProcessingDecorator {
 
-    @Override
     public int extractCalibrationValueFromLine(String line) {
         int leftNumber = getLeftmostNumber(line);
         int rightNumber = getRightmostNumber(line);
-        return leftNumber*10 + rightNumber;
+        return leftNumber * 10 + rightNumber;
     }
 
     private int getLeftmostNumber(String line) {
@@ -28,3 +27,4 @@ public class SimpleCalibrationValueExtractionStrategy implements CalibrationValu
         throw new IllegalArgumentException("No number found");
     }
 }
+

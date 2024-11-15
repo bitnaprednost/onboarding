@@ -5,21 +5,22 @@ import java.util.List;
 public class CalibrationDocument {
 
     private final List<String> lines;
-    private final CalibrationValueExtractionStrategy extractionStrategy;
+    private final LineProcessingDecorator decorator;
 
-    public CalibrationDocument(List<String> lines, CalibrationValueExtractionStrategy extractionStrategy) {
+    public CalibrationDocument(List<String> lines, LineProcessingDecorator decorator) {
         if (lines == null || lines.isEmpty()) {
             throw new IllegalArgumentException("Lines must not be null or empty.");
         }
         this.lines = lines;
-        this.extractionStrategy = extractionStrategy;
+        this.decorator = decorator;
     }
 
     public int calculateCalibrationValuesSum() {
         int sum = 0;
         for (String line : lines) {
-            sum += extractionStrategy.extractCalibrationValueFromLine(line);
+            sum += decorator.extractCalibrationValueFromLine(line);
         }
         return sum;
     }
 }
+
