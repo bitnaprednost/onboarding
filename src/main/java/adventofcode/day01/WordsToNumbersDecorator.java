@@ -13,23 +13,26 @@ public class WordsToNumbersDecorator extends ExtractionStrategyDecorator {
     }
 
     private String preprocessLine(String line) {
-        String newLine = "";
-        StringBuilder potentialNumberAsString = new StringBuilder();
+        StringBuilder newLine = new StringBuilder();
         for (int i = 0; i < line.length(); i++) {
             if (Character.isDigit(line.charAt(i))) {
-                newLine += line.charAt(i);
+                newLine.append(line.charAt(i));
             } else {
-                potentialNumberAsString.append(line.charAt(i));
-                for (int j = i+1; j < line.length() && j < i+5; j++) {
-                    potentialNumberAsString.append(line.charAt(j));
-                    if (NumberAsLetter.getValuesAsLowercase().contains(potentialNumberAsString.toString())) {
-                        newLine += NumberAsLetter.valueOf(potentialNumberAsString.toString().toUpperCase()).getIntValue();
-                        break;
-                    }
-                }
-                potentialNumberAsString = new StringBuilder();
+                appendPotentialNumberAsString(line, i, newLine);
             }
         }
-        return newLine;
+        return newLine.toString();
+    }
+
+    private static void appendPotentialNumberAsString(String line, int i, StringBuilder newLine) {
+        StringBuilder potentialNumberAsString = new StringBuilder();
+        potentialNumberAsString.append(line.charAt(i));
+        for (int j = i +1; j < line.length() && j < i +5; j++) {
+            potentialNumberAsString.append(line.charAt(j));
+            if (NumberAsLetter.getValuesAsLowercase().contains(potentialNumberAsString.toString())) {
+                newLine.append(NumberAsLetter.valueOf(potentialNumberAsString.toString().toUpperCase()).getIntValue());
+                break;
+            }
+        }
     }
 }
