@@ -9,11 +9,10 @@ import static adventofcode.day02.TestUtils.getShortInput;
 public class GameRunnerTest {
 
     private GameRunner gameRunner;
-    private InputParser inputParser;
 
     @BeforeEach
     public void setUp() {
-        inputParser = new InputParser();
+        InputParser inputParser = new InputParser();
         gameRunner = new GameRunner(inputParser);
     }
 
