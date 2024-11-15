@@ -1,6 +1,7 @@
 package adventofcode.day02;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,15 +11,14 @@ import static adventofcode.day02.TestUtils.getShortGameInformation;
 
 public class GameRunnerTest {
 
-    private static final GameRunner gameRunner = new GameRunner();
-
     @Test
     public void testSmallMap() {
         Map<Integer, List<Map<ColorEnum, Integer>>> inputGameInformation = getShortGameInformation();
+        GameRunner gameRunner = new GameRunner(inputGameInformation);
 
-        Integer expectedIdSum = 12;
+        Integer expectedIdSum = 5;
 
-        Integer actualIdSum = gameRunner.runGame(inputGameInformation);
+        Integer actualIdSum = gameRunner.runGame();
 
         Assertions.assertEquals(expectedIdSum, actualIdSum);
 
