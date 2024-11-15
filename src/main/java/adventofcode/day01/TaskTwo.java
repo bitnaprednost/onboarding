@@ -7,7 +7,7 @@ public class TaskTwo {
         List<String> lines = Utils.readUserInput();
 
         CalibrationValueExtractionStrategy simpleStrategy = new SimpleCalibrationValueExtractionStrategy();
-        CalibrationValueExtractionStrategy advancedStrategy = new WordsToNumbersDecorator(simpleStrategy);
+        CalibrationValueExtractionStrategy advancedStrategy = new WordsToDigitsDecorator(simpleStrategy);
 
         CalibrationDocument advancedCalibrationDocument = new CalibrationDocument(lines, advancedStrategy);
 

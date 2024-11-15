@@ -2,9 +2,8 @@ package adventofcode.day01;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public enum NumberAsLetter {
+public enum DigitWordEnum {
 
     ONE(1),
     TWO(2),
@@ -18,7 +17,7 @@ public enum NumberAsLetter {
 
     private final int intValue;
 
-    NumberAsLetter(int intValue) {
+    DigitWordEnum(int intValue) {
         this.intValue = intValue;
     }
 

@@ -154,7 +154,7 @@ public class CalibrationDocumentTest {
 
     private CalibrationDocument createAdvancedCalibrationDocument(String... lines) {
         CalibrationValueExtractionStrategy simpleStrategy = new SimpleCalibrationValueExtractionStrategy();
-        CalibrationValueExtractionStrategy advancedStrategy = new WordsToNumbersDecorator(simpleStrategy);
+        CalibrationValueExtractionStrategy advancedStrategy = new WordsToDigitsDecorator(simpleStrategy);
 
         return new CalibrationDocument(Arrays.asList(lines), advancedStrategy);
     }
