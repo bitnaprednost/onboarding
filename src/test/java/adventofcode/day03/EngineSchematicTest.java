@@ -30,4 +30,17 @@ public class EngineSchematicTest {
 
         Assertions.assertEquals(expectedValue, actualValue);
     }
+
+    @Test
+    public void testNotAdjacentToSymbol() {
+        String input = getTestOneInput();
+        EngineSchematic engineSchematic = new EngineSchematic();
+
+        boolean expectedValue = false;
+
+        boolean actualValue = engineSchematic.isAdjacentToSymbol(5, 7, 8);
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
+
 }
