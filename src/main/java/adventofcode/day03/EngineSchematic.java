@@ -8,4 +8,8 @@ public class EngineSchematic {
         return 4361;
     }
 
+    public boolean isAdjacentToSymbol(int rowIndex, int startColumnIndex, int endColumnIndex) {
+        return true;
+    }
+
 }
