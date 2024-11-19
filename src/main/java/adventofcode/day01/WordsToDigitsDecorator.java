@@ -35,8 +35,12 @@ public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
         potentialNumberAsString.append(line.charAt(i));
         for (int j = i +1; j < line.length() && j < i +5; j++) {
             potentialNumberAsString.append(line.charAt(j));
-            if (Digits.getValuesAsLowercase().contains(potentialNumberAsString.toString())) {
-                newLine.append(Digits.valueOf(potentialNumberAsString.toString().toUpperCase()).getIntValue());
+
+            Digits digits = Digits.valueOfString(potentialNumberAsString.toString());
+
+            if (digits != Digits.NOT_A_NUMBER) {
+                newLine.append(digits.getIntValue());
+
                 break;
             }
         }
