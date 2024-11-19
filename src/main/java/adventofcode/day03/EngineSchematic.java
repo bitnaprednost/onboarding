@@ -2,6 +2,8 @@ package adventofcode.day03;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EngineSchematic {
 
@@ -21,7 +23,11 @@ public class EngineSchematic {
     }
 
     public int calculateSumOfGearRatios() {
-        return 467835;
+        int sum = 0;
+        for (GearPosition gearPosition : gearPositions) {
+            sum += findGearRatioForGear(gearPosition);
+        }
+        return sum;
     }
 
     public int calculateSum() {
@@ -32,6 +38,35 @@ public class EngineSchematic {
             }
         }
         return sum;
+    }
+
+    private int findGearRatioForGear(GearPosition gearPosition) {
+        int ratio = 0;
+        List<NumberPosition> numberPositionsAdjacentToGear = this.numberPositions.stream()
+                .filter(numberPosition -> numberIsAdjacentToGearPosition(gearPosition, numberPosition))
+                .collect(Collectors.toUnmodifiableList());
+        if (numberPositionsAdjacentToGear.size() == 2) {
+            ratio = numberPositionsAdjacentToGear.get(0).value() * numberPositionsAdjacentToGear.get(1).value();
+        }
+        return ratio;
+    }
+
+    private boolean numberIsAdjacentToGearPosition(GearPosition gearPosition, NumberPosition numberPosition) {
+        int rowDistance = getRowDistance(gearPosition, numberPosition);
+        int columnDistance = getColumnDistance(gearPosition, numberPosition);
+        return rowDistance <= 1 && columnDistance <= 1;
+    }
+
+    private int getColumnDistance(GearPosition gearPosition, NumberPosition numberPosition) {
+        int distance = Integer.MAX_VALUE;
+        for (int i = numberPosition.beginColumn(); i <= numberPosition.endColumn(); i++) {
+            distance = Math.min(distance, Math.abs(i - gearPosition.column()));
+        }
+        return distance;
+    }
+
+    private int getRowDistance(GearPosition gearPosition, NumberPosition numberPosition) {
+        return Math.abs(gearPosition.row() - numberPosition.row());
     }
 
     public boolean isAdjacentToSymbol(int rowIndex, int startColumnIndex, int endColumnIndex) {
