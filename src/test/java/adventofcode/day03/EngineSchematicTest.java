@@ -4,11 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static adventofcode.day03.TestUtils.getTestOneInput;
+import static adventofcode.day03.TestUtils.getTestTwoInput;
 
 public class EngineSchematicTest {
 
     @Test
-    public void testOne() {
+    public void testCalculateSum() {
         String input = getTestOneInput();
         EngineSchematic engineSchematic = new EngineSchematic(input);
 
@@ -41,6 +42,18 @@ public class EngineSchematicTest {
         boolean actualValue = engineSchematic.isAdjacentToSymbol(5, 7, 8);
 
         Assertions.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void testCalculateSumTwo() {
+        String input = getTestTwoInput();
+        EngineSchematic engineSchematic = new EngineSchematic(input);
+
+        int expectedSum = 4427;
+
+        int actualSum = engineSchematic.calculateSum();
+
+        Assertions.assertEquals(expectedSum, actualSum);
     }
 
 }
