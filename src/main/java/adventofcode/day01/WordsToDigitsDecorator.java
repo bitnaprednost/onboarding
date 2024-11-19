@@ -1,6 +1,6 @@
 package adventofcode.day01;
 
-import adventofcode.day01.text.Digits;
+import adventofcode.day01.text.Digit;
 
 public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
 
@@ -36,10 +36,10 @@ public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
         for (int j = i +1; j < line.length() && j < i +5; j++) {
             potentialNumberAsString.append(line.charAt(j));
 
-            Digits digits = Digits.valueOfString(potentialNumberAsString.toString());
+            Digit digit = Digit.valueOfString(potentialNumberAsString.toString());
 
-            if (digits != Digits.NOT_A_NUMBER) {
-                newLine.append(digits.getIntValue());
+            if (digit != Digit.NOT_A_NUMBER) {
+                newLine.append(digit.getIntValue());
 
                 break;
             }
