@@ -1,6 +1,5 @@
 package adventofcode.day04;
 
-import adventofcode.day03.EngineSchematic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

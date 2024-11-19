@@ -9,4 +9,4 @@
 - ChatGPT help: just reminded me that records exist, no further help
 
 # Day 04
-- no notes
+- ChatGPT help: just asked it to give me a formula for the intersection point of 2 lines if only the slope and 1 point is known.

@@ -45,6 +45,20 @@ public class TestUtils {
                 "20, 82, 15 @ 0, 0, 0";
     }
 
+    public static Hailstone hailstone1() {
+        return new Hailstone(
+                new Position(1,2,3),
+                new Velocity(1,3,3)
+        );
+    }
+
+    public static Hailstone hailstone2() {
+        return new Hailstone(
+                new Position(1,2,3),
+                new Velocity(4,12,3)
+        );
+    }
+
     public static List<Hailstone> expectedHailstonesTestTwo = List.of(
             new Hailstone(new Position(11, 13, 30), new Velocity(-2, 1, -2)),
             new Hailstone(new Position(18, 19, 22), new Velocity(-1, 1, -2)),
