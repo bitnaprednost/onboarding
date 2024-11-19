@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class Position {
 
-    private int x;
-    private int y;
-    private int z;
+    private long x;
+    private long y;
+    private long z;
 
-    public Position(int x, int y, int z) {
+    public Position(long x, long y, long z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -26,11 +26,11 @@ public class Position {
         return Objects.hash(x, y, z);
     }
 
-    public Integer getX() {
+    public Long getX() {
         return this.x;
     }
 
-    public Integer getY() {
+    public Long getY() {
         return this.y;
     }
 }

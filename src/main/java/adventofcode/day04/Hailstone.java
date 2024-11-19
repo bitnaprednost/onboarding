@@ -13,7 +13,7 @@ public class Hailstone {
         this.position = position;
     }
 
-    public boolean intersectsInTheFutureWithinArea(Hailstone hailstone, int minimumX, int minimumY, int maximumX, int maximumY) {
+    public boolean intersectsInTheFutureWithinArea(Hailstone hailstone, long minimumX, long minimumY, long maximumX, long maximumY) {
         Pair<Double, Double> intersection = this.intersect(hailstone);
         if (Double.isNaN(intersection.getLeft()) || Double.isNaN(intersection.getRight())) {
             return false;
@@ -24,7 +24,7 @@ public class Hailstone {
         return intersectionIsWithinArea && intersectionIsInTheFutureOfThis && intersectionIsInTheFutureOfHailstone;
     }
 
-    private boolean intersectionIsWithinArea(Pair<Double, Double> intersection, int minimumX, int minimumY, int maximumX, int maximumY) {
+    private boolean intersectionIsWithinArea(Pair<Double, Double> intersection, long minimumX, long minimumY, long maximumX, long maximumY) {
         return intersection.getLeft() >= minimumX &&
                 intersection.getLeft() <= maximumX &&
                 intersection.getRight() >= minimumY &&
@@ -36,12 +36,12 @@ public class Hailstone {
             return Pair.create(Double.NaN, Double.NaN);
         }
         Double m1 = this.getSlope();
-        Integer x1 = this.position.getX();
-        Integer y1 = this.position.getY();
+        Long x1 = this.position.getX();
+        Long y1 = this.position.getY();
 
         Double m2 = hailstone.getSlope();
-        Integer x2 = hailstone.position.getX();
-        Integer y2 = hailstone.position.getY();
+        Long x2 = hailstone.position.getX();
+        Long y2 = hailstone.position.getY();
 
 
         Double x = ((m1*x1 - m2*x2) + (y2 - y1)) / (m1 - m2);

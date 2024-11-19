@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Experiment {
 
-    private int minimumXValue;
-    private int minimumYValue;
-    private int maximumXValue;
-    private int maximumYValue;
+    private long minimumXValue;
+    private long minimumYValue;
+    private long maximumXValue;
+    private long maximumYValue;
     private List<Hailstone> hailstones;
 
-    public Experiment(String input, int minimumXValue, int minimumYValue, int maximumXValue, int maximumYValue) {
+    public Experiment(String input, long minimumXValue, long minimumYValue, long maximumXValue, long maximumYValue) {
         setHailstonesFromInput(input);
         this.minimumXValue = minimumXValue;
         this.minimumYValue = minimumYValue;
@@ -55,9 +55,9 @@ public class Experiment {
 
     private Position extractPosition(String leftSideOfInputLine) {
         String[] positions = leftSideOfInputLine.split(",");
-        int x = Integer.parseInt(positions[0].strip());
-        int y = Integer.parseInt(positions[1].strip());
-        int z = Integer.parseInt(positions[2].strip());
+        long x = Long.parseLong(positions[0].strip());
+        long y = Long.parseLong(positions[1].strip());
+        long z = Long.parseLong(positions[2].strip());
         return new Position(x,y,z);
     }
 

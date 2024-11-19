@@ -7,10 +7,10 @@ import adventofcode.Utils;
  */
 public class TaskOne {
 
-    private static final int MINIMUM_X = 7;
-    private static final int MINIMUM_Y = 7;
-    private static final int MAXIMUM_X = 27;
-    private static final int MAXIMUM_Y = 27;
+    private static final long MINIMUM_X = 200000000000000L;
+    private static final long MINIMUM_Y = 200000000000000L;
+    private static final long MAXIMUM_X = 400000000000000L;
+    private static final long MAXIMUM_Y = 400000000000000L;
 
     public static void main(String[] args) {
         String input = Utils.readUserInputAsString();
