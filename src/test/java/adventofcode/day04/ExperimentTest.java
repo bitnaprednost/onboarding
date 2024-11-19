@@ -52,6 +52,30 @@ public class ExperimentTest {
         Assertions.assertEquals(expectedNumberOfIntersections, actualNumberOfIntersections);
     }
 
+    @Test
+    public void testCalculatingNumberOfIntersectionsWithinTestAreaTwo() {
+        String input = getNoIntersectionsInput();
+        Experiment experiment = getExperimentForTheFirstTask(input);
+
+        int expectedNumberOfIntersections = 0;
+
+        int actualNumberOfIntersections = experiment.calculateNumberOfIntersectionsWithinTestArea();
+
+        Assertions.assertEquals(expectedNumberOfIntersections, actualNumberOfIntersections);
+    }
+
+    @Test
+    public void testCalculatingNumberOfIntersectionsWithinTestAreaZeroVelocities() {
+        String input = getZeroVelocitiesInput();
+        Experiment experiment = getExperimentForTheFirstTask(input);
+
+        int expectedNumberOfIntersections = 0;
+
+        int actualNumberOfIntersections = experiment.calculateNumberOfIntersectionsWithinTestArea();
+
+        Assertions.assertEquals(expectedNumberOfIntersections, actualNumberOfIntersections);
+    }
+
 
     private Experiment getExperimentForTheFirstTask(String input) {
         return new Experiment(input, MINIMUM_X, MINIMUM_Y, MAXIMUM_X, MAXIMUM_Y);
