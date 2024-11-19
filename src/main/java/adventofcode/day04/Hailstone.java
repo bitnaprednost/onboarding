@@ -12,6 +12,16 @@ public class Hailstone {
         this.position = position;
     }
 
+
+
+    public boolean isParallelInXYPlaneWith(Hailstone hailstone) {
+        return this.getSlope() == hailstone.getSlope();
+    }
+
+    private double getSlope() {
+        return (double) this.velocity.getDy() / this.velocity.getDx();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Hailstone hailstone)) return false;

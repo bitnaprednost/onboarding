@@ -14,6 +14,14 @@ public class Velocity {
         this.dz = dz;
     }
 
+    public int getDx() {
+        return dx;
+    }
+
+    public int getDy() {
+        return dy;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Velocity velocity)) return false;
