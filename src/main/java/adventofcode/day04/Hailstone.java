@@ -59,4 +59,13 @@ public class Hailstone {
     }
 
 
+    public boolean intersectInTheFuture(Hailstone hailstone) {
+        Pair<Double, Double> intersection = this.intersect(hailstone);
+        if (Double.isNaN(intersection.getLeft()) || Double.isNaN(intersection.getRight())) {
+            return false;
+        }
+        boolean intersectionIsInTheFutureOfThis = this.pointIsInTheFutureOfTheLine(intersection);
+        boolean intersectionIsInTheFutureOfHailstone = hailstone.pointIsInTheFutureOfTheLine(intersection);
+        return intersectionIsInTheFutureOfThis && intersectionIsInTheFutureOfHailstone;
+    }
 }
