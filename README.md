@@ -11,5 +11,8 @@
 # Day 03
 - ChatGPT help: just reminded me that records exist in Java, no further help
 
+# Day 04
+- a
+
 # Day 24
 - ChatGPT help: just asked it to give me a formula for the intersection point of 2 lines if only the slope and 1 point is known, asked it to generate more test data
