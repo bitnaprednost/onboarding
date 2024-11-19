@@ -1,6 +1,6 @@
 package adventofcode.day01;
 
-import adventofcode.day01.text.DigitWordEnum;
+import adventofcode.day01.text.Digits;
 
 public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
 
@@ -35,8 +35,8 @@ public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
         potentialNumberAsString.append(line.charAt(i));
         for (int j = i +1; j < line.length() && j < i +5; j++) {
             potentialNumberAsString.append(line.charAt(j));
-            if (DigitWordEnum.getValuesAsLowercase().contains(potentialNumberAsString.toString())) {
-                newLine.append(DigitWordEnum.valueOf(potentialNumberAsString.toString().toUpperCase()).getIntValue());
+            if (Digits.getValuesAsLowercase().contains(potentialNumberAsString.toString())) {
+                newLine.append(Digits.valueOf(potentialNumberAsString.toString().toUpperCase()).getIntValue());
                 break;
             }
         }
