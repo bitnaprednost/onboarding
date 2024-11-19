@@ -23,7 +23,6 @@ public class EngineSchematic {
         int rowSum = 0;
         int number = 0;
         int numberBeginIndex = -1;
-        int numberEndIndex = -1;
         for (int i = 0; i < row.length; i++) {
             if (Character.isDigit(row[i])) {
                 if (numberBeginIndex == -1) {
@@ -32,8 +31,7 @@ public class EngineSchematic {
                 number *= 10;
                 number += Integer.parseInt(String.valueOf(row[i]));
             } else {
-                numberEndIndex = i - 1;
-                if (isAdjacentToSymbol(rowIndex, numberBeginIndex, numberEndIndex)) {
+                if (isAdjacentToSymbol(rowIndex, numberBeginIndex, i - 1)) {
                     rowSum += number;
                 }
                 number = 0;
