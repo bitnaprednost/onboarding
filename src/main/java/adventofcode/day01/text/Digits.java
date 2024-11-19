@@ -13,7 +13,8 @@ public enum Digits {
     SIX(6),
     SEVEN(7),
     EIGHT(8),
-    NINE(9);
+    NINE(9),
+    NOT_A_NUMBER(Integer.MIN_VALUE);
 
     private final int intValue;
 
@@ -32,6 +33,20 @@ public enum Digits {
 
     public static List<String> getValuesAsLowercase() {
         return Arrays.stream(values()).map(a -> a.name().toLowerCase()).toList();
+    }
+
+    public static Digits valueOfString(String value) {
+        if (value == null || value.isEmpty()) {
+            return NOT_A_NUMBER;
+        }
+
+        for (Digits digit : Digits.values()) {
+            if (value.equalsIgnoreCase(digit.name())) {
+                return digit;
+            }
+        }
+
+        return NOT_A_NUMBER;
     }
 
 }
