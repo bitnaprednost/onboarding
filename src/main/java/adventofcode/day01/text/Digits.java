@@ -1,8 +1,5 @@
 package adventofcode.day01.text;
 
-import java.util.Arrays;
-import java.util.List;
-
 public enum Digits {
 
     ONE(1),
@@ -29,10 +26,6 @@ public enum Digits {
     @Override
     public String toString() {
         return this.name().toLowerCase();
-    }
-
-    public static List<String> getValuesAsLowercase() {
-        return Arrays.stream(values()).map(a -> a.name().toLowerCase()).toList();
     }
 
     public static Digits valueOfString(String value) {
