@@ -18,16 +18,12 @@ public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
         StringBuilder newLine = new StringBuilder();
         for (int i = 0; i < line.length(); i++) {
             if (Character.isDigit(line.charAt(i))) {
-                appendDigit(line, newLine, i);
+                newLine.append(line.charAt(i));
             } else {
                 appendPotentialWordAsADigit(line, newLine, i);
             }
         }
         return newLine.toString();
-    }
-
-    private static void appendDigit(String line, StringBuilder newLine, int i) {
-        newLine.append(line.charAt(i));
     }
 
     private static void appendPotentialWordAsADigit(String line, StringBuilder newLine, int i) {
