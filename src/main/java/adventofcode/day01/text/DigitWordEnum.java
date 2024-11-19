@@ -1,4 +1,4 @@
-package adventofcode.day01;
+package adventofcode.day01.text;
 
 import java.util.Arrays;
 import java.util.List;

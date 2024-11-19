@@ -1,5 +1,7 @@
 package adventofcode.day01;
 
+import adventofcode.day01.text.DigitWordEnum;
+
 public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
 
     public WordsToDigitsDecorator(CalibrationValueExtractionStrategy strategy) {
