@@ -1,10 +1,10 @@
-package adventofcode.day04;
+package adventofcode.day24;
 
 import org.graalvm.collections.Pair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static adventofcode.day04.TestUtils.*;
+import static adventofcode.day24.TestUtils.*;
 
 public class HailstoneTest {
     @Test
