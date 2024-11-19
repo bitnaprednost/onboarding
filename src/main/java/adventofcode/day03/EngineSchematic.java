@@ -12,7 +12,35 @@ public class EngineSchematic {
     }
 
     public int calculateSum() {
-        return 4361;
+        int sum = 0;
+        for (int i = 0; i < grid.length; i++) {
+            sum += calculateSumForRow(grid[i], i);
+        }
+        return sum;
+    }
+
+    private int calculateSumForRow(char[] row, int rowIndex) {
+        int rowSum = 0;
+        int number = 0;
+        int numberBeginIndex = -1;
+        int numberEndIndex = -1;
+        for (int i = 0; i < row.length; i++) {
+            if (Character.isDigit(row[i])) {
+                if (numberBeginIndex == -1) {
+                    numberBeginIndex = i;
+                }
+                number *= 10;
+                number += Integer.parseInt(String.valueOf(row[i]));
+            } else {
+                numberEndIndex = i - 1;
+                if (isAdjacentToSymbol(rowIndex, numberBeginIndex, numberEndIndex)) {
+                    rowSum += number;
+                }
+                number = 0;
+                numberBeginIndex = -1;
+            }
+        }
+        return rowSum;
     }
 
     public boolean isAdjacentToSymbol(int rowIndex, int startColumnIndex, int endColumnIndex) {
