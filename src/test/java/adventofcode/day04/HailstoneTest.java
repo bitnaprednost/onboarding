@@ -124,4 +124,22 @@ public class HailstoneTest {
         Assertions.assertEquals(expectedIsIntersectionIsInTheFutureOfHailstone1, actualIsIntersectionIsInTheFutureOfHailstone1);
         Assertions.assertEquals(expectedIsIntersectionIsInTheFutureOfHailstone2, actualIsIntersectionIsInTheFutureOfHailstone2);
     }
+
+    @Test
+    public void testIfHailstonesIntersectInTheFuture() {
+        Hailstone hailstone1 = new Hailstone(
+                new Position(-3, -2, 0),
+                new Velocity(1, 2, 0)
+        );
+        Hailstone hailstone2 = new Hailstone(
+                new Position(-1, -1, 0),
+                new Velocity(-1, -1, 0)
+        );
+
+        boolean expectedIntersectInTheFuture = false;
+
+        boolean actualIntersectInTheFuture = hailstone1.intersectInTheFuture(hailstone2);
+
+        Assertions.assertEquals(expectedIntersectInTheFuture, actualIntersectInTheFuture);
+    }
 }
