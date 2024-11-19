@@ -3,8 +3,7 @@ package adventofcode.day03;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static adventofcode.day03.TestUtils.getTestOneInput;
-import static adventofcode.day03.TestUtils.getTestTwoInput;
+import static adventofcode.day03.TestUtils.*;
 
 public class EngineSchematicTest {
 
@@ -62,6 +61,18 @@ public class EngineSchematicTest {
         EngineSchematic engineSchematic = new EngineSchematic(input);
 
         int expectedSum = 467835;
+
+        int actualSum = engineSchematic.calculateSumOfGearRatios();
+
+        Assertions.assertEquals(expectedSum, actualSum);
+    }
+
+    @Test
+    public void testCalculateSumOfGearRatiosTwo() {
+        String input = getGearRatiosSumTestInputOne();
+        EngineSchematic engineSchematic = new EngineSchematic(input);
+
+        int expectedSum = 274;
 
         int actualSum = engineSchematic.calculateSumOfGearRatios();
 
