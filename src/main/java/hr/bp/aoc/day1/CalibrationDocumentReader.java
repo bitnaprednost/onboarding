@@ -1,19 +1,22 @@
 package hr.bp.aoc.day1;
 
+import java.util.List;
+
 public class CalibrationDocumentReader {
-    private String document;
+    private List<String> document;
     private ReadingStrategy strategy;
 
-    public CalibrationDocumentReader(String document, ReadingStrategy strategy) {
+
+    public CalibrationDocumentReader(List<String> document) {
         this.document = document;
-        this.strategy = strategy;
+        this.strategy = new CalibrationReaderStrategy();
     }
 
-    public String getDocument() {
+    public List<String> getDocument() {
         return document;
     }
 
-    public void setDocument(String document) {
+    public void setDocument(List<String> document) {
         this.document = document;
     }
 
@@ -26,6 +29,13 @@ public class CalibrationDocumentReader {
     }
 
     public int calibration() {
-        return strategy.parseDocument(document);
+        int calibrationSum = 0;
+
+        for (String calibration : document) {
+            calibrationSum += strategy.parseDocument(calibration);
+        }
+
+        return calibrationSum;
     }
+
 }

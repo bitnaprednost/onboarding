@@ -1,5 +1,7 @@
 package hr.bp.aoc.day1;
 
+import java.util.List;
+
 public class CalibrationReaderStrategy implements ReadingStrategy{
     @Override
     public int parseDocument(String document) {

@@ -1,20 +1,14 @@
 package hr.bp.aoc.day1;
 
+import java.net.URL;
+import java.util.List;
+
+
 public class TaskOne {
     public static void main(String[] args) {
-        String testFloorDirections = "))(((((";
-        String testCalibrationReader = "treb7uchet";
+        List<String> document = Utils.readFromFile("inputTaskOne.txt");
+        CalibrationDocumentReader calibrationReader = new CalibrationDocumentReader(document);
 
-        ReadingStrategy strategyFloors = new FloorReadingStrategy();
-        SantaDirectionsReader santa = new SantaDirectionsReader(testFloorDirections, strategyFloors);
-
-        int floor = santa.whatFloor();
-        System.out.println("Santa will end up on " + floor + " floor!");
-
-        ReadingStrategy strategyCalibrations = new CalibrationReaderStrategy();
-        CalibrationDocumentReader calibrationsReader = new CalibrationDocumentReader(testCalibrationReader,
-                strategyCalibrations);
-
-        System.out.println(calibrationsReader.calibration());
+        System.out.println(calibrationReader.calibration());
     }
 }

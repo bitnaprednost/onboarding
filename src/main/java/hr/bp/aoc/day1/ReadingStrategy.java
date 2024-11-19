@@ -1,5 +1,8 @@
 package hr.bp.aoc.day1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public interface ReadingStrategy {
-    public int parseDocument(String document);
+    int parseDocument(String document);
 }
