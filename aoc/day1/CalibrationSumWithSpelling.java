@@ -1,3 +1,5 @@
+package day1;
+
 public class CalibrationSumWithSpelling {
     public int calibrationSumWithSpelling (String calib_document) {
         int totalSum = 0;

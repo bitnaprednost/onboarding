@@ -1,8 +1,12 @@
+package day1;
+
+import common.ReadFile;
+
 public class Main {
     public static void main(String[] args) {
 
         // Specify the file name
-        String fileName = "aoc/aoc-day1/calibration_document.txt";
+        String fileName = "day1/calibration_document.txt";
 
         // Read the file
         ReadFile readFile = new ReadFile();
