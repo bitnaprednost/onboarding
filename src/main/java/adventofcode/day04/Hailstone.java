@@ -5,33 +5,22 @@ import java.util.Objects;
 
 public class Hailstone {
 
-    private Velocity velocity;
-    private Position position;
+    private final Velocity velocity;
+    private final Position position;
 
     public Hailstone(Position position, Velocity velocity) {
         this.velocity = velocity;
         this.position = position;
     }
 
-
-
-    public boolean isParallelInXYPlaneWith(Hailstone hailstone) {
-        return this.getSlope() == hailstone.getSlope();
-    }
-
-    private double getSlope() {
-        return (double) this.velocity.getDy() / this.velocity.getDx();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Hailstone hailstone)) return false;
-        return Objects.equals(velocity, hailstone.velocity) && Objects.equals(position, hailstone.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(velocity, position);
+    public boolean intersectInTheFuture(Hailstone hailstone) {
+        Pair<Double, Double> intersection = this.intersect(hailstone);
+        if (Double.isNaN(intersection.getLeft()) || Double.isNaN(intersection.getRight())) {
+            return false;
+        }
+        boolean intersectionIsInTheFutureOfThis = this.pointIsInTheFutureOfTheLine(intersection);
+        boolean intersectionIsInTheFutureOfHailstone = hailstone.pointIsInTheFutureOfTheLine(intersection);
+        return intersectionIsInTheFutureOfThis && intersectionIsInTheFutureOfHailstone;
     }
 
     public Pair<Double, Double> intersect(Hailstone hailstone) {
@@ -53,19 +42,27 @@ public class Hailstone {
         return Pair.create(x, y);
     }
 
+    public boolean isParallelInXYPlaneWith(Hailstone hailstone) {
+        return this.getSlope() == hailstone.getSlope();
+    }
+
+    private double getSlope() {
+        return (double) this.velocity.getDy() / this.velocity.getDx();
+    }
+
     public boolean pointIsInTheFutureOfTheLine(Pair<Double, Double> point) {
         return (this.velocity.getDx() < 0 && point.getLeft() < this.position.getX()) ||
                 (this.velocity.getDx() > 0 && point.getLeft() > this.position.getX());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Hailstone hailstone)) return false;
+        return Objects.equals(velocity, hailstone.velocity) && Objects.equals(position, hailstone.position);
+    }
 
-    public boolean intersectInTheFuture(Hailstone hailstone) {
-        Pair<Double, Double> intersection = this.intersect(hailstone);
-        if (Double.isNaN(intersection.getLeft()) || Double.isNaN(intersection.getRight())) {
-            return false;
-        }
-        boolean intersectionIsInTheFutureOfThis = this.pointIsInTheFutureOfTheLine(intersection);
-        boolean intersectionIsInTheFutureOfHailstone = hailstone.pointIsInTheFutureOfTheLine(intersection);
-        return intersectionIsInTheFutureOfThis && intersectionIsInTheFutureOfHailstone;
+    @Override
+    public int hashCode() {
+        return Objects.hash(velocity, position);
     }
 }
