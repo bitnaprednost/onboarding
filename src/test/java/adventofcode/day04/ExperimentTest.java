@@ -40,6 +40,18 @@ public class ExperimentTest {
         Assertions.assertEquals(expectedHailstones, actualHailstones);
     }
 
+    @Test
+    public void testCalculatingNumberOfIntersectionsWithinTestArea() {
+        String input = getTestOneInput();
+        Experiment experiment = getExperimentForTheFirstTask(input);
+
+        int expectedNumberOfIntersections = 2;
+
+        int actualNumberOfIntersections = experiment.calculateNumberOfIntersectionsWithinTestArea();
+
+        Assertions.assertEquals(expectedNumberOfIntersections, actualNumberOfIntersections);
+    }
+
 
     private Experiment getExperimentForTheFirstTask(String input) {
         return new Experiment(input, MINIMUM_X, MINIMUM_Y, MAXIMUM_X, MAXIMUM_Y);
