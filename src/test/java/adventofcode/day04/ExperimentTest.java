@@ -20,6 +20,6 @@ public class ExperimentTest {
 
         List<Hailstone> actualHailstones = experiment.getHailstones();
 
-        Assertions.assertEquals(expectedHailstones, actualHailstones);
+        Assertions.assertIterableEquals(expectedHailstones, actualHailstones);
     }
 }
