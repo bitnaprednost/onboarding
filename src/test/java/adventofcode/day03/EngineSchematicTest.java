@@ -56,4 +56,16 @@ public class EngineSchematicTest {
         Assertions.assertEquals(expectedSum, actualSum);
     }
 
+    @Test
+    public void testCalculateSumOfGearRatios() {
+        String input = getTestOneInput();
+        EngineSchematic engineSchematic = new EngineSchematic(input);
+
+        int expectedSum = 467835;
+
+        int actualSum = engineSchematic.calculateSumOfGearRatios();
+
+        Assertions.assertEquals(expectedSum, actualSum);
+    }
+
 }
