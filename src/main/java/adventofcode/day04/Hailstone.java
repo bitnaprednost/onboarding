@@ -8,7 +8,8 @@ public class Hailstone {
     private Position position;
 
     public Hailstone(Position position, Velocity velocity) {
-
+        this.velocity = velocity;
+        this.position = position;
     }
 
     @Override

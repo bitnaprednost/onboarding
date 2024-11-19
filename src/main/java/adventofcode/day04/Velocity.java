@@ -9,6 +9,9 @@ public class Velocity {
     private int dz;
 
     public Velocity(int dx, int dy, int dz) {
+        this.dx = dx;
+        this.dy = dy;
+        this.dz = dz;
     }
 
     @Override
