@@ -1,6 +1,6 @@
 package adventofcode.day01.text;
 
-public enum Digits {
+public enum Digit {
 
     ONE(1),
     TWO(2),
@@ -15,7 +15,7 @@ public enum Digits {
 
     private final int intValue;
 
-    Digits(int intValue) {
+    Digit(int intValue) {
         this.intValue = intValue;
     }
 
@@ -28,12 +28,12 @@ public enum Digits {
         return this.name().toLowerCase();
     }
 
-    public static Digits valueOfString(String value) {
+    public static Digit valueOfString(String value) {
         if (value == null || value.isEmpty()) {
             return NOT_A_NUMBER;
         }
 
-        for (Digits digit : Digits.values()) {
+        for (Digit digit : Digit.values()) {
             if (value.equalsIgnoreCase(digit.name())) {
                 return digit;
             }
