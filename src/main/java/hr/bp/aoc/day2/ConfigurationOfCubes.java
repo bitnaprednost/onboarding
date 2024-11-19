@@ -6,6 +6,10 @@ public class ConfigurationOfCubes {
     private int greenCubes;
     private int gameId;
 
+    public int powerOfSet() {
+        return blueCubes * redCubes * greenCubes;
+    }
+
     public ConfigurationOfCubes(int blueCubes, int redCubes, int greenCubes, int gameId) {
         this.blueCubes = blueCubes;
         this.redCubes = redCubes;

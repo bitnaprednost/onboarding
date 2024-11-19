@@ -25,4 +25,14 @@ public class Player {
         return sumOfPossibleGames;
     }
 
+    public int sumOfPowers() {
+        int sumOfPowers = 0;
+
+        for (String game : gamesPlayed) {
+            ConfigurationOfCubes gameConfig = parsesr.parse(game);
+            sumOfPowers += gameConfig.powerOfSet();
+        }
+        return sumOfPowers;
+    }
+
 }
