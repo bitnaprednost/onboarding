@@ -1,6 +1,5 @@
 package adventofcode.day04;
 
-import java.beans.VetoableChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 

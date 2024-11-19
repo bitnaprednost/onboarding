@@ -1,5 +1,6 @@
 package adventofcode.day04;
 
+import org.graalvm.collections.Pair;
 import java.util.Objects;
 
 public class Hailstone {
@@ -32,4 +33,25 @@ public class Hailstone {
     public int hashCode() {
         return Objects.hash(velocity, position);
     }
+
+    public Pair<Double, Double> intersect(Hailstone hailstone) {
+        if (this.isParallelInXYPlaneWith(hailstone)){
+            return Pair.create(Double.NaN, Double.NaN);
+        }
+        Double m1 = this.getSlope();
+        Integer x1 = this.position.getX();
+        Integer y1 = this.position.getY();
+
+        Double m2 = hailstone.getSlope();
+        Integer x2 = hailstone.position.getX();
+        Integer y2 = hailstone.position.getY();
+
+
+        Double x = ((m1*x1 - m2*x2) + (y2 - y1)) / (m1 - m2);
+        Double y = y1 + m1*(x-x1);
+
+        return Pair.create(x, y);
+    }
+
+
 }

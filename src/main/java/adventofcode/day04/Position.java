@@ -25,4 +25,12 @@ public class Position {
     public int hashCode() {
         return Objects.hash(x, y, z);
     }
+
+    public Integer getX() {
+        return this.x;
+    }
+
+    public Integer getY() {
+        return this.y;
+    }
 }
