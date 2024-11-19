@@ -13,14 +13,22 @@ public class Hailstone {
         this.position = position;
     }
 
-    public boolean intersectInTheFuture(Hailstone hailstone) {
+    public boolean intersectsInTheFutureWithinArea(Hailstone hailstone, int minimumX, int minimumY, int maximumX, int maximumY) {
         Pair<Double, Double> intersection = this.intersect(hailstone);
         if (Double.isNaN(intersection.getLeft()) || Double.isNaN(intersection.getRight())) {
             return false;
         }
+        boolean intersectionIsWithinArea = intersectionIsWithinArea(intersection, minimumX, minimumY, maximumX, maximumY);
         boolean intersectionIsInTheFutureOfThis = this.pointIsInTheFutureOfTheLine(intersection);
         boolean intersectionIsInTheFutureOfHailstone = hailstone.pointIsInTheFutureOfTheLine(intersection);
-        return intersectionIsInTheFutureOfThis && intersectionIsInTheFutureOfHailstone;
+        return intersectionIsWithinArea && intersectionIsInTheFutureOfThis && intersectionIsInTheFutureOfHailstone;
+    }
+
+    private boolean intersectionIsWithinArea(Pair<Double, Double> intersection, int minimumX, int minimumY, int maximumX, int maximumY) {
+        return intersection.getLeft() >= minimumX &&
+                intersection.getLeft() <= maximumX &&
+                intersection.getRight() >= minimumY &&
+                intersection.getRight() <= maximumY;
     }
 
     public Pair<Double, Double> intersect(Hailstone hailstone) {

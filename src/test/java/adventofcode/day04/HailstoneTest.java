@@ -127,6 +127,10 @@ public class HailstoneTest {
 
     @Test
     public void testIfHailstonesIntersectInTheFuture() {
+        int minimumX = 7;
+        int minimumY = 7;
+        int maximumX = 7;
+        int maximumY = 7;
         Hailstone hailstone1 = new Hailstone(
                 new Position(-3, -2, 0),
                 new Velocity(1, 2, 0)
@@ -138,7 +142,7 @@ public class HailstoneTest {
 
         boolean expectedIntersectInTheFuture = false;
 
-        boolean actualIntersectInTheFuture = hailstone1.intersectInTheFuture(hailstone2);
+        boolean actualIntersectInTheFuture = hailstone1.intersectsInTheFutureWithinArea(hailstone2, minimumX, minimumY, maximumX, maximumY);
 
         Assertions.assertEquals(expectedIntersectInTheFuture, actualIntersectInTheFuture);
     }

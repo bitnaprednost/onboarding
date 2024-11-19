@@ -20,7 +20,15 @@ public class Experiment {
     }
 
     public int calculateNumberOfIntersectionsWithinTestArea() {
-        return 2;
+        int numberOfIntersections = 0;
+        for (int i = 0; i < hailstones.size() - 1; i++) {
+            for (int j = i + 1; j < hailstones.size(); j++) {
+                if (hailstones.get(i).intersectsInTheFutureWithinArea(hailstones.get(j), minimumXValue, minimumYValue, maximumXValue, maximumYValue)) {
+                    numberOfIntersections++;
+                }
+            }
+        }
+        return numberOfIntersections;
     }
 
     private void setHailstonesFromInput(String input) {
