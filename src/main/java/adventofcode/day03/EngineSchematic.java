@@ -30,7 +30,8 @@ public class EngineSchematic {
                 }
                 number *= 10;
                 number += Integer.parseInt(String.valueOf(row[i]));
-            } else {
+            }
+            if (!Character.isDigit(row[i]) || i == row.length - 1) {
                 if (isAdjacentToSymbol(rowIndex, numberBeginIndex, i - 1)) {
                     rowSum += number;
                 }
@@ -75,7 +76,5 @@ public class EngineSchematic {
             char[] row = rows[i].toCharArray();
             this.grid[i] = row;
         }
-
     }
-
 }
