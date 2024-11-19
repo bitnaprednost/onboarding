@@ -53,5 +53,10 @@ public class Hailstone {
         return Pair.create(x, y);
     }
 
+    public boolean pointIsInTheFutureOfTheLine(Pair<Double, Double> point) {
+        return (this.velocity.getDx() < 0 && point.getLeft() < this.position.getX()) ||
+                (this.velocity.getDx() > 0 && point.getLeft() > this.position.getX());
+    }
+
 
 }
