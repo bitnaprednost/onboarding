@@ -16,7 +16,7 @@ public class TestUtils {
             new Hailstone(new Position(18, 19, 22), new Velocity(-1, -1, -2)),
             new Hailstone(new Position(20, 25, 34), new Velocity(-2, -2, -4)),
             new Hailstone(new Position(12, 31, 28), new Velocity(-1, -2, -1)),
-            new Hailstone(new Position(20, 19, 25), new Velocity(1, -5, -3))
+            new Hailstone(new Position(20, 19, 15), new Velocity(1, -5, -3))
     );
 
 
@@ -34,6 +34,6 @@ public class TestUtils {
             new Hailstone(new Position(18, 19, 22), new Velocity(-1, 1, -2)),
             new Hailstone(new Position(20, 44, 13), new Velocity(-3, -2, -4)),
             new Hailstone(new Position(12, 31, 28), new Velocity(-1, 2, -1)),
-            new Hailstone(new Position(20, 82, 25), new Velocity(1, -5, -3))
+            new Hailstone(new Position(20, 82, 15), new Velocity(1, -5, -3))
     );
 }
