@@ -1,3 +1,6 @@
+// TODO: inline simple variables, add @author config, add spacing between pieces of code, add more precise packages (hr.bitnaprednost.aoc...days)
+
+
 # Day 01
 - I kind of overdid this task with Strategy and Decorator pattern, it was unnecessary for the task, but kind of did it for practice, after day 01 I stopped doing it.
 - ChatGPT help: advised to use combination of Strategy and Decorator pattern, main focus was on anticipating potential new algorithms for calculating sums.
