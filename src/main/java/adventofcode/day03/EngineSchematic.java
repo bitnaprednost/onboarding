@@ -7,14 +7,17 @@ public class EngineSchematic {
 
     private char[][] grid;
     private List<NumberPosition> numberPositions;
+    private List<GearPosition> gearPositions;
 
     public EngineSchematic(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank.");
         }
-        this.numberPositions = new ArrayList<>();
-        this.parseInput(input);
-        this.extractNumberPositions();
+        numberPositions = new ArrayList<>();
+        gearPositions = new ArrayList<>();
+        parseInput(input);
+        extractNumberPositions();
+        extractGearPositions();
     }
 
     public int calculateSumOfGearRatios() {
@@ -30,7 +33,6 @@ public class EngineSchematic {
         }
         return sum;
     }
-
 
     public boolean isAdjacentToSymbol(int rowIndex, int startColumnIndex, int endColumnIndex) {
         boolean isAdjacent = checkRowForSymbols(rowIndex, startColumnIndex, endColumnIndex);
@@ -64,13 +66,13 @@ public class EngineSchematic {
         grid = new char[rows.length][];
         for (int i = 0; i < rows.length; i++) {
             char[] row = rows[i].toCharArray();
-            this.grid[i] = row;
+            grid[i] = row;
         }
     }
 
     private void extractNumberPositions() {
         for (int i = 0; i < grid.length; i++) {
-            this.extractNumberPositionsFromRow(i);
+            extractNumberPositionsFromRow(i);
         }
     }
 
@@ -88,10 +90,20 @@ public class EngineSchematic {
             }
             if (!Character.isDigit(row[i]) || i == row.length - 1) {
                 if (number != 0) {
-                    this.numberPositions.add(new NumberPosition(number, rowIndex, numberBeginIndex, i - 1));
+                    numberPositions.add(new NumberPosition(number, rowIndex, numberBeginIndex, i - 1));
                 }
                 number = 0;
                 numberBeginIndex = -1;
+            }
+        }
+    }
+
+    private void extractGearPositions() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (String.valueOf(grid[i][j]).equals("*")) {
+                    gearPositions.add(new GearPosition(i, j));
+                }
             }
         }
     }
