@@ -7,9 +7,9 @@ public class CalibrationDocumentReader {
     private ReadingStrategy strategy;
 
 
-    public CalibrationDocumentReader(List<String> document) {
+    public CalibrationDocumentReader(List<String> document, ReadingStrategy strategy) {
         this.document = document;
-        this.strategy = new CalibrationReaderStrategy();
+        this.strategy = strategy;
     }
 
     public List<String> getDocument() {
