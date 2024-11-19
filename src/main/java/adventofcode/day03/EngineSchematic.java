@@ -1,14 +1,20 @@
 package adventofcode.day03;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EngineSchematic {
 
     private char[][] grid;
+    private List<NumberPosition> numberPositions;
 
     public EngineSchematic(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank.");
         }
+        this.numberPositions = new ArrayList<>();
         this.parseInput(input);
+        this.extractNumberPositions();
     }
 
     public int calculateSumOfGearRatios() {
@@ -17,34 +23,14 @@ public class EngineSchematic {
 
     public int calculateSum() {
         int sum = 0;
-        for (int i = 0; i < grid.length; i++) {
-            sum += calculateSumForRow(grid[i], i);
+        for (NumberPosition numberPosition : numberPositions) {
+            if (isAdjacentToSymbol(numberPosition.row(), numberPosition.beginColumn(), numberPosition.endColumn())) {
+                sum += numberPosition.value();
+            }
         }
         return sum;
     }
 
-    private int calculateSumForRow(char[] row, int rowIndex) {
-        int rowSum = 0;
-        int number = 0;
-        int numberBeginIndex = -1;
-        for (int i = 0; i < row.length; i++) {
-            if (Character.isDigit(row[i])) {
-                if (numberBeginIndex == -1) {
-                    numberBeginIndex = i;
-                }
-                number *= 10;
-                number += Integer.parseInt(String.valueOf(row[i]));
-            }
-            if (!Character.isDigit(row[i]) || i == row.length - 1) {
-                if (isAdjacentToSymbol(rowIndex, numberBeginIndex, i - 1)) {
-                    rowSum += number;
-                }
-                number = 0;
-                numberBeginIndex = -1;
-            }
-        }
-        return rowSum;
-    }
 
     public boolean isAdjacentToSymbol(int rowIndex, int startColumnIndex, int endColumnIndex) {
         boolean isAdjacent = checkRowForSymbols(rowIndex, startColumnIndex, endColumnIndex);
@@ -79,6 +65,34 @@ public class EngineSchematic {
         for (int i = 0; i < rows.length; i++) {
             char[] row = rows[i].toCharArray();
             this.grid[i] = row;
+        }
+    }
+
+    private void extractNumberPositions() {
+        for (int i = 0; i < grid.length; i++) {
+            this.extractNumberPositionsFromRow(i);
+        }
+    }
+
+    private void extractNumberPositionsFromRow(int rowIndex) {
+        char[] row = grid[rowIndex];
+        int number = 0;
+        int numberBeginIndex = -1;
+        for (int i = 0; i < row.length; i++) {
+            if (Character.isDigit(row[i])) {
+                if (numberBeginIndex == -1) {
+                    numberBeginIndex = i;
+                }
+                number *= 10;
+                number += Integer.parseInt(String.valueOf(row[i]));
+            }
+            if (!Character.isDigit(row[i]) || i == row.length - 1) {
+                if (number != 0) {
+                    this.numberPositions.add(new NumberPosition(number, rowIndex, numberBeginIndex, i - 1));
+                }
+                number = 0;
+                numberBeginIndex = -1;
+            }
         }
     }
 }
