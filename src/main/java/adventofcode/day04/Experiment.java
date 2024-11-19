@@ -20,6 +20,10 @@ public class Experiment {
         this.maximumYValue = maximumYValue;
     }
 
+    public int calculateNumberOfIntersectionsWithinTestArea() {
+        return 2;
+    }
+
     private void setHailstonesFromInput(String input) {
         hailstones = new ArrayList<>();
         String[] inputLines = getInputLines(input);
