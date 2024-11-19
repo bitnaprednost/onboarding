@@ -1,4 +1,4 @@
-package main.adventofcode.day1;
+package hr.bp.aoc.day1;
 
 public class TaskOne {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package main.adventofcode.day1;
+package hr.bp.aoc.day1;
 
 public class SantaDirectionsReader {
     private String directions;
