@@ -3,7 +3,7 @@ package adventofcode.day01.text;
 import java.util.Arrays;
 import java.util.List;
 
-public enum DigitWordEnum {
+public enum Digits {
 
     ONE(1),
     TWO(2),
@@ -17,7 +17,7 @@ public enum DigitWordEnum {
 
     private final int intValue;
 
-    DigitWordEnum(int intValue) {
+    Digits(int intValue) {
         this.intValue = intValue;
     }
 
