@@ -89,11 +89,11 @@ public class GameTest {
     }
 
     @Test
-    public void calculateTotalScratchcardsWon_givenNoScratchcards_returnsZero() {
+    public void calculateTotalScratchcardsWon_givenNoAdditionalScratchcards_returnsSix() {
         String input = getInputNoWinningNumber();
         Game game = new Game(input);
 
-        int expectedTotalScratchcards = 0;
+        int expectedTotalScratchcards = 6;
 
         int actualTotalScratchcards = game.calculateTotalScratchcardsWon();
 
