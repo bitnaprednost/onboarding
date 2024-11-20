@@ -48,6 +48,10 @@ public class Game {
     }
 
     public int calculateTotalPoints() {
-        return 13;
+        int sum = 0;
+        for (Scratchcard scratchcard : scratchcards) {
+            sum += scratchcard.calculatePoints();
+        }
+        return sum;
     }
 }
