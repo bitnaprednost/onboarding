@@ -17,7 +17,7 @@ import static adventofcode.day04.TestUtils.getListOfScratchcardsForInputOne;
 public class GameTest {
 
     @Test
-    public void testConstructionOfGame() {
+    public void constructor_givenValidInput_createsGameWithExpectedScratchcards() {
         String input = getInputOne();
         Game game = new Game(input);
 
@@ -29,7 +29,7 @@ public class GameTest {
     }
 
     @Test
-    public void calculateTotalPoints() {
+    public void calculateTotalPoints_givenInputOne_returnsExpectedPoints() {
         String input = getInputOne();
         Game game = new Game(input);
 
@@ -41,7 +41,7 @@ public class GameTest {
     }
 
     @Test
-    public void calculateTotalPointsTwo() {
+    public void calculateTotalPoints_givenInputTwo_returnsExpectedPoints() {
         String input = getInputTwo();
         Game game = new Game(input);
 
@@ -53,7 +53,7 @@ public class GameTest {
     }
 
     @Test
-    public void calculateAllPointsWon() {
+    public void calculateTotalPoints_givenAllWinningNumbers_returnsMaximumPoints() {
         String input = getInputAllWinningNumbers();
         Game game = new Game(input);
 
@@ -65,7 +65,7 @@ public class GameTest {
     }
 
     @Test
-    public void calculateNoPointsWon() {
+    public void calculateTotalPoints_givenNoWinningNumbers_returnsZeroPoints() {
         String input = getInputNoWinningNumber();
         Game game = new Game(input);
 
@@ -77,11 +77,23 @@ public class GameTest {
     }
 
     @Test
-    public void calculateTotalPointsTaskTwo() {
+    public void calculateTotalScratchcardsWon_givenInputOne_returnsExpectedTotal() {
         String input = getInputOne();
         Game game = new Game(input);
 
         int expectedTotalScratchcards = 30;
+
+        int actualTotalScratchcards = game.calculateTotalScratchcardsWon();
+
+        Assertions.assertEquals(expectedTotalScratchcards, actualTotalScratchcards);
+    }
+
+    @Test
+    public void calculateTotalScratchcardsWon_givenNoScratchcards_returnsZero() {
+        String input = getInputNoWinningNumber();
+        Game game = new Game(input);
+
+        int expectedTotalScratchcards = 0;
 
         int actualTotalScratchcards = game.calculateTotalScratchcardsWon();
 
