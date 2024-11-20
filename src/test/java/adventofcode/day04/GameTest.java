@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static adventofcode.day04.TestUtils.getInputNoWinningNumber;
 import static adventofcode.day04.TestUtils.getInputOne;
+import static adventofcode.day04.TestUtils.getInputAllWinningNumbers;
 import static adventofcode.day04.TestUtils.getInputTwo;
 import static adventofcode.day04.TestUtils.getListOfScratchcardsForInputOne;
 
@@ -44,6 +46,30 @@ public class GameTest {
         Game game = new Game(input);
 
         int expectedTotalPoints = 15;
+
+        int actualTotalPoints = game.calculateTotalPoints();
+
+        Assertions.assertEquals(expectedTotalPoints, actualTotalPoints);
+    }
+
+    @Test
+    public void calculateAllPointsWon() {
+        String input = getInputAllWinningNumbers();
+        Game game = new Game(input);
+
+        int expectedTotalPoints = 32;
+
+        int actualTotalPoints = game.calculateTotalPoints();
+
+        Assertions.assertEquals(expectedTotalPoints, actualTotalPoints);
+    }
+
+    @Test
+    public void calculateNoPointsWon() {
+        String input = getInputNoWinningNumber();
+        Game game = new Game(input);
+
+        int expectedTotalPoints = 0;
 
         int actualTotalPoints = game.calculateTotalPoints();
 
