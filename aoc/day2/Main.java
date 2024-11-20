@@ -1,7 +1,6 @@
 package day2;
 
 import common.ReadFile;
-import day1.CalibrationSum;
 
 public class Main {
     public static void main(String[] args) {
