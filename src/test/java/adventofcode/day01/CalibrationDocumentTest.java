@@ -136,6 +136,17 @@ public class CalibrationDocumentTest {
     }
 
     @Test
+    public void testNumbersAsLettersAdvanced2() {
+        CalibrationDocument calibrationDocument = createAdvancedCalibrationDocument("gsevenine", "garbagetwoonetwoonetwo", "garbage4eighthreeight", "twogarone1", "two");
+
+        int expectedValue = 79 + 22 + 48 + 21 + 22;
+
+        int actualValue = calibrationDocument.calculateCalibrationValuesSum();
+
+        Assertions.assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
     public void testNumbersAsLettersThree() {
         CalibrationDocument calibrationDocument = createAdvancedCalibrationDocument("threeeee", "four1", "eght23", "one97945979684three", "1");
 
