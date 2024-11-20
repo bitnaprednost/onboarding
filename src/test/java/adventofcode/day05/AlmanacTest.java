@@ -65,12 +65,12 @@ public class AlmanacTest {
         );
 
         Assertions.assertEquals(expectedSeeds, almanac.getSeeds());
-        Assertions.assertEquals(expectedSeedToSoilMap, almanac.getSeedToSoilMap());
-        Assertions.assertEquals(expectedSoilToFertilizerMap, almanac.getSoilToFertilizerMap());
-        Assertions.assertEquals(expectedFertilizerToWaterMap, almanac.getFertilizerToWaterMap());
-        Assertions.assertEquals(expectedWaterToLightMap, almanac.getWaterToLightMap());
-        Assertions.assertEquals(expectedLightToTemperatureMap, almanac.getLightToTemperatureMap());
-        Assertions.assertEquals(expectedTemperatureToHumidityMap, almanac.getTemperatureToHumidityMap());
-        Assertions.assertEquals(expectedHumidityToLocationMap, almanac.getHumidityToLocationMap());
+        Assertions.assertEquals(expectedSeedToSoilMap, almanac.getListOfMaps().get(0));
+        Assertions.assertEquals(expectedSoilToFertilizerMap, almanac.getListOfMaps().get(1));
+        Assertions.assertEquals(expectedFertilizerToWaterMap, almanac.getListOfMaps().get(2));
+        Assertions.assertEquals(expectedWaterToLightMap, almanac.getListOfMaps().get(3));
+        Assertions.assertEquals(expectedLightToTemperatureMap, almanac.getListOfMaps().get(4));
+        Assertions.assertEquals(expectedTemperatureToHumidityMap, almanac.getListOfMaps().get(5));
+        Assertions.assertEquals(expectedHumidityToLocationMap, almanac.getListOfMaps().get(6));
     }
 }
