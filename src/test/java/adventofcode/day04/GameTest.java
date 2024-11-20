@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Set;
 
 import static adventofcode.day04.TestUtils.getInputOne;
 import static adventofcode.day04.TestUtils.getListOfScratchcardsForInputOne;
@@ -24,5 +23,17 @@ public class GameTest {
         List<Scratchcard> actualScratchcards = game.getScratchcards();
 
         Assertions.assertEquals(expectedScratchcards, actualScratchcards);
+    }
+
+    @Test
+    public void calculateTotalPoints() {
+        String input = getInputOne();
+        Game game = new Game(input);
+
+        int expectedTotalPoints = 13;
+
+        int actualTotalPoints = game.calculateTotalPoints();
+
+        Assertions.assertEquals(expectedTotalPoints, actualTotalPoints);
     }
 }
