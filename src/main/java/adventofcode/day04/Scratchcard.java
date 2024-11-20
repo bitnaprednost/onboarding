@@ -16,17 +16,6 @@ public class Scratchcard {
         this.playersNumbers = playersNumbers;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Scratchcard that)) return false;
-        return Objects.equals(winningNumbers, that.winningNumbers) && Objects.equals(playersNumbers, that.playersNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(winningNumbers, playersNumbers);
-    }
-
     public int calculatePoints() {
         int numbersWon = getMatchingNumbers();
         if (numbersWon == 0) {
@@ -40,5 +29,16 @@ public class Scratchcard {
         Set<Integer> intersectionOfWinningAndPlayersNumbers = new HashSet<>(playersNumbers);
         intersectionOfWinningAndPlayersNumbers.retainAll(winningNumbers);
         return intersectionOfWinningAndPlayersNumbers.size();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Scratchcard that)) return false;
+        return Objects.equals(winningNumbers, that.winningNumbers) && Objects.equals(playersNumbers, that.playersNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(winningNumbers, playersNumbers);
     }
 }

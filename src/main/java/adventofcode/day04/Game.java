@@ -66,14 +66,18 @@ public class Game {
 
         for (Map.Entry<Integer, Integer> scratchcardEntry : copiesOfScratchcardsWon.entrySet()) {
             Scratchcard scratchcard = scratchcards.get(scratchcardEntry.getKey());
+
             int numbersWon = scratchcard.getMatchingNumbers();
             int currentScratchCardCopies = scratchcardEntry.getValue();
+            int currentScratchCardNumber = scratchcardEntry.getKey();
+
             for (int i = 0; i < currentScratchCardCopies; i++) {
-                for (int j = scratchcardEntry.getKey() + 1; j < scratchcardEntry.getKey() + 1 + numbersWon; j++) {
+                for (int j = currentScratchCardNumber + 1; j < currentScratchCardNumber + 1 + numbersWon; j++) {
                     copiesOfScratchcardsWon.put(j, copiesOfScratchcardsWon.get(j) + 1);
                 }
             }
         }
+
         return copiesOfScratchcardsWon.values().stream().reduce(Integer::sum).get();
     }
 }
