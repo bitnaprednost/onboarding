@@ -1,8 +1,9 @@
 package adventofcode.day04;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
  * @author Ivan Tomičić
  */
 public class Game {
-    private final List<Scratchcard> scratchcards = new ArrayList<>();
+    private final Map<Integer, Scratchcard> scratchcards = new HashMap<>();
 
     public Game(String input) {
         if (input == null || input.isBlank()) {
@@ -28,13 +29,14 @@ public class Game {
     }
 
     private void addScratchcardFromLine(String line) {
+        String scratchcardNumber = line.split(":")[0].split("Card")[1].strip();
         String leftSide = line.split("\\|")[0].split(":")[1].strip();
         String rightSide = line.split("\\|")[1].strip();
 
         Set<Integer> winningNumbers = splitStringBySpace(leftSide);
         Set<Integer> playersNumbers = splitStringBySpace(rightSide);
 
-        scratchcards.add(new Scratchcard(winningNumbers, playersNumbers));
+        scratchcards.put(Integer.parseInt(scratchcardNumber), new Scratchcard(winningNumbers, playersNumbers));
     }
 
     private Set<Integer> splitStringBySpace(String numbersString) {
@@ -43,13 +45,13 @@ public class Game {
                 .collect(Collectors.toSet());
     }
 
-    public List<Scratchcard> getScratchcards() {
-        return scratchcards;
+    public Map<Integer, Scratchcard> getScratchcards() {
+        return Collections.unmodifiableMap(scratchcards);
     }
 
     public int calculateTotalPoints() {
         int sum = 0;
-        for (Scratchcard scratchcard : scratchcards) {
+        for (Scratchcard scratchcard : scratchcards.values()) {
             sum += scratchcard.calculatePoints();
         }
         return sum;

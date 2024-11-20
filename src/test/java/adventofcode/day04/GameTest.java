@@ -3,11 +3,11 @@ package adventofcode.day04;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import java.util.Map;
 
+import static adventofcode.day04.TestUtils.getInputAllWinningNumbers;
 import static adventofcode.day04.TestUtils.getInputNoWinningNumber;
 import static adventofcode.day04.TestUtils.getInputOne;
-import static adventofcode.day04.TestUtils.getInputAllWinningNumbers;
 import static adventofcode.day04.TestUtils.getInputTwo;
 import static adventofcode.day04.TestUtils.getListOfScratchcardsForInputOne;
 
@@ -21,9 +21,9 @@ public class GameTest {
         String input = getInputOne();
         Game game = new Game(input);
 
-        List<Scratchcard> expectedScratchcards = getListOfScratchcardsForInputOne();
+        Map<Integer, Scratchcard> expectedScratchcards = getListOfScratchcardsForInputOne();
 
-        List<Scratchcard> actualScratchcards = game.getScratchcards();
+        Map<Integer, Scratchcard> actualScratchcards = game.getScratchcards();
 
         Assertions.assertEquals(expectedScratchcards, actualScratchcards);
     }
