@@ -75,4 +75,16 @@ public class GameTest {
 
         Assertions.assertEquals(expectedTotalPoints, actualTotalPoints);
     }
+
+    @Test
+    public void calculateTotalPointsTaskTwo() {
+        String input = getInputOne();
+        Game game = new Game(input);
+
+        int expectedTotalScratchcards = 30;
+
+        int actualTotalScratchcards = game.calculateTotalScratchcardsWon();
+
+        Assertions.assertEquals(expectedTotalScratchcards, actualTotalScratchcards);
+    }
 }
