@@ -1,5 +1,5 @@
 // TODO: inline simple variables, add @author config, add spacing between pieces of code, add more precise packages (hr.bitnaprednost.aoc...days)
-
+// TODO: fix previous days based on Igor's review
 
 # Day 01
 - I kind of overdid this task with Strategy and Decorator pattern, it was unnecessary for the task, but kind of did it for practice, after day 01 I stopped doing it.
@@ -12,7 +12,10 @@
 - ChatGPT help: just reminded me that records exist in Java, no further help
 
 # Day 04
-- a
+- ChatGPT help: just used it to turn raw input into Java Maps instead of manually writing it.
+
+# Day 05
+- no notes yet
 
 # Day 24
 - ChatGPT help: just asked it to give me a formula for the intersection point of 2 lines if only the slope and 1 point is known, asked it to generate more test data
