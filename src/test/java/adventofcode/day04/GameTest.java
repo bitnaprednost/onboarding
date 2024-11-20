@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static adventofcode.day04.TestUtils.getInputOne;
+import static adventofcode.day04.TestUtils.getInputTwo;
 import static adventofcode.day04.TestUtils.getListOfScratchcardsForInputOne;
 
 /**
@@ -31,6 +32,18 @@ public class GameTest {
         Game game = new Game(input);
 
         int expectedTotalPoints = 13;
+
+        int actualTotalPoints = game.calculateTotalPoints();
+
+        Assertions.assertEquals(expectedTotalPoints, actualTotalPoints);
+    }
+
+    @Test
+    public void calculateTotalPointsTwo() {
+        String input = getInputTwo();
+        Game game = new Game(input);
+
+        int expectedTotalPoints = 15;
 
         int actualTotalPoints = game.calculateTotalPoints();
 
