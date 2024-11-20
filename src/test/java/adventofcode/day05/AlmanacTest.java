@@ -1,13 +1,9 @@
 package adventofcode.day05;
 
-import adventofcode.day04.Game;
-import adventofcode.day04.Scratchcard;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static adventofcode.day05.TestUtils.getInputOne;
 
@@ -72,7 +68,7 @@ public class AlmanacTest {
         Assertions.assertEquals(expectedSeedToSoilMap, almanac.getSeedToSoilMap());
         Assertions.assertEquals(expectedSoilToFertilizerMap, almanac.getSoilToFertilizerMap());
         Assertions.assertEquals(expectedFertilizerToWaterMap, almanac.getFertilizerToWaterMap());
-        Assertions.assertEquals(expectedWaterToLightMap, almanac.getWaterToLightMa());
+        Assertions.assertEquals(expectedWaterToLightMap, almanac.getWaterToLightMap());
         Assertions.assertEquals(expectedLightToTemperatureMap, almanac.getLightToTemperatureMap());
         Assertions.assertEquals(expectedTemperatureToHumidityMap, almanac.getTemperatureToHumidityMap());
         Assertions.assertEquals(expectedHumidityToLocationMap, almanac.getHumidityToLocationMap());
