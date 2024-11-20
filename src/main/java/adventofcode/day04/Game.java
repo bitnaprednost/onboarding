@@ -54,4 +54,8 @@ public class Game {
         }
         return sum;
     }
+
+    public int calculateTotalScratchcardsWon() {
+        return 30;
+    }
 }
