@@ -28,12 +28,17 @@ public class Scratchcard {
     }
 
     public int calculatePoints() {
-        Set<Integer> intersectionOfWinningAndPlayersNumbers = new HashSet<Integer>(playersNumbers);
-        intersectionOfWinningAndPlayersNumbers.retainAll(winningNumbers);
-        if (intersectionOfWinningAndPlayersNumbers.isEmpty()) {
+        int numbersWon = getMatchingNumbers();
+        if (numbersWon == 0) {
             return 0;
         } else {
-            return (int) Math.pow(2, intersectionOfWinningAndPlayersNumbers.size() - 1);
+            return (int) Math.pow(2, numbersWon - 1);
         }
+    }
+
+    public int getMatchingNumbers() {
+        Set<Integer> intersectionOfWinningAndPlayersNumbers = new HashSet<>(playersNumbers);
+        intersectionOfWinningAndPlayersNumbers.retainAll(winningNumbers);
+        return intersectionOfWinningAndPlayersNumbers.size();
     }
 }

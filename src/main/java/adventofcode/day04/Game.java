@@ -2,7 +2,7 @@ package adventofcode.day04;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * @author Ivan Tomičić
  */
 public class Game {
-    private final Map<Integer, Scratchcard> scratchcards = new HashMap<>();
+    private final Map<Integer, Scratchcard> scratchcards = new LinkedHashMap<>();
 
     public Game(String input) {
         if (input == null || input.isBlank()) {
@@ -25,7 +25,6 @@ public class Game {
         for (String line : lines) {
             addScratchcardFromLine(line);
         }
-
     }
 
     private void addScratchcardFromLine(String line) {
@@ -51,6 +50,7 @@ public class Game {
 
     public int calculateTotalPoints() {
         int sum = 0;
+
         for (Scratchcard scratchcard : scratchcards.values()) {
             sum += scratchcard.calculatePoints();
         }
@@ -58,6 +58,22 @@ public class Game {
     }
 
     public int calculateTotalScratchcardsWon() {
-        return 30;
+        Map<Integer, Integer> copiesOfScratchcardsWon = new LinkedHashMap<>();
+
+        for (Integer i : scratchcards.keySet()) {
+            copiesOfScratchcardsWon.put(i, 1);
+        }
+
+        for (Map.Entry<Integer, Integer> scratchcardEntry : copiesOfScratchcardsWon.entrySet()) {
+            Scratchcard scratchcard = scratchcards.get(scratchcardEntry.getKey());
+            int numbersWon = scratchcard.getMatchingNumbers();
+            int currentScratchCardCopies = scratchcardEntry.getValue();
+            for (int i = 0; i < currentScratchCardCopies; i++) {
+                for (int j = scratchcardEntry.getKey() + 1; j < scratchcardEntry.getKey() + 1 + numbersWon; j++) {
+                    copiesOfScratchcardsWon.put(j, copiesOfScratchcardsWon.get(j) + 1);
+                }
+            }
+        }
+        return copiesOfScratchcardsWon.values().stream().reduce(Integer::sum).get();
     }
 }
