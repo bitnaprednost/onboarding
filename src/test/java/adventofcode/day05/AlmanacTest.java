@@ -50,11 +50,11 @@ public class AlmanacTest {
     @Test
     public void findLowestLocationNumber_givenValidInputTaskTwo_returnsCorrectLowestLocationNumber() {
         String input = getInputOne();
-        Almanac almanac = new Almanac(input);
+        Almanac almanacWithRanges = new AlmanacWithRanges(input);
 
         long expectedLowestLocationNumber = 46;
 
-        long actualLowestLocationNumber = almanac.findLowestLocationNumberForTaskTwo();
+        long actualLowestLocationNumber = almanacWithRanges.findLowestLocationNumber();
 
         Assertions.assertEquals(expectedLowestLocationNumber, actualLowestLocationNumber);
     }

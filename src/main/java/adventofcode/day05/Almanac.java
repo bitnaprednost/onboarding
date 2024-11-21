@@ -11,9 +11,9 @@ import java.util.Optional;
  */
 public class Almanac {
 
-    private List<Long> seeds = new ArrayList<>();
+    protected List<Long> seeds = new ArrayList<>();
 
-    private List<List<SourceDestinationMap>> listOfMaps = new LinkedList<>();
+    protected List<List<SourceDestinationMap>> listOfMaps = new LinkedList<>();
 
     public Almanac(String input) {
         if (input == null || input.isBlank()) {
@@ -63,30 +63,6 @@ public class Almanac {
             }
         }
         return lowestLocationNumber;
-    }
-
-    public long findLowestLocationNumberForTaskTwo() {
-        long lowestLocationNumber = Long.MAX_VALUE;
-        List<Long> newSeeds = expandSeedsForTaskTwo(seeds);
-        for (Long seed : newSeeds) {
-            long seedLocation = getSeedLocation(seed);
-            if (seedLocation < lowestLocationNumber) {
-                lowestLocationNumber = seedLocation;
-            }
-        }
-        return lowestLocationNumber;
-    }
-
-    private List<Long> expandSeedsForTaskTwo(List<Long> seeds) {
-        List<Long> expandedSeeds = new ArrayList<>();
-        for (int i = 0; i < seeds.size(); i += 2) {
-            long seedStart = seeds.get(i);
-            long range = seeds.get(i + 1);
-            for (long j = seedStart; j < seedStart + range; j++) {
-                expandedSeeds.add(j);
-            }
-        }
-        return expandedSeeds;
     }
 
     private long getSeedLocation(Long seed) {

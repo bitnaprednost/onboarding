@@ -13,8 +13,8 @@ import java.util.List;
 public class TaskTwo {
     public static void main(String[] args) {
         String input = readInputForTask();
-        Almanac almanac = new Almanac(input);
-        long sum = almanac.findLowestLocationNumberForTaskTwo();
+        Almanac almanac = new AlmanacWithRanges(input);
+        long sum = almanac.findLowestLocationNumber();
         Utils.displayResult(sum);
     }
 
