@@ -1,4 +1,5 @@
 // TODO: inline simple variables, add @author config, add spacing between pieces of code, add more precise packages (hr.bitnaprednost.aoc...days)
+
 // TODO: fix previous days based on Igor's review
 
 # Day 01
@@ -15,7 +16,8 @@
 - ChatGPT help: just used it to turn raw input into Java Maps instead of manually writing it.
 
 # Day 05
-- no notes yet
+- ChatGPT help: just some refactoring idea after I completed the 2nd task. Needs refactoring, especially Range class.
+- Perhaps make fillBlanks() and similar methods public instance methods and AlmanacWithRanges should call it to define what to do with ranges?
 
 # Day 24
 - ChatGPT help: just asked it to give me a formula for the intersection point of 2 lines if only the slope and 1 point is known, asked it to generate more test data
