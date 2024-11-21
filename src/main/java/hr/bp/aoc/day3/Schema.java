@@ -1,9 +1,8 @@
 package hr.bp.aoc.day3;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class Schema {
     private final List<String> schematic;
@@ -20,6 +19,19 @@ public class Schema {
 
     private static boolean isDigit(String potentialDigit) {
         return Character.isDigit(potentialDigit.charAt(0));
+    }
+
+    public int getSumGearRations() {
+        int sum = 0;
+
+        for (EngineSymbol symbol : allSymbols) {
+            List<Coordinate> adjacent = symbol.getAdjacantNumCoordinates();
+            getPartNumbersFromCoordinates(adjacent, symbol);
+
+            sum += symbol.getGearRatio();
+        }
+
+        return sum;
     }
 
     public int getSumPartNumbers() {
