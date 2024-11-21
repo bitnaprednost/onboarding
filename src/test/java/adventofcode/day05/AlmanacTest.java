@@ -31,7 +31,7 @@ public class AlmanacTest {
 
         long actualSeed = almanac.findLowestLocationNumber();
 
-        assertAlmanacOneCreatedCorrectly(almanac);
+        Assertions.assertEquals(expectedSeed, actualSeed);
     }
 
 
