@@ -37,7 +37,7 @@ public class Utils {
         return inputBuilder.toString();
     }
 
-    public static void displayResult(int sum) {
+    public static void displayResult(Number sum) {
         System.out.printf("The result is %s.%n", sum);
     }
 }
