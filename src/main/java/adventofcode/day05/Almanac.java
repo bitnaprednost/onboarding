@@ -98,9 +98,9 @@ public class Almanac {
     }
 
     private Optional<Long> findMappedDestination(long sourceNumber, SourceDestinationMap mapping) {
-        if ((mapping.getSourceStart() <= sourceNumber)
-                && mapping.getSourceStart() + mapping.getRangeLength() > sourceNumber) {
-            return Optional.of(mapping.getDestinationStart() + sourceNumber - mapping.getSourceStart());
+        if ((mapping.sourceStart() <= sourceNumber)
+                && mapping.sourceStart() + mapping.rangeLength() > sourceNumber) {
+            return Optional.of(mapping.destinationStart() + sourceNumber - mapping.sourceStart());
         }
         return Optional.empty();
     }
