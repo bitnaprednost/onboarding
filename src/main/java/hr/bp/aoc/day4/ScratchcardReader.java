@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScratchcardReader {
-//    private List<String> scratchcards;
-//    private int totalPoints = 0;
     private List<Scratchcard> scratchcards;
 
     public ScratchcardReader(List<String> scratchcards) {
@@ -33,6 +31,28 @@ public class ScratchcardReader {
         }
 
         return scratchcards;
+    }
+
+
+    public int getNumbOfScratchcards() {
+        int numScratchcards = 0;
+
+        scratchcards.forEach(scratchcard -> setCopyOfScratchcards(scratchcard.getId()));
+
+        for (Scratchcard scratchcard : scratchcards) {
+            numScratchcards += scratchcard.getCopy();
+        }
+
+        return numScratchcards;
+    }
+
+
+    private void setCopyOfScratchcards(int scratchcardId) {
+        int numOfMatches = scratchcards.get(scratchcardId - 1).getMatches();
+
+        for (int i = 0; i < numOfMatches; i++) {
+            scratchcards.get(scratchcardId + i).addCopy();
+        }
     }
 
     public int getTotalPoints() {

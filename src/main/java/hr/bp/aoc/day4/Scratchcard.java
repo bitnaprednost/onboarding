@@ -7,13 +7,32 @@ public class Scratchcard {
     private List<Integer> winningNumbers;
     private List<Integer> myNumbers;
     private int id;
+    private int copy;
     private int matches = -1;
 
     public Scratchcard(int id) {
         this.id = id;
         winningNumbers = new ArrayList<>();
         myNumbers = new ArrayList<>();
+        copy = 1;
     }
+
+    public void addCopy() {
+        setCopy(copy + 1);
+    }
+
+    public int getCopy() {
+        return copy;
+    }
+
+    public void setCopy(int copy) {
+        this.copy = copy;
+    }
+
+    public int getId() {
+        return id;
+    }
+
 
     public void setWinningNumbers(String numbersString) {
         winningNumbers = stringToNumList(numbersString);
@@ -36,11 +55,11 @@ public class Scratchcard {
 
     public int getPoints() {
         int matches = getMatches();
-        return matches == 1 ? 1 : (matches > 1 ? (int) Math.pow(2, matches-1) : 0);
+        return matches == 1 ? 1 : (matches > 1 ? (int) Math.pow(2, matches - 1) : 0);
     }
 
-    private int getMatches() {
-        return matches < 0 ? setMatches() : matches;
+    public int getMatches() {
+        return matches < 0 ? setMatches() : matches * copy;
     }
 
     private int setMatches() {
@@ -51,7 +70,7 @@ public class Scratchcard {
                 matches++;
         }
 
-        this.matches = matches;
+        this.matches = matches * copy;
         return matches;
     }
 }
