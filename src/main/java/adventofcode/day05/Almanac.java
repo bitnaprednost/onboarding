@@ -74,6 +74,33 @@ public class Almanac {
     }
 
     private long getSeedLocation(Long seed) {
-        return 35;
+        return processMap(0, seed);
+    }
+
+    private long processMap(int mapIndex, long sourceNumber) {
+        List<SourceDestinationMap> currentMap = listOfMaps.get(mapIndex);
+        long destinationNumber = getDestinationNumberForSource(currentMap, sourceNumber);
+        if (mapIndex == listOfMaps.size() - 1) {
+            return destinationNumber;
+        }
+        return processMap(++mapIndex, destinationNumber);
+    }
+
+    private long getDestinationNumberForSource(List<SourceDestinationMap> currentMap, long sourceNumber) {
+        for (SourceDestinationMap mapping : currentMap) {
+            Long destinationNumber = findMappedDestination(sourceNumber, mapping);
+            if (destinationNumber != null) {
+                return destinationNumber;
+            }
+        }
+        return sourceNumber;
+    }
+
+    private Long findMappedDestination(long sourceNumber, SourceDestinationMap mapping) {
+        if ((mapping.getSourceStart() <= sourceNumber)
+                && mapping.getSourceStart() + mapping.getRangeLength() > sourceNumber) {
+            return mapping.getDestinationStart() + sourceNumber - mapping.getSourceStart();
+        }
+        return null;
     }
 }
