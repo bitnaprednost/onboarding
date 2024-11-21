@@ -6,8 +6,11 @@ import java.util.List;
 public class Scratchcard {
     private List<Integer> winningNumbers;
     private List<Integer> myNumbers;
+    private int id;
+    private int matches = -1;
 
-    public Scratchcard() {
+    public Scratchcard(int id) {
+        this.id = id;
         winningNumbers = new ArrayList<>();
         myNumbers = new ArrayList<>();
     }
@@ -37,6 +40,10 @@ public class Scratchcard {
     }
 
     private int getMatches() {
+        return matches < 0 ? setMatches() : matches;
+    }
+
+    private int setMatches() {
         int matches = 0;
 
         for (Integer myNumber : myNumbers) {
@@ -44,6 +51,7 @@ public class Scratchcard {
                 matches++;
         }
 
+        this.matches = matches;
         return matches;
     }
 }

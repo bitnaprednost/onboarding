@@ -18,7 +18,9 @@ public class ScratchcardReader {
         String myNumbers = "";
 
         for (String card : scratchcardsString) {
-            Scratchcard scratchcard = new Scratchcard();
+            String scratchcardId = card.split(":")[0].split(" ")[1];
+
+            Scratchcard scratchcard = new Scratchcard(Integer.parseInt(scratchcardId));
             String numTogether = card.split(":")[1].strip();
 
             winningNumbers = numTogether.split("\\|")[0].strip();
