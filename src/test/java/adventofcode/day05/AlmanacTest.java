@@ -36,7 +36,7 @@ public class AlmanacTest {
 
 
     private void assertAlmanacOneCreatedCorrectly(Almanac almanac) {
-        List<Integer> expectedSeeds = List.of(79, 14, 55, 13);
+        List<Long> expectedSeeds = List.of(79L, 14L, 55L, 13L);
 
         List<SourceDestinationMap> expectedSeedToSoilMap = List.of(
                 new SourceDestinationMap(50, 98, 2),

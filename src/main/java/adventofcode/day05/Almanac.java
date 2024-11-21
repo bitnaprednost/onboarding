@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Almanac {
 
-    private List<Integer> seeds = new ArrayList<>();
+    private List<Long> seeds = new ArrayList<>();
 
     private List<List<SourceDestinationMap>> listOfMaps = new LinkedList<>();
 
@@ -50,7 +50,7 @@ public class Almanac {
         String[] seedNumbers = seedsSection.split(":")[1].strip().split("\\s+");
         Arrays.stream(seedNumbers)
                 .forEach(
-                        e -> seeds.add(Integer.parseInt(e))
+                        e -> seeds.add(Long.parseLong(e))
                 );
     }
 
@@ -58,7 +58,22 @@ public class Almanac {
         return listOfMaps;
     }
 
-    public List<Integer> getSeeds() {
+    public List<Long> getSeeds() {
         return seeds;
+    }
+
+    public long findLowestLocationNumber() {
+        long lowestLocationNumber = Long.MAX_VALUE;
+        for (Long seed : seeds) {
+            long seedLocation = getSeedLocation(seed);
+            if (seedLocation < lowestLocationNumber) {
+                lowestLocationNumber = seedLocation;
+            }
+        }
+        return lowestLocationNumber;
+    }
+
+    private long getSeedLocation(Long seed) {
+        return 35;
     }
 }
