@@ -30,7 +30,6 @@ public class Almanac {
         for (int i = 1; i < inputSections.length; i++) {
             parseMap(inputSections[i]);
         }
-        System.out.println(listOfMaps);
     }
 
     private void parseMap(String mapSection) {
