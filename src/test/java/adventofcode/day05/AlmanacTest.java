@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static adventofcode.day05.TestUtils.getInputForTaskOne;
+import static adventofcode.day05.TestUtils.getInputForTheTask;
 import static adventofcode.day05.TestUtils.getInputOne;
 
 
@@ -37,7 +37,7 @@ public class AlmanacTest {
 
     @Test
     public void findLowestLocationNumber_givenValidInput_returnsCorrectLowestLocationNumberTwo() {
-        String input = getInputForTaskOne();
+        String input = getInputForTheTask();
         Almanac almanac = new Almanac(input);
 
         long expectedLowestLocationNumber = 226172555;

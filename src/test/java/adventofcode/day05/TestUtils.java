@@ -41,7 +41,7 @@ public class TestUtils {
                 "56 93 4";
     }
 
-    public static String getInputForTaskOne() {
+    public static String getInputForTheTask() {
         return  "seeds: 3037945983 743948277 2623786093 391282324 195281306 62641412 769611781 377903357 2392990228 144218002 1179463071 45174621 2129467491 226193957 1994898626 92402726 1555863421 340215202 426882817 207194644\n" +
                 "\n" +
                 "seed-to-soil map:\n" +
