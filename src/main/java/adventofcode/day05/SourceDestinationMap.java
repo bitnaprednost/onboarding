@@ -7,11 +7,11 @@ import java.util.Objects;
  */
 public class SourceDestinationMap {
 
-    private long sourceStart;
-    private long destinationStart;
-    private long rangeLength;
+    private final long sourceStart;
+    private final long destinationStart;
+    private final long rangeLength;
 
-    public SourceDestinationMap(long sourceStart, long destinationStart, long rangeLength) {
+    public SourceDestinationMap(long destinationStart, long sourceStart,long rangeLength) {
         this.sourceStart = sourceStart;
         this.destinationStart = destinationStart;
         this.rangeLength = rangeLength;
