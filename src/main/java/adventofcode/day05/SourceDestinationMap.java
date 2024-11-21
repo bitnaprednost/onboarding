@@ -45,4 +45,16 @@ public class SourceDestinationMap {
                 ", rangeLength=" + rangeLength +
                 '}';
     }
+
+    public long getSourceStart() {
+        return sourceStart;
+    }
+
+    public long getDestinationStart() {
+        return destinationStart;
+    }
+
+    public long getRangeLength() {
+        return rangeLength;
+    }
 }
