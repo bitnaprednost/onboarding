@@ -7,11 +7,15 @@ public class EngineSchematicReader {
 
     public EngineSchematicReader(List<String> schematic) {
         schema = new Schema(schematic);
+        schema.findSymbols();
     }
 
     public int getSumPartNumbers() {
-        schema.findSymbols();
         return schema.getSumPartNumbers();
+    }
+
+    public int getSumGearRatios() {
+        return schema.getSumGearRations();
     }
 
 }
