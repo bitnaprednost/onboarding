@@ -12,11 +12,24 @@ import static adventofcode.day05.TestUtils.getInputOne;
  * @author Ivan Tomičić
  */
 public class AlmanacTest {
+
     @Test
     public void constructor_givenValidInput_createsAlmanacWithExpectedValues() {
         String input = getInputOne();
 
         Almanac almanac = new Almanac(input);
+
+        assertAlmanacOneCreatedCorrectly(almanac);
+    }
+
+    @Test
+    public void findLowestLocationNumber_givenValidInput_returnsCorrectLowestLocationNumber() {
+        String input = getInputOne();
+        Almanac almanac = new Almanac(input);
+
+        long expectedSeed = 35;
+
+        long actualSeed = almanac.findLowestLocationNumber();
 
         assertAlmanacOneCreatedCorrectly(almanac);
     }
