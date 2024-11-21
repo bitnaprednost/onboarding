@@ -28,11 +28,11 @@ public class AlmanacTest {
         String input = getInputOne();
         Almanac almanac = new Almanac(input);
 
-        long expectedSeed = 35;
+        long expectedLowestLocationNumber = 35;
 
-        long actualSeed = almanac.findLowestLocationNumber();
+        long actualLowestLocationNumber = almanac.findLowestLocationNumber();
 
-        Assertions.assertEquals(expectedSeed, actualSeed);
+        Assertions.assertEquals(expectedLowestLocationNumber, actualLowestLocationNumber);
     }
 
     @Test
@@ -40,11 +40,11 @@ public class AlmanacTest {
         String input = getInputForTaskOne();
         Almanac almanac = new Almanac(input);
 
-        long expectedSeed = 226172555;
+        long expectedLowestLocationNumber = 226172555;
 
-        long actualSeed = almanac.findLowestLocationNumber();
+        long actualLowestLocationNumber = almanac.findLowestLocationNumber();
 
-        Assertions.assertEquals(expectedSeed, actualSeed);
+        Assertions.assertEquals(expectedLowestLocationNumber, actualLowestLocationNumber);
     }
 
     @Test
