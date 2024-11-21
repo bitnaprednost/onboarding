@@ -19,6 +19,23 @@ public class EngineSymbol {
         return sum;
     }
 
+    public int getGearRatio() {
+        int gearRatio = 1;
+
+        if (isGear()) {
+            for (EngineNumber adjacentNumber : adjacentNumbers) {
+                gearRatio *= adjacentNumber.getValue();
+            }
+            return gearRatio;
+        }
+        return 0;
+    }
+
+    private boolean isGear() {
+        return value.equals("*")
+                && adjacentNumbers.size() == 2;
+    }
+
     public EngineSymbol(int row, int column, String value) {
         this.value = value;
         coordinate = new Coordinate(row, column);
