@@ -47,6 +47,18 @@ public class AlmanacTest {
         Assertions.assertEquals(expectedSeed, actualSeed);
     }
 
+    @Test
+    public void findLowestLocationNumber_givenValidInputTaskTwo_returnsCorrectLowestLocationNumber() {
+        String input = getInputOne();
+        Almanac almanac = new Almanac(input);
+
+        long expectedLowestLocationNumber = 46;
+
+        long actualLowestLocationNumber = almanac.findLowestLocationNumberForTaskTwo();
+
+        Assertions.assertEquals(expectedLowestLocationNumber, actualLowestLocationNumber);
+    }
+
 
     private void assertAlmanacOneCreatedCorrectly(Almanac almanac) {
         List<Long> expectedSeeds = List.of(79L, 14L, 55L, 13L);
