@@ -16,7 +16,8 @@ public class ScratchcardReader {
         String myNumbers = "";
 
         for (String card : scratchcardsString) {
-            String scratchcardId = card.split(":")[0].split(" ")[1];
+            String[] scratchcardCard = card.split(":")[0].split(" ");
+            String scratchcardId = scratchcardCard[scratchcardCard.length-1];
 
             Scratchcard scratchcard = new Scratchcard(Integer.parseInt(scratchcardId));
             String numTogether = card.split(":")[1].strip();
@@ -50,8 +51,10 @@ public class ScratchcardReader {
     private void setCopyOfScratchcards(int scratchcardId) {
         int numOfMatches = scratchcards.get(scratchcardId - 1).getMatches();
 
-        for (int i = 0; i < numOfMatches; i++) {
-            scratchcards.get(scratchcardId + i).addCopy();
+        for (int copy = 0; copy < scratchcards.get(scratchcardId - 1).getCopy(); copy++) {
+            for (int i = 0; i < numOfMatches; i++) {
+                scratchcards.get(scratchcardId + i).addCopy();
+            }
         }
     }
 
