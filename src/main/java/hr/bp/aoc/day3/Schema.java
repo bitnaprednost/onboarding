@@ -24,33 +24,26 @@ public class Schema {
 
     public int getSumPartNumbers() {
         int sum = 0;
-        Set<EngineNumber> partNumbers = new HashSet<>();
 
         for (EngineSymbol symbol : allSymbols) {
             List<Coordinate> adjacent = symbol.getAdjacantNumCoordinates();
-            List<EngineNumber> numbers = getPartNumbersFromCordinates(adjacent);
-            partNumbers.addAll(numbers);
-        }
+            getPartNumbersFromCoordinates(adjacent, symbol);
 
-        for (EngineNumber number : partNumbers) {
-            sum += number.getValue();
+            sum += symbol.getSumAdjacentNum();
         }
 
         return sum;
     }
 
-    private List<EngineNumber> getPartNumbersFromCordinates(List<Coordinate> coordinates) {
-        List<EngineNumber> partNumbers = new ArrayList<>();
-
+    private void getPartNumbersFromCoordinates(List<Coordinate> coordinates, EngineSymbol symbol) {
         for (Coordinate coordinate : coordinates) {
             if (isOnSchema(coordinate)) {
                 EngineNumber potentialNum = getIfPartNum(coordinate);
                 if (potentialNum != null) {
-                    partNumbers.add(potentialNum);
+                    symbol.getAdjacentNumbers().add(potentialNum);
                 }
             }
         }
-        return partNumbers;
     }
 
     private EngineNumber getIfPartNum(Coordinate coordinate) {

@@ -1,21 +1,34 @@
 package hr.bp.aoc.day3;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class EngineSymbol {
-    private int row;
-    private int column;
     private String value;
     private Coordinate coordinate;
+    private Set<EngineNumber> adjacentNumbers = new HashSet<>();
+
+    public int getSumAdjacentNum() {
+        int sum = 0;
+
+        for (EngineNumber adjacentNumber : adjacentNumbers) {
+            sum += adjacentNumber.getValue();
+        }
+
+        return sum;
+    }
 
     public EngineSymbol(int row, int column, String value) {
-        this.row = row;
-        this.column = column;
         this.value = value;
         coordinate = new Coordinate(row, column);
     }
 
     public List<Coordinate> getAdjacantNumCoordinates() {
         return coordinate.getAdjacent();
+    }
+
+    public Set<EngineNumber> getAdjacentNumbers() {
+        return adjacentNumbers;
     }
 }
