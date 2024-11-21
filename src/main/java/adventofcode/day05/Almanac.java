@@ -80,7 +80,6 @@ public class Almanac {
     private List<Long> expandSeedsForTaskTwo(List<Long> seeds) {
         List<Long> expandedSeeds = new ArrayList<>();
         for (int i = 0; i < seeds.size(); i += 2) {
-            System.out.println("Expanding for i ");
             long seedStart = seeds.get(i);
             long range = seeds.get(i + 1);
             for (long j = seedStart; j < seedStart + range; j++) {
