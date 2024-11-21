@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Ivan Tomičić
@@ -88,19 +89,19 @@ public class Almanac {
 
     private long getDestinationNumberForSource(List<SourceDestinationMap> currentMap, long sourceNumber) {
         for (SourceDestinationMap mapping : currentMap) {
-            Long destinationNumber = findMappedDestination(sourceNumber, mapping);
-            if (destinationNumber != null) {
-                return destinationNumber;
+            Optional<Long> destinationNumber = findMappedDestination(sourceNumber, mapping);
+            if (destinationNumber.isPresent()) {
+                return destinationNumber.get();
             }
         }
         return sourceNumber;
     }
 
-    private Long findMappedDestination(long sourceNumber, SourceDestinationMap mapping) {
+    private Optional<Long> findMappedDestination(long sourceNumber, SourceDestinationMap mapping) {
         if ((mapping.getSourceStart() <= sourceNumber)
                 && mapping.getSourceStart() + mapping.getRangeLength() > sourceNumber) {
-            return mapping.getDestinationStart() + sourceNumber - mapping.getSourceStart();
+            return Optional.of(mapping.getDestinationStart() + sourceNumber - mapping.getSourceStart());
         }
-        return null;
+        return Optional.empty();
     }
 }
