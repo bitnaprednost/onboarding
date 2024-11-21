@@ -19,20 +19,20 @@ public class Almanac {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank");
         }
-        setSeedsAndMapsFromInput(input);
+        initializeSeedsAndMaps(input);
     }
 
-    private void setSeedsAndMapsFromInput(String input) {
+    private void initializeSeedsAndMaps(String input) {
         String[] inputSections = input.split("\n\n");
 
-        parseSeedsInput(inputSections[0]);
+        extractSeedValues(inputSections[0]);
 
         for (int i = 1; i < inputSections.length; i++) {
-            parseMap(inputSections[i]);
+            createMapFromSection(inputSections[i]);
         }
     }
 
-    private void parseMap(String mapSection) {
+    private void createMapFromSection(String mapSection) {
         List<SourceDestinationMap> map = new ArrayList<>();
 
         String[] sourceDestinationLists = mapSection
@@ -46,20 +46,12 @@ public class Almanac {
         listOfMaps.add(map);
     }
 
-    private void parseSeedsInput(String seedsSection) {
+    private void extractSeedValues(String seedsSection) {
         String[] seedNumbers = seedsSection.split(":")[1].strip().split("\\s+");
         Arrays.stream(seedNumbers)
                 .forEach(
                         e -> seeds.add(Long.parseLong(e))
                 );
-    }
-
-    public List<List<SourceDestinationMap>> getListOfMaps() {
-        return listOfMaps;
-    }
-
-    public List<Long> getSeeds() {
-        return seeds;
     }
 
     public long findLowestLocationNumber() {
@@ -102,5 +94,13 @@ public class Almanac {
             return Optional.of(mapping.destinationStart() + sourceNumber - mapping.sourceStart());
         }
         return Optional.empty();
+    }
+
+    public List<List<SourceDestinationMap>> getListOfMaps() {
+        return listOfMaps;
+    }
+
+    public List<Long> getSeeds() {
+        return seeds;
     }
 }
