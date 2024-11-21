@@ -10,7 +10,7 @@ public class TaskTwo {
 
         ScratchcardReader reader = new ScratchcardReader(scratchcards);
 
-        int numOfStrachcards = reader.getNumbOfScratchcards();
-        System.out.println(numOfStrachcards);
+        int numOfScratchcards = reader.getNumbOfScratchcards();
+        System.out.println(numOfScratchcards);
     }
 }
