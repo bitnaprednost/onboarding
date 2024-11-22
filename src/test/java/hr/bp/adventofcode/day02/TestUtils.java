@@ -1,5 +1,7 @@
 package hr.bp.adventofcode.day02;
 
+import hr.bp.adventofcode.day02.color.Color;
+
 import java.util.List;
 import java.util.Map;
 

@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 
 import static hr.bp.adventofcode.day02.TestUtils.getShortInput;
 
-public class GameRunnerTest {
+public class GameRunnerPartOneTest {
 
-    private GameRunner gameRunner;
+    private GameRunnerPartOne gameRunnerPartOne;
 
     @BeforeEach
     public void setUp() {
         InputParser inputParser = new InputParser();
-        gameRunner = new GameRunner(inputParser);
+        gameRunnerPartOne = new GameRunnerPartOne(inputParser);
     }
 
     @Test
@@ -23,7 +23,7 @@ public class GameRunnerTest {
 
         Bag bag = new Bag(12, 13, 14);
 
-        Integer actualIdSum = gameRunner.calculateSumOfPossibleGameIds(input, bag);
+        Integer actualIdSum = gameRunnerPartOne.calculateSumOfPossibleGameIds(input, bag);
 
         Assertions.assertEquals(expectedIdSum, actualIdSum);
     }

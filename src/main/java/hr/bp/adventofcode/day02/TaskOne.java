@@ -7,11 +7,11 @@ public class TaskOne {
 
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
-        GameRunner gameRunner = new GameRunner(inputParser);
+        GameRunnerPartOne gameRunnerPartOne = new GameRunnerPartOne(inputParser);
         Bag bag = new Bag(12, 13, 14);
 
         String userInput = readUserInputAsString();
-        int result = gameRunner.calculateSumOfPossibleGameIds(userInput, bag);
+        int result = gameRunnerPartOne.calculateSumOfPossibleGameIds(userInput, bag);
 
         displayResult(result);
     }
