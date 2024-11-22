@@ -44,9 +44,9 @@ public class RacesRunnerTest {
         String input = getFirstInput();
         RacesRunner racesRunner = new RacesRunner(input);
 
-        int expectedResult = 288;
+        long expectedResult = 288;
 
-        int actualResult = racesRunner.multiplyResultsOfAllRaces();
+        long actualResult = racesRunner.multiplyResultsOfAllRaces();
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
@@ -56,9 +56,9 @@ public class RacesRunnerTest {
         String input = getSecondInput();
         RacesRunner racesRunner = new RacesRunner(input);
 
-        int expectedResult = 393120;
+        long expectedResult = 393120;
 
-        int actualResult = racesRunner.multiplyResultsOfAllRaces();
+        long actualResult = racesRunner.multiplyResultsOfAllRaces();
 
         Assertions.assertEquals(expectedResult, actualResult);
     }

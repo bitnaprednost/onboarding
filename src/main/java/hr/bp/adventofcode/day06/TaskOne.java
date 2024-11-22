@@ -12,7 +12,7 @@ public class TaskOne {
         String input = readUserInputAsString();
         RacesRunner racesRunner = new RacesRunner(input);
 
-        int sum = racesRunner.multiplyResultsOfAllRaces();
+        long sum = racesRunner.multiplyResultsOfAllRaces();
 
         displayResult(sum);
     }

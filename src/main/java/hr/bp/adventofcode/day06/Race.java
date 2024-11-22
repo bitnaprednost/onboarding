@@ -15,36 +15,36 @@ public class Race {
         this.raceRecord = raceRecord;
     }
 
-    public int calculateWaysToWinARace() {
-        int maximumTime = raceRecord.maximumTime();
-        int recordDistance = raceRecord.recordDistance();
+    public long calculateWaysToWinARace() {
+        long maximumTime = raceRecord.maximumTime();
+        long recordDistance = raceRecord.recordDistance();
 
         Pair<Double, Double> quadraticEquationResult = solveQuadraticEquation(maximumTime, recordDistance);
 
-        Pair<Integer, Integer> extractedWholeNumbers = extractWholeNumbers(quadraticEquationResult);
+        Pair<Long, Long> extractedWholeNumbers = extractWholeNumbers(quadraticEquationResult);
 
         return extractedWholeNumbers.getRight() - extractedWholeNumbers.getLeft() + 1;
     }
 
 
-    private Pair<Double, Double> solveQuadraticEquation(int maximumTime, int recordDistance) {
+    private Pair<Double, Double> solveQuadraticEquation(long maximumTime, long recordDistance) {
         Double rightValue = (((maximumTime*maximumTime) + Math.sqrt(maximumTime * maximumTime - 4 * recordDistance)) / 2);
         Double leftValue = (((maximumTime*maximumTime) - Math.sqrt(maximumTime*maximumTime - 4*recordDistance)) / 2);
         
         return Pair.create(leftValue, rightValue);
     }
 
-    private Pair<Integer, Integer> extractWholeNumbers(Pair<Double, Double> quadraticEquationResult) {
+    private Pair<Long, Long> extractWholeNumbers(Pair<Double, Double> quadraticEquationResult) {
         Double leftValue = quadraticEquationResult.getLeft();
         Double rightValue = quadraticEquationResult.getRight();
 
-        Integer leftValueCeiled = (leftValue % 1 == 0)
-                ? (int) Math.ceil(leftValue) + 1
-                : (int) Math.ceil(leftValue);
+        Long leftValueCeiled = (leftValue % 1 == 0)
+                ? (long) Math.ceil(leftValue) + 1
+                : (long) Math.ceil(leftValue);
 
-        Integer rightValueFloored = (rightValue % 1 == 0)
-                ? (int) Math.floor(rightValue) - 1
-                : (int) Math.floor(rightValue);
+        Long rightValueFloored = (rightValue % 1 == 0)
+                ? (long) Math.floor(rightValue) - 1
+                : (long) Math.floor(rightValue);
 
         return Pair.create(leftValueCeiled, rightValueFloored);
     }

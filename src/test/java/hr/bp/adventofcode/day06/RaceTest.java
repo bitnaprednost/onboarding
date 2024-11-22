@@ -13,9 +13,9 @@ public class RaceTest {
         RaceRecord raceRecord = new RaceRecord(7, 9);
         Race race = new Race(raceRecord);
 
-        int expectedWaysToWinARace = 4;
+        long expectedWaysToWinARace = 4;
 
-        int actualWaysToWinARace = race.calculateWaysToWinARace();
+        long actualWaysToWinARace = race.calculateWaysToWinARace();
 
         Assertions.assertEquals(expectedWaysToWinARace, actualWaysToWinARace);
     }
@@ -25,9 +25,9 @@ public class RaceTest {
         RaceRecord raceRecord = new RaceRecord(15, 40);
         Race race = new Race(raceRecord);
 
-        int expectedWaysToWinARace = 8;
+        long expectedWaysToWinARace = 8;
 
-        int actualWaysToWinARace = race.calculateWaysToWinARace();
+        long actualWaysToWinARace = race.calculateWaysToWinARace();
 
         Assertions.assertEquals(expectedWaysToWinARace, actualWaysToWinARace);
     }
@@ -37,9 +37,9 @@ public class RaceTest {
         RaceRecord raceRecord = new RaceRecord(30, 200);
         Race race = new Race(raceRecord);
 
-        int expectedWaysToWinARace = 9;
+        long expectedWaysToWinARace = 9;
 
-        int actualWaysToWinARace = race.calculateWaysToWinARace();
+        long actualWaysToWinARace = race.calculateWaysToWinARace();
 
         Assertions.assertEquals(expectedWaysToWinARace, actualWaysToWinARace);
     }

@@ -36,8 +36,8 @@ public class RacesRunner {
         return races;
     }
 
-    public int multiplyResultsOfAllRaces() {
-        int multiplication = 1;
+    public long multiplyResultsOfAllRaces() {
+        long multiplication = 1;
         for (Race race : races) {
             multiplication *= race.calculateWaysToWinARace();
         }
