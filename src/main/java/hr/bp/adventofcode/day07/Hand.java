@@ -1,6 +1,7 @@
 package hr.bp.adventofcode.day07;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Ivan Tomičić
@@ -29,5 +30,16 @@ public class Hand implements Comparable<Hand> {
         }
 
         return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Hand hand)) return false;
+        return Objects.equals(cards, hand.cards);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(cards);
     }
 }
