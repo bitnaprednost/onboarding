@@ -4,6 +4,7 @@ import static adventofcode.Utils.displayResult;
 import static adventofcode.Utils.readUserInputAsString;
 
 public class TaskOne {
+
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
         GameRunner gameRunner = new GameRunner(inputParser);
@@ -13,7 +14,5 @@ public class TaskOne {
         int result = gameRunner.calculateSumOfPossibleGameIds(userInput, bag);
 
         displayResult(result);
-
-
     }
 }

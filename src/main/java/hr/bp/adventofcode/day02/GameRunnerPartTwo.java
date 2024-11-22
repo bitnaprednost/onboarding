@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GameRunnerPartTwo {
+
     InputParser inputParser;
 
     public GameRunnerPartTwo(InputParser inputParser) {
@@ -13,6 +14,7 @@ public class GameRunnerPartTwo {
     public int calculateSumOfPowerOfSets(String input) {
         Map<Integer, List<Map<Color, Integer>>> parsedInput = inputParser.parse(input);
         int sum = 0;
+
         for (List<Map<Color, Integer>> line : parsedInput.values()) {
             sum += getPowerOfSetOfCubes(line);
         }
@@ -23,6 +25,7 @@ public class GameRunnerPartTwo {
         int minimumRed = getMinimumCubesForColor(setOfCubes, Color.RED);
         int minimumGreen = getMinimumCubesForColor(setOfCubes, Color.GREEN);
         int minimumBlue = getMinimumCubesForColor(setOfCubes, Color.BLUE);
+
         return minimumRed * minimumGreen * minimumBlue;
     }
 
