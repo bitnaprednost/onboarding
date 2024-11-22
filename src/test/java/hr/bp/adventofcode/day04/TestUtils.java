@@ -1,4 +1,4 @@
-package adventofcode.day04;
+package hr.bp.adventofcode.day04;
 
 import java.util.Map;
 import java.util.Set;
@@ -68,5 +68,4 @@ public class TestUtils {
                 "Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36\n" +
                 "Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11";
     }
-
 }

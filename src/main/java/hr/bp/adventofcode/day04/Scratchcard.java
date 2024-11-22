@@ -1,4 +1,4 @@
-package adventofcode.day04;
+package hr.bp.adventofcode.day04;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -8,6 +8,7 @@ import java.util.Set;
  * @author Ivan Tomičić
  */
 public class Scratchcard {
+
     private Set<Integer> winningNumbers;
     private Set<Integer> playersNumbers;
 
@@ -18,6 +19,7 @@ public class Scratchcard {
 
     public int calculatePoints() {
         int numbersWon = getMatchingNumbers();
+
         if (numbersWon == 0) {
             return 0;
         } else {

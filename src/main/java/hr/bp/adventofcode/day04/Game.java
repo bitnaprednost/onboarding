@@ -1,4 +1,4 @@
-package adventofcode.day04;
+package hr.bp.adventofcode.day04;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  * @author Ivan Tomičić
  */
 public class Game {
+
     private final Map<Integer, Scratchcard> scratchcards = new LinkedHashMap<>();
 
     public Game(String input) {
@@ -22,6 +23,7 @@ public class Game {
 
     private void setScratchcardsFromInput(String input) {
         String[] lines = input.split("\n");
+
         for (String line : lines) {
             addScratchcardFromLine(line);
         }
@@ -29,6 +31,7 @@ public class Game {
 
     private void addScratchcardFromLine(String line) {
         String scratchcardNumber = line.split(":")[0].split("Card")[1].strip();
+
         String leftSide = line.split("\\|")[0].split(":")[1].strip();
         String rightSide = line.split("\\|")[1].strip();
 
@@ -68,6 +71,7 @@ public class Game {
             Scratchcard scratchcard = scratchcards.get(scratchcardEntry.getKey());
 
             int numbersWon = scratchcard.getMatchingNumbers();
+
             int currentScratchCardCopies = scratchcardEntry.getValue();
             int currentScratchCardNumber = scratchcardEntry.getKey();
 
@@ -77,7 +81,6 @@ public class Game {
                 }
             }
         }
-
         return copiesOfScratchcardsWon.values().stream().reduce(Integer::sum).get();
     }
 }
