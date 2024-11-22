@@ -3,6 +3,9 @@ package hr.bp.adventofcode.day03;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class EngineSchematic {
 
     private char[][] grid;
