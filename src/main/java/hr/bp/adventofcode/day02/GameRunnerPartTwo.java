@@ -5,6 +5,9 @@ import hr.bp.adventofcode.day02.color.Color;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class GameRunnerPartTwo {
 
     InputParser inputParser;

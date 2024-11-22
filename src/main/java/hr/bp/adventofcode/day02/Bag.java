@@ -4,6 +4,9 @@ import hr.bp.adventofcode.day02.color.Color;
 
 import java.util.Map;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class Bag {
 
     private final Map<Color, Integer> maxCubes;

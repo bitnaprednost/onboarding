@@ -3,6 +3,9 @@ package hr.bp.adventofcode.day02;
 import static adventofcode.Utils.displayResult;
 import static adventofcode.Utils.readUserInputAsString;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class TaskTwo {
 
     public static void main(String[] args) {

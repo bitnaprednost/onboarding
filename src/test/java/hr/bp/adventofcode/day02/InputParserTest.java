@@ -10,6 +10,9 @@ import java.util.Map;
 import static hr.bp.adventofcode.day02.TestUtils.getShortGameInformation;
 import static hr.bp.adventofcode.day02.TestUtils.getShortInput;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class InputParserTest {
 
     private static final InputParser inputParser = new InputParser();
