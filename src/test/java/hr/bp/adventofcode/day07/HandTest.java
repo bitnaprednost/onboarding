@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class HandTest {
 
     @Test
-    public void compareHands_givenTwoHands_comparesThemCorrectly() {
+    public void compareHands_givenFirstHandStrongerThanSecondHand_comparesThemCorrectly() {
         Hand hand1 = new Hand (
                 new Card[]{Card.A, Card.A, Card.A, Card.A, Card.TWO}
         );
@@ -19,6 +19,40 @@ public class HandTest {
         );
 
         int expectedCompareResult = 1;
+
+        int actualCompareResult = hand1.compareTo(hand2);
+
+        Assertions.assertEquals(expectedCompareResult, actualCompareResult);
+    }
+
+    @Test
+    public void compareHands_givenFirstHandWeakerThanSecondHand_comparesThemCorrectly() {
+        Hand hand1 = new Hand (
+                new Card[]{Card.A, Card.A, Card.A, Card.A, Card.TWO}
+        );
+
+        Hand hand2 = new Hand (
+                new Card[]{Card.A, Card.A, Card.A, Card.A, Card.THREE}
+        );
+
+        int expectedCompareResult = -1;
+
+        int actualCompareResult = hand1.compareTo(hand2);
+
+        Assertions.assertEquals(expectedCompareResult, actualCompareResult);
+    }
+
+    @Test
+    public void compareHands_givenFirstHandEqualToSecondHand_comparesThemCorrectly() {
+        Hand hand1 = new Hand (
+                new Card[]{Card.A, Card.A, Card.A, Card.A, Card.TWO}
+        );
+
+        Hand hand2 = new Hand (
+                new Card[]{Card.A, Card.A, Card.A, Card.A, Card.TWO}
+        );
+
+        int expectedCompareResult = 0;
 
         int actualCompareResult = hand1.compareTo(hand2);
 

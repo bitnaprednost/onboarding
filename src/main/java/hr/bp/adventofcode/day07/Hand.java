@@ -5,9 +5,12 @@ package hr.bp.adventofcode.day07;
  */
 public class Hand implements Comparable<Hand> {
 
-    private Card[] cards = new Card[5];
+    private final Card[] cards;
 
     public Hand(Card[] cards) {
+        if (cards.length != 5) {
+            throw new IllegalArgumentException("cards array must have exactly 5 elements.");
+        }
         this.cards = cards;
     }
 
