@@ -3,18 +3,18 @@ package hr.bp.adventofcode.day02;
 import java.util.Map;
 
 public class Bag {
-    private final Map<ColorEnum, Integer> maxCubes;
+    private final Map<Color, Integer> maxCubes;
 
     public Bag(int redCubes, int greenCubes, int blueCubes) {
         this.maxCubes = Map.of(
-                ColorEnum.RED, redCubes,
-                ColorEnum.GREEN, greenCubes,
-                ColorEnum.BLUE, blueCubes
+                Color.RED, redCubes,
+                Color.GREEN, greenCubes,
+                Color.BLUE, blueCubes
         );
     }
 
-    public boolean canHoldSubset(Map<ColorEnum, Integer> subset) {
-        for (Map.Entry<ColorEnum, Integer> entry : subset.entrySet()) {
+    public boolean canHoldSubset(Map<Color, Integer> subset) {
+        for (Map.Entry<Color, Integer> entry : subset.entrySet()) {
             int maxAllowed = maxCubes.getOrDefault(entry.getKey(), 0);
             if (entry.getValue() > maxAllowed) {
                 return false;

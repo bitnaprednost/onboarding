@@ -5,9 +5,9 @@ import java.util.Map;
 
 public class Game {
     private final int gameId;
-    private final List<Map<ColorEnum, Integer>> subsets;
+    private final List<Map<Color, Integer>> subsets;
 
-    public Game(int gameId, List<Map<ColorEnum, Integer>> subsets) {
+    public Game(int gameId, List<Map<Color, Integer>> subsets) {
         this.gameId = gameId;
         this.subsets = subsets;
     }
@@ -17,7 +17,7 @@ public class Game {
     }
 
     public boolean isPossibleWithBag(Bag bag) {
-        for (Map<ColorEnum, Integer> subset : subsets) {
+        for (Map<Color, Integer> subset : subsets) {
             if (!bag.canHoldSubset(subset)) {
                 return false;
             }

@@ -4,8 +4,8 @@ import java.util.*;
 
 public class InputParser {
 
-    public Map<Integer, List<Map<ColorEnum, Integer>>> parse(String input) {
-        Map<Integer, List<Map<ColorEnum, Integer>>> gameInformationMap = new HashMap<>();
+    public Map<Integer, List<Map<Color, Integer>>> parse(String input) {
+        Map<Integer, List<Map<Color, Integer>>> gameInformationMap = new HashMap<>();
         List<String> inputLines = getInputLines(input);
         for (String inputLine : inputLines) {
             processInputLine(inputLine, gameInformationMap);
@@ -19,15 +19,15 @@ public class InputParser {
     }
 
     // inputLine = "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
-    private void processInputLine(String inputLine, Map<Integer, List<Map<ColorEnum, Integer>>> gameInformationMap) {
+    private void processInputLine(String inputLine, Map<Integer, List<Map<Color, Integer>>> gameInformationMap) {
         Integer gameId = getGameId(inputLine);
-        List<Map<ColorEnum, Integer>> listOfSubsetsRevealed = getListOfSubsetsRevealed(inputLine);
+        List<Map<Color, Integer>> listOfSubsetsRevealed = getListOfSubsetsRevealed(inputLine);
         gameInformationMap.put(gameId, listOfSubsetsRevealed);
     }
 
     // inputLine = "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
-    private List<Map<ColorEnum, Integer>> getListOfSubsetsRevealed(String inputLine) {
-        List<Map<ColorEnum, Integer>> listOfSubsetsRevealed = new ArrayList<>();
+    private List<Map<Color, Integer>> getListOfSubsetsRevealed(String inputLine) {
+        List<Map<Color, Integer>> listOfSubsetsRevealed = new ArrayList<>();
         List<String> inputLineSubsets = getInputLineSubsets(inputLine);
         for (String inputLineSubset : inputLineSubsets) {
             processSubset(inputLineSubset, listOfSubsetsRevealed);
@@ -36,8 +36,8 @@ public class InputParser {
     }
 
     // inputLineSubset = "3 blue, 4 red"
-    private void processSubset(String inputLineSubset, List<Map<ColorEnum, Integer>> listOfSubsetsRevealed) {
-        Map<ColorEnum, Integer> subsetRevealed = new HashMap<>();
+    private void processSubset(String inputLineSubset, List<Map<Color, Integer>> listOfSubsetsRevealed) {
+        Map<Color, Integer> subsetRevealed = new HashMap<>();
         List<String> cubeNumbers = getCubes(inputLineSubset);
         for (String cubeNumber : cubeNumbers) {                // cubeNumber = "3 blue"
             processCubeNumber(cubeNumber, subsetRevealed);
@@ -46,8 +46,8 @@ public class InputParser {
     }
 
     // cubeNumber = "3 blue"
-    private void processCubeNumber(String cubeNumber, Map<ColorEnum, Integer> subsetRevealed) {
-        ColorEnum color = getColorEnum(cubeNumber);
+    private void processCubeNumber(String cubeNumber, Map<Color, Integer> subsetRevealed) {
+        Color color = getColorEnum(cubeNumber);
         Integer number = getNumber(cubeNumber);
         subsetRevealed.put(color, number);
     }
@@ -70,9 +70,9 @@ public class InputParser {
     }
 
     // cubeNumber = "3 blue"
-    private ColorEnum getColorEnum(String cubeNumber) {
+    private Color getColorEnum(String cubeNumber) {
         String color = cubeNumber.strip().split(" ")[1];
-        return ColorEnum.valueOf(color.toUpperCase());
+        return Color.valueOf(color.toUpperCase());
     }
 
     // cubeNumber = "3 blue"

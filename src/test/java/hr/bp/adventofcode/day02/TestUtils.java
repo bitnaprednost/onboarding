@@ -1,7 +1,5 @@
 package hr.bp.adventofcode.day02;
 
-import hr.bp.adventofcode.day02.ColorEnum;
-
 import java.util.List;
 import java.util.Map;
 
@@ -15,31 +13,31 @@ public class TestUtils {
                 "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green";
     }
 
-    static Map<Integer, List<Map<ColorEnum, Integer>>> getShortGameInformation() {
+    static Map<Integer, List<Map<Color, Integer>>> getShortGameInformation() {
         return Map.of(
                 1, List.of(
-                        Map.of(ColorEnum.BLUE, 3, ColorEnum.RED, 4),
-                        Map.of(ColorEnum.RED, 1, ColorEnum.GREEN, 2, ColorEnum.BLUE, 6),
-                        Map.of(ColorEnum.GREEN, 2)
+                        Map.of(Color.BLUE, 3, Color.RED, 4),
+                        Map.of(Color.RED, 1, Color.GREEN, 2, Color.BLUE, 6),
+                        Map.of(Color.GREEN, 2)
                 ),
                 2, List.of(
-                        Map.of(ColorEnum.BLUE, 1, ColorEnum.GREEN, 2),
-                        Map.of(ColorEnum.GREEN, 3, ColorEnum.BLUE, 4, ColorEnum.RED, 1),
-                        Map.of(ColorEnum.GREEN, 1, ColorEnum.BLUE, 1)
+                        Map.of(Color.BLUE, 1, Color.GREEN, 2),
+                        Map.of(Color.GREEN, 3, Color.BLUE, 4, Color.RED, 1),
+                        Map.of(Color.GREEN, 1, Color.BLUE, 1)
                 ),
                 3, List.of(
-                        Map.of(ColorEnum.GREEN, 8, ColorEnum.BLUE, 6, ColorEnum.RED, 20),
-                        Map.of(ColorEnum.BLUE, 5, ColorEnum.RED, 4, ColorEnum.GREEN, 13),
-                        Map.of(ColorEnum.GREEN, 5, ColorEnum.RED, 1)
+                        Map.of(Color.GREEN, 8, Color.BLUE, 6, Color.RED, 20),
+                        Map.of(Color.BLUE, 5, Color.RED, 4, Color.GREEN, 13),
+                        Map.of(Color.GREEN, 5, Color.RED, 1)
                 ),
                 4, List.of(
-                        Map.of(ColorEnum.GREEN, 1, ColorEnum.RED, 3, ColorEnum.BLUE, 6),
-                        Map.of(ColorEnum.GREEN, 3, ColorEnum.RED, 6),
-                        Map.of(ColorEnum.GREEN, 3, ColorEnum.BLUE, 15, ColorEnum.RED, 14)
+                        Map.of(Color.GREEN, 1, Color.RED, 3, Color.BLUE, 6),
+                        Map.of(Color.GREEN, 3, Color.RED, 6),
+                        Map.of(Color.GREEN, 3, Color.BLUE, 15, Color.RED, 14)
                 ),
                 5, List.of(
-                        Map.of(ColorEnum.RED, 6, ColorEnum.BLUE, 1, ColorEnum.GREEN, 3),
-                        Map.of(ColorEnum.BLUE, 2, ColorEnum.RED, 1, ColorEnum.GREEN, 2)
+                        Map.of(Color.RED, 6, Color.BLUE, 1, Color.GREEN, 3),
+                        Map.of(Color.BLUE, 2, Color.RED, 1, Color.GREEN, 2)
                 )
         );
     }
