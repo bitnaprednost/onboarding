@@ -1,27 +1,29 @@
-package adventofcode.day02;
+package hr.bp.adventofcode.day02;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static adventofcode.day02.TestUtils.getShortInput;
+import static hr.bp.adventofcode.day02.TestUtils.getShortInput;
 
-public class GameRunnerPartTwoTest {
+public class GameRunnerTest {
 
-    private GameRunnerPartTwo gameRunnerPartTwo;
+    private GameRunner gameRunner;
 
     @BeforeEach
     public void setUp() {
         InputParser inputParser = new InputParser();
-        gameRunnerPartTwo = new GameRunnerPartTwo(inputParser);
+        gameRunner = new GameRunner(inputParser);
     }
 
     @Test
     public void testSmallMap() {
         String input = getShortInput();
-        Integer expectedIdSum = 2286;
+        Integer expectedIdSum = 8;
 
-        Integer actualIdSum = gameRunnerPartTwo.calculateSumOfPowerOfSets(input);
+        Bag bag = new Bag(12, 13, 14);
+
+        Integer actualIdSum = gameRunner.calculateSumOfPossibleGameIds(input, bag);
 
         Assertions.assertEquals(expectedIdSum, actualIdSum);
     }

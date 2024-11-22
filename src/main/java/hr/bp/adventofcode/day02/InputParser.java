@@ -1,4 +1,4 @@
-package adventofcode.day02;
+package hr.bp.adventofcode.day02;
 
 import java.util.*;
 
