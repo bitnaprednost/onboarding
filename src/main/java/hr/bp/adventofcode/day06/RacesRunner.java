@@ -35,4 +35,12 @@ public class RacesRunner {
     public List<Race> getRacess() {
         return races;
     }
+
+    public int multiplyResultsOfAllRaces() {
+        int multiplication = 1;
+        for (Race race : races) {
+            multiplication *= race.calculateWaysToWinARace();
+        }
+        return multiplication;
+    }
 }
