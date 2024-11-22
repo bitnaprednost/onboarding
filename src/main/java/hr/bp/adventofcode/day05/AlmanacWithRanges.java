@@ -1,4 +1,4 @@
-package adventofcode.day05;
+package hr.bp.adventofcode.day05;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ public class AlmanacWithRanges extends Almanac {
     @Override
     public long findLowestLocationNumber() {
         List<Range> seedsRanges = new ArrayList<>();
+
         for (int i = 0; i < seeds.size(); i += 2) {
             seedsRanges.add(
                     new Range(seeds.get(i), seeds.get(i) + seeds.get(i + 1) - 1, Range.DEFAULT_MAPPER)
@@ -24,9 +25,11 @@ public class AlmanacWithRanges extends Almanac {
 
         for (List<SourceDestinationMap> listOfMap : listOfMaps) {
             List<Range> currentLevelRanges = new ArrayList<>();
+
             for (Range seedRange : seedsRanges) {
                 List<Range> mapperRanges = extractMapperRanges(listOfMap);
                 List<Range> overlappedRanges = Range.breakRangeIntoRanges(seedRange, mapperRanges);
+
                 currentLevelRanges.addAll(overlappedRanges);
             }
             seedsRanges = Range.mapToNextLevel(currentLevelRanges);
@@ -40,11 +43,13 @@ public class AlmanacWithRanges extends Almanac {
 
     private List<Range> extractMapperRanges(List<SourceDestinationMap> sourceDestinationMaps) {
         List<Range> mapperRanges = new ArrayList<>();
+
         for (SourceDestinationMap map : sourceDestinationMaps) {
             Range mapperRange = new Range(
                     map.sourceStart(),
                     map.sourceStart() + map.rangeLength(),
                     a -> a + map.destinationStart() - map.sourceStart());
+
             mapperRanges.add(mapperRange);
         }
         return mapperRanges;

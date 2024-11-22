@@ -1,4 +1,4 @@
-package adventofcode.day05;
+package hr.bp.adventofcode.day05;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,16 +42,13 @@ public class Almanac {
         for (String sourceDestinationLine : sourceDestinationLists) {
             map.add(SourceDestinationMap.createFromInputLine(sourceDestinationLine));
         }
-
         listOfMaps.add(map);
     }
 
     private void extractSeedValues(String seedsSection) {
         String[] seedNumbers = seedsSection.split(":")[1].strip().split("\\s+");
-        Arrays.stream(seedNumbers)
-                .forEach(
-                        e -> seeds.add(Long.parseLong(e))
-                );
+
+        Arrays.stream(seedNumbers).forEach(e -> seeds.add(Long.parseLong(e)));
     }
 
     public long findLowestLocationNumber() {
@@ -80,7 +77,9 @@ public class Almanac {
 
     private long getDestinationNumberForSource(List<SourceDestinationMap> currentMap, long sourceNumber) {
         for (SourceDestinationMap mapping : currentMap) {
+
             Optional<Long> destinationNumber = findMappedDestination(sourceNumber, mapping);
+
             if (destinationNumber.isPresent()) {
                 return destinationNumber.get();
             }

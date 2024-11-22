@@ -1,4 +1,4 @@
-package adventofcode.day05;
+package hr.bp.adventofcode.day05;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,15 +6,14 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.function.Function;
 
-import static adventofcode.day05.Range.DEFAULT_MAPPER;
-import static adventofcode.day05.Range.breakRangeIntoRanges;
+import static hr.bp.adventofcode.day05.Range.DEFAULT_MAPPER;
+import static hr.bp.adventofcode.day05.Range.breakRangeIntoRanges;
 
 /**
  * @author Ivan Tomičić
  */
 public class RangeTest {
 
-    //private static final Function<Long, Long> DEFAULT_MAPPER = a -> a;
     private static final Function<Long, Long> PLUS_ONE_MAPPER = a -> a + 1;
     private static final Function<Long, Long> PLUS_TWO_MAPPER = a -> a + 2;
     private static final Function<Long, Long> PLUS_THREE_MAPPER = a -> a + 3;

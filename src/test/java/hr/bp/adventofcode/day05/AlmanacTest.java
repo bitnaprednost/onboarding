@@ -1,12 +1,12 @@
-package adventofcode.day05;
+package hr.bp.adventofcode.day05;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static adventofcode.day05.TestUtils.getInputForTheTask;
-import static adventofcode.day05.TestUtils.getInputOne;
+import static hr.bp.adventofcode.day05.TestUtils.getInputForTheTask;
+import static hr.bp.adventofcode.day05.TestUtils.getInputOne;
 
 
 /**

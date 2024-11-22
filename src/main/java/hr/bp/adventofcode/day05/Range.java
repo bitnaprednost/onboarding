@@ -1,4 +1,4 @@
-package adventofcode.day05;
+package hr.bp.adventofcode.day05;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,17 +17,20 @@ public record Range (long start, long end, Function<Long, Long> mappingFunction)
 
     public static List<Range> breakRangeIntoRanges(Range range, List<Range> mapperRanges) {
         List<Range> newRanges = new ArrayList<>();
+
         List<Range> sortedMapperRanges = new ArrayList<>(List.copyOf(mapperRanges));
         sortedMapperRanges.sort(RANGE_COMPARATOR);
 
         addOverlappingRanges(range, sortedMapperRanges, newRanges);
         addMissingRangeIntervals(range.start, range.end, newRanges);
+
         return newRanges;
     }
 
     private static void addOverlappingRanges(Range range, List<Range> sortedMapperRanges, List<Range> newRanges) {
         for (Range mapperRange : sortedMapperRanges) {
             Optional<Range> overlappedRange = getOverlappedRange(range, mapperRange);
+
             if (overlappedRange.isEmpty()) {
                 continue;
             }
@@ -42,6 +45,7 @@ public record Range (long start, long end, Function<Long, Long> mappingFunction)
         if (!newRanges.isEmpty()) {
             while (start < end) {
                 Range currentRange = newRanges.get(i);
+
                 if (start >= currentRange.start) {
                     start = currentRange.end + 1;
                     if (++i >= newRanges.size()) {
@@ -76,6 +80,7 @@ public record Range (long start, long end, Function<Long, Long> mappingFunction)
     public static Optional<Range> getOverlappedRange(Range seedRange, Range mapperRange) {
         long newStart = Math.max(seedRange.start, mapperRange.start);
         long newEnd = Math.min(seedRange.end, mapperRange.end);
+
         if (newEnd < newStart) {
             return Optional.empty();
         }
