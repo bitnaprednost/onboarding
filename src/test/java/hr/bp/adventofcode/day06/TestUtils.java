@@ -36,4 +36,9 @@ public class TestUtils {
         );
     }
 
+    public static String getThirdInput() {
+        return """
+                Time: 62737565
+                Distance:   644102312401023""";
+    }
 }

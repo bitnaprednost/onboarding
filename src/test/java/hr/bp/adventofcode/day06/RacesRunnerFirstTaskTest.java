@@ -9,6 +9,7 @@ import static hr.bp.adventofcode.day06.TestUtils.getFirstInput;
 import static hr.bp.adventofcode.day06.TestUtils.getFirstInputParsed;
 import static hr.bp.adventofcode.day06.TestUtils.getSecondInput;
 import static hr.bp.adventofcode.day06.TestUtils.getSecondInputParsed;
+import static hr.bp.adventofcode.day06.TestUtils.getThirdInput;
 
 /**
  * @author Ivan Tomičić
@@ -57,6 +58,18 @@ public class RacesRunnerFirstTaskTest {
         RacesRunnerFirstTask racesRunnerFirstTask = new RacesRunnerFirstTask(input);
 
         long expectedResult = 393120;
+
+        long actualResult = racesRunnerFirstTask.multiplyResultsOfAllRaces();
+
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void multiplyResultsOfAllRaces_givenTheThirdRaceInput_returnsCorrectResult() {
+        String input = getThirdInput();
+        RacesRunnerFirstTask racesRunnerFirstTask = new RacesRunnerFirstTask(input);
+
+        long expectedResult = 36872656;
 
         long actualResult = racesRunnerFirstTask.multiplyResultsOfAllRaces();
 
