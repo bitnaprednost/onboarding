@@ -14,7 +14,6 @@ public class InputParserTest {
 
     private static final InputParser inputParser = new InputParser();
 
-
     @Test
     public void testShortInput() {
         String input = getShortInput();
@@ -30,8 +29,4 @@ public class InputParserTest {
     private void assertMapsEqual(Map<Integer, List<Map<Color, Integer>>> expected, Map<Integer, List<Map<Color, Integer>>> actual) {
         Assertions.assertEquals(expected, actual, "The parsed map does not match the expected map.");
     }
-
-
-
-
 }

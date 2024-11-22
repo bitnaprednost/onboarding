@@ -36,5 +36,4 @@ public class GameRunnerPartTwoTest {
 
         Assertions.assertEquals(expectedIdSum, actualIdSum);
     }
-
 }
