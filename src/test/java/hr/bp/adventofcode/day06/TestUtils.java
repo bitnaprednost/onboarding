@@ -13,11 +13,11 @@ public class TestUtils {
                 Distance:  9  40  200""";
     }
 
-    public static List<RaceRecord> getFirstInputParsed() {
+    public static List<Race> getFirstInputParsed() {
         return List.of(
-                new RaceRecord(7, 9),
-                new RaceRecord(15, 40),
-                new RaceRecord(30, 200)
+                new Race(new RaceRecord(7, 9)),
+                new Race(new RaceRecord(15, 40)),
+                new Race(new RaceRecord(30, 200))
         );
     }
 
@@ -27,12 +27,12 @@ public class TestUtils {
                 Distance:   644   1023   1240   1023""";
     }
 
-    public static List<RaceRecord> getSecondInputParsed() {
+    public static List<Race> getSecondInputParsed() {
         return List.of(
-                new RaceRecord(62, 644),
-                new RaceRecord(73, 1023),
-                new RaceRecord(75, 1240),
-                new RaceRecord(65, 1023)
+                new Race(new RaceRecord(62, 644)),
+                new Race(new RaceRecord(73, 1023)),
+                new Race(new RaceRecord(75, 1240)),
+                new Race(new RaceRecord(65, 1023))
         );
     }
 

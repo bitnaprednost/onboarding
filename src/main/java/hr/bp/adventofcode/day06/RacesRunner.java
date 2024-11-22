@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class RacesRunner {
 
-    private List<RaceRecord> raceRecords = new ArrayList<>();
+    private List<Race> races = new ArrayList<>();
 
     public RacesRunner(String input) {
         parseInput(input);
@@ -28,11 +28,11 @@ public class RacesRunner {
                 .split("\\s+");
 
         for (int i = 0; i < maximumTimes.length; i++) {
-            raceRecords.add(new RaceRecord(maximumTimes[i], distanceRecords[i]));
+            races.add(new Race(new RaceRecord(maximumTimes[i], distanceRecords[i])));
         }
     }
 
-    public List<RaceRecord> getRaceRecords() {
-        return raceRecords;
+    public List<Race> getRacess() {
+        return races;
     }
 }

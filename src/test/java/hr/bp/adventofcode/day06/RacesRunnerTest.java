@@ -20,9 +20,9 @@ public class RacesRunnerTest {
         String input = getFirstInput();
         RacesRunner racesRunner = new RacesRunner(input);
 
-        List<RaceRecord> expectedRaceRecords = getFirstInputParsed();
+        List<Race> expectedRaceRecords = getFirstInputParsed();
 
-        List<RaceRecord> actualRaceRecords = racesRunner.getRaceRecords();
+        List<Race> actualRaceRecords = racesRunner.getRacess();
 
         Assertions.assertEquals(expectedRaceRecords, actualRaceRecords);
     }
@@ -32,9 +32,9 @@ public class RacesRunnerTest {
         String input = getSecondInput();
         RacesRunner racesRunner = new RacesRunner(input);
 
-        List<RaceRecord> expectedRaceRecords = getSecondInputParsed();
+        List<Race> expectedRaceRecords = getSecondInputParsed();
 
-        List<RaceRecord> actualRaceRecords = racesRunner.getRaceRecords();
+        List<Race> actualRaceRecords = racesRunner.getRacess();
 
         Assertions.assertEquals(expectedRaceRecords, actualRaceRecords);
     }
