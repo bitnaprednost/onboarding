@@ -12,7 +12,7 @@ import static hr.bp.adventofcode.day02.TestUtils.getShortInput;
 
 public class InputParserTest {
 
-    private static final InputParser inputParser = new InputParser();;
+    private static final InputParser inputParser = new InputParser();
 
 
     @Test
