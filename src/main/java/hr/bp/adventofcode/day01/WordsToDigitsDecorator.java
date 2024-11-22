@@ -1,6 +1,6 @@
-package adventofcode.day01;
+package hr.bp.adventofcode.day01;
 
-import adventofcode.day01.text.Digit;
+import hr.bp.adventofcode.day01.text.Digit;
 
 /**
  * @author Ivan Tomičić
