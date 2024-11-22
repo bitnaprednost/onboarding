@@ -2,6 +2,9 @@ package hr.bp.adventofcode.day03;
 
 import adventofcode.Utils;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class TaskTwo {
 
     public static void main(String[] args) {

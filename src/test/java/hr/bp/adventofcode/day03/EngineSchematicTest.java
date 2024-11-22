@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static hr.bp.adventofcode.day03.TestUtils.*;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class EngineSchematicTest {
 
     @Test
