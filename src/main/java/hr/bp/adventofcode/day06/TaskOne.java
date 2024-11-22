@@ -10,9 +10,9 @@ public class TaskOne {
 
     public static void main(String[] args) {
         String input = readUserInputAsString();
-        RacesRunner racesRunner = new RacesRunner(input);
+        RacesRunnerFirstTask racesRunnerFirstTask = new RacesRunnerFirstTask(input);
 
-        long sum = racesRunner.multiplyResultsOfAllRaces();
+        long sum = racesRunnerFirstTask.multiplyResultsOfAllRaces();
 
         displayResult(sum);
     }

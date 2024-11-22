@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * @author Ivan Tomičić
  */
-public class RacesRunner {
+public class RacesRunnerFirstTask {
 
     private List<Race> races = new ArrayList<>();
 
-    public RacesRunner(String input) {
+    public RacesRunnerFirstTask(String input) {
         parseInput(input);
     }
 
