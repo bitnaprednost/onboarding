@@ -6,7 +6,9 @@ public class InputParser {
 
     public Map<Integer, List<Map<Color, Integer>>> parse(String input) {
         Map<Integer, List<Map<Color, Integer>>> gameInformationMap = new HashMap<>();
+
         List<String> inputLines = getInputLines(input);
+
         for (String inputLine : inputLines) {
             processInputLine(inputLine, gameInformationMap);
         }
@@ -28,7 +30,9 @@ public class InputParser {
     // inputLine = "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
     private List<Map<Color, Integer>> getListOfSubsetsRevealed(String inputLine) {
         List<Map<Color, Integer>> listOfSubsetsRevealed = new ArrayList<>();
+
         List<String> inputLineSubsets = getInputLineSubsets(inputLine);
+
         for (String inputLineSubset : inputLineSubsets) {
             processSubset(inputLineSubset, listOfSubsetsRevealed);
         }
@@ -38,7 +42,9 @@ public class InputParser {
     // inputLineSubset = "3 blue, 4 red"
     private void processSubset(String inputLineSubset, List<Map<Color, Integer>> listOfSubsetsRevealed) {
         Map<Color, Integer> subsetRevealed = new HashMap<>();
+
         List<String> cubeNumbers = getCubes(inputLineSubset);
+
         for (String cubeNumber : cubeNumbers) {                // cubeNumber = "3 blue"
             processCubeNumber(cubeNumber, subsetRevealed);
         }
@@ -49,6 +55,7 @@ public class InputParser {
     private void processCubeNumber(String cubeNumber, Map<Color, Integer> subsetRevealed) {
         Color color = getColorEnum(cubeNumber);
         Integer number = getNumber(cubeNumber);
+
         subsetRevealed.put(color, number);
     }
 

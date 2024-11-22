@@ -3,6 +3,7 @@ package hr.bp.adventofcode.day02;
 import java.util.Map;
 
 public class Bag {
+
     private final Map<Color, Integer> maxCubes;
 
     public Bag(int redCubes, int greenCubes, int blueCubes) {
@@ -15,7 +16,9 @@ public class Bag {
 
     public boolean canHoldSubset(Map<Color, Integer> subset) {
         for (Map.Entry<Color, Integer> entry : subset.entrySet()) {
+
             int maxAllowed = maxCubes.getOrDefault(entry.getKey(), 0);
+
             if (entry.getValue() > maxAllowed) {
                 return false;
             }

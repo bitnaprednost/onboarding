@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Game {
+
     private final int gameId;
     private final List<Map<Color, Integer>> subsets;
 
