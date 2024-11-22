@@ -1,4 +1,4 @@
-package adventofcode.day01.text;
+package hr.bp.adventofcode.day01.text;
 
 /**
  * @author Ivan Tomičić

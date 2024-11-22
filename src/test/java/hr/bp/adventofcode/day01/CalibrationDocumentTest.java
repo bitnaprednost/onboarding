@@ -1,4 +1,4 @@
-package adventofcode.day01;
+package hr.bp.adventofcode.day01;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
