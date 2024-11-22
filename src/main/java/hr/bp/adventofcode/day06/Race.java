@@ -2,6 +2,8 @@ package hr.bp.adventofcode.day06;
 
 import org.graalvm.collections.Pair;
 
+import java.util.Objects;
+
 /**
  * @author Ivan Tomičić
  */
@@ -47,4 +49,14 @@ public class Race {
         return Pair.create(leftValueCeiled, rightValueFloored);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Race race)) return false;
+        return Objects.equals(raceRecord, race.raceRecord);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(raceRecord);
+    }
 }
