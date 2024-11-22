@@ -2,6 +2,9 @@ package adventofcode.day01;
 
 import adventofcode.day01.text.Digit;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class WordsToDigitsDecorator extends ExtractionStrategyDecorator {
 
     public WordsToDigitsDecorator(CalibrationValueExtractionStrategy strategy) {

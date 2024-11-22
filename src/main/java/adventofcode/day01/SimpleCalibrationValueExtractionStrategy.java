@@ -1,5 +1,8 @@
 package adventofcode.day01;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class SimpleCalibrationValueExtractionStrategy implements CalibrationValueExtractionStrategy {
 
     @Override

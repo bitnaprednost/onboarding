@@ -2,6 +2,9 @@ package adventofcode.day01;
 
 import java.util.List;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class CalibrationDocument {
 
     private final List<String> lines;

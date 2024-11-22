@@ -1,5 +1,8 @@
 package adventofcode.day01.text;
 
+/**
+ * @author Ivan Tomičić
+ */
 public enum Digit {
 
     ONE(1),

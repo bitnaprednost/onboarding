@@ -4,6 +4,9 @@ import adventofcode.Utils;
 
 import java.util.List;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class TaskOne {
 
     public static void main(String[] args) {
