@@ -1,13 +1,15 @@
 package hr.bp.adventofcode.day02;
 
+import hr.bp.adventofcode.day02.color.Color;
+
 import java.util.List;
 import java.util.Map;
 
-public class GameRunner {
+public class GameRunnerPartOne {
 
     private final InputParser inputParser;
 
-    public GameRunner(InputParser inputParser) {
+    public GameRunnerPartOne(InputParser inputParser) {
         this.inputParser = inputParser;
     }
 
