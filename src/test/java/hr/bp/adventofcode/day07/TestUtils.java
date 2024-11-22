@@ -20,11 +20,11 @@ public class TestUtils {
 
     public static List<Pair<Hand, Integer>> getFirstInputParsed() {
         return List.of(
-                Pair.create(new Hand (new Card[]{Card.THREE, Card.TWO, Card.T, Card.THREE, Card.K}), 765),
-                Pair.create(new Hand (new Card[]{Card.T, Card.FIVE, Card.FIVE, Card.J, Card.FIVE}), 684),
-                Pair.create(new Hand (new Card[]{Card.K, Card.K, Card.SIX, Card.SEVEN, Card.SEVEN}), 28),
-                Pair.create(new Hand (new Card[]{Card.K, Card.T, Card.J, Card.J, Card.T}), 220),
-                Pair.create(new Hand (new Card[]{Card.Q, Card.Q, Card.Q, Card.J, Card.A}), 483)
+                Pair.create(new Hand (List.of(Card.THREE, Card.TWO, Card.T, Card.THREE, Card.K)), 765),
+                Pair.create(new Hand (List.of(Card.T, Card.FIVE, Card.FIVE, Card.J, Card.FIVE)), 684),
+                Pair.create(new Hand (List.of(Card.K, Card.K, Card.SIX, Card.SEVEN, Card.SEVEN)), 28),
+                Pair.create(new Hand (List.of(Card.K, Card.T, Card.J, Card.J, Card.T)), 220),
+                Pair.create(new Hand (List.of(Card.Q, Card.Q, Card.Q, Card.J, Card.A)), 483)
         );
     }
 
