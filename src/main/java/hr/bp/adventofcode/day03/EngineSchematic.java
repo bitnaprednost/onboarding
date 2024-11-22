@@ -1,13 +1,12 @@
-package adventofcode.day03;
+package hr.bp.adventofcode.day03;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class EngineSchematic {
 
     private char[][] grid;
+
     private List<NumberPosition> numberPositions;
     private List<GearPosition> gearPositions;
 
@@ -15,15 +14,19 @@ public class EngineSchematic {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank.");
         }
+
         numberPositions = new ArrayList<>();
         gearPositions = new ArrayList<>();
+
         parseInput(input);
+
         extractNumberPositions();
         extractGearPositions();
     }
 
     public int calculateSumOfGearRatios() {
         int sum = 0;
+
         for (GearPosition gearPosition : gearPositions) {
             sum += findGearRatioForGear(gearPosition);
         }
@@ -32,6 +35,7 @@ public class EngineSchematic {
 
     public int calculateSum() {
         int sum = 0;
+
         for (NumberPosition numberPosition : numberPositions) {
             if (isAdjacentToSymbol(numberPosition.row(), numberPosition.beginColumn(), numberPosition.endColumn())) {
                 sum += numberPosition.value();
@@ -42,9 +46,11 @@ public class EngineSchematic {
 
     private int findGearRatioForGear(GearPosition gearPosition) {
         int ratio = 0;
+
         List<NumberPosition> numberPositionsAdjacentToGear = this.numberPositions.stream()
                 .filter(numberPosition -> numberIsAdjacentToGearPosition(gearPosition, numberPosition))
-                .collect(Collectors.toUnmodifiableList());
+                .toList();
+
         if (numberPositionsAdjacentToGear.size() == 2) {
             ratio = numberPositionsAdjacentToGear.get(0).value() * numberPositionsAdjacentToGear.get(1).value();
         }
@@ -59,6 +65,7 @@ public class EngineSchematic {
 
     private int getColumnDistance(GearPosition gearPosition, NumberPosition numberPosition) {
         int distance = Integer.MAX_VALUE;
+
         for (int i = numberPosition.beginColumn(); i <= numberPosition.endColumn(); i++) {
             distance = Math.min(distance, Math.abs(i - gearPosition.column()));
         }
@@ -71,9 +78,11 @@ public class EngineSchematic {
 
     public boolean isAdjacentToSymbol(int rowIndex, int startColumnIndex, int endColumnIndex) {
         boolean isAdjacent = checkRowForSymbols(rowIndex, startColumnIndex, endColumnIndex);
+
         if (rowIndex > 0) {
             isAdjacent |= checkRowForSymbols(rowIndex - 1, startColumnIndex, endColumnIndex);
         }
+
         if (rowIndex < grid.length - 1) {
             isAdjacent |= checkRowForSymbols(rowIndex + 1, startColumnIndex, endColumnIndex);
         }
@@ -82,8 +91,10 @@ public class EngineSchematic {
 
     private boolean checkRowForSymbols(int rowIndex, int startColumnIndex, int endColumnIndex) {
         char[] row = grid[rowIndex];
+
         startColumnIndex = Math.max(0, startColumnIndex - 1);
         endColumnIndex = Math.min(row.length - 1, endColumnIndex + 1);
+
         for (int i = startColumnIndex; i <= endColumnIndex; i++) {
             if (isSymbol(row[i])) {
                 return true;
@@ -98,7 +109,9 @@ public class EngineSchematic {
 
     private void parseInput(String input) {
         String[] rows = input.split("\n");
+
         grid = new char[rows.length][];
+
         for (int i = 0; i < rows.length; i++) {
             char[] row = rows[i].toCharArray();
             grid[i] = row;
@@ -113,8 +126,10 @@ public class EngineSchematic {
 
     private void extractNumberPositionsFromRow(int rowIndex) {
         char[] row = grid[rowIndex];
+
         int number = 0;
         int numberBeginIndex = -1;
+
         for (int i = 0; i < row.length; i++) {
             if (Character.isDigit(row[i])) {
                 if (numberBeginIndex == -1) {
