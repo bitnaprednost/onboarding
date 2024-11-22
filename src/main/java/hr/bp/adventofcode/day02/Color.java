@@ -1,5 +1,5 @@
 package hr.bp.adventofcode.day02;
 
-public enum ColorEnum {
+public enum Color {
     RED, GREEN, BLUE;
 }

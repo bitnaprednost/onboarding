@@ -18,15 +18,15 @@ public class InputParserTest {
     public void testShortInput() {
         String input = getShortInput();
 
-        Map<Integer, List<Map<ColorEnum, Integer>>> expectedGameInformation = getShortGameInformation();
+        Map<Integer, List<Map<Color, Integer>>> expectedGameInformation = getShortGameInformation();
 
-        Map<Integer, List<Map<ColorEnum, Integer>>> actualGameInformation = inputParser.parse(input);
+        Map<Integer, List<Map<Color, Integer>>> actualGameInformation = inputParser.parse(input);
 
         assertMapsEqual(expectedGameInformation, actualGameInformation);
 
     }
 
-    private void assertMapsEqual(Map<Integer, List<Map<ColorEnum, Integer>>> expected, Map<Integer, List<Map<ColorEnum, Integer>>> actual) {
+    private void assertMapsEqual(Map<Integer, List<Map<Color, Integer>>> expected, Map<Integer, List<Map<Color, Integer>>> actual) {
         Assertions.assertEquals(expected, actual, "The parsed map does not match the expected map.");
     }
 
