@@ -1,15 +1,15 @@
-package adventofcode.day04;
+package hr.bp.adventofcode.day04;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-import static adventofcode.day04.TestUtils.getInputAllWinningNumbers;
-import static adventofcode.day04.TestUtils.getInputNoWinningNumber;
-import static adventofcode.day04.TestUtils.getInputOne;
-import static adventofcode.day04.TestUtils.getInputTwo;
-import static adventofcode.day04.TestUtils.getListOfScratchcardsForInputOne;
+import static hr.bp.adventofcode.day04.TestUtils.getInputAllWinningNumbers;
+import static hr.bp.adventofcode.day04.TestUtils.getInputNoWinningNumber;
+import static hr.bp.adventofcode.day04.TestUtils.getInputOne;
+import static hr.bp.adventofcode.day04.TestUtils.getInputTwo;
+import static hr.bp.adventofcode.day04.TestUtils.getListOfScratchcardsForInputOne;
 
 /**
  * @author Ivan Tomičić
