@@ -1,5 +1,8 @@
 package adventofcode.day01;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class ExtractionStrategyDecorator implements CalibrationValueExtractionStrategy {
     protected final CalibrationValueExtractionStrategy strategy;
 

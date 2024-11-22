@@ -4,6 +4,9 @@ import adventofcode.Utils;
 
 import java.util.List;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class TaskTwo {
     public static void main(String[] args) {
         List<String> lines = Utils.collectUserInputLines();
