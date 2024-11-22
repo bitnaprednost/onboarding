@@ -25,4 +25,16 @@ public class GameTest {
 
         Assertions.assertEquals(expectedListOfHands, actualListOfHands);
     }
+
+    @Test
+    public void calculateTotalWinnings_givenFirstInput_returnsCorrectWinnings() {
+        String input = getFirstInput();
+        Game game = new Game(input);
+
+        int expectedWinnings = 6440;
+
+        int actualWinnings = game.calculateActualWinnings();
+
+        Assertions.assertEquals(expectedWinnings, actualWinnings);
+    }
 }
