@@ -1,9 +1,9 @@
-package adventofcode.day03;
+package hr.bp.adventofcode.day03;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static adventofcode.day03.TestUtils.*;
+import static hr.bp.adventofcode.day03.TestUtils.*;
 
 public class EngineSchematicTest {
 
@@ -78,5 +78,4 @@ public class EngineSchematicTest {
 
         Assertions.assertEquals(expectedSum, actualSum);
     }
-
 }

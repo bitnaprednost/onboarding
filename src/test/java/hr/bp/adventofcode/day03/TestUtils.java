@@ -1,4 +1,4 @@
-package adventofcode.day03;
+package hr.bp.adventofcode.day03;
 
 public class TestUtils {
 
