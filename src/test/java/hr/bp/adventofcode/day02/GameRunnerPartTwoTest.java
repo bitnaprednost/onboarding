@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import static hr.bp.adventofcode.day02.TestUtils.getLongInput;
 import static hr.bp.adventofcode.day02.TestUtils.getShortInput;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class GameRunnerPartTwoTest {
 
     private GameRunnerPartTwo gameRunnerPartTwo;

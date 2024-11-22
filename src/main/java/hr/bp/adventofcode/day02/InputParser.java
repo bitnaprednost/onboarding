@@ -4,6 +4,9 @@ import hr.bp.adventofcode.day02.color.Color;
 
 import java.util.*;
 
+/**
+ * @author Ivan Tomičić
+ */
 public class InputParser {
 
     public Map<Integer, List<Map<Color, Integer>>> parse(String input) {
