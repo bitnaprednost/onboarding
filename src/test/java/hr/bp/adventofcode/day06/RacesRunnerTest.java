@@ -50,4 +50,16 @@ public class RacesRunnerTest {
 
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void multiplyResultsOfAllRaces_givenTheSecondRaceInput_returnsCorrectResult() {
+        String input = getSecondInput();
+        RacesRunner racesRunner = new RacesRunner(input);
+
+        int expectedResult = 393120;
+
+        int actualResult = racesRunner.multiplyResultsOfAllRaces();
+
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
