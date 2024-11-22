@@ -1,4 +1,6 @@
-package adventofcode.day02;
+package hr.bp.adventofcode.day02;
+
+import hr.bp.adventofcode.day02.ColorEnum;
 
 import java.util.List;
 import java.util.Map;

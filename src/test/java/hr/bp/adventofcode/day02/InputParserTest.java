@@ -1,4 +1,4 @@
-package adventofcode.day02;
+package hr.bp.adventofcode.day02;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static adventofcode.day02.TestUtils.getShortGameInformation;
-import static adventofcode.day02.TestUtils.getShortInput;
+import static hr.bp.adventofcode.day02.TestUtils.getShortGameInformation;
+import static hr.bp.adventofcode.day02.TestUtils.getShortInput;
 
 public class InputParserTest {
 

@@ -1,15 +1,16 @@
-package adventofcode.day02;
+package hr.bp.adventofcode.day02;
 
 import static adventofcode.Utils.displayResult;
 import static adventofcode.Utils.readUserInputAsString;
 
-public class TaskTwo {
+public class TaskOne {
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
-        GameRunnerPartTwo gameRunner = new GameRunnerPartTwo(inputParser);
+        GameRunner gameRunner = new GameRunner(inputParser);
+        Bag bag = new Bag(12, 13, 14);
 
         String userInput = readUserInputAsString();
-        int result = gameRunner.calculateSumOfPowerOfSets(userInput);
+        int result = gameRunner.calculateSumOfPossibleGameIds(userInput, bag);
 
         displayResult(result);
 
