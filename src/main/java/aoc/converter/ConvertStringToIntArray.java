@@ -1,4 +1,4 @@
-package converter;
+package aoc.converter;
 
 public class ConvertStringToIntArray {
 

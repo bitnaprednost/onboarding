@@ -1,4 +1,4 @@
-package day4;
+package aoc.day4;
 
 public class MatchCounter {
     private int matchCount;

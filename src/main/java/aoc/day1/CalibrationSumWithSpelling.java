@@ -1,4 +1,4 @@
-package day1;
+package aoc.day1;
 
 public class CalibrationSumWithSpelling {
     public int calibrationSumWithSpelling (String calib_document) {

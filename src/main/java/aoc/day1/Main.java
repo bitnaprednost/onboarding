@@ -1,4 +1,4 @@
-package day1;
+package aoc.day1;
 
 import io.ReadFile;
 
