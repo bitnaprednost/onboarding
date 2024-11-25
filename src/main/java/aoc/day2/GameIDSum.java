@@ -1,11 +1,15 @@
-package day2;
+package aoc.day2;
 
-public class PowerSum {
-    public int powerSum (String game_document){
+public class GameIDSum {
+    public int gameIDSum (String game_document){
         int totalSum = 0;
 
         // Split the file content into lines
         String[] lines = game_document.split(System.lineSeparator());
+
+        int red_limit = 12;
+        int green_limit = 13;
+        int blue_limit = 14;
 
         // Process each line
         for (String line : lines)
@@ -13,12 +17,14 @@ public class PowerSum {
             // Split game data into game ID and rounds
             String[] parts = line.split(": ");
 
+            String gameIdPart = parts[0];
+            // Extract the game ID
+            int gameId = Integer.parseInt(gameIdPart.replace("Game ", "").trim());
+
             // Extract rounds
             String[] rounds = parts[1].split("; ");
 
-            // Initialize minimum required cubes
-            int minRed = 0, minGreen = 0, minBlue = 0;
-
+            boolean isGamePossible = true;
             for (String round : rounds)
             {
                 // Parse the cubes in the round
@@ -34,35 +40,39 @@ public class PowerSum {
                     // Extract color
                     String color = cubeInfo[1];
 
-                    // Find the maximum for each color in this round
-                    switch (color) {
+                    // Increment the corresponding color count
+                    switch (color)
+                    {
                         case "red":
-                            redCount = Math.max(redCount, count);
+                            redCount += count;
                             break;
                         case "green":
-                            greenCount = Math.max(greenCount, count);
+                            greenCount += count;
                             break;
                         case "blue":
-                            blueCount = Math.max(blueCount, count);
+                            blueCount += count;
                             break;
                     }
                 }
 
-                // Update the minimum required cubes across all rounds
-                minRed = Math.max(minRed, redCount);
-                minGreen = Math.max(minGreen, greenCount);
-                minBlue = Math.max(minBlue, blueCount);
+                // Check if the round exceeds any limit
+                if (redCount > red_limit || greenCount > green_limit || blueCount > blue_limit)
+                {
+                    isGamePossible = false;
+                    break;
+                }
             }
 
-            // Calculate the power of the minimum set of cubes
-            int power = minRed * minGreen * minBlue;
-
-            // Add the power to the total
-            totalSum += power;
+            // If the game is possible, add the game ID to the total sum
+            if (isGamePossible)
+            {
+                totalSum += gameId;
+            }
         }
 
-        // Return the total power
+        // Return the total sum
         return totalSum;
 
     }
 }
+

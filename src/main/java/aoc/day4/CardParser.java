@@ -1,6 +1,6 @@
-package day4;
+package aoc.day4;
 
-import converter.ConvertStringToIntArray;
+import aoc.converter.ConvertStringToIntArray;
 
 import java.util.Arrays;
 

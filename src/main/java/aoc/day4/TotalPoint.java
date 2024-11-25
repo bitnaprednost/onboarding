@@ -1,4 +1,4 @@
-package day4;
+package aoc.day4;
 
 public class TotalPoint {
     public int totalPoint (String filename){
