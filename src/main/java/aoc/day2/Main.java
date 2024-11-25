@@ -1,6 +1,6 @@
 package aoc.day2;
 
-import io.ReadFile;
+import aoc.io.ReadFile;
 
 public class Main {
     public static void main(String[] args) {
