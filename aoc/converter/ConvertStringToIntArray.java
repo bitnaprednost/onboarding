@@ -1,6 +1,6 @@
-package common;
+package converter;
 
-public class ConvertToIntArray {
+public class ConvertStringToIntArray {
 
     // Helper method to convert String array to int array
     public static int[] convertToIntArray(String[] strArray) {
