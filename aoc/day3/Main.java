@@ -1,6 +1,6 @@
 package day3;
 
-import common.ReadFile;
+import io.ReadFile;
 
 public class Main {
     public static void main(String[] args) {
