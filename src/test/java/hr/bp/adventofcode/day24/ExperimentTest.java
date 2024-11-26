@@ -1,11 +1,11 @@
-package adventofcode.day24;
+package hr.bp.adventofcode.day24;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static adventofcode.day24.TestUtils.*;
+import static hr.bp.adventofcode.day24.TestUtils.*;
 
 
 public class ExperimentTest {

@@ -1,6 +1,6 @@
 package hr.bp.adventofcode.day05;
 
-import adventofcode.Utils;
+import hr.bp.adventofcode.Utils;
 
 import java.io.IOException;
 import java.nio.file.Files;
