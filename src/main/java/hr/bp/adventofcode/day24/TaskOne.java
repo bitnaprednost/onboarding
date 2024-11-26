@@ -1,6 +1,6 @@
-package adventofcode.day24;
+package hr.bp.adventofcode.day24;
 
-import adventofcode.Utils;
+import hr.bp.adventofcode.Utils;
 
 /**
  * @author Ivan Tomičić

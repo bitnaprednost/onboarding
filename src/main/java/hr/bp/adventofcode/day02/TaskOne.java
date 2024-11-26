@@ -1,7 +1,7 @@
 package hr.bp.adventofcode.day02;
 
-import static adventofcode.Utils.displayResult;
-import static adventofcode.Utils.readUserInputAsString;
+import static hr.bp.adventofcode.Utils.displayResult;
+import static hr.bp.adventofcode.Utils.readUserInputAsString;
 
 /**
  * @author Ivan Tomičić

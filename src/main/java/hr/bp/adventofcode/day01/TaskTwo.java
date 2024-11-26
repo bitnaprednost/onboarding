@@ -1,6 +1,6 @@
 package hr.bp.adventofcode.day01;
 
-import adventofcode.Utils;
+import hr.bp.adventofcode.Utils;
 
 import java.util.List;
 

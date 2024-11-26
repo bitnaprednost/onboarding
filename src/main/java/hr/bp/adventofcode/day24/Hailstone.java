@@ -1,4 +1,4 @@
-package adventofcode.day24;
+package hr.bp.adventofcode.day24;
 
 import org.graalvm.collections.Pair;
 import java.util.Objects;
