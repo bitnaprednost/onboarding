@@ -1,4 +1,4 @@
-package hr.bp.adventofcode.day07;
+package hr.bp.adventofcode.day07.taskone;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

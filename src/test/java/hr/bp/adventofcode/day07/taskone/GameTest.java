@@ -1,4 +1,4 @@
-package hr.bp.adventofcode.day07;
+package hr.bp.adventofcode.day07.taskone;
 
 import org.graalvm.collections.Pair;
 import org.junit.jupiter.api.Assertions;
@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static hr.bp.adventofcode.day07.TestUtils.getFirstInput;
-import static hr.bp.adventofcode.day07.TestUtils.getSecondInput;
-import static hr.bp.adventofcode.day07.TestUtils.getFirstInputParsed;
+import static hr.bp.adventofcode.day07.taskone.TestUtils.getFirstInput;
+import static hr.bp.adventofcode.day07.taskone.TestUtils.getSecondInput;
+import static hr.bp.adventofcode.day07.taskone.TestUtils.getFirstInputParsed;
 
 /**
  * @author Ivan Tomičić
