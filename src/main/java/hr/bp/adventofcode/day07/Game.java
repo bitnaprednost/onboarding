@@ -4,6 +4,7 @@ import org.graalvm.collections.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -39,5 +40,17 @@ public class Game {
         List<Card> cards = Arrays.stream(symbols).map(Card::fromSymbol).toList();
 
         listOfHands.add(Pair.create(new Hand(cards), bidNumber));
+    }
+
+    public int calculateActualWinnings() {
+        List<Pair<Hand, Integer>> listOfHandsRanked = listOfHands.stream().sorted(Comparator.comparing(Pair::getLeft)).toList();
+
+        int sum = 0;
+
+        for (int i = 0; i < listOfHandsRanked.size(); i++) {
+            sum += listOfHandsRanked.get(i).getRight() * (i+1);
+        }
+
+        return sum;
     }
 }

@@ -1,7 +1,9 @@
 package hr.bp.adventofcode.day07;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author Ivan Tomičić
@@ -9,12 +11,14 @@ import java.util.Objects;
 public class Hand implements Comparable<Hand> {
 
     private final List<Card> cards;
+    private HandKind handKind;
 
     public Hand(List<Card> cards) {
         if (cards.size() != 5) {
             throw new IllegalArgumentException("cards array must have exactly 5 elements.");
         }
         this.cards = cards;
+        setHandKind();
     }
 
 
@@ -22,13 +26,19 @@ public class Hand implements Comparable<Hand> {
     public int compareTo(Hand hand) {
         if (hand == null) return 1;
 
+        if(this.handKind.compareTo(hand.handKind) > 0) return 1;
+        else if(this.handKind.compareTo(hand.handKind) < 0) return -1;
+
+        else return compareCardStrengths(hand);
+    }
+
+    private Integer compareCardStrengths(Hand hand) {
         for (int i = 0; i < 5; i++) {
             int cardComparison = cards.get(i).compareTo(hand.cards.get(i));
 
             if (cardComparison > 0) return 1;
             else if (cardComparison < 0) return -1;
         }
-
         return 0;
     }
 
@@ -41,5 +51,34 @@ public class Hand implements Comparable<Hand> {
     @Override
     public int hashCode() {
         return Objects.hashCode(cards);
+    }
+
+    private void setHandKind() {
+        Map<Card, Integer> cardCounts = this.cards.stream().collect(
+                Collectors.groupingBy(card -> card, Collectors.summingInt(value -> 1)));
+        if (cardCounts.containsValue(5)) {
+            this.handKind = HandKind.FIVE_OF_A_KIND;
+        } else if (cardCounts.containsValue(4)) {
+            this.handKind = HandKind.FOUR_OF_A_KIND;
+        } else if (cardCounts.containsValue(3) && cardCounts.containsValue(2)) {
+            this.handKind = HandKind.FULL_HOUSE;
+        } else if (cardCounts.containsValue(3) && cardCounts.containsValue(1)) {
+            this.handKind = HandKind.THREE_OF_A_KIND;
+        } else if (hasTwoPair(cardCounts)) {
+            this.handKind = HandKind.TWO_PAIR;
+        } else if (hasOnePair(cardCounts)) {
+            this.handKind = HandKind.ONE_PAIR;
+        } else {
+            this.handKind = HandKind.HIGH_CARD;
+        }
+    }
+
+    private static boolean hasTwoPair(Map<Card, Integer> cardCounts) {
+        return cardCounts.values().stream().filter(a -> a == 2).count() == 2;
+    }
+
+    private static boolean hasOnePair(Map<Card, Integer> cardCounts) {
+        return cardCounts.values().stream().filter(a -> a == 2).count() == 1 &&
+                cardCounts.values().stream().filter(a -> a == 1).count() == 3;
     }
 }
