@@ -22,7 +22,7 @@ public class TaskOne {
     }
 
     private static String readInputForTask() {
-        String filePath = "src/main/java/adventofcode/day05/input-task01.txt";
+        String filePath = "src/main/java/hr/bp/adventofcode/day05/input-task01.txt";
 
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
