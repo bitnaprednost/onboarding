@@ -1,4 +1,4 @@
-package hr.bp.adventofcode.day07.taskone;
+package hr.bp.adventofcode.day07;
 
 import java.util.HashMap;
 import java.util.Map;

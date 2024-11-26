@@ -1,4 +1,4 @@
-package hr.bp.adventofcode.day07.taskone;
+package hr.bp.adventofcode.day07;
 
 import org.graalvm.collections.Pair;
 
@@ -12,13 +12,16 @@ import java.util.List;
  */
 public class Game {
 
+    private boolean usesJokerCard;
+
     public List<Pair<Hand, Integer>> getListOfHands() {
         return listOfHands;
     }
 
     List<Pair<Hand, Integer>> listOfHands = new ArrayList<>();
 
-    public Game(String input) {
+    public Game(String input, boolean usesJokerCard) {
+        this.usesJokerCard = usesJokerCard;
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank");
         }
@@ -39,7 +42,7 @@ public class Game {
 
         List<Card> cards = Arrays.stream(symbols).map(Card::fromSymbol).toList();
 
-        listOfHands.add(Pair.create(new Hand(cards), bidNumber));
+        listOfHands.add(Pair.create(new Hand(cards, usesJokerCard), bidNumber));
     }
 
     public int calculateActualWinnings() {

@@ -1,4 +1,4 @@
-package hr.bp.adventofcode.day07.taskone;
+package hr.bp.adventofcode.day07;
 
 import java.util.List;
 import java.util.Map;
@@ -12,11 +12,13 @@ public class Hand implements Comparable<Hand> {
 
     private final List<Card> cards;
     private HandKind handKind;
+    private boolean usesJokerCard;
 
-    public Hand(List<Card> cards) {
+    public Hand(List<Card> cards, boolean usesJokerCard) {
         if (cards.size() != 5) {
             throw new IllegalArgumentException("cards array must have exactly 5 elements.");
         }
+        this.usesJokerCard = usesJokerCard;
         this.cards = cards;
         setHandKind();
     }
@@ -34,6 +36,10 @@ public class Hand implements Comparable<Hand> {
 
     private Integer compareCardStrengths(Hand hand) {
         for (int i = 0; i < 5; i++) {
+            if (usesJokerCard) {  // Override default enum comparison if usesJokerCard = true -> in this case J is always the lowest Card
+                if (cards.get(i).equals(Card.J) && !hand.cards.get(i).equals(Card.J)) return -1;
+                else if (!cards.get(i).equals(Card.J) && hand.cards.get(i).equals(Card.J)) return 1;
+            }
             int cardComparison = cards.get(i).compareTo(hand.cards.get(i));
 
             if (cardComparison > 0) return 1;
@@ -56,6 +62,12 @@ public class Hand implements Comparable<Hand> {
     private void setHandKind() {
         Map<Card, Integer> cardCounts = this.cards.stream().collect(
                 Collectors.groupingBy(card -> card, Collectors.summingInt(value -> 1)));
+
+        if (usesJokerCard) {
+            replaceJokerWithCards(cardCounts);
+        }
+
+
         if (cardCounts.containsValue(5)) {
             this.handKind = HandKind.FIVE_OF_A_KIND;
         } else if (cardCounts.containsValue(4)) {
@@ -70,6 +82,24 @@ public class Hand implements Comparable<Hand> {
             this.handKind = HandKind.ONE_PAIR;
         } else {
             this.handKind = HandKind.HIGH_CARD;
+        }
+    }
+
+    private void replaceJokerWithCards(Map<Card, Integer> cardCounts) {
+        if (cardCounts.containsKey(Card.J) && cardCounts.size() > 1) {
+            int jokerValue = cardCounts.get(Card.J);
+
+            Card maxKey = cardCounts.entrySet().stream()
+                    .filter(entry -> !entry.getKey().equals(Card.J))
+                    .max(Map.Entry.comparingByValue())
+                    .map(Map.Entry::getKey)
+                    .orElse(null);
+
+            if (maxKey != null) {
+                cardCounts.put(maxKey, cardCounts.get(maxKey) + jokerValue);
+            }
+
+            cardCounts.remove(Card.J);
         }
     }
 
