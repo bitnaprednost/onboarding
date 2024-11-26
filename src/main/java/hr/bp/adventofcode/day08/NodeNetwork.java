@@ -56,6 +56,30 @@ public class NodeNetwork {
         }
     }
 
+    public int stepThroughNetwork() {
+        int numberOfSteps = 0;
+        int directionIndex = 0;
+
+        String currentNodeLabel = "AAA";
+        String endingNodeLabel = "ZZZ";
+
+        while (!currentNodeLabel.equals(endingNodeLabel)) {
+            Direction direction = directions.get(directionIndex);
+            directionIndex = ++directionIndex % directions.size();
+
+            Pair<Node, Node> nextNodes = nodeMappings.get(new Node(currentNodeLabel));
+            if (direction.equals(Direction.RIGHT)) {
+                currentNodeLabel = nextNodes.getRight().getLabel();
+            } else {
+                currentNodeLabel = nextNodes.getLeft().getLabel();
+            }
+            numberOfSteps++;
+        }
+
+        return numberOfSteps;
+    }
+
+
     public List<Direction> getDirections() {
         return this.directions;
     }
@@ -74,4 +98,6 @@ public class NodeNetwork {
     public int hashCode() {
         return Objects.hash(getDirections(), getNodeMappings());
     }
+
+
 }
