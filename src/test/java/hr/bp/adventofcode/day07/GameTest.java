@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static hr.bp.adventofcode.day07.TestUtils.getFirstInput;
+import static hr.bp.adventofcode.day07.TestUtils.getSecondInput;
 import static hr.bp.adventofcode.day07.TestUtils.getFirstInputParsed;
 
 /**
@@ -32,6 +33,18 @@ public class GameTest {
         Game game = new Game(input);
 
         int expectedWinnings = 6440;
+
+        int actualWinnings = game.calculateActualWinnings();
+
+        Assertions.assertEquals(expectedWinnings, actualWinnings);
+    }
+
+    @Test
+    public void calculateTotalWinnings_givenSecondInput_returnsCorrectWinnings() {
+        String input = getSecondInput();
+        Game game = new Game(input);
+
+        int expectedWinnings = 251287184;
 
         int actualWinnings = game.calculateActualWinnings();
 

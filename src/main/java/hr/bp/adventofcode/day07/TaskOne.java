@@ -1,6 +1,7 @@
 package hr.bp.adventofcode.day07;
 
-import adventofcode.Utils;
+
+import hr.bp.adventofcode.Utils;
 
 /**
  * @author Ivan Tomičić
