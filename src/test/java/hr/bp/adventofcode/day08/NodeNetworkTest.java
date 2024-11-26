@@ -10,6 +10,7 @@ import java.util.Map;
 import static hr.bp.adventofcode.day08.TestUtils.getDirectionsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getNodeMappingsFirstInput;
+import static hr.bp.adventofcode.day08.TestUtils.getSecondInput;
 
 /**
  * @author Ivan Tomičić
@@ -37,6 +38,18 @@ public class NodeNetworkTest {
         NodeNetwork nodeNetwork = new NodeNetwork(input);
 
         int expectedNumberOfSteps = 2;
+
+        int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
+
+        Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
+    }
+
+    @Test
+    public void testFindingOfZZZ_givenValidInputTwo_returnsCorrectNumberOfSteps() {
+        String input = getSecondInput();
+        NodeNetwork nodeNetwork = new NodeNetwork(input);
+
+        int expectedNumberOfSteps = 6;
 
         int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
 
