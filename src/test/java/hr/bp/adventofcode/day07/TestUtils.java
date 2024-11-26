@@ -1,4 +1,4 @@
-package hr.bp.adventofcode.day07.taskone;
+package hr.bp.adventofcode.day07;
 
 import org.graalvm.collections.Pair;
 
@@ -20,11 +20,11 @@ public class TestUtils {
 
     public static List<Pair<Hand, Integer>> getFirstInputParsed() {
         return List.of(
-                Pair.create(new Hand (List.of(Card.THREE, Card.TWO, Card.T, Card.THREE, Card.K)), 765),
-                Pair.create(new Hand (List.of(Card.T, Card.FIVE, Card.FIVE, Card.J, Card.FIVE)), 684),
-                Pair.create(new Hand (List.of(Card.K, Card.K, Card.SIX, Card.SEVEN, Card.SEVEN)), 28),
-                Pair.create(new Hand (List.of(Card.K, Card.T, Card.J, Card.J, Card.T)), 220),
-                Pair.create(new Hand (List.of(Card.Q, Card.Q, Card.Q, Card.J, Card.A)), 483)
+                Pair.create(new Hand (List.of(Card.THREE, Card.TWO, Card.T, Card.THREE, Card.K), false), 765),
+                Pair.create(new Hand (List.of(Card.T, Card.FIVE, Card.FIVE, Card.J, Card.FIVE), false), 684),
+                Pair.create(new Hand (List.of(Card.K, Card.K, Card.SIX, Card.SEVEN, Card.SEVEN), false), 28),
+                Pair.create(new Hand (List.of(Card.K, Card.T, Card.J, Card.J, Card.T), false), 220),
+                Pair.create(new Hand (List.of(Card.Q, Card.Q, Card.Q, Card.J, Card.A), false), 483)
         );
     }
 
