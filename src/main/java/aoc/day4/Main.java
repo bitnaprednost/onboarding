@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Specify the file name
-        String fileName = "day4/scratchcard.txt";
+        String fileName = "src/main/resources/aoc/day4/scratchcard.txt";
 
         // Read the file
         ReadFile readFile = new ReadFile();

@@ -5,7 +5,7 @@ import aoc.io.ReadFile;
 public class Main {
     public static void main(String[] args) {
         // Specify the file name
-        String fileName = "day3/engine_schematic.txt";
+        String fileName = "src/main/resources/aoc/day3/engine_schematic.txt";
 
         // Read the file
         ReadFile readFile = new ReadFile();

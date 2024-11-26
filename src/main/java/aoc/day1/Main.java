@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Specify the file name
-        String fileName = "day1/calibration_document.txt";
+        String fileName = "src/main/resources/aoc/day1/calibration_document.txt";
 
         // Read the file
         ReadFile readFile = new ReadFile();
