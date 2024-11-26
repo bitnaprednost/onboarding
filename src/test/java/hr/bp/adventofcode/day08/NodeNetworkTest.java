@@ -11,6 +11,7 @@ import static hr.bp.adventofcode.day08.TestUtils.getDirectionsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getNodeMappingsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getSecondInput;
+import static hr.bp.adventofcode.day08.TestUtils.getThirdInput;
 
 /**
  * @author Ivan Tomičić
@@ -23,10 +24,10 @@ public class NodeNetworkTest {
         NodeNetwork nodeNetwork = new NodeNetwork(input);
 
         List<Direction> expectedDirections = getDirectionsFirstInput();
-        Map<Node, Pair<Node, Node>> expectedNodeMappings = getNodeMappingsFirstInput();
+        Map<String, Pair<String, String>> expectedNodeMappings = getNodeMappingsFirstInput();
 
         List<Direction> actualDirections = nodeNetwork.getDirections();
-        Map<Node, Pair<Node, Node>> actualNodeMappings = nodeNetwork.getNodeMappings();
+        Map<String, Pair<String, String>> actualNodeMappings = nodeNetwork.getNodeMappings();
 
         Assertions.assertEquals(expectedDirections, actualDirections);
         Assertions.assertEquals(expectedNodeMappings, actualNodeMappings);
@@ -50,6 +51,18 @@ public class NodeNetworkTest {
         NodeNetwork nodeNetwork = new NodeNetwork(input);
 
         int expectedNumberOfSteps = 6;
+
+        int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
+
+        Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
+    }
+
+    @Test
+    public void testFindingOfZZZ_givenValidInputThree_returnsCorrectNumberOfSteps() {
+        String input = getThirdInput();
+        NodeNetwork nodeNetwork = new NodeNetwork(input);
+
+        int expectedNumberOfSteps = 12169;
 
         int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
 

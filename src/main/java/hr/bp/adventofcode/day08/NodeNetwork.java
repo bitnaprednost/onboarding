@@ -14,7 +14,7 @@ import java.util.Objects;
 public class NodeNetwork {
 
     private final List<Direction> directions = new ArrayList<>();
-    private final Map<Node, Pair<Node, Node>> nodeMappings = new HashMap<>();
+    private final Map<String, Pair<String, String>> nodeMappings = new HashMap<>();
 
     public NodeNetwork(String input) {
         if (input == null || input.isBlank()) {
@@ -39,11 +39,12 @@ public class NodeNetwork {
     }
 
     private void extractNodeMapping(String nodeMappingsInputLine) {
-        Node sourceNode = new Node( nodeMappingsInputLine.split("=")[0].strip());
+        String sourceNode = nodeMappingsInputLine.split("=")[0].strip();
 
         String rightSide = nodeMappingsInputLine.split("=")[1].strip();
-        Node leftNode = new Node(rightSide.split(",")[0].substring(1,4));
-        Node rightNode = new Node(rightSide.split(",")[1].substring(1,4));
+
+        String leftNode =rightSide.split(",")[0].substring(1,4);
+        String rightNode = rightSide.split(",")[1].substring(1,4);
 
         nodeMappings.put(sourceNode, Pair.create(leftNode, rightNode));
     }
@@ -67,11 +68,11 @@ public class NodeNetwork {
             Direction direction = directions.get(directionIndex);
             directionIndex = ++directionIndex % directions.size();
 
-            Pair<Node, Node> nextNodes = nodeMappings.get(new Node(currentNodeLabel));
+            Pair<String, String> nextNodes = nodeMappings.get(currentNodeLabel);
             if (direction.equals(Direction.RIGHT)) {
-                currentNodeLabel = nextNodes.getRight().getLabel();
+                currentNodeLabel = nextNodes.getRight();
             } else {
-                currentNodeLabel = nextNodes.getLeft().getLabel();
+                currentNodeLabel = nextNodes.getLeft();
             }
             numberOfSteps++;
         }
@@ -84,7 +85,7 @@ public class NodeNetwork {
         return this.directions;
     }
 
-    public Map<Node, Pair<Node, Node>> getNodeMappings() {
+    public Map<String, Pair<String, String>> getNodeMappings() {
         return this.nodeMappings;
     }
 
