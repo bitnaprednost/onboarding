@@ -32,10 +32,6 @@ public enum Card {
         this.symbol = symbol;
     }
 
-    public String getSymbol() {
-        return symbol;
-    }
-
     public static Card fromSymbol(String symbol) {
         return SYMBOL_TO_CARD.get(symbol);
     }

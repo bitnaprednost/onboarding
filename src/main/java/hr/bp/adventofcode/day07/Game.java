@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Game {
 
-    private boolean usesJokerCard;
+    private final boolean usesJokerCard;
 
     public List<Pair<Hand, Integer>> getListOfHands() {
         return listOfHands;
@@ -22,6 +22,7 @@ public class Game {
 
     public Game(String input, boolean usesJokerCard) {
         this.usesJokerCard = usesJokerCard;
+
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank");
         }
