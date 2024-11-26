@@ -31,4 +31,16 @@ public class NodeNetworkTest {
         Assertions.assertEquals(expectedNodeMappings, actualNodeMappings);
     }
 
+    @Test
+    public void testFindingOfZZZ_givenValidInputOne_returnsCorrectNumberOfSteps() {
+        String input = getFirstInput();
+        NodeNetwork nodeNetwork = new NodeNetwork(input);
+
+        int expectedNumberOfSteps = 2;
+
+        int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
+
+        Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
+    }
+
 }
