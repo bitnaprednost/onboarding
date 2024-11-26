@@ -24,7 +24,7 @@ public class TestUtils {
     }
 
     public static List<Direction> getDirectionsFirstInput() {
-        return List.of(Direction.R, Direction.L);
+        return List.of(Direction.RIGHT, Direction.LEFT);
     }
 
     public static Map<Node, Pair<Node, Node>>  getNodeMappingsFirstInput() {
