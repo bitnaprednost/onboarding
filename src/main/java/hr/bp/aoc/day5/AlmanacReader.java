@@ -64,7 +64,9 @@ public class AlmanacReader {
         return seedList;
     }
 
-    public void getNearestLocation() {
+    public int getNearestLocation() {
         parseAlmanac();
+
+        return almanac.getNearestLocation();
     }
 }

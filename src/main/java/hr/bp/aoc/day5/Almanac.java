@@ -1,6 +1,7 @@
 package hr.bp.aoc.day5;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,14 +27,52 @@ public class Almanac {
         humidityToLocation = new HashMap<>();
     }
 
-    private int findDestination(int source, Map<Integer, AlmanacMap> map) {
-        AlmanacMap destinationMap = map.get(source);
+    public int getNearestLocation() {
+        ArrayList<Integer> allSeedLocations = getAllLocations();
 
-        if (destinationMap != null) {
-            return destinationMap.getDestinationStart();
+        allSeedLocations.sort(Comparator.naturalOrder());
+
+        return allSeedLocations.get(0);
+    }
+
+    private ArrayList<Integer> getAllLocations() {
+        ArrayList<Integer> locations = new ArrayList<>();
+
+        for (int seed : seeds) {
+            locations.add(findSeedLocation(seed));
         }
 
-        return -1;
+        return locations;
+    }
+
+    private int findSeedLocation(int seed) {
+        int soil = findDestination(seed, seedToSoil);
+        int fertilizer = findDestination(soil, soilToFertilizer);
+        int water = findDestination(fertilizer, fertilizerToWater);
+        int light = findDestination(water, waterToLight);
+        int temperature = findDestination(light, lightToTemperature);
+        int humidity = findDestination(temperature, temperatureToHumidity);
+
+        return findDestination(humidity, humidityToLocation);
+    }
+
+    private int findDestination(int source, Map<Integer, AlmanacMap> map) {
+        AlmanacMap destinationMap = map.get(source);
+        int destination = source;
+
+        if (destinationMap != null) {
+            destination = destinationMap.getDestinationStart();
+        } else {
+            for (int mapSoruce : map.keySet()) {
+                if (mapSoruce < source) {
+                    destinationMap = map.get(mapSoruce);
+                    if (destinationMap.getRange() >= source - mapSoruce) {
+                        destination = destinationMap.getDestinationStart() + source - mapSoruce;
+                    }
+                }
+            }
+        }
+        return destination;
     }
 
     public ArrayList<Integer> getSeeds() {
