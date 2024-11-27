@@ -101,29 +101,60 @@ public class NodeNetwork {
     }
 
 
-    public int stepThroughNetworkInParallel() {
-        int numberOfSteps = 0;
+    public long stepThroughNetworkInParallel() {
+        List<Long> numberOfSteps = new ArrayList<>();
+
+        List<String> allNodeLabelsEndingInA = getAllNodeLabelsEndingInA();
+
+        for (String nodeLabel : allNodeLabelsEndingInA) {
+            long period = getPeriod(nodeLabel);
+            numberOfSteps.add(period);
+        }
+        return leastCommonMultipleOfList(numberOfSteps);
+    }
+
+    private long leastCommonMultipleOfList(List<Long> numberOfSteps) {
+        long lcm = numberOfSteps.get(0);
+
+        for (int i = 1; i < numberOfSteps.size(); i++) {
+            lcm = lcm(lcm, numberOfSteps.get(i));
+
+            if (lcm == 0) {
+                break;
+            }
+        }
+        return lcm;
+    }
+
+    private static long lcm(long a, long b) {
+        return Math.abs(a * b) / gcd(a, b);
+    }
+
+    private static long gcd(long a, long b) {
+        while (b != 0) {
+            long temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+
+
+    private long getPeriod(String nodeLabel) {
         int directionIndex = 0;
+        long counter = 0;
 
-        List<String> currentNodeLabels = getAllNodeLabelsEndingInA();
-
-        while (notAllCurrentNodeLabelsEndInZ(currentNodeLabels)) {
-            List<String> nextNodeLabels = new ArrayList<>();
+        while (!nodeLabel.endsWith("Z")) {
             Direction direction = directions.get(directionIndex);
             directionIndex = ++directionIndex % directions.size();
-
-            for (String nodeLabel : currentNodeLabels) {
-                Pair<String, String> nextNodes = nodeMappings.get(nodeLabel);
-                if (direction.equals(Direction.RIGHT)) {
-                    nextNodeLabels.add(nextNodes.getRight());
-                } else {
-                    nextNodeLabels.add(nextNodes.getLeft());
-                }
+            counter++;
+            if (direction.equals(Direction.RIGHT)) {
+                nodeLabel = nodeMappings.get(nodeLabel).getRight();
+            } else {
+                nodeLabel = nodeMappings.get(nodeLabel).getLeft();
             }
-            currentNodeLabels = nextNodeLabels;
-            numberOfSteps++;
         }
-        return numberOfSteps;
+        return counter;
     }
 
     private boolean notAllCurrentNodeLabelsEndInZ(List<String> currentNodeLabels) {
