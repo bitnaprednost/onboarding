@@ -35,7 +35,7 @@ public class PolynomialEquation {
         int x = sequenceOfNumbers.size() + 1;
 
         for (int i = 0; i < coefficients.getDimension(); i++) {
-            result += (int) (Math.round(coefficients.getEntry(i)) * Math.pow(x, i));
+            result += (int) Math.round(coefficients.getEntry(i) * Math.pow(x, i));
         }
 
         return result;
