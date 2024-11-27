@@ -34,29 +34,29 @@ public class AlmanacReader {
     }
 
     private void putMapToAlmanac(Map<Long, AlmanacMap> almanacMap, int startIndex) {
-        String mapToEnter = almanacString.get(startIndex+1);
+        String mapToEnter = almanacString.get(startIndex + 1);
 
-        while(!mapToEnter.isEmpty() && startIndex+1 < almanacString.size()) {
+        while (!mapToEnter.isEmpty() && startIndex + 1 < almanacString.size()) {
             String[] mapInput = mapToEnter.split(" ");
             long source = Long.parseLong(mapInput[1]);
             long destination = Long.parseLong(mapInput[0]);
             long range = Long.parseLong(mapInput[2]);
 
             almanacMap.put(source, new AlmanacMap(source, destination, range));
-            mapToEnter = almanacString.get(startIndex+1);
+            mapToEnter = almanacString.get(startIndex + 1);
             startIndex++;
         }
     }
-    
-    private Map<Long, Long> getAlmanacSeedsRange() {
-        String[] seeds = getSeedStrings();
-        Map<Long, Long> seedRange = new HashMap<>();
 
-        for (int i = 0; i < seeds.length; i+=2) {
+    private Map<Long, AlmanacMap> getAlmanacSeedsRange() {
+        String[] seeds = getSeedStrings();
+        Map<Long, AlmanacMap> seedRange = new HashMap<>();
+
+        for (int i = 0; i < seeds.length; i += 2) {
             if (!seeds[i].isEmpty()) {
                 long seedStart = Long.parseLong(seeds[i].trim());
-                long range = Long.parseLong(seeds[i+1].trim());
-                seedRange.put(seedStart, range);
+                long range = Long.parseLong(seeds[i + 1].trim());
+                seedRange.put(seedStart, new AlmanacMap(seedStart, 0, range));
             }
         }
         return seedRange;
