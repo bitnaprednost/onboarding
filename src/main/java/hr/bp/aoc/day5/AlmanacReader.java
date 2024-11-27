@@ -1,9 +1,6 @@
 package hr.bp.aoc.day5;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AlmanacReader {
     private List<String> almanacString;
@@ -16,6 +13,7 @@ public class AlmanacReader {
 
     public Almanac parseAlmanac() {
         almanac.setSeeds(getAlmanacSeeds());
+        almanac.setSeedsRange(getAlmanacSeedsRange());
         almanac.setSeedToSoil(getAlmanacMap(AlmanacMapEnum.SEED_SOIL));
         almanac.setSoilToFertilizer(getAlmanacMap(AlmanacMapEnum.SOIL_FERTILIZER));
         almanac.setFertilizerToWater(getAlmanacMap(AlmanacMapEnum.FERTILIZER_WATER));
@@ -49,9 +47,23 @@ public class AlmanacReader {
             startIndex++;
         }
     }
+    
+    private Map<Long, Long> getAlmanacSeedsRange() {
+        String[] seeds = getSeedStrings();
+        Map<Long, Long> seedRange = new HashMap<>();
+
+        for (int i = 0; i < seeds.length; i+=2) {
+            if (!seeds[i].isEmpty()) {
+                long seedStart = Long.parseLong(seeds[i].trim());
+                long range = Long.parseLong(seeds[i+1].trim());
+                seedRange.put(seedStart, range);
+            }
+        }
+        return seedRange;
+    }
 
     private ArrayList<Long> getAlmanacSeeds() {
-        String[] seeds = almanacString.get(0).split(":")[1].split(" ");
+        String[] seeds = getSeedStrings();
         ArrayList<Long> seedList = new ArrayList<>();
 
         for (String seed : seeds) {
@@ -62,6 +74,13 @@ public class AlmanacReader {
         }
 
         return seedList;
+    }
+
+    private String[] getSeedStrings() {
+        List<String> seedString = new ArrayList<String>(Arrays.asList(almanacString.get(0).split(":")[1].split(" ")));
+        seedString.removeAll(Arrays.asList("", null));
+
+        return seedString.toArray(new String[0]);
     }
 
     public long getNearestLocation() {

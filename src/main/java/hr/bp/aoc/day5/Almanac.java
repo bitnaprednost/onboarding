@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class Almanac {
     private ArrayList<Long> seeds;
+    private Map<Long, Long> seedsRange;
     private Map<Long, AlmanacMap> seedToSoil;
     private Map<Long, AlmanacMap> soilToFertilizer;
     private Map<Long, AlmanacMap> fertilizerToWater;
@@ -18,6 +19,7 @@ public class Almanac {
 
     public Almanac() {
         seeds = new ArrayList<>();
+        seedsRange = new HashMap<>();
         seedToSoil = new HashMap<>();
         soilToFertilizer = new HashMap<>();
         fertilizerToWater = new HashMap<>();
@@ -73,6 +75,10 @@ public class Almanac {
             }
         }
         return destination;
+    }
+
+    public void setSeedsRange(Map<Long, Long> seedsRange) {
+        this.seedsRange = seedsRange;
     }
 
     public ArrayList<Long> getSeeds() {
