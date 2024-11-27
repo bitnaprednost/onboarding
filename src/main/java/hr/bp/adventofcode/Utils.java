@@ -1,5 +1,8 @@
 package hr.bp.adventofcode;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -39,5 +42,15 @@ public class Utils {
 
     public static void displayResult(Number sum) {
         System.out.printf("The result is %s.%n", sum);
+    }
+
+    public static String readInputForDay(String day) {
+        String filePath = "src/main/java/hr/bp/adventofcode/" + day + "/input.txt";
+
+        try {
+            return Files.readString(Paths.get(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading input file: " + e.getMessage(), e);
+        }
     }
 }
