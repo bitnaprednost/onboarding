@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static hr.bp.adventofcode.day09.TestUtils.areBigDecimalArraysEqual;
-import static hr.bp.adventofcode.day09.TestUtils.areBigDecimalsEqual;
+import static hr.bp.adventofcode.day09.BigDecimalUtils.areBigDecimalArraysEqual;
+import static hr.bp.adventofcode.day09.BigDecimalUtils.areBigDecimalsEqual;
 
 /**
  * @author Ivan Tomičić
@@ -128,14 +128,10 @@ public class PolynomialEquationTest {
 
         BigDecimal[]  actualCoefficients = polynomialEquation.getCoefficients();
 
-        BigDecimal a = new BigDecimal(1);
-
         double tolerance = 1e-6;
         Assertions.assertTrue(areBigDecimalArraysEqual(expectedCoefficients, actualCoefficients, tolerance),
                 "The coefficients do not match within the tolerance.");
     }
-
-
 
     @Test
     public void calculateNextNumber_givenConstantSequence_returnsCorrectCoefficients() {

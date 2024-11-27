@@ -26,12 +26,10 @@ public class Sensor {
     }
 
     private void addPolynomialEquationToHistory(String line) {
-        history.add(
-                new PolynomialEquation(Arrays.stream(line.split(" "))
+        history.add(new PolynomialEquation(Arrays.stream(line.split(" "))
                         .map(Integer::parseInt)
                         .toList()
-                )
-        );
+                ));
     }
 
     public List<PolynomialEquation> getHistory() {
@@ -40,6 +38,7 @@ public class Sensor {
 
     public BigDecimal sumNextValues() {
         BigDecimal sum = BigDecimal.valueOf(0);
+
         for (PolynomialEquation polynomialEquation : history) {
             sum = sum.add(polynomialEquation.calculateNextValue());
         }
@@ -48,6 +47,7 @@ public class Sensor {
 
     public BigDecimal sumPreviousValues() {
         BigDecimal sum = BigDecimal.valueOf(0);
+
         for (PolynomialEquation polynomialEquation : history) {
             sum = sum.add(polynomialEquation.calculatePreviousValue());
         }

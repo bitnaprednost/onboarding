@@ -10,6 +10,7 @@ import org.apache.commons.math3.linear.RealVector;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -23,7 +24,7 @@ public class PolynomialEquation {
 
     private Integer degreeOfPolynomial;
 
-    private BigDecimal[] coefficients; // Store coefficients as BigDecimal
+    private BigDecimal[] coefficients;
 
     public PolynomialEquation(List<Integer> sequenceOfNumbers) {
         this.sequenceOfNumbers = sequenceOfNumbers;
@@ -37,8 +38,8 @@ public class PolynomialEquation {
         BigDecimal x = BigDecimal.valueOf(sequenceOfNumbers.size() + 1);
 
         for (int i = 0; i < coefficients.length; i++) {
-            BigDecimal xRaisedToTheExponent = x.pow(i); // x^i
-            result = result.add(coefficients[i].multiply(xRaisedToTheExponent)); // Add a_i * x^i
+            BigDecimal xRaisedToTheExponent = x.pow(i);
+            result = result.add(coefficients[i].multiply(xRaisedToTheExponent));
         }
 
         return result;
@@ -47,23 +48,13 @@ public class PolynomialEquation {
     public BigDecimal calculatePreviousValue() {
         BigDecimal result = BigDecimal.ZERO;
 
-        // The next value of x
         BigDecimal x = BigDecimal.ZERO;
 
-        // Iterate over the coefficients
         for (int i = 0; i < coefficients.length; i++) {
-            BigDecimal xRaisedToTheExponent = x.pow(i); // x^i
-            result = result.add(coefficients[i].multiply(xRaisedToTheExponent)); // Add a_i * x^i
+            BigDecimal xRaisedToTheExponent = x.pow(i);
+            result = result.add(coefficients[i].multiply(xRaisedToTheExponent));
         }
 
-        return result;
-    }
-
-    private long getXRaisedToTheExponent(long x, int i) {
-        long result = 1;
-        for (int k = 0; k < i; k++) {
-            result *= x;
-        }
         return result;
     }
 
@@ -114,8 +105,10 @@ public class PolynomialEquation {
 
         DecompositionSolver solver = new QRDecomposition(vandermondeMatrix).getSolver();
         RealVector solution = solver.solve(yVector);
+
         this.coefficients = new BigDecimal[solution.getDimension()];
-        MathContext mathContext = new MathContext(20); // Adjust precision as needed
+
+        MathContext mathContext = new MathContext(20);
         for (int i = 0; i < solution.getDimension(); i++) {
             this.coefficients[i] = BigDecimal.valueOf(solution.getEntry(i)).round(mathContext);
         }
@@ -129,16 +122,17 @@ public class PolynomialEquation {
         return degreeOfPolynomial;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof PolynomialEquation that)) return false;
         return Objects.equals(sequenceOfNumbers, that.sequenceOfNumbers) &&
                 Objects.equals(getDegreeOfPolynomial(), that.getDegreeOfPolynomial()) &&
-                Objects.equals(getCoefficients(), that.getCoefficients());
+                Objects.deepEquals(getCoefficients(), that.getCoefficients());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sequenceOfNumbers, getDegreeOfPolynomial(), getCoefficients());
+        return Objects.hash(sequenceOfNumbers, getDegreeOfPolynomial(), Arrays.hashCode(getCoefficients()));
     }
 }
