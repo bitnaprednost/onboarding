@@ -1,7 +1,15 @@
 package hr.bp.adventofcode.day09;
 
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.ArrayRealVector;
+import org.apache.commons.math3.linear.DecompositionSolver;
+import org.apache.commons.math3.linear.QRDecomposition;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.linear.RealVector;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * @author Ivan Tomičić
@@ -10,15 +18,13 @@ public class PolynomialEquation {
 
     private List<Integer> sequenceOfNumbers;
     private Integer degreeOfPolynomial;
+    private RealVector coefficients;
 
 
     public PolynomialEquation(List<Integer> sequenceOfNumbers) {
         this.sequenceOfNumbers = sequenceOfNumbers;
         calculateDegreeOfPolynomial();
-    }
-
-    public int getDegreeOfPolynomial() {
-        return degreeOfPolynomial;
+        calculateCoefficients();
     }
 
     private void calculateDegreeOfPolynomial() {
@@ -38,4 +44,40 @@ public class PolynomialEquation {
     private boolean sequenceContainsAllZeroes(List<Integer> oldSequence) {
         return oldSequence.stream().allMatch(n -> n == 0);
     }
+
+    private void calculateCoefficients() {
+        int degree = this.degreeOfPolynomial;
+
+        double[] x = IntStream.rangeClosed(1, sequenceOfNumbers.size())
+                .mapToDouble(i -> i)
+                .toArray();
+
+        double[] y = sequenceOfNumbers.stream()
+                .mapToDouble(Integer::doubleValue)
+                .toArray();
+
+
+        double[][] vandermonde = new double[x.length][degree + 1];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j <= degree; j++) {
+                vandermonde[i][j] = Math.pow(x[i], j);
+            }
+        }
+
+        RealMatrix vandermondeMatrix = new Array2DRowRealMatrix(vandermonde);
+        RealVector yVector = new ArrayRealVector(y);
+
+        DecompositionSolver solver = new QRDecomposition(vandermondeMatrix).getSolver();
+
+        this.coefficients = solver.solve(yVector);
+    }
+
+    public RealVector getCoefficients() {
+        return this.coefficients;
+    }
+
+    public int getDegreeOfPolynomial() {
+        return degreeOfPolynomial;
+    }
+
 }
