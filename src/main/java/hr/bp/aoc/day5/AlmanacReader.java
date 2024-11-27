@@ -40,8 +40,8 @@ public class AlmanacReader {
 
         while(!mapToEnter.isEmpty() && startIndex+1 < almanacString.size()) {
             String[] mapInput = mapToEnter.split(" ");
-            int source = Integer.parseInt(mapInput[0]);
-            int destination = Integer.parseInt(mapInput[1]);
+            int source = Integer.parseInt(mapInput[1]);
+            int destination = Integer.parseInt(mapInput[0]);
             int range = Integer.parseInt(mapInput[2]);
 
             almanacMap.put(source, new AlmanacMap(source, destination, range));
