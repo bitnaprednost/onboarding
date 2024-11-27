@@ -13,7 +13,7 @@ import java.util.List;
 public class PolynomialEquationTest {
 
     @Test
-    public void findDegreeOfPolynomial_givenSimpleSequence_returnsCorrectExponent() {
+    public void findDegreeOfPolynomial_givenLinearSequence_returnsCorrectExponent() {
         List<Integer> listOfNumbers = List.of(1,2,3,4,5,6);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
@@ -61,7 +61,7 @@ public class PolynomialEquationTest {
     }
 
     @Test
-    public void calculateCoefficients_givenSimpleSequence_returnsCorrectCoefficients() {
+    public void calculateCoefficients_givenLinearSequence_returnsCorrectCoefficients() {
         List<Integer> listOfNumbers = List.of(1,2,3,4,5,6,7,8,9);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
@@ -128,5 +128,41 @@ public class PolynomialEquationTest {
         double tolerance = 1e-6;
         Assertions.assertTrue(VectorUtils.areVectorsEqual(expectedCoefficients, actualCoefficients, tolerance),
                 "The coefficients do not match within the tolerance.");
+    }
+
+    @Test
+    public void calculateNextNumber_givenConstantSequence_returnsCorrectCoefficients() {
+        List<Integer> listOfNumbers = List.of(4,4,4,4,4,4,4,4,4,4);
+        PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
+
+        int expectedNextNumber = 4;
+
+        int actualNextNumber = polynomialEquation.calculateNextValue();
+
+        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+    }
+
+    @Test
+    public void calculateNextNumber_givenLinearSequence_returnsCorrectCoefficients() {
+        List<Integer> listOfNumbers = List.of(5,6,7,8,9,10,11,12,13,14);
+        PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
+
+        int expectedNextNumber = 15;
+
+        int actualNextNumber = polynomialEquation.calculateNextValue();
+
+        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+    }
+
+    @Test
+    public void calculateNextNumber_givenQuadraticSequence_returnsCorrectCoefficients() {
+        List<Integer> listOfNumbers = List.of(36,25,16,9,4,1,0,1,4,9,16,25,36,49,64,81,100);
+        PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
+
+        int expectedNextNumber = 121;
+
+        int actualNextNumber = polynomialEquation.calculateNextValue();
+
+        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
     }
 }
