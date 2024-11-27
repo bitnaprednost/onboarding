@@ -101,4 +101,40 @@ public class NodeNetwork {
     }
 
 
+    public int stepThroughNetworkInParallel() {
+        int numberOfSteps = 0;
+        int directionIndex = 0;
+
+        List<String> currentNodeLabels = getAllNodeLabelsEndingInA();
+
+        while (notAllCurrentNodeLabelsEndInZ(currentNodeLabels)) {
+            List<String> nextNodeLabels = new ArrayList<>();
+            Direction direction = directions.get(directionIndex);
+            directionIndex = ++directionIndex % directions.size();
+
+            for (String nodeLabel : currentNodeLabels) {
+                Pair<String, String> nextNodes = nodeMappings.get(nodeLabel);
+                if (direction.equals(Direction.RIGHT)) {
+                    nextNodeLabels.add(nextNodes.getRight());
+                } else {
+                    nextNodeLabels.add(nextNodes.getLeft());
+                }
+            }
+            currentNodeLabels = nextNodeLabels;
+            numberOfSteps++;
+        }
+        return numberOfSteps;
+    }
+
+    private boolean notAllCurrentNodeLabelsEndInZ(List<String> currentNodeLabels) {
+        return currentNodeLabels.stream().anyMatch(node -> !node.endsWith("Z"));
+    }
+
+    private List<String> getAllNodeLabelsEndingInA() {
+        return new ArrayList<>(
+                nodeMappings.keySet()
+                .stream()
+                .filter(node -> node.endsWith("A"))
+                .toList());
+    }
 }
