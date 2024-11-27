@@ -22,7 +22,7 @@
 - no notes
 
 # Day 08
-- no notes
+- 1st solution for task 2 was too slow, read a hint on reddit that I can use LCM because every node moves periodically
 
 # Day 24
 - ChatGPT help: just asked it to give me a formula for the intersection point of 2 lines if only the slope and 1 point is known, asked it to generate more test data
