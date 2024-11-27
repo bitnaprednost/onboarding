@@ -1,6 +1,6 @@
 package hr.bp.adventofcode.day08;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public class NodeNetwork {
         String leftNode =rightSide.split(",")[0].substring(1,4);
         String rightNode = rightSide.split(",")[1].substring(1,4);
 
-        nodeMappings.put(sourceNode, Pair.create(leftNode, rightNode));
+        nodeMappings.put(sourceNode, new Pair<>(leftNode, rightNode));
     }
 
     private void initializeDirections(String directionLine) {
@@ -71,9 +71,9 @@ public class NodeNetwork {
             Pair<String, String> nextNodes = nodeMappings.get(currentNodeLabel);
 
             if (direction.equals(Direction.RIGHT)) {
-                currentNodeLabel = nextNodes.getRight();
+                currentNodeLabel = nextNodes.right();
             } else {
-                currentNodeLabel = nextNodes.getLeft();
+                currentNodeLabel = nextNodes.left();
             }
             numberOfSteps++;
         }
@@ -143,9 +143,9 @@ public class NodeNetwork {
             counter++;
 
             if (direction.equals(Direction.RIGHT)) {
-                nodeLabel = nodeMappings.get(nodeLabel).getRight();
+                nodeLabel = nodeMappings.get(nodeLabel).right();
             } else {
-                nodeLabel = nodeMappings.get(nodeLabel).getLeft();
+                nodeLabel = nodeMappings.get(nodeLabel).left();
             }
         }
         return counter;
