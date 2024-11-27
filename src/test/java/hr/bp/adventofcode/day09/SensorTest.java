@@ -30,9 +30,9 @@ public class SensorTest {
         String input = getFirstInput();
         Sensor sensor = new Sensor(input);
 
-        int expectedSum = 114;
+        long expectedSum = 114;
 
-        int actualSum = sensor.sumNextValues();
+        long actualSum = sensor.sumNextValues();
 
         Assertions.assertEquals(expectedSum, actualSum);
     }

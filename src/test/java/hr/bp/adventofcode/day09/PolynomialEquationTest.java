@@ -135,9 +135,9 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(4,4,4,4,4,4,4,4,4,4);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        int expectedNextNumber = 4;
+        long expectedNextNumber = 4;
 
-        int actualNextNumber = polynomialEquation.calculateNextValue();
+        long actualNextNumber = polynomialEquation.calculateNextValue();
 
         Assertions.assertEquals(expectedNextNumber, actualNextNumber);
     }
@@ -147,9 +147,9 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(5,6,7,8,9,10,11,12,13,14);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        int expectedNextNumber = 15;
+        long expectedNextNumber = 15;
 
-        int actualNextNumber = polynomialEquation.calculateNextValue();
+        long actualNextNumber = polynomialEquation.calculateNextValue();
 
         Assertions.assertEquals(expectedNextNumber, actualNextNumber);
     }
@@ -159,9 +159,9 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(36,25,16,9,4,1,0,1,4,9,16,25,36,49,64,81,100);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        int expectedNextNumber = 121;
+        long expectedNextNumber = 121;
 
-        int actualNextNumber = polynomialEquation.calculateNextValue();
+        long actualNextNumber = polynomialEquation.calculateNextValue();
 
         Assertions.assertEquals(expectedNextNumber, actualNextNumber);
     }

@@ -37,8 +37,8 @@ public class Sensor {
         return this.history;
     }
 
-    public int sumNextValues() {
-        int sum = 0;
+    public long sumNextValues() {
+        long sum = 0;
         for (PolynomialEquation polynomialEquation : history) {
             sum += polynomialEquation.calculateNextValue();
         }
