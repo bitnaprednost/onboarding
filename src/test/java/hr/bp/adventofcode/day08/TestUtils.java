@@ -1,6 +1,6 @@
 package hr.bp.adventofcode.day08;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -29,13 +29,13 @@ public class TestUtils {
 
     public static Map<String, Pair<String, String>>  getNodeMappingsFirstInput() {
         return Map.of(
-                "AAA", Pair.create("BBB", "CCC"),
-                "BBB", Pair.create("DDD", "EEE"),
-                "CCC", Pair.create("ZZZ", "GGG"),
-                "DDD", Pair.create("DDD", "DDD"),
-                "EEE", Pair.create("EEE", "EEE"),
-                "GGG", Pair.create("GGG", "GGG"),
-                "ZZZ", Pair.create("ZZZ", "ZZZ")
+                "AAA", new Pair<>("BBB", "CCC"),
+                "BBB", new Pair<>("DDD", "EEE"),
+                "CCC", new Pair<>("ZZZ", "GGG"),
+                "DDD", new Pair<>("DDD", "DDD"),
+                "EEE", new Pair<>("EEE", "EEE"),
+                "GGG", new Pair<>("GGG", "GGG"),
+                "ZZZ", new Pair<>("ZZZ", "ZZZ")
         );
     }
 

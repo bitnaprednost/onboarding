@@ -1,6 +1,6 @@
 package hr.bp.adventofcode.day08;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +9,10 @@ import java.util.Map;
 
 import static hr.bp.adventofcode.day08.TestUtils.getDirectionsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getFirstInput;
+import static hr.bp.adventofcode.day08.TestUtils.getFourthInput;
 import static hr.bp.adventofcode.day08.TestUtils.getNodeMappingsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getSecondInput;
 import static hr.bp.adventofcode.day08.TestUtils.getThirdInput;
-import static hr.bp.adventofcode.day08.TestUtils.getFourthInput;
 
 /**
  * @author Ivan Tomičić
