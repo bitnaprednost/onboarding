@@ -1,6 +1,6 @@
 package hr.bp.adventofcode.day07;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,16 +43,16 @@ public class Game {
 
         List<Card> cards = Arrays.stream(symbols).map(Card::fromSymbol).toList();
 
-        listOfHands.add(Pair.create(new Hand(cards, usesJokerCard), bidNumber));
+        listOfHands.add(new Pair<>(new Hand(cards, usesJokerCard), bidNumber));
     }
 
     public int calculateActualWinnings() {
-        List<Pair<Hand, Integer>> listOfHandsRanked = listOfHands.stream().sorted(Comparator.comparing(Pair::getLeft)).toList();
+        List<Pair<Hand, Integer>> listOfHandsRanked = listOfHands.stream().sorted(Comparator.comparing(Pair::left)).toList();
 
         int sum = 0;
 
         for (int i = 0; i < listOfHandsRanked.size(); i++) {
-            sum += listOfHandsRanked.get(i).getRight() * (i+1);
+            sum += listOfHandsRanked.get(i).right() * (i+1);
         }
 
         return sum;

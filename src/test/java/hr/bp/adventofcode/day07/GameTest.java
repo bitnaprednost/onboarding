@@ -1,14 +1,14 @@
 package hr.bp.adventofcode.day07;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static hr.bp.adventofcode.day07.TestUtils.getFirstInput;
-import static hr.bp.adventofcode.day07.TestUtils.getSecondInput;
 import static hr.bp.adventofcode.day07.TestUtils.getFirstInputParsed;
+import static hr.bp.adventofcode.day07.TestUtils.getSecondInput;
 
 /**
  * @author Ivan Tomičić
