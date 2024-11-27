@@ -1,6 +1,6 @@
 package hr.bp.adventofcode.day06;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public class Race {
 
         Pair<Long, Long> extractedWholeNumbers = extractWholeNumbers(quadraticEquationResult);
 
-        return extractedWholeNumbers.getRight() - extractedWholeNumbers.getLeft() + 1;
+        return extractedWholeNumbers.right() - extractedWholeNumbers.left() + 1;
     }
 
 
@@ -31,12 +31,12 @@ public class Race {
         Double rightValue = (((maximumTime*maximumTime) + Math.sqrt(maximumTime * maximumTime - 4 * recordDistance)) / 2);
         Double leftValue = (((maximumTime*maximumTime) - Math.sqrt(maximumTime*maximumTime - 4*recordDistance)) / 2);
         
-        return Pair.create(leftValue, rightValue);
+        return new Pair<>(leftValue, rightValue);
     }
 
     private Pair<Long, Long> extractWholeNumbers(Pair<Double, Double> quadraticEquationResult) {
-        Double leftValue = quadraticEquationResult.getLeft();
-        Double rightValue = quadraticEquationResult.getRight();
+        Double leftValue = quadraticEquationResult.left();
+        Double rightValue = quadraticEquationResult.right();
 
         Long leftValueCeiled = (leftValue % 1 == 0)
                 ? (long) Math.ceil(leftValue) + 1
@@ -46,7 +46,7 @@ public class Race {
                 ? (long) Math.floor(rightValue) - 1
                 : (long) Math.floor(rightValue);
 
-        return Pair.create(leftValueCeiled, rightValueFloored);
+        return new Pair<>(leftValueCeiled, rightValueFloored);
     }
 
     @Override
