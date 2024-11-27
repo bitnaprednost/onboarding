@@ -1,6 +1,7 @@
 package hr.bp.adventofcode.day24;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
+
 import java.util.Objects;
 
 public class Hailstone {
@@ -15,7 +16,7 @@ public class Hailstone {
 
     public boolean intersectsInTheFutureWithinArea(Hailstone hailstone, long minimumX, long minimumY, long maximumX, long maximumY) {
         Pair<Double, Double> intersection = this.intersect(hailstone);
-        if (Double.isNaN(intersection.getLeft()) || Double.isNaN(intersection.getRight())) {
+        if (Double.isNaN(intersection.left()) || Double.isNaN(intersection.right())) {
             return false;
         }
         boolean intersectionIsWithinArea = intersectionIsWithinArea(intersection, minimumX, minimumY, maximumX, maximumY);
@@ -25,15 +26,15 @@ public class Hailstone {
     }
 
     private boolean intersectionIsWithinArea(Pair<Double, Double> intersection, long minimumX, long minimumY, long maximumX, long maximumY) {
-        return intersection.getLeft() >= minimumX &&
-                intersection.getLeft() <= maximumX &&
-                intersection.getRight() >= minimumY &&
-                intersection.getRight() <= maximumY;
+        return intersection.left() >= minimumX &&
+                intersection.left() <= maximumX &&
+                intersection.right() >= minimumY &&
+                intersection.right() <= maximumY;
     }
 
     public Pair<Double, Double> intersect(Hailstone hailstone) {
         if (this.isParallelInXYPlaneWith(hailstone)){
-            return Pair.create(Double.NaN, Double.NaN);
+            return new Pair<>(Double.NaN, Double.NaN);
         }
         Double m1 = this.getSlope();
         Long x1 = this.position.getX();
@@ -47,7 +48,7 @@ public class Hailstone {
         Double x = ((m1*x1 - m2*x2) + (y2 - y1)) / (m1 - m2);
         Double y = y1 + m1*(x-x1);
 
-        return Pair.create(x, y);
+        return new Pair<>(x, y);
     }
 
     public boolean isParallelInXYPlaneWith(Hailstone hailstone) {
@@ -59,8 +60,8 @@ public class Hailstone {
     }
 
     public boolean pointIsInTheFutureOfTheLine(Pair<Double, Double> point) {
-        return (this.velocity.getDx() < 0 && point.getLeft() < this.position.getX()) ||
-                (this.velocity.getDx() > 0 && point.getLeft() > this.position.getX());
+        return (this.velocity.getDx() < 0 && point.left() < this.position.getX()) ||
+                (this.velocity.getDx() > 0 && point.left() > this.position.getX());
     }
 
     @Override

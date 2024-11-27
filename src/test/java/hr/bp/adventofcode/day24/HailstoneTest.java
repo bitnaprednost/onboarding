@@ -1,10 +1,12 @@
 package hr.bp.adventofcode.day24;
 
-import org.graalvm.collections.Pair;
+import hr.bp.adventofcode.Pair;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static hr.bp.adventofcode.day24.TestUtils.*;
+import static hr.bp.adventofcode.day24.TestUtils.hailstone1;
+import static hr.bp.adventofcode.day24.TestUtils.hailstone2;
+import static hr.bp.adventofcode.day24.TestUtils.hailstone3;
 
 public class HailstoneTest {
     @Test
@@ -24,7 +26,7 @@ public class HailstoneTest {
         Hailstone hailstone1 = hailstone1();
         Hailstone hailstone3 = hailstone3();
 
-        Pair<Double, Double> expectedIntersection = Pair.create(0.5d, 0.5d);
+        Pair<Double, Double> expectedIntersection = new Pair<>(0.5d, 0.5d);
 
         Pair<Double, Double> actualIntersection = hailstone1.intersect(hailstone3);
 
@@ -42,7 +44,7 @@ public class HailstoneTest {
                 new Velocity(1, 1, 0)
         );
 
-        Pair<Double, Double> expectedIntersection = Pair.create(-2.0d, -3.0d);
+        Pair<Double, Double> expectedIntersection = new Pair<>(-2.0d, -3.0d);
 
         Pair<Double, Double> actualIntersection = hailstone1.intersect(hailstone2);
 
@@ -60,7 +62,7 @@ public class HailstoneTest {
                 new Velocity(1, 1, 0)
         );
 
-        Pair<Double, Double> expectedIntersection = Pair.create(Double.NaN, Double.NaN);
+        Pair<Double, Double> expectedIntersection = new Pair<>(Double.NaN, Double.NaN);
 
         Pair<Double, Double> actualIntersection = hailstone1.intersect(hailstone2);
 
@@ -78,7 +80,7 @@ public class HailstoneTest {
                 new Velocity(2, 2, 0)
         );
 
-        Pair<Double, Double> expectedIntersection = Pair.create(Double.NaN, Double.NaN);
+        Pair<Double, Double> expectedIntersection = new Pair<>(Double.NaN, Double.NaN);
 
         Pair<Double, Double> actualIntersection = hailstone1.intersect(hailstone2);
 
@@ -96,7 +98,7 @@ public class HailstoneTest {
                 new Velocity(-1, -1, 0)
         );
 
-        Pair<Double, Double> expectedIntersection = Pair.create(-4.0d, -4.0d);
+        Pair<Double, Double> expectedIntersection = new Pair<>(-4.0d, -4.0d);
 
         Pair<Double, Double> actualIntersection = hailstone1.intersect(hailstone2);
 
