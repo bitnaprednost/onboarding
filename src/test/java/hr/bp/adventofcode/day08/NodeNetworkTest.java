@@ -71,13 +71,25 @@ public class NodeNetworkTest {
     }
 
     @Test
-    public void testFindingOfAllNodesEndingInZ_givenValidInputThree_returnsCorrectNumberOfSteps() {
+    public void testFindingOfAllNodesEndingInZ_givenValidInputFour_returnsCorrectNumberOfSteps() {
         String input = getFourthInput();
         NodeNetwork nodeNetwork = new NodeNetwork(input);
 
-        int expectedNumberOfSteps = 6;
+        long expectedNumberOfSteps = 6;
 
-        int actualNumberOfSteps = nodeNetwork.stepThroughNetworkInParallel();
+        long actualNumberOfSteps = nodeNetwork.stepThroughNetworkInParallel();
+
+        Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
+    }
+
+    @Test
+    public void testFindingOfAllNodesEndingInZ_givenValidInputThree_returnsCorrectNumberOfSteps() {
+        String input = getThirdInput();
+        NodeNetwork nodeNetwork = new NodeNetwork(input);
+
+        long expectedNumberOfSteps = 12030780859469L;
+
+        long actualNumberOfSteps = nodeNetwork.stepThroughNetworkInParallel();
 
         Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
     }
