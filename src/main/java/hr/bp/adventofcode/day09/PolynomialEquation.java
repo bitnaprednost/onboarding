@@ -35,9 +35,17 @@ public class PolynomialEquation {
         long x = sequenceOfNumbers.size() + 1;
 
         for (int i = 0; i < coefficients.getDimension(); i++) {
-            result += Math.round(coefficients.getEntry(i) * Math.pow(x, i));
+            long xRaisedToTheExponent = getXRaisedToTheExponent(x, i);
+            result += (long) (coefficients.getEntry(i) * xRaisedToTheExponent);
         }
+        return result;
+    }
 
+    private long getXRaisedToTheExponent(long x, int i) {
+        long result = 1;
+        for (int k = 0; k < i; k++) {
+            result *= x;
+        }
         return result;
     }
 

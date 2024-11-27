@@ -15,6 +15,13 @@ public class TaskOne {
 
         long sum = sensor.sumNextValues();
 
+        for(PolynomialEquation p : sensor.getHistory()) {
+            System.out.println(p.getCoefficients());
+        }
+
         Utils.displayResult(sum);
     }
 }
+// 1934898160
+// 191084735742
+// 191084735652
