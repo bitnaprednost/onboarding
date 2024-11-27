@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
+import static hr.bp.adventofcode.Utils.readInputForDay;
 import static hr.bp.adventofcode.day08.TestUtils.getDirectionsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getFourthInput;
 import static hr.bp.adventofcode.day08.TestUtils.getNodeMappingsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getSecondInput;
-import static hr.bp.adventofcode.day08.TestUtils.getThirdInput;
 
 /**
  * @author Ivan Tomičić
@@ -60,7 +60,7 @@ public class NodeNetworkTest {
 
     @Test
     public void testFindingOfZZZ_givenValidInputThree_returnsCorrectNumberOfSteps() {
-        String input = getThirdInput();
+        String input = readInputForDay("day08");
         NodeNetwork nodeNetwork = new NodeNetwork(input);
 
         int expectedNumberOfSteps = 12169;
@@ -84,7 +84,7 @@ public class NodeNetworkTest {
 
     @Test
     public void testFindingOfAllNodesEndingInZ_givenValidInputThree_returnsCorrectNumberOfSteps() {
-        String input = getThirdInput();
+        String input = readInputForDay("day08");
         NodeNetwork nodeNetwork = new NodeNetwork(input);
 
         long expectedNumberOfSteps = 12030780859469L;
