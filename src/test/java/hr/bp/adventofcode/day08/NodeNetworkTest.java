@@ -12,6 +12,7 @@ import static hr.bp.adventofcode.day08.TestUtils.getFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getNodeMappingsFirstInput;
 import static hr.bp.adventofcode.day08.TestUtils.getSecondInput;
 import static hr.bp.adventofcode.day08.TestUtils.getThirdInput;
+import static hr.bp.adventofcode.day08.TestUtils.getFourthInput;
 
 /**
  * @author Ivan Tomičić
@@ -65,6 +66,18 @@ public class NodeNetworkTest {
         int expectedNumberOfSteps = 12169;
 
         int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
+
+        Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
+    }
+
+    @Test
+    public void testFindingOfAllNodesEndingInZ_givenValidInputThree_returnsCorrectNumberOfSteps() {
+        String input = getFourthInput();
+        NodeNetwork nodeNetwork = new NodeNetwork(input);
+
+        int expectedNumberOfSteps = 6;
+
+        int actualNumberOfSteps = nodeNetwork.stepThroughNetworkInParallel();
 
         Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
     }
