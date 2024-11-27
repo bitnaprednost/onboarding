@@ -24,4 +24,16 @@ public class SensorTest {
 
         Assertions.assertEquals(expectedHistory, actualHistory);
     }
+
+    @Test
+    public void nextValuesSummed_givenValidInputOne_returnsCorrectSum() {
+        String input = getFirstInput();
+        Sensor sensor = new Sensor(input);
+
+        int expectedSum = 114;
+
+        int actualSum = sensor.sumNextValues();
+
+        Assertions.assertEquals(expectedSum, actualSum);
+    }
 }
