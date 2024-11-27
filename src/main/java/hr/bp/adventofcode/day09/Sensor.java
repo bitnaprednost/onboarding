@@ -36,4 +36,12 @@ public class Sensor {
     public List<PolynomialEquation> getHistory() {
         return this.history;
     }
+
+    public int sumNextValues() {
+        int sum = 0;
+        for (PolynomialEquation polynomialEquation : history) {
+            sum += polynomialEquation.calculateNextValue();
+        }
+        return sum;
+    }
 }
