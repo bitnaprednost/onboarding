@@ -165,4 +165,28 @@ public class PolynomialEquationTest {
 
         Assertions.assertEquals(expectedNextNumber, actualNextNumber);
     }
+
+    @Test
+    public void calculateNextNumber_givenDescendingLinearSequence_returnsCorrectCoefficients() {
+        List<Integer> listOfNumbers = List.of(-1,-2,-3,-4,-5,-6,-7,-8);
+        PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
+
+        long expectedNextNumber = -9;
+
+        long actualNextNumber = polynomialEquation.calculateNextValue();
+
+        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+    }
+
+    @Test
+    public void calculateNextNumber_givenDescendingCubicSequence_returnsCorrectCoefficients() {
+        List<Integer> listOfNumbers = List.of(-8, -27, -64, -125, -216, -343);
+        PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
+
+        long expectedNextNumber = -512;
+
+        long actualNextNumber = polynomialEquation.calculateNextValue();
+
+        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+    }
 }
