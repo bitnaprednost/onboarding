@@ -1,11 +1,13 @@
 package hr.bp.adventofcode.day09;
 
-import org.apache.commons.math3.linear.ArrayRealVector;
-import org.apache.commons.math3.linear.RealVector;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import static hr.bp.adventofcode.day09.TestUtils.areBigDecimalArraysEqual;
+import static hr.bp.adventofcode.day09.TestUtils.areBigDecimalsEqual;
 
 /**
  * @author Ivan Tomičić
@@ -65,12 +67,12 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(1,2,3,4,5,6,7,8,9);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        RealVector expectedCoefficients = new ArrayRealVector(new double[]{0,1});
+        BigDecimal[] expectedCoefficients = new BigDecimal[]{BigDecimal.ZERO, BigDecimal.ONE};
 
-        RealVector actualCoefficients = polynomialEquation.getCoefficients();
+        BigDecimal[]  actualCoefficients = polynomialEquation.getCoefficients();
 
         double tolerance = 1e-6;
-        Assertions.assertTrue(VectorUtils.areVectorsEqual(expectedCoefficients, actualCoefficients, tolerance),
+        Assertions.assertTrue(areBigDecimalArraysEqual(expectedCoefficients, actualCoefficients, tolerance),
                 "The coefficients do not match within the tolerance.");
     }
 
@@ -79,12 +81,12 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(1,4,9,16,25,36,49,64,81,100);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        RealVector expectedCoefficients = new ArrayRealVector(new double[]{0,0,1});
+        BigDecimal[]  expectedCoefficients = new BigDecimal[]{BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE};
 
-        RealVector actualCoefficients = polynomialEquation.getCoefficients();
+        BigDecimal[]  actualCoefficients = polynomialEquation.getCoefficients();
 
         double tolerance = 1e-6;
-        Assertions.assertTrue(VectorUtils.areVectorsEqual(expectedCoefficients, actualCoefficients, tolerance),
+        Assertions.assertTrue(areBigDecimalArraysEqual(expectedCoefficients, actualCoefficients, tolerance),
                 "The coefficients do not match within the tolerance.");
     }
 
@@ -93,12 +95,12 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(2,5,10,17,26,37,50,65,82,101);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        RealVector expectedCoefficients = new ArrayRealVector(new double[]{1,0,1});
+        BigDecimal[]  expectedCoefficients = new BigDecimal[]{BigDecimal.ONE, BigDecimal.ZERO, BigDecimal.ONE};
 
-        RealVector actualCoefficients = polynomialEquation.getCoefficients();
+        BigDecimal[]  actualCoefficients = polynomialEquation.getCoefficients();
 
         double tolerance = 1e-6;
-        Assertions.assertTrue(VectorUtils.areVectorsEqual(expectedCoefficients, actualCoefficients, tolerance),
+        Assertions.assertTrue(areBigDecimalArraysEqual(expectedCoefficients, actualCoefficients, tolerance),
                 "The coefficients do not match within the tolerance.");
     }
 
@@ -107,12 +109,13 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(1,32,243,1024,3125,7776,16807,32768);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        RealVector expectedCoefficients = new ArrayRealVector(new double[]{0,0,0,0,0,1});
+        BigDecimal[]  expectedCoefficients = new BigDecimal[]{BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+                BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ONE};
 
-        RealVector actualCoefficients = polynomialEquation.getCoefficients();
+        BigDecimal[]  actualCoefficients = polynomialEquation.getCoefficients();
 
         double tolerance = 1e-6;
-        Assertions.assertTrue(VectorUtils.areVectorsEqual(expectedCoefficients, actualCoefficients, tolerance),
+        Assertions.assertTrue(areBigDecimalArraysEqual(expectedCoefficients, actualCoefficients, tolerance),
                 "The coefficients do not match within the tolerance.");
     }
 
@@ -121,25 +124,31 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(4,4,4,4,4,4,4,4,4,4);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        RealVector expectedCoefficients = new ArrayRealVector(new double[]{4});
+        BigDecimal[]  expectedCoefficients = new BigDecimal[]{BigDecimal.valueOf(4)};
 
-        RealVector actualCoefficients = polynomialEquation.getCoefficients();
+        BigDecimal[]  actualCoefficients = polynomialEquation.getCoefficients();
+
+        BigDecimal a = new BigDecimal(1);
 
         double tolerance = 1e-6;
-        Assertions.assertTrue(VectorUtils.areVectorsEqual(expectedCoefficients, actualCoefficients, tolerance),
+        Assertions.assertTrue(areBigDecimalArraysEqual(expectedCoefficients, actualCoefficients, tolerance),
                 "The coefficients do not match within the tolerance.");
     }
+
+
 
     @Test
     public void calculateNextNumber_givenConstantSequence_returnsCorrectCoefficients() {
         List<Integer> listOfNumbers = List.of(4,4,4,4,4,4,4,4,4,4);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        long expectedNextNumber = 4;
+        BigDecimal expectedNextNumber = BigDecimal.valueOf(4);
 
-        long actualNextNumber = polynomialEquation.calculateNextValue();
+        BigDecimal actualNextNumber = polynomialEquation.calculateNextValue();
 
-        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+        double tolerance = 1e-6;
+        Assertions.assertTrue(areBigDecimalsEqual(expectedNextNumber, actualNextNumber, tolerance),
+                "The coefficients do not match within the tolerance.");
     }
 
     @Test
@@ -147,11 +156,13 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(5,6,7,8,9,10,11,12,13,14);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        long expectedNextNumber = 15;
+        BigDecimal expectedNextNumber = BigDecimal.valueOf(15);
 
-        long actualNextNumber = polynomialEquation.calculateNextValue();
+        BigDecimal actualNextNumber = polynomialEquation.calculateNextValue();
 
-        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+        double tolerance = 1e-6;
+        Assertions.assertTrue(areBigDecimalsEqual(expectedNextNumber, actualNextNumber, tolerance),
+                "The coefficients do not match within the tolerance.");
     }
 
     @Test
@@ -159,11 +170,13 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(36,25,16,9,4,1,0,1,4,9,16,25,36,49,64,81,100);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        long expectedNextNumber = 121;
+        BigDecimal expectedNextNumber = BigDecimal.valueOf(121);
 
-        long actualNextNumber = polynomialEquation.calculateNextValue();
+        BigDecimal actualNextNumber = polynomialEquation.calculateNextValue();
 
-        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+        double tolerance = 1e-6;
+        Assertions.assertTrue(areBigDecimalsEqual(expectedNextNumber, actualNextNumber, tolerance),
+                "The coefficients do not match within the tolerance.");
     }
 
     @Test
@@ -171,11 +184,13 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(-1,-2,-3,-4,-5,-6,-7,-8);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        long expectedNextNumber = -9;
+        BigDecimal expectedNextNumber = BigDecimal.valueOf(-9);
 
-        long actualNextNumber = polynomialEquation.calculateNextValue();
+        BigDecimal actualNextNumber = polynomialEquation.calculateNextValue();
 
-        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+        double tolerance = 1e-6;
+        Assertions.assertTrue(areBigDecimalsEqual(expectedNextNumber, actualNextNumber, tolerance),
+                "The coefficients do not match within the tolerance.");
     }
 
     @Test
@@ -183,10 +198,12 @@ public class PolynomialEquationTest {
         List<Integer> listOfNumbers = List.of(-8, -27, -64, -125, -216, -343);
         PolynomialEquation polynomialEquation = new PolynomialEquation(listOfNumbers);
 
-        long expectedNextNumber = -512;
+        BigDecimal expectedNextNumber = BigDecimal.valueOf(-512);
 
-        long actualNextNumber = polynomialEquation.calculateNextValue();
+        BigDecimal actualNextNumber = polynomialEquation.calculateNextValue();
 
-        Assertions.assertEquals(expectedNextNumber, actualNextNumber);
+        double tolerance = 1e-6;
+        Assertions.assertTrue(areBigDecimalsEqual(expectedNextNumber, actualNextNumber, tolerance),
+                "The coefficients do not match within the tolerance.");
     }
 }

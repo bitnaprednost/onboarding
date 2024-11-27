@@ -3,6 +3,7 @@ package hr.bp.adventofcode.day09;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static hr.bp.adventofcode.day09.TestUtils.getFirstInput;
@@ -30,9 +31,9 @@ public class SensorTest {
         String input = getFirstInput();
         Sensor sensor = new Sensor(input);
 
-        long expectedSum = 114;
+        BigDecimal expectedSum = BigDecimal.valueOf(114);
 
-        long actualSum = sensor.sumNextValues();
+        BigDecimal actualSum = sensor.sumNextValues();
 
         Assertions.assertEquals(expectedSum, actualSum);
     }
