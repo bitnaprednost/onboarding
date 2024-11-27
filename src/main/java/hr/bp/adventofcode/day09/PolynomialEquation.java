@@ -7,6 +7,8 @@ import org.apache.commons.math3.linear.QRDecomposition;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.linear.RealVector;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +23,7 @@ public class PolynomialEquation {
 
     private Integer degreeOfPolynomial;
 
-    private RealVector coefficients;
+    private BigDecimal[] coefficients; // Store coefficients as BigDecimal
 
     public PolynomialEquation(List<Integer> sequenceOfNumbers) {
         this.sequenceOfNumbers = sequenceOfNumbers;
@@ -29,15 +31,31 @@ public class PolynomialEquation {
         calculateCoefficients();
     }
 
-    public Long calculateNextValue() {
-        long result = 0;
+    public BigDecimal calculateNextValue() {
+        BigDecimal result = BigDecimal.ZERO;
 
-        long x = sequenceOfNumbers.size() + 1;
+        BigDecimal x = BigDecimal.valueOf(sequenceOfNumbers.size() + 1);
 
-        for (int i = 0; i < coefficients.getDimension(); i++) {
-            long xRaisedToTheExponent = getXRaisedToTheExponent(x, i);
-            result += (long) (coefficients.getEntry(i) * xRaisedToTheExponent);
+        for (int i = 0; i < coefficients.length; i++) {
+            BigDecimal xRaisedToTheExponent = x.pow(i); // x^i
+            result = result.add(coefficients[i].multiply(xRaisedToTheExponent)); // Add a_i * x^i
         }
+
+        return result;
+    }
+
+    public BigDecimal calculatePreviousValue() {
+        BigDecimal result = BigDecimal.ZERO;
+
+        // The next value of x
+        BigDecimal x = BigDecimal.ZERO;
+
+        // Iterate over the coefficients
+        for (int i = 0; i < coefficients.length; i++) {
+            BigDecimal xRaisedToTheExponent = x.pow(i); // x^i
+            result = result.add(coefficients[i].multiply(xRaisedToTheExponent)); // Add a_i * x^i
+        }
+
         return result;
     }
 
@@ -95,11 +113,15 @@ public class PolynomialEquation {
         RealVector yVector = new ArrayRealVector(y);
 
         DecompositionSolver solver = new QRDecomposition(vandermondeMatrix).getSolver();
-
-        this.coefficients = solver.solve(yVector);
+        RealVector solution = solver.solve(yVector);
+        this.coefficients = new BigDecimal[solution.getDimension()];
+        MathContext mathContext = new MathContext(20); // Adjust precision as needed
+        for (int i = 0; i < solution.getDimension(); i++) {
+            this.coefficients[i] = BigDecimal.valueOf(solution.getEntry(i)).round(mathContext);
+        }
     }
 
-    public RealVector getCoefficients() {
+    public BigDecimal[] getCoefficients() {
         return this.coefficients;
     }
 

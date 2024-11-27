@@ -1,5 +1,6 @@
 package hr.bp.adventofcode.day09;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,10 +38,18 @@ public class Sensor {
         return this.history;
     }
 
-    public long sumNextValues() {
-        long sum = 0;
+    public BigDecimal sumNextValues() {
+        BigDecimal sum = BigDecimal.valueOf(0);
         for (PolynomialEquation polynomialEquation : history) {
-            sum += polynomialEquation.calculateNextValue();
+            sum = sum.add(polynomialEquation.calculateNextValue());
+        }
+        return sum;
+    }
+
+    public BigDecimal sumPreviousValues() {
+        BigDecimal sum = BigDecimal.valueOf(0);
+        for (PolynomialEquation polynomialEquation : history) {
+            sum = sum.add(polynomialEquation.calculatePreviousValue());
         }
         return sum;
     }

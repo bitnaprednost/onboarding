@@ -2,6 +2,8 @@ package hr.bp.adventofcode.day09;
 
 import hr.bp.adventofcode.Utils;
 
+import java.math.BigDecimal;
+
 import static hr.bp.adventofcode.Utils.readInputForDay;
 
 /**
@@ -13,15 +15,8 @@ public class TaskOne {
         String input = readInputForDay("day09");
         Sensor sensor = new Sensor(input);
 
-        long sum = sensor.sumNextValues();
-
-        for(PolynomialEquation p : sensor.getHistory()) {
-            System.out.println(p.getCoefficients());
-        }
+        BigDecimal sum = sensor.sumNextValues();
 
         Utils.displayResult(sum);
     }
 }
-// 1934898160
-// 191084735742
-// 191084735652
