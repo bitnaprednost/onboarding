@@ -17,9 +17,10 @@ import java.util.stream.IntStream;
 public class PolynomialEquation {
 
     private List<Integer> sequenceOfNumbers;
-    private Integer degreeOfPolynomial;
-    private RealVector coefficients;
 
+    private Integer degreeOfPolynomial;
+
+    private RealVector coefficients;
 
     public PolynomialEquation(List<Integer> sequenceOfNumbers) {
         this.sequenceOfNumbers = sequenceOfNumbers;
@@ -27,17 +28,34 @@ public class PolynomialEquation {
         calculateCoefficients();
     }
 
+    public Integer calculateNextValue() {
+        int result = 0;
+
+        int x = sequenceOfNumbers.size() + 1;
+
+        for (int i = 0; i < coefficients.getDimension(); i++) {
+            result += (int) (Math.round(coefficients.getEntry(i)) * Math.pow(x, i));
+        }
+
+        return result;
+    }
+
     private void calculateDegreeOfPolynomial() {
         List<Integer> oldSequence = new ArrayList<>(sequenceOfNumbers);
+
         int degreeOfPolynomial = 0;
+
         while(!sequenceContainsAllZeroes(oldSequence)) {
             List<Integer> newSequence = new ArrayList<>();
+
             for (int i = 0; i < oldSequence.size() - 1; i++) {
                 newSequence.add(oldSequence.get(i+1) - oldSequence.get(i));
             }
+
             oldSequence = newSequence;
             degreeOfPolynomial++;
         }
+
         this.degreeOfPolynomial = degreeOfPolynomial - 1;
     }
 
@@ -56,8 +74,8 @@ public class PolynomialEquation {
                 .mapToDouble(Integer::doubleValue)
                 .toArray();
 
-
         double[][] vandermonde = new double[x.length][degree + 1];
+
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j <= degree; j++) {
                 vandermonde[i][j] = Math.pow(x[i], j);
