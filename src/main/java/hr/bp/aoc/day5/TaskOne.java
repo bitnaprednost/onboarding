@@ -9,7 +9,7 @@ public class TaskOne {
         List<String> document = Utils.readFromFile("inputDay5.txt");
 
         AlmanacReader almanacReader = new AlmanacReader(document);
-        int nearestLocation = almanacReader.getNearestLocation();
+        long nearestLocation = almanacReader.getNearestLocation();
         System.out.println(nearestLocation);
     }
 }

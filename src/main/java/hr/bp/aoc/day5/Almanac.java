@@ -6,14 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Almanac {
-    private ArrayList<Integer> seeds;
-    private Map<Integer, AlmanacMap> seedToSoil;
-    private Map<Integer, AlmanacMap> soilToFertilizer;
-    private Map<Integer, AlmanacMap> fertilizerToWater;
-    private Map<Integer, AlmanacMap> waterToLight;
-    private Map<Integer, AlmanacMap> lightToTemperature;
-    private Map<Integer, AlmanacMap> temperatureToHumidity;
-    private Map<Integer, AlmanacMap> humidityToLocation;
+    private ArrayList<Long> seeds;
+    private Map<Long, AlmanacMap> seedToSoil;
+    private Map<Long, AlmanacMap> soilToFertilizer;
+    private Map<Long, AlmanacMap> fertilizerToWater;
+    private Map<Long, AlmanacMap> waterToLight;
+    private Map<Long, AlmanacMap> lightToTemperature;
+    private Map<Long, AlmanacMap> temperatureToHumidity;
+    private Map<Long, AlmanacMap> humidityToLocation;
 
 
     public Almanac() {
@@ -27,43 +27,43 @@ public class Almanac {
         humidityToLocation = new HashMap<>();
     }
 
-    public int getNearestLocation() {
-        ArrayList<Integer> allSeedLocations = getAllLocations();
+    public long getNearestLocation() {
+        ArrayList<Long> allSeedLocations = getAllLocations();
 
         allSeedLocations.sort(Comparator.naturalOrder());
 
         return allSeedLocations.get(0);
     }
 
-    private ArrayList<Integer> getAllLocations() {
-        ArrayList<Integer> locations = new ArrayList<>();
+    private ArrayList<Long> getAllLocations() {
+        ArrayList<Long> locations = new ArrayList<>();
 
-        for (int seed : seeds) {
+        for (long seed : seeds) {
             locations.add(findSeedLocation(seed));
         }
 
         return locations;
     }
 
-    private int findSeedLocation(int seed) {
-        int soil = findDestination(seed, seedToSoil);
-        int fertilizer = findDestination(soil, soilToFertilizer);
-        int water = findDestination(fertilizer, fertilizerToWater);
-        int light = findDestination(water, waterToLight);
-        int temperature = findDestination(light, lightToTemperature);
-        int humidity = findDestination(temperature, temperatureToHumidity);
+    private long findSeedLocation(long seed) {
+        long soil = findDestination(seed, seedToSoil);
+        long fertilizer = findDestination(soil, soilToFertilizer);
+        long water = findDestination(fertilizer, fertilizerToWater);
+        long light = findDestination(water, waterToLight);
+        long temperature = findDestination(light, lightToTemperature);
+        long humidity = findDestination(temperature, temperatureToHumidity);
 
         return findDestination(humidity, humidityToLocation);
     }
 
-    private int findDestination(int source, Map<Integer, AlmanacMap> map) {
+    private long findDestination(long source, Map<Long, AlmanacMap> map) {
         AlmanacMap destinationMap = map.get(source);
-        int destination = source;
+        long destination = source;
 
         if (destinationMap != null) {
             destination = destinationMap.getDestinationStart();
         } else {
-            for (int mapSoruce : map.keySet()) {
+            for (long mapSoruce : map.keySet()) {
                 if (mapSoruce < source) {
                     destinationMap = map.get(mapSoruce);
                     if (destinationMap.getRange() >= source - mapSoruce) {
@@ -75,67 +75,67 @@ public class Almanac {
         return destination;
     }
 
-    public ArrayList<Integer> getSeeds() {
+    public ArrayList<Long> getSeeds() {
         return seeds;
     }
 
-    public void setSeeds(ArrayList<Integer> seeds) {
+    public void setSeeds(ArrayList<Long> seeds) {
         this.seeds = seeds;
     }
 
-    public Map<Integer, AlmanacMap> getSeedToSoil() {
+    public Map<Long, AlmanacMap> getSeedToSoil() {
         return seedToSoil;
     }
 
-    public void setSeedToSoil(Map<Integer, AlmanacMap> seedToSoil) {
+    public void setSeedToSoil(Map<Long, AlmanacMap> seedToSoil) {
         this.seedToSoil = seedToSoil;
     }
 
-    public Map<Integer, AlmanacMap> getSoilToFertilizer() {
+    public Map<Long, AlmanacMap> getSoilToFertilizer() {
         return soilToFertilizer;
     }
 
-    public void setSoilToFertilizer(Map<Integer, AlmanacMap> soilToFertilizer) {
+    public void setSoilToFertilizer(Map<Long, AlmanacMap> soilToFertilizer) {
         this.soilToFertilizer = soilToFertilizer;
     }
 
-    public Map<Integer, AlmanacMap> getFertilizerToWater() {
+    public Map<Long, AlmanacMap> getFertilizerToWater() {
         return fertilizerToWater;
     }
 
-    public void setFertilizerToWater(Map<Integer, AlmanacMap> fertilizerToWater) {
+    public void setFertilizerToWater(Map<Long, AlmanacMap> fertilizerToWater) {
         this.fertilizerToWater = fertilizerToWater;
     }
 
-    public Map<Integer, AlmanacMap> getHumidityToLocation() {
+    public Map<Long, AlmanacMap> getHumidityToLocation() {
         return humidityToLocation;
     }
 
-    public void setHumidityToLocation(Map<Integer, AlmanacMap> humidityToLocation) {
+    public void setHumidityToLocation(Map<Long, AlmanacMap> humidityToLocation) {
         this.humidityToLocation = humidityToLocation;
     }
 
-    public Map<Integer, AlmanacMap> getWaterToLight() {
+    public Map<Long, AlmanacMap> getWaterToLight() {
         return waterToLight;
     }
 
-    public void setWaterToLight(Map<Integer, AlmanacMap> waterToLight) {
+    public void setWaterToLight(Map<Long, AlmanacMap> waterToLight) {
         this.waterToLight = waterToLight;
     }
 
-    public Map<Integer, AlmanacMap> getLightToTemperature() {
+    public Map<Long, AlmanacMap> getLightToTemperature() {
         return lightToTemperature;
     }
 
-    public void setLightToTemperature(Map<Integer, AlmanacMap> lightToTemperature) {
+    public void setLightToTemperature(Map<Long, AlmanacMap> lightToTemperature) {
         this.lightToTemperature = lightToTemperature;
     }
 
-    public Map<Integer, AlmanacMap> getTemperatureToHumidity() {
+    public Map<Long, AlmanacMap> getTemperatureToHumidity() {
         return temperatureToHumidity;
     }
 
-    public void setTemperatureToHumidity(Map<Integer, AlmanacMap> temperatureToHumidity) {
+    public void setTemperatureToHumidity(Map<Long, AlmanacMap> temperatureToHumidity) {
         this.temperatureToHumidity = temperatureToHumidity;
     }
 }

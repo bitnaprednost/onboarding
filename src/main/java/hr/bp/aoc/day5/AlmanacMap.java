@@ -1,25 +1,25 @@
 package hr.bp.aoc.day5;
 
 public class AlmanacMap {
-    private int sourceStart;
-    private int destinationStart;
-    private int range;
+    private long sourceStart;
+    private long destinationStart;
+    private long range;
 
-    public AlmanacMap(int sourceStart, int destinationStart, int range) {
+    public AlmanacMap(long sourceStart, long destinationStart, long range) {
         this.sourceStart = sourceStart;
         this.destinationStart = destinationStart;
         this.range = range;
     }
 
-    public int getSourceStart() {
+    public long getSourceStart() {
         return sourceStart;
     }
 
-    public int getDestinationStart() {
+    public long getDestinationStart() {
         return destinationStart;
     }
 
-    public int getRange() {
+    public long getRange() {
         return range;
     }
 }

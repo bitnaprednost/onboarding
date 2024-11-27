@@ -27,22 +27,22 @@ public class AlmanacReader {
         return almanac;
     }
 
-    private Map<Integer, AlmanacMap> getAlmanacMap(AlmanacMapEnum enumKey) {
-        Map<Integer, AlmanacMap> almanacMap = new HashMap<>();
+    private Map<Long, AlmanacMap> getAlmanacMap(AlmanacMapEnum enumKey) {
+        Map<Long, AlmanacMap> almanacMap = new HashMap<>();
         int startIndex = almanacString.indexOf(enumKey.getStringValue());
         putMapToAlmanac(almanacMap, startIndex);
 
         return almanacMap;
     }
 
-    private void putMapToAlmanac(Map<Integer, AlmanacMap> almanacMap, int startIndex) {
+    private void putMapToAlmanac(Map<Long, AlmanacMap> almanacMap, int startIndex) {
         String mapToEnter = almanacString.get(startIndex+1);
 
         while(!mapToEnter.isEmpty() && startIndex+1 < almanacString.size()) {
             String[] mapInput = mapToEnter.split(" ");
-            int source = Integer.parseInt(mapInput[1]);
-            int destination = Integer.parseInt(mapInput[0]);
-            int range = Integer.parseInt(mapInput[2]);
+            long source = Long.parseLong(mapInput[1]);
+            long destination = Long.parseLong(mapInput[0]);
+            long range = Long.parseLong(mapInput[2]);
 
             almanacMap.put(source, new AlmanacMap(source, destination, range));
             mapToEnter = almanacString.get(startIndex+1);
@@ -50,21 +50,21 @@ public class AlmanacReader {
         }
     }
 
-    private ArrayList<Integer> getAlmanacSeeds() {
+    private ArrayList<Long> getAlmanacSeeds() {
         String[] seeds = almanacString.get(0).split(":")[1].split(" ");
-        ArrayList<Integer> seedList = new ArrayList<>();
+        ArrayList<Long> seedList = new ArrayList<>();
 
         for (String seed : seeds) {
             if (!seed.isEmpty()) {
-                int seedInt = Integer.parseInt(seed.trim());
-                seedList.add(seedInt);
+                long seedlong = Long.parseLong(seed.trim());
+                seedList.add(seedlong);
             }
         }
 
         return seedList;
     }
 
-    public int getNearestLocation() {
+    public long getNearestLocation() {
         parseAlmanac();
 
         return almanac.getNearestLocation();
