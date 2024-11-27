@@ -9,6 +9,7 @@ import org.apache.commons.math3.linear.RealVector;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 
 /**
@@ -98,4 +99,16 @@ public class PolynomialEquation {
         return degreeOfPolynomial;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof PolynomialEquation that)) return false;
+        return Objects.equals(sequenceOfNumbers, that.sequenceOfNumbers) &&
+                Objects.equals(getDegreeOfPolynomial(), that.getDegreeOfPolynomial()) &&
+                Objects.equals(getCoefficients(), that.getCoefficients());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sequenceOfNumbers, getDegreeOfPolynomial(), getCoefficients());
+    }
 }
