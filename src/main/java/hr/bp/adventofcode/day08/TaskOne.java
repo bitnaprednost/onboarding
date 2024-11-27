@@ -13,7 +13,7 @@ public class TaskOne {
         String input = readInputForDay("day08");
         NodeNetwork game = new NodeNetwork(input);
 
-        int sum = game.stepThroughNetwork();
+        int sum = game.calculateStepsToEnd();
 
         Utils.displayResult(sum);
     }

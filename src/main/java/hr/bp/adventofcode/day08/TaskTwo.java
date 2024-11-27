@@ -13,7 +13,7 @@ public class TaskTwo {
         String input = readInputForDay("day08");
         NodeNetwork game = new NodeNetwork(input);
 
-        long sum = game.stepThroughNetworkInParallel();
+        long sum = game.calculateParallelStepsToEnd();
 
         Utils.displayResult(sum);
     }

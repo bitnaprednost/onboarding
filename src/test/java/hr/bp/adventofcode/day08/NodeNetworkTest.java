@@ -41,7 +41,7 @@ public class NodeNetworkTest {
 
         int expectedNumberOfSteps = 2;
 
-        int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
+        int actualNumberOfSteps = nodeNetwork.calculateStepsToEnd();
 
         Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
     }
@@ -53,7 +53,7 @@ public class NodeNetworkTest {
 
         int expectedNumberOfSteps = 6;
 
-        int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
+        int actualNumberOfSteps = nodeNetwork.calculateStepsToEnd();
 
         Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
     }
@@ -65,7 +65,7 @@ public class NodeNetworkTest {
 
         int expectedNumberOfSteps = 12169;
 
-        int actualNumberOfSteps = nodeNetwork.stepThroughNetwork();
+        int actualNumberOfSteps = nodeNetwork.calculateStepsToEnd();
 
         Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
     }
@@ -77,7 +77,7 @@ public class NodeNetworkTest {
 
         long expectedNumberOfSteps = 6;
 
-        long actualNumberOfSteps = nodeNetwork.stepThroughNetworkInParallel();
+        long actualNumberOfSteps = nodeNetwork.calculateParallelStepsToEnd();
 
         Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
     }
@@ -89,7 +89,7 @@ public class NodeNetworkTest {
 
         long expectedNumberOfSteps = 12030780859469L;
 
-        long actualNumberOfSteps = nodeNetwork.stepThroughNetworkInParallel();
+        long actualNumberOfSteps = nodeNetwork.calculateParallelStepsToEnd();
 
         Assertions.assertEquals(expectedNumberOfSteps, actualNumberOfSteps);
     }
