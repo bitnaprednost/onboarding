@@ -1,7 +1,6 @@
 package hr.bp.adventofcode.day10;
 
-import java.util.Arrays;
-
+import static hr.bp.adventofcode.Utils.displayResult;
 import static hr.bp.adventofcode.Utils.readInputForDay;
 
 /**
@@ -12,6 +11,8 @@ public class TaskOne {
         String input = readInputForDay("day10");
         PipeMaze pipeMaze = new PipeMaze(input);
 
-        System.out.println(Arrays.deepToString(pipeMaze.getGrid()));
+        int farthestPosition = pipeMaze.findFarthestPosition();
+
+        displayResult(farthestPosition);
     }
 }

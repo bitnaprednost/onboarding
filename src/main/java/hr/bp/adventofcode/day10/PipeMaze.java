@@ -48,20 +48,25 @@ public class PipeMaze {
 
     public int findFarthestPosition() {
         Pair<Pair<Integer, Integer>, Move> nextGridElementMove = findNextMoveFromStartingPosition();
-        return moveThroughMaze(nextGridElementMove.left().left(), nextGridElementMove.left().right(), nextGridElementMove.right()) / 2;
+        return moveThroughMaze(nextGridElementMove.left().left(), nextGridElementMove.left().right(), nextGridElementMove.right()) / 2 + 1;
     }
 
     private int moveThroughMaze(Integer row, Integer column, Move previousMove) {
         GridElement currentElement = grid[row][column];
-        
-        if (currentElement.equals(GridElement.STARTING_POSITION)) return 1;
+        int sum = 0;
 
-        Move nextMove = currentElement.nextMove(previousMove);
+        while (!currentElement.equals(GridElement.STARTING_POSITION)) {
+            Move move = currentElement.nextMove(previousMove);
 
-        int nextRow = nextMove.getMoveRow().apply(row);
-        int nextColumn = nextMove.getMoveColumn().apply(column);
+            row = move.getMoveRow().apply(row);
+            column = move.getMoveColumn().apply(column);
 
-        return 1 + moveThroughMaze(nextRow, nextColumn, nextMove);
+            currentElement = grid[row][column];
+            previousMove = move;
+
+            sum++;
+        }
+        return sum;
     }
 
     private Pair<Pair<Integer, Integer>, Move> findNextMoveFromStartingPosition() {
