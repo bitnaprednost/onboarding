@@ -22,4 +22,16 @@ public class PipeMazeTest {
 
         Assertions.assertArrayEquals(expectedGrid, actualGrid);
     }
+
+    @Test
+    public void walkThroughMaze_givenValidInputOne_returnsCorrectFarthestPosition() {
+        String input = getFirstInput();
+        PipeMaze pipeMaze = new PipeMaze(input);
+
+        int expectedFarthestPosition= 8;
+
+        int actualFarthestPosition = pipeMaze.findFarthestPosition();
+
+        Assertions.assertEquals(expectedFarthestPosition, actualFarthestPosition);
+    }
 }
