@@ -9,10 +9,6 @@ public class ToyBoat {
         this.raceTime = raceTime;
     }
 
-    public int getSpeed() {
-        return speed;
-    }
-
     private int getRemainingRaceTime() {
         return raceTime - speed;
     }

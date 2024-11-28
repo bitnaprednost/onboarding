@@ -1,6 +1,5 @@
 package hr.bp.aoc.day6;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class BoatConfiguration {
