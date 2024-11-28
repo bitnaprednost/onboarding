@@ -6,7 +6,8 @@ import static hr.bp.adventofcode.Utils.readInputForDay;
 /**
  * @author Ivan Tomičić
  */
-public class TaskOne {
+public class TaskOneAndTwo {
+
     public static void main(String[] args) {
         String input = readInputForDay("day10");
         PipeMaze pipeMaze = new PipeMaze(input);
@@ -14,5 +15,9 @@ public class TaskOne {
         int farthestPosition = pipeMaze.getFarthestPosition();
 
         displayResult(farthestPosition);
+
+        int dotsInsideMainArea = pipeMaze.calculateDotsInsideTheMainLoop();
+
+        displayResult(dotsInsideMainArea);
     }
 }
