@@ -138,9 +138,7 @@ public class Almanac {
                 destinationStart = sourceMap.getSourceStart() + currMap.getMapping();
 
                 result.add(new AlmanacMap(destinationStart, 0, sourceMap.getRange()));
-            } else if (sourceMap.getSourceStart() < currMap.getSourceStart() &&
-                    sourceMap.getSourceEnd() > currMap.getSourceStart() &&
-                    sourceMap.getSourceEnd() <= currMap.getSourceEnd()) {
+            } else if (isSourceRangeOnLeftSide(sourceMap, currMap)) {
                 destinationStart = currMap.getDestinationStart();
                 range = sourceMap.getSourceEnd() - currMap.getSourceStart();
 
@@ -148,9 +146,7 @@ public class Almanac {
                 result.addAll(findDestinationRange(new AlmanacMap(sourceMap.getSourceStart(), 0,
                                 sourceMap.getRange() - range),
                         map));
-            } else if (sourceMap.getSourceEnd() > currMap.getSourceEnd() &&
-                    sourceMap.getSourceStart() >= currMap.getSourceStart() &&
-                    sourceMap.getSourceStart() < currMap.getSourceEnd()) {
+            } else if (isSourceRangeOnRightSide(sourceMap, currMap)) {
                 destinationStart = sourceMap.getSourceStart() + currMap.getMapping();
                 range = currMap.getSourceEnd() - sourceMap.getSourceStart();
 
@@ -166,6 +162,18 @@ public class Almanac {
             result.add(sourceMap);
 
         return result;
+    }
+
+    private static boolean isSourceRangeOnRightSide(AlmanacMap sourceMap, AlmanacMap currMap) {
+        return sourceMap.getSourceEnd() > currMap.getSourceEnd() &&
+                sourceMap.getSourceStart() >= currMap.getSourceStart() &&
+                sourceMap.getSourceStart() < currMap.getSourceEnd();
+    }
+
+    private static boolean isSourceRangeOnLeftSide(AlmanacMap sourceMap, AlmanacMap currMap) {
+        return sourceMap.getSourceStart() < currMap.getSourceStart() &&
+                sourceMap.getSourceEnd() > currMap.getSourceStart() &&
+                sourceMap.getSourceEnd() <= currMap.getSourceEnd();
     }
 
     public void setSeedsRange(Map<Long, AlmanacMap> seedsRange) {
