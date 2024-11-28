@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static hr.bp.adventofcode.day10.TestUtils.getFirstInput;
 import static hr.bp.adventofcode.day10.TestUtils.getFirstInputGrid;
+import static hr.bp.adventofcode.day10.TestUtils.getFourthInput;
 import static hr.bp.adventofcode.day10.TestUtils.getSecondInput;
+import static hr.bp.adventofcode.day10.TestUtils.getThirdInput;
 
 /**
  * @author Ivan Tomičić
@@ -46,5 +48,41 @@ public class PipeMazeTest {
         int actualFarthestPosition = pipeMaze.findFarthestPosition();
 
         Assertions.assertEquals(expectedFarthestPosition, actualFarthestPosition);
+    }
+
+    @Test
+    public void calculateAreaOfTheMainLoop_givenValidInputTwo_returnsCorrectArea() {
+        String input = getSecondInput();
+        PipeMaze pipeMaze = new PipeMaze(input);
+
+        int expectedArea= 1;
+
+        int actualArea = pipeMaze.calculateAreaOfTheMainLoop();
+
+        Assertions.assertEquals(expectedArea, actualArea);
+    }
+
+    @Test
+    public void calculateAreaOfTheMainLoop_givenValidInputThree_returnsCorrectArea() {
+        String input = getThirdInput();
+        PipeMaze pipeMaze = new PipeMaze(input);
+
+        int expectedArea= 4;
+
+        int actualArea = pipeMaze.calculateAreaOfTheMainLoop();
+
+        Assertions.assertEquals(expectedArea, actualArea);
+    }
+
+    @Test
+    public void calculateAreaOfTheMainLoop_givenValidInputFour_returnsCorrectArea() {
+        String input = getFourthInput();
+        PipeMaze pipeMaze = new PipeMaze(input);
+
+        int expectedArea= 8;
+
+        int actualArea = pipeMaze.calculateAreaOfTheMainLoop();
+
+        Assertions.assertEquals(expectedArea, actualArea);
     }
 }
