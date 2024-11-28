@@ -64,37 +64,37 @@ public class PipeMazeTest {
     }
 
     @Test
-    public void calculateAreaOfTheMainLoop_givenValidInputTwo_returnsCorrectArea() {
+    public void calculateDotsInsideTheMainLoop_givenValidInputTwo_returnsCorrectNumber() {
         String input = getSecondInput();
         PipeMaze pipeMaze = new PipeMaze(input);
 
         int expectedArea= 1;
 
-        int actualArea = pipeMaze.calculateAreaOfTheMainLoop();
+        int actualArea = pipeMaze.calculateDotsInsideTheMainLoop();
 
         Assertions.assertEquals(expectedArea, actualArea);
     }
 
     @Test
-    public void calculateAreaOfTheMainLoop_givenValidInputThree_returnsCorrectArea() {
+    public void calculateDotsInsideTheMainLoop_givenValidInputThree_returnsCorrectNumber() {
         String input = getThirdInput();
         PipeMaze pipeMaze = new PipeMaze(input);
 
         int expectedArea= 4;
 
-        int actualArea = pipeMaze.calculateAreaOfTheMainLoop();
+        int actualArea = pipeMaze.calculateDotsInsideTheMainLoop();
 
         Assertions.assertEquals(expectedArea, actualArea);
     }
 
     @Test
-    public void calculateAreaOfTheMainLoop_givenValidInputFour_returnsCorrectArea() {
+    public void calculateDotsInsideTheMainLoop_givenValidInputFour_returnsCorrectNumber() {
         String input = getFourthInput();
         PipeMaze pipeMaze = new PipeMaze(input);
 
-        int expectedArea= 8;
+        int expectedArea = 8;
 
-        int actualArea = pipeMaze.calculateAreaOfTheMainLoop();
+        int actualArea = pipeMaze.calculateDotsInsideTheMainLoop();
 
         Assertions.assertEquals(expectedArea, actualArea);
     }

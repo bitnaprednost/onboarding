@@ -2,6 +2,7 @@ package hr.bp.adventofcode.day10;
 
 import hr.bp.adventofcode.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
 public class PipeMaze {
 
     private GridElement[][] grid;
-    private boolean[][] isPartOfMainLoop;
+    private final List<Pair<Integer, Integer>> edges = new ArrayList<>();
 
     private Integer startingPositionRowIndex;
     private Integer startingPositionColumnIndex;
@@ -23,6 +24,13 @@ public class PipeMaze {
         }
         initializeGrid(input);
         setFarthestPosition();
+    }
+
+    private void checkIfStartingPositionIsEdge() {
+        if (!(canConnectNorthFromStartingPosition() && canConnectSouthFromStartingPosition())
+                && !(canConnectEastFromStartingPosition() && canConnectWestFromStartingPosition())) {
+            edges.add(new Pair<>(startingPositionRowIndex, startingPositionColumnIndex));
+        }
     }
 
     private void setFarthestPosition() {
@@ -38,18 +46,12 @@ public class PipeMaze {
         String[] lines = input.split("\\n");
 
         grid = new GridElement[lines.length][];
-        isPartOfMainLoop = new boolean[lines.length][];
 
         int rowIndex = 0;
 
         for (String line : lines) {
-            addRowToIsPartOfMainLoopArray(rowIndex, line.length());
             addRowToGrid(line, rowIndex++);
         }
-    }
-
-    private void addRowToIsPartOfMainLoopArray(int rowIndex, int columns) {
-        isPartOfMainLoop[rowIndex] = new boolean[columns];
     }
 
     private void addRowToGrid(String line, int rowIndex) {
@@ -63,24 +65,28 @@ public class PipeMaze {
             if (element.equals("S")) {
                 startingPositionRowIndex = rowIndex;
                 startingPositionColumnIndex = i;
-                isPartOfMainLoop[rowIndex][i] = true;
             }
         }
         grid[rowIndex] = row;
     }
 
     private int moveThroughMaze(Integer row, Integer column, Move previousMove) {
+        checkIfStartingPositionIsEdge();
+
         GridElement currentElement = grid[row][column];
         int sum = 0;
 
         while (!currentElement.equals(GridElement.STARTING_POSITION)) {
             Move move = currentElement.nextMove(previousMove);
-            isPartOfMainLoop[row][column] = true;
+            if (currentElement.isEdge()) {
+                edges.add(new Pair<> (row, column));
+            }
 
             row = move.getMoveRow().apply(row);
             column = move.getMoveColumn().apply(column);
 
             currentElement = grid[row][column];
+
             previousMove = move;
 
             sum++;
@@ -139,5 +145,23 @@ public class PipeMaze {
 
     public GridElement[][] getGrid() {
         return grid;
+    }
+
+    public int calculateDotsInsideTheMainLoop() {
+        int A = calculateArea();
+        int b = farthestPosition*2;
+        return A -b/2 + 1;
+    }
+
+    private int calculateArea() {
+        int sum = 0;
+        for (int i = 0; i < edges.size(); i++) {
+            sum += calculateDeterminant(edges.get(i), edges.get((i+1) % edges.size()));
+        }
+        return Math.abs(sum)/2;
+    }
+
+    private int calculateDeterminant(Pair<Integer, Integer> edge1, Pair<Integer, Integer> edge2) {
+        return edge1.left() * edge2.right() - edge2.left() * edge1.right();
     }
 }
