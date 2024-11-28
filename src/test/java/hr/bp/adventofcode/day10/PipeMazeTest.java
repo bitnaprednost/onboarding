@@ -98,4 +98,16 @@ public class PipeMazeTest {
 
         Assertions.assertEquals(expectedArea, actualArea);
     }
+
+    @Test
+    public void calculateDotsInsideTheMainLoop_givenTaskInput_returnsCorrectNumber() {
+        String input = readInputForDay("day10");
+        PipeMaze pipeMaze = new PipeMaze(input);
+
+        int expectedArea = 381;
+
+        int actualArea = pipeMaze.calculateDotsInsideTheMainLoop();
+
+        Assertions.assertEquals(expectedArea, actualArea);
+    }
 }

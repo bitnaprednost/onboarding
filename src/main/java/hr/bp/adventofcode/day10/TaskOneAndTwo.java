@@ -13,11 +13,9 @@ public class TaskOneAndTwo {
         PipeMaze pipeMaze = new PipeMaze(input);
 
         int farthestPosition = pipeMaze.getFarthestPosition();
-
         displayResult(farthestPosition);
 
         int dotsInsideMainArea = pipeMaze.calculateDotsInsideTheMainLoop();
-
         displayResult(dotsInsideMainArea);
     }
 }
