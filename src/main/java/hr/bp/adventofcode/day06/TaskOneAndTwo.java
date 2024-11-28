@@ -6,7 +6,7 @@ import static hr.bp.adventofcode.Utils.readUserInputAsString;
 /**
  * @author Ivan Tomičić
  */
-public class TaskOne {
+public class TaskOneAndTwo {
 
     public static void main(String[] args) {
         String input = readUserInputAsString();
