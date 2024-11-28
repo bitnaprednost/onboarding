@@ -51,11 +51,12 @@ public class PipeMaze {
         return moveThroughMaze(nextGridElementMove.left().left(), nextGridElementMove.left().right(), nextGridElementMove.right()) / 2;
     }
 
-    private int moveThroughMaze(Integer row, Integer column, Move move) {
+    private int moveThroughMaze(Integer row, Integer column, Move previousMove) {
         GridElement currentElement = grid[row][column];
+        
         if (currentElement.equals(GridElement.STARTING_POSITION)) return 1;
 
-        Move nextMove = currentElement.nextMove(move);
+        Move nextMove = currentElement.nextMove(previousMove);
 
         int nextRow = nextMove.getMoveRow().apply(row);
         int nextColumn = nextMove.getMoveColumn().apply(column);

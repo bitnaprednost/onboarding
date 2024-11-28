@@ -42,26 +42,26 @@ public enum GridElement {
         return isPipe;
     }
 
-    public Move nextMove(Move directionFrom) {
+    public Move nextMove(Move previousMove) {
         switch(this) {
             case NORTH_EAST -> {
-                if (directionFrom.equals(Move.NORTH)) return Move.EAST;
-                else return Move.NORTH;
+                if (previousMove.equals(Move.WEST)) return Move.NORTH;
+                else return Move.EAST;
             } case NORTH_WEST -> {
-                if (directionFrom.equals(Move.NORTH)) return Move.WEST;
-                else return Move.NORTH;
+                if (previousMove.equals(Move.EAST)) return Move.NORTH;
+                else return Move.WEST;
             } case SOUTH_EAST -> {
-                if (directionFrom.equals(Move.SOUTH)) return Move.EAST;
-                else return Move.SOUTH;
+                if (previousMove.equals(Move.WEST)) return Move.SOUTH;
+                else return Move.EAST;
             } case SOUTH_WEST -> {
-                if (directionFrom.equals(Move.SOUTH)) return Move.WEST;
+                if (previousMove.equals(Move.NORTH)) return Move.WEST;
                 else return Move.SOUTH;
             } case EAST_WEST -> {
-                if (directionFrom.equals(Move.EAST)) return Move.WEST;
-                else return Move.EAST;
+                if (previousMove.equals(Move.EAST)) return Move.EAST;
+                else return Move.WEST;
             } case NORTH_SOUTH -> {
-                if (directionFrom.equals(Move.NORTH)) return Move.SOUTH;
-                else return Move.NORTH;
+                if (previousMove.equals(Move.NORTH)) return Move.NORTH;
+                else return Move.SOUTH;
             } default -> {
                 return null;
             }
