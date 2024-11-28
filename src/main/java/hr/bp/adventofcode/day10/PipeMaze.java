@@ -10,6 +10,7 @@ import java.util.List;
 public class PipeMaze {
 
     private GridElement[][] grid;
+    private boolean[][] isPartOfMainLoop;
 
     private Integer startingPositionRowIndex;
     private Integer startingPositionColumnIndex;
@@ -23,24 +24,34 @@ public class PipeMaze {
 
     private void initializeGrid(String input) {
         String[] lines = input.split("\\n");
+
         grid = new GridElement[lines.length][];
+        isPartOfMainLoop = new boolean[lines.length][];
 
         int rowIndex = 0;
 
         for (String line : lines) {
+            addRowToIsPartOfMainLoopArray(rowIndex, line.length());
             addRowToGrid(line, rowIndex++);
         }
     }
 
+    private void addRowToIsPartOfMainLoopArray(int rowIndex, int columns) {
+        isPartOfMainLoop[rowIndex] = new boolean[columns];
+    }
+
     private void addRowToGrid(String line, int rowIndex) {
         GridElement[] row = new GridElement[line.length()];
+
         for (int i = 0; i < line.length(); i++) {
+
             String element = line.substring(i, i+1);
             row[i] = GridElement.fromSymbol(element);
 
             if (element.equals("S")) {
                 startingPositionRowIndex = rowIndex;
                 startingPositionColumnIndex = i;
+                isPartOfMainLoop[rowIndex][i] = true;
             }
         }
         grid[rowIndex] = row;
@@ -57,6 +68,7 @@ public class PipeMaze {
 
         while (!currentElement.equals(GridElement.STARTING_POSITION)) {
             Move move = currentElement.nextMove(previousMove);
+            isPartOfMainLoop[row][column] = true;
 
             row = move.getMoveRow().apply(row);
             column = move.getMoveColumn().apply(column);
