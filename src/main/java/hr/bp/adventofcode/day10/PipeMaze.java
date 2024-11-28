@@ -11,6 +11,7 @@ import java.util.List;
 public class PipeMaze {
 
     private GridElement[][] grid;
+
     private final List<Pair<Integer, Integer>> edges = new ArrayList<>();
 
     private Integer startingPositionRowIndex;
@@ -27,8 +28,8 @@ public class PipeMaze {
     }
 
     private void checkIfStartingPositionIsEdge() {
-        if (!(canConnectNorthFromStartingPosition() && canConnectSouthFromStartingPosition())
-                && !(canConnectEastFromStartingPosition() && canConnectWestFromStartingPosition())) {
+        if (!(canMoveNorthFromStartingPosition() && canMoveSouthFromStartingPosition())
+                && !(canMoveEastFromStartingPosition() && canMoveWestFromStartingPosition())) {
             edges.add(new Pair<>(startingPositionRowIndex, startingPositionColumnIndex));
         }
     }
@@ -78,16 +79,16 @@ public class PipeMaze {
 
         while (!currentElement.equals(GridElement.STARTING_POSITION)) {
             Move move = currentElement.nextMove(previousMove);
+
             if (currentElement.isEdge()) {
                 edges.add(new Pair<> (row, column));
             }
 
             row = move.getMoveRow().apply(row);
             column = move.getMoveColumn().apply(column);
+            previousMove = move;
 
             currentElement = grid[row][column];
-
-            previousMove = move;
 
             sum++;
         }
@@ -98,20 +99,24 @@ public class PipeMaze {
         int row = startingPositionRowIndex;
         int column = startingPositionColumnIndex;
 
-        if (canConnectNorthFromStartingPosition()) {
+        if (canMoveNorthFromStartingPosition()) {
             return new Pair<>(new Pair<>(row-1, column), Move.NORTH);
-        } else if (canConnectSouthFromStartingPosition()) {
+
+        } else if (canMoveSouthFromStartingPosition()) {
             return new Pair<>(new Pair<>(row+1, column), Move.SOUTH);
-        } else if (canConnectWestFromStartingPosition()) {
+
+        } else if (canMoveWestFromStartingPosition()) {
             return new Pair<>(new Pair<>(row, column-1), Move.WEST);
-        } else if (canConnectEastFromStartingPosition()) {
+
+        } else if (canMoveEastFromStartingPosition()) {
             return new Pair<>(new Pair<>(row, column+1), Move.EAST);
+
         } else {
             throw new IllegalArgumentException("Grid is invalid, you cannot move anywhere from starting position");
         }
     }
 
-    private boolean canConnectNorthFromStartingPosition() {
+    private boolean canMoveNorthFromStartingPosition() {
         if (startingPositionRowIndex < 1) return false;
 
         GridElement northernElement = grid[startingPositionRowIndex - 1][startingPositionColumnIndex];
@@ -119,7 +124,7 @@ public class PipeMaze {
         return List.of(GridElement.SOUTH_WEST, GridElement.SOUTH_EAST, GridElement.NORTH_SOUTH).contains(northernElement);
     }
 
-    private boolean canConnectSouthFromStartingPosition() {
+    private boolean canMoveSouthFromStartingPosition() {
         if (startingPositionRowIndex >= grid.length - 1) return false;
 
         GridElement southernElement = grid[startingPositionRowIndex + 1][startingPositionColumnIndex];
@@ -127,7 +132,7 @@ public class PipeMaze {
         return List.of(GridElement.NORTH_EAST, GridElement.NORTH_WEST, GridElement.NORTH_SOUTH).contains(southernElement);
     }
 
-    private boolean canConnectWestFromStartingPosition() {
+    private boolean canMoveWestFromStartingPosition() {
         if (startingPositionColumnIndex < 1) return false;
 
         GridElement northernElement = grid[startingPositionRowIndex][startingPositionColumnIndex - 1];
@@ -135,7 +140,7 @@ public class PipeMaze {
         return List.of(GridElement.NORTH_EAST, GridElement.SOUTH_EAST, GridElement.EAST_WEST).contains(northernElement);
     }
 
-    private boolean canConnectEastFromStartingPosition() {
+    private boolean canMoveEastFromStartingPosition() {
         if (startingPositionColumnIndex >= grid[0].length - 1) return false;
 
         GridElement southernElement = grid[startingPositionRowIndex][startingPositionColumnIndex + 1];
@@ -143,17 +148,15 @@ public class PipeMaze {
         return List.of(GridElement.NORTH_WEST, GridElement.SOUTH_WEST, GridElement.EAST_WEST).contains(southernElement);
     }
 
-    public GridElement[][] getGrid() {
-        return grid;
-    }
-
+    // https://en.wikipedia.org/wiki/Pick%27s_theorem
     public int calculateDotsInsideTheMainLoop() {
-        int A = calculateArea();
+        int A = calculateAreaOfTheMainLoop();
         int b = farthestPosition*2;
         return A -b/2 + 1;
     }
 
-    private int calculateArea() {
+    // https://en.wikipedia.org/wiki/Shoelace_formula
+    private int calculateAreaOfTheMainLoop() {
         int sum = 0;
         for (int i = 0; i < edges.size(); i++) {
             sum += calculateDeterminant(edges.get(i), edges.get((i+1) % edges.size()));
@@ -163,5 +166,9 @@ public class PipeMaze {
 
     private int calculateDeterminant(Pair<Integer, Integer> edge1, Pair<Integer, Integer> edge2) {
         return edge1.left() * edge2.right() - edge2.left() * edge1.right();
+    }
+
+    public GridElement[][] getGrid() {
+        return grid;
     }
 }

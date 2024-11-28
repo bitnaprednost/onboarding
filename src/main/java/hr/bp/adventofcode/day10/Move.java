@@ -8,8 +8,11 @@ import java.util.function.Function;
 public enum Move {
 
     NORTH(row -> row - 1, column -> column),
+
     SOUTH(row -> row + 1, column -> column),
+
     WEST(row -> row, column -> column - 1),
+
     EAST(row -> row, column -> column + 1);
 
     private final Function<Integer, Integer> moveRow;
