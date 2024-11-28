@@ -76,7 +76,7 @@ public enum GridElement {
                 else return Move.SOUTH;
 
             } default -> {
-                return null;
+                return Move.UNDEFINED_MOVE;
             }
         }
     }

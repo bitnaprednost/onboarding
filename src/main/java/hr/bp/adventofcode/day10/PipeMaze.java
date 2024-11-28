@@ -75,10 +75,13 @@ public class PipeMaze {
         checkIfStartingPositionIsEdge();
 
         GridElement currentElement = grid[row][column];
-        int sum = 0;
+        int steps = 0;
 
         while (!currentElement.equals(GridElement.STARTING_POSITION)) {
             Move move = currentElement.nextMove(previousMove);
+            if (move.equals(Move.UNDEFINED_MOVE)) {
+                throw new IllegalStateException("Maze is incorrectly configured, cannot form a loop");
+            }
 
             if (currentElement.isEdge()) {
                 edges.add(new Pair<> (row, column));
@@ -90,9 +93,9 @@ public class PipeMaze {
 
             currentElement = grid[row][column];
 
-            sum++;
+            steps++;
         }
-        return sum;
+        return steps;
     }
 
     private Pair<Pair<Integer, Integer>, Move> findNextMoveFromStartingPosition() {

@@ -13,7 +13,9 @@ public enum Move {
 
     WEST(row -> row, column -> column - 1),
 
-    EAST(row -> row, column -> column + 1);
+    EAST(row -> row, column -> column + 1),
+
+    UNDEFINED_MOVE(null, null);
 
     private final Function<Integer, Integer> moveRow;
 
