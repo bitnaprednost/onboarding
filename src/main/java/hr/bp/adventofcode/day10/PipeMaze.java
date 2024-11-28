@@ -53,9 +53,14 @@ public class PipeMaze {
 
     private int moveThroughMaze(Integer row, Integer column, Move move) {
         GridElement currentElement = grid[row][column];
+        if (currentElement.equals(GridElement.STARTING_POSITION)) return 1;
+
         Move nextMove = currentElement.nextMove(move);
 
-        GridElement nextElement = grid[nextMove.getMoveXAxis().apply(column)][nextMove.getMoveXAxis().apply(row)];
+        int nextRow = nextMove.getMoveRow().apply(row);
+        int nextColumn = nextMove.getMoveColumn().apply(column);
+
+        return 1 + moveThroughMaze(nextRow, nextColumn, nextMove);
     }
 
     private Pair<Pair<Integer, Integer>, Move> findNextMoveFromStartingPosition() {
