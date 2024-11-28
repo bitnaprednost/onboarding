@@ -8,18 +8,16 @@ import java.util.Map;
  */
 public enum GridElement {
 
-    NORTH_EAST("L", true),
-    NORTH_WEST("J", true),
-    SOUTH_EAST("F", true),
-    SOUTH_WEST("7", true),
-    NORTH_SOUTH("|", true),
-    EAST_WEST("-", true),
-    GROUND(".", true),
-    STARTING_POSITION("S", true);
+    NORTH_EAST("L"),
+    NORTH_WEST("J"),
+    SOUTH_EAST("F"),
+    SOUTH_WEST("7"),
+    NORTH_SOUTH("|"),
+    EAST_WEST("-"),
+    GROUND("."),
+    STARTING_POSITION("S");
 
     private final String symbol;
-
-    private final boolean isPipe;
 
     private static final Map<String, GridElement> SYMBOL_TO_PIPE = new HashMap<>();
 
@@ -29,17 +27,12 @@ public enum GridElement {
         }
     }
 
-    GridElement(String symbol, boolean isPipe) {
+    GridElement(String symbol) {
         this.symbol = symbol;
-        this.isPipe = isPipe;
     }
 
     public static GridElement fromSymbol(String symbol) {
         return SYMBOL_TO_PIPE.get(symbol);
-    }
-
-    public boolean isPipe() {
-        return isPipe;
     }
 
     public Move nextMove(Move previousMove) {
