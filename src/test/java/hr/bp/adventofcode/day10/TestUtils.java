@@ -24,6 +24,13 @@ public class TestUtils {
         };
     }
 
-
+    public static String getSecondInput() {
+        return """
+            .....
+            .S-7.
+            .|.|.
+            .L-J.
+            .....""";
+    }
 
 }
