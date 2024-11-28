@@ -1,19 +1,19 @@
 package hr.bp.aoc.day6;
 
 public class ToyBoat {
-    private int speed;
-    private int raceTime;
+    private long speed;
+    private long raceTime;
 
-    public ToyBoat(int timeSpentHoldingButton, int raceTime) {
+    public ToyBoat(long timeSpentHoldingButton, long raceTime) {
         this.speed = timeSpentHoldingButton;
         this.raceTime = raceTime;
     }
 
-    private int getRemainingRaceTime() {
+    private long getRemainingRaceTime() {
         return raceTime - speed;
     }
 
-    public int getTraveledDistance() {
+    public long getTraveledDistance() {
         return speed * getRemainingRaceTime();
     }
 

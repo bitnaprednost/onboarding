@@ -19,8 +19,8 @@ public class RaceParser {
     private List<Race> parseRaceString() {
         List<Race> races = new ArrayList<>();
 
-        List<Integer> times = getTimes(racesString.get(0));
-        List<Integer> distances = getDistances(racesString.get(1));
+        List<Long> times = getTimes(racesString.get(0));
+        List<Long> distances = getDistances(racesString.get(1));
 
         for (int i = 0; i < times.size(); i++) {
             races.add(new Race(distances.get(i), times.get(i)));
@@ -29,21 +29,21 @@ public class RaceParser {
         return races;
     }
 
-    private List<Integer> getTimes(String timesString) {
+    private List<Long> getTimes(String timesString) {
         return getData(timesString);
     }
 
-    private List<Integer> getDistances(String distancesString) {
+    private List<Long> getDistances(String distancesString) {
         return getData(distancesString);
     }
 
-    private List<Integer> getData(String potentialData) {
-        List<Integer> data = new ArrayList<>();
+    private List<Long> getData(String potentialData) {
+        List<Long> data = new ArrayList<>();
 
         if (!kerning) {
             for (String s : potentialData.split(":")[1].split(" ")) {
                 if (!s.isEmpty()) {
-                    data.add(Integer.parseInt(s.strip()));
+                    data.add(Long.parseLong(s.strip()));
                 }
             }
         } else {
@@ -53,7 +53,7 @@ public class RaceParser {
                     sb.append(s);
                 }
             }
-            data.add(Integer.parseInt(sb.toString()));
+            data.add(Long.parseLong(sb.toString()));
         }
 
         return data;

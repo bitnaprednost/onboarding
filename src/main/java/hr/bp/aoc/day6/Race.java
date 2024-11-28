@@ -1,19 +1,19 @@
 package hr.bp.aoc.day6;
 
 public class Race {
-    private int time;
-    private int recordDistance;
+    private long time;
+    private long recordDistance;
 
-    public Race(int distance, int time) {
+    public Race(long distance, long time) {
         this.recordDistance = distance;
         this.time = time;
     }
 
-    public int getTime() {
+    public long getTime() {
         return time;
     }
 
-    public int getRecordDistance() {
+    public long getRecordDistance() {
         return recordDistance;
     }
 }

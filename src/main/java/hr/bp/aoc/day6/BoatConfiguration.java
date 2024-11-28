@@ -9,8 +9,8 @@ public class BoatConfiguration {
         this.races = races;
     }
 
-    public int numberOfRecordsBeatMultiply() {
-        int[] recordsBeatInRace = new int[races.size()];
+    public long numberOfRecordsBeatMultiply() {
+        long[] recordsBeatInRace = new long[races.size()];
 
         for (int raceInd = 0; raceInd < races.size(); raceInd++) {
             recordsBeatInRace[raceInd] = getNumOfWinsInRace(races.get(raceInd));
@@ -19,20 +19,20 @@ public class BoatConfiguration {
         return multiplyElements(recordsBeatInRace);
     }
 
-    private int multiplyElements(int[] array) {
+    private long multiplyElements(long[] array) {
         int product = 1;
 
-        for (int element : array) {
+        for (long element : array) {
             product *= element;
         }
 
         return product;
     }
 
-    private int getNumOfWinsInRace(Race race) {
-        int numOfWins = 0;
+    private long getNumOfWinsInRace(Race race) {
+        long numOfWins = 0;
 
-        for (int buttonHeld = 0; buttonHeld <= race.getTime(); buttonHeld++) {
+        for (long buttonHeld = 0; buttonHeld <= race.getTime(); buttonHeld++) {
             ToyBoat boat = new ToyBoat(buttonHeld, race.getTime());
 
             if (boat.raceWon(race)) {
