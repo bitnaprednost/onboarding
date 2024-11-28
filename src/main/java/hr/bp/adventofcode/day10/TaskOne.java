@@ -11,7 +11,7 @@ public class TaskOne {
         String input = readInputForDay("day10");
         PipeMaze pipeMaze = new PipeMaze(input);
 
-        int farthestPosition = pipeMaze.findFarthestPosition();
+        int farthestPosition = pipeMaze.getFarthestPosition();
 
         displayResult(farthestPosition);
     }

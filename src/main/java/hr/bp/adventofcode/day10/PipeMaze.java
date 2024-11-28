@@ -15,11 +15,23 @@ public class PipeMaze {
     private Integer startingPositionRowIndex;
     private Integer startingPositionColumnIndex;
 
+    private int farthestPosition;
+
     public PipeMaze(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank");
         }
         initializeGrid(input);
+        setFarthestPosition();
+    }
+
+    private void setFarthestPosition() {
+        Pair<Pair<Integer, Integer>, Move> nextGridElementMove = findNextMoveFromStartingPosition();
+        this.farthestPosition = moveThroughMaze(nextGridElementMove.left().left(), nextGridElementMove.left().right(), nextGridElementMove.right()) / 2 + 1;
+    }
+
+    public int getFarthestPosition() {
+        return this.farthestPosition;
     }
 
     private void initializeGrid(String input) {
@@ -55,11 +67,6 @@ public class PipeMaze {
             }
         }
         grid[rowIndex] = row;
-    }
-
-    public int findFarthestPosition() {
-        Pair<Pair<Integer, Integer>, Move> nextGridElementMove = findNextMoveFromStartingPosition();
-        return moveThroughMaze(nextGridElementMove.left().left(), nextGridElementMove.left().right(), nextGridElementMove.right()) / 2 + 1;
     }
 
     private int moveThroughMaze(Integer row, Integer column, Move previousMove) {

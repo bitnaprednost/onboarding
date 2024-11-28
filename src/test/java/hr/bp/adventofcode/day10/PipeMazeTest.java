@@ -34,7 +34,7 @@ public class PipeMazeTest {
 
         int expectedFarthestPosition= 8;
 
-        int actualFarthestPosition = pipeMaze.findFarthestPosition();
+        int actualFarthestPosition = pipeMaze.getFarthestPosition();
 
         Assertions.assertEquals(expectedFarthestPosition, actualFarthestPosition);
     }
@@ -46,7 +46,7 @@ public class PipeMazeTest {
 
         int expectedFarthestPosition= 4;
 
-        int actualFarthestPosition = pipeMaze.findFarthestPosition();
+        int actualFarthestPosition = pipeMaze.getFarthestPosition();
 
         Assertions.assertEquals(expectedFarthestPosition, actualFarthestPosition);
     }
@@ -58,7 +58,7 @@ public class PipeMazeTest {
 
         int expectedFarthestPosition= 6717;
 
-        int actualFarthestPosition = pipeMaze.findFarthestPosition();
+        int actualFarthestPosition = pipeMaze.getFarthestPosition();
 
         Assertions.assertEquals(expectedFarthestPosition, actualFarthestPosition);
     }
