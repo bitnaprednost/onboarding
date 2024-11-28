@@ -5,9 +5,11 @@ import java.util.List;
 
 public class RaceParser {
     private final List<String> racesString;
+    private boolean kerning;
 
-    public RaceParser(List<String> racesString) {
+    public RaceParser(List<String> racesString, boolean kerning) {
         this.racesString = racesString;
+        this.kerning = kerning;
     }
 
     public List<Race> getRacesFromFile() {
@@ -38,11 +40,22 @@ public class RaceParser {
     private List<Integer> getData(String potentialData) {
         List<Integer> data = new ArrayList<>();
 
-        for (String s : potentialData.split(":")[1].split(" ")) {
-            if (!s.isEmpty()) {
-                data.add(Integer.parseInt(s.strip()));
+        if (!kerning) {
+            for (String s : potentialData.split(":")[1].split(" ")) {
+                if (!s.isEmpty()) {
+                    data.add(Integer.parseInt(s.strip()));
+                }
             }
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (String s : potentialData.split(":")[1].split(" ")) {
+                if (!s.isEmpty()) {
+                    sb.append(s);
+                }
+            }
+            data.add(Integer.parseInt(sb.toString()));
         }
+
         return data;
     }
 }
