@@ -7,7 +7,11 @@ import java.util.List;
 
 public class TaskOne {
     public static void main(String[] args) {
-        List<String> document = Utils.readFromFile("inputDay6.txt");
+        List<String> races = Utils.readFromFile("inputDay6.txt");
 
+        RaceParser raceParser = new RaceParser(races);
+        BoatConfiguration boatConfigurations = new BoatConfiguration(raceParser.getRacesFromFile());
+
+        System.out.println(boatConfigurations.numberOfRecordsBeatMultiply());
     }
 }
