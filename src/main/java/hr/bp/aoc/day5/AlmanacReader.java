@@ -88,4 +88,10 @@ public class AlmanacReader {
 
         return almanac.getNearestLocation();
     }
+
+    public long getNearestLocationRange() {
+        parseAlmanac();
+
+        return almanac.findNearestLocationRange();
+    }
 }

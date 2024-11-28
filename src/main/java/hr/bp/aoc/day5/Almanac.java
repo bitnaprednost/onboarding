@@ -77,6 +77,97 @@ public class Almanac {
         return destination;
     }
 
+    public long findNearestLocationRange() {
+        ArrayList<AlmanacMap> allLocations = getAllLocationsRange();
+
+        return findMinLocation(allLocations);
+    }
+
+    private long findMinLocation(ArrayList<AlmanacMap> allLocations) {
+        long min = Long.MAX_VALUE;
+
+        for (AlmanacMap location : allLocations) {
+            if (min > location.getSourceStart())
+                min = location.getSourceStart();
+        }
+
+        return min;
+    }
+
+    private ArrayList<AlmanacMap> getAllLocationsRange() {
+        ArrayList<AlmanacMap> locations = new ArrayList<>();
+
+        for (Long seed : seedsRange.keySet()) {
+            ArrayList<AlmanacMap> oneSeedLocations = findSeedLocationRange(seed);
+            locations.addAll(oneSeedLocations);
+        }
+
+        return locations;
+    }
+
+    private ArrayList<AlmanacMap> findSeedLocationRange(Long seed) {
+        AlmanacMap seedMap = seedsRange.get(seed);
+
+        ArrayList<AlmanacMap> soilRanges = findDestinationRange(seedMap, seedToSoil);
+
+        ArrayList<AlmanacMap> fertilizerRanges = getAlmanacMaps(soilRanges, soilToFertilizer);
+        ArrayList<AlmanacMap> waterRanges = getAlmanacMaps(fertilizerRanges, fertilizerToWater);
+        ArrayList<AlmanacMap> lightRanges = getAlmanacMaps(waterRanges, waterToLight);
+        ArrayList<AlmanacMap> temperaturesRanges = getAlmanacMaps(lightRanges, lightToTemperature);
+        ArrayList<AlmanacMap> humidityRanges = getAlmanacMaps(temperaturesRanges, temperatureToHumidity);
+        return getAlmanacMaps(humidityRanges, humidityToLocation);
+    }
+
+    private ArrayList<AlmanacMap> getAlmanacMaps(ArrayList<AlmanacMap> ranges, Map<Long, AlmanacMap> mapper) {
+        ArrayList<AlmanacMap> destRanges = new ArrayList<>();
+        for (AlmanacMap source : ranges) {
+            destRanges.addAll(findDestinationRange(source, mapper));
+        }
+        return destRanges;
+    }
+
+    private ArrayList<AlmanacMap> findDestinationRange(AlmanacMap sourceMap, Map<Long, AlmanacMap> map) {
+        ArrayList<AlmanacMap> result = new ArrayList<>();
+
+        for (Long mapSource : map.keySet()) {
+            AlmanacMap currMap = map.get(mapSource);
+            long destinationStart = -1;
+            long range = -1;
+
+            if (currMap.contains(sourceMap)) {
+                destinationStart = sourceMap.getSourceStart() + currMap.getMapping();
+
+                result.add(new AlmanacMap(destinationStart, 0, sourceMap.getRange()));
+            } else if (sourceMap.getSourceStart() < currMap.getSourceStart() &&
+                    sourceMap.getSourceEnd() > currMap.getSourceStart() &&
+                    sourceMap.getSourceEnd() <= currMap.getSourceEnd()) {
+                destinationStart = currMap.getDestinationStart();
+                range = sourceMap.getSourceEnd() - currMap.getSourceStart();
+
+                result.add(new AlmanacMap(destinationStart, 0, range));
+                result.addAll(findDestinationRange(new AlmanacMap(sourceMap.getSourceStart(), 0,
+                                sourceMap.getRange() - range),
+                        map));
+            } else if (sourceMap.getSourceEnd() > currMap.getSourceEnd() &&
+                    sourceMap.getSourceStart() >= currMap.getSourceStart() &&
+                    sourceMap.getSourceStart() < currMap.getSourceEnd()) {
+                destinationStart = sourceMap.getSourceStart() + currMap.getMapping();
+                range = currMap.getSourceEnd() - sourceMap.getSourceStart();
+
+                result.add(new AlmanacMap(destinationStart, 0, range));
+                result.addAll(findDestinationRange(new AlmanacMap(currMap.getSourceEnd(), 0,
+                                sourceMap.getRange() - range),
+                        map));
+            } else if (sourceMap.contains(currMap)) {
+                result.add(new AlmanacMap(currMap.getDestinationStart(), 0, currMap.getRange()));
+            }
+        }
+        if (result.isEmpty())
+            result.add(sourceMap);
+
+        return result;
+    }
+
     public void setSeedsRange(Map<Long, AlmanacMap> seedsRange) {
         this.seedsRange = seedsRange;
     }

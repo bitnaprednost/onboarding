@@ -11,8 +11,20 @@ public class AlmanacMap {
         this.sourceStart = sourceStart;
         this.destinationStart = destinationStart;
         this.range = range;
-        sourceEnd = sourceStart + range - 1;
-        mapping = sourceStart - destinationStart;
+        sourceEnd = sourceStart + range;
+        mapping = destinationStart - sourceStart;
+    }
+
+    public boolean contains(AlmanacMap map) {
+        return sourceStart <= map.sourceStart && sourceEnd >= map.sourceEnd;
+    }
+
+    public long getMapping() {
+        return mapping;
+    }
+
+    public long getSourceEnd() {
+        return sourceEnd;
     }
 
     public long getSourceStart() {
