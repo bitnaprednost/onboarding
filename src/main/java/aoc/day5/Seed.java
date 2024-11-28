@@ -21,4 +21,18 @@ public class Seed {
         }
         return seeds;
     }
+
+    // Task 2: Parse seeds into ranges (start and length pairs)
+    public List<Range> parseSeedRanges() {
+        String[] parts = seedLine.split(":")[1].trim().split(" ");
+
+        List<Range> seedRanges = new ArrayList<>();
+        for (int i = 0; i < parts.length; i += 2)
+        {
+            long start = Long.parseLong(parts[i]);
+            long length = Long.parseLong(parts[i + 1]);
+            seedRanges.add(new Range(start, start + length));
+        }
+        return seedRanges;
+    }
 }
