@@ -172,64 +172,32 @@ public class Almanac {
         this.seedsRange = seedsRange;
     }
 
-    public ArrayList<Long> getSeeds() {
-        return seeds;
-    }
-
     public void setSeeds(ArrayList<Long> seeds) {
         this.seeds = seeds;
-    }
-
-    public Map<Long, AlmanacMap> getSeedToSoil() {
-        return seedToSoil;
     }
 
     public void setSeedToSoil(Map<Long, AlmanacMap> seedToSoil) {
         this.seedToSoil = seedToSoil;
     }
 
-    public Map<Long, AlmanacMap> getSoilToFertilizer() {
-        return soilToFertilizer;
-    }
-
     public void setSoilToFertilizer(Map<Long, AlmanacMap> soilToFertilizer) {
         this.soilToFertilizer = soilToFertilizer;
-    }
-
-    public Map<Long, AlmanacMap> getFertilizerToWater() {
-        return fertilizerToWater;
     }
 
     public void setFertilizerToWater(Map<Long, AlmanacMap> fertilizerToWater) {
         this.fertilizerToWater = fertilizerToWater;
     }
 
-    public Map<Long, AlmanacMap> getHumidityToLocation() {
-        return humidityToLocation;
-    }
-
     public void setHumidityToLocation(Map<Long, AlmanacMap> humidityToLocation) {
         this.humidityToLocation = humidityToLocation;
-    }
-
-    public Map<Long, AlmanacMap> getWaterToLight() {
-        return waterToLight;
     }
 
     public void setWaterToLight(Map<Long, AlmanacMap> waterToLight) {
         this.waterToLight = waterToLight;
     }
 
-    public Map<Long, AlmanacMap> getLightToTemperature() {
-        return lightToTemperature;
-    }
-
     public void setLightToTemperature(Map<Long, AlmanacMap> lightToTemperature) {
         this.lightToTemperature = lightToTemperature;
-    }
-
-    public Map<Long, AlmanacMap> getTemperatureToHumidity() {
-        return temperatureToHumidity;
     }
 
     public void setTemperatureToHumidity(Map<Long, AlmanacMap> temperatureToHumidity) {
