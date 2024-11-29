@@ -86,4 +86,20 @@ class HandTest {
         Assertions.assertEquals(1, greaterHand.compareTo(lesserHand));
     }
 
+    @Test
+    void Compare_withJoker_Q2QQQ_QJQQ2() {
+        Hand greaterHand = new Hand(List.of(Card.Q, Card.TWO, Card.Q, Card.Q, Card.Q), 483, true);
+        Hand lesserHand = new Hand(List.of(Card.Q, Card.J, Card.Q, Card.Q, Card.TWO), 483, true);
+
+        Assertions.assertEquals(1, greaterHand.compareTo(lesserHand));
+    }
+
+    @Test
+    void Compare_withJoker_Q2QQQ_JJJJQ() {
+        Hand lesserHand = new Hand(List.of(Card.Q, Card.TWO, Card.Q, Card.Q, Card.Q), 483, true);
+        Hand greaterHand = new Hand(List.of(Card.J, Card.J, Card.J, Card.J, Card.Q), 483, true);
+
+        Assertions.assertEquals(1, greaterHand.compareTo(lesserHand));
+    }
+
 }
