@@ -46,4 +46,20 @@ class HandTest {
         Assertions.assertEquals(expectedHand, actualHand);
     }
 
+    @Test
+    void CompareSameHandType_FirstCardDifferent() {
+        Hand greaterHand = new Hand(List.of(Card.THREE, Card.THREE, Card.THREE, Card.THREE, Card.TWO), 765);
+        Hand lesserHand = new Hand(List.of(Card.TWO, Card.A, Card.A, Card.A, Card.A), 765);
+
+        Assertions.assertEquals(1, greaterHand.compareTo(lesserHand));
+    }
+
+    @Test
+    void CompareSameHandType_DifferentCardNotFirst() {
+        Hand greaterHand = new Hand(List.of(Card.SEVEN, Card.SEVEN, Card.EIGHT, Card.EIGHT, Card.EIGHT), 765);
+        Hand lesserHand = new Hand(List.of(Card.SEVEN, Card.SEVEN, Card.SEVEN, Card.EIGHT, Card.EIGHT), 765);
+
+        Assertions.assertEquals(1, greaterHand.compareTo(lesserHand));
+    }
+
 }
