@@ -32,4 +32,26 @@ class GameTest {
         Assertions.assertEquals(expectedTotalWinnings, game.getTotalWinnings());
     }
 
+    @Test
+    void JokerTestTotalWinningsTestInput() {
+        List<String> input = getTestInputCorrect();
+        GameParser gameParser = new GameParser(input, true);
+        Game game = gameParser.parseGameString();
+
+        long expectedTotalWinnings = 5905;
+
+        Assertions.assertEquals(expectedTotalWinnings, game.getTotalWinnings());
+    }
+
+    @Test
+    void JokerTestTotalWinningsFinalInput() {
+        List<String> input = getFinalInputCorrect();
+        GameParser gameParser = new GameParser(input, true);
+        Game game = gameParser.parseGameString();
+
+        long expectedTotalWinnings = 248750248;
+
+        Assertions.assertEquals(expectedTotalWinnings, game.getTotalWinnings());
+    }
+
 }
