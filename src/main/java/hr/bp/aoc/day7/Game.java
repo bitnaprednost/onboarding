@@ -11,6 +11,18 @@ public class Game {
         this.hands = hands;
     }
 
+    public Long getTotalWinnings() {
+        long totalWinnings = 0;
+        long rank = 1;
+
+        for (Hand hand : hands) {
+            totalWinnings += hand.getBid() * rank;
+            rank++;
+        }
+
+        return totalWinnings;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
