@@ -75,8 +75,7 @@ public class Hand implements Comparable<Hand> {
         if (o == null || getClass() != o.getClass())
             return false;
         Hand hand = (Hand) o;
-        return bid == hand.bid && cardsEqual(((Hand) o).cards) && Objects.equals(handType,
-                hand.handType);
+        return bid == hand.bid && cardsEqual(((Hand) o).cards) && Objects.equals(handType, hand.handType);
     }
 
     private boolean cardsEqual(List<Card> cards) {
@@ -106,9 +105,13 @@ public class Hand implements Comparable<Hand> {
     private int compareCards(List<Card> cards) {
         for (int i = 0; i < cards.size(); i++) {
             if (!cards.get(i).equals(this.cards.get(i))) {
-                return cards.get(i).compareTo(this.cards.get(i));
+                return Integer.compare((this.cards.get(i).getPoints()), cards.get(i).getPoints());
             }
         }
         return 0;
+    }
+
+    public int getBid() {
+        return bid;
     }
 }
