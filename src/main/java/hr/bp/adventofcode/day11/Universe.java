@@ -14,9 +14,9 @@ public class Universe {
 
     private List<GridCoordinates> galaxyLocations;
 
-    private List<Integer> emptyRows;
+    private List<Integer> emptyRowsIndexes;
 
-    private List<Integer> emptyColumns;
+    private List<Integer> emptyColumnsIndexes;
 
     public Universe(String input) {
         if (input == null || input.isBlank()) {
@@ -48,7 +48,7 @@ public class Universe {
     }
 
     private long getDistanceBetweenGalaxiesForExpansionFactor(GridCoordinates coordinates1, GridCoordinates coordinates2, int expansionFactor) {
-        long emptyColumnsBetween = emptyColumns.stream()
+        long emptyColumnsBetween = emptyColumnsIndexes.stream()
                 .filter(columnIndex -> {
                     int rightMostGalaxy = Math.max(coordinates1.column(), coordinates2.column());
                     int leftMostGalaxy = Math.min(coordinates1.column(), coordinates2.column());
@@ -56,7 +56,7 @@ public class Universe {
                 }
                 ).count();
 
-        long emptyRowsBetween = emptyRows.stream()
+        long emptyRowsBetween = emptyRowsIndexes.stream()
                 .filter(rowIndex -> {
                             int lowerMostGalaxy = Math.max(coordinates1.row(), coordinates2.row());
                             int upperMostGalaxy = Math.min(coordinates1.row(), coordinates2.row());
@@ -67,15 +67,15 @@ public class Universe {
         long columnDistance = Math.abs(coordinates1.column() - coordinates2.column());
         long rowDistance = Math.abs(coordinates1.row() - coordinates2.row());
 
-        return rowDistance + columnDistance - emptyColumnsBetween - emptyRowsBetween + expansionFactor*(emptyRowsBetween + emptyColumnsBetween);
+        return rowDistance + columnDistance + (expansionFactor - 1) * (emptyRowsBetween + emptyColumnsBetween);
     }
 
     private void setGalaxyLocations() {
         galaxyLocations = new ArrayList<>();
-        for (int i = 0; i < image.length; i++) {
-            for (int j = 0; j < image[i].length; j++) {
-                if (image[i][j] == '#') {
-                    galaxyLocations.add(new GridCoordinates(i, j));
+        for (int rowIndex = 0; rowIndex < image.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < image[rowIndex].length; columnIndex++) {
+                if (image[rowIndex][columnIndex] == '#') {
+                    galaxyLocations.add(new GridCoordinates(rowIndex, columnIndex));
                 }
             }
         }
@@ -84,33 +84,33 @@ public class Universe {
     private void setEmptyColumnIndexes() {
         List<Integer> emptyColumnIndexes = new ArrayList<>();
 
-        for (int column = 0; column < image[0].length; column++) {
+        for (int columnIndex = 0; columnIndex < image[0].length; columnIndex++) {
             boolean columnIsEmpty = true;
             for (char[] row : image) {
-                if (row[column] == '#') {
+                if (row[columnIndex] == '#') {
                     columnIsEmpty = false;
                     break;
                 }
             }
-            if (columnIsEmpty) emptyColumnIndexes.add(column);
+            if (columnIsEmpty) emptyColumnIndexes.add(columnIndex);
         }
-        this.emptyColumns = emptyColumnIndexes;
+        this.emptyColumnsIndexes = emptyColumnIndexes;
     }
 
     private void setEmptyRowIndexes() {
         List<Integer> emptyRowIndexes = new ArrayList<>();
 
-        for (int row = 0; row < image.length; row++) {
+        for (int rowIndex = 0; rowIndex < image.length; rowIndex++) {
             boolean rowIsEmpty = true;
-            for (int column = 0; column < image[row].length; column++) {
-                if (image[row][column] == '#') {
+            for (int columnIndex = 0; columnIndex < image[rowIndex].length; columnIndex++) {
+                if (image[rowIndex][columnIndex] == '#') {
                     rowIsEmpty = false;
                     break;
                 }
             }
-            if (rowIsEmpty) emptyRowIndexes.add(row);
+            if (rowIsEmpty) emptyRowIndexes.add(rowIndex);
         }
-        this.emptyRows = emptyRowIndexes;
+        this.emptyRowsIndexes = emptyRowIndexes;
     }
 
     public char[][] getImage() {
