@@ -12,13 +12,14 @@ public class Universe {
 
     private char[][] image;
 
-    private List<GridCoordinates> galaxyLocations = new ArrayList<>();
+    private List<GridCoordinates> galaxyLocations;
 
     public Universe(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank");
         }
         parseImage(input);
+        setGalaxyLocations();
     }
 
     private void parseImage(String input) {
@@ -40,16 +41,6 @@ public class Universe {
         setGalaxyLocations();
     }
 
-    private void setGalaxyLocations() {
-        for (int i = 0; i < image.length; i++) {
-            for (int j = 0; j < image[i].length; j++) {
-                if (image[i][j] == '#') {
-                    galaxyLocations.add(new GridCoordinates(i, j));
-                }
-            }
-        }
-    }
-
     public int getSumOfShortestPaths() {
         int sum = 0;
         for (int i = 0; i < galaxyLocations.size() - 1; i++) {
@@ -58,6 +49,17 @@ public class Universe {
             }
         }
         return sum;
+    }
+
+    private void setGalaxyLocations() {
+        galaxyLocations = new ArrayList<>();
+        for (int i = 0; i < image.length; i++) {
+            for (int j = 0; j < image[i].length; j++) {
+                if (image[i][j] == '#') {
+                    galaxyLocations.add(new GridCoordinates(i, j));
+                }
+            }
+        }
     }
 
     private int getDistanceBetweenGalaxies(GridCoordinates coordinates1, GridCoordinates coordinates2) {
