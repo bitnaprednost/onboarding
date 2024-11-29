@@ -1,8 +1,6 @@
 package hr.bp.aoc.day7;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Hand implements Comparable<Hand> {
     private List<Card> cards;
@@ -16,19 +14,58 @@ public class Hand implements Comparable<Hand> {
         this.cards = cards;
         this.bid = bid;
 
-        setHandType(List.copyOf(cards));
+        setHandType(findHandType());
     }
 
-    private void setHandType(List<Card> cards) {
-
-        this.handType = findHandType(cards);
+    public void setHandType(HandType type) {
+        this.handType = type;
     }
 
-    private HandType findHandType(List<Card> cards) {
-        int equalCards = 0;
+    private HandType findHandType() {
+        HandType handType = HandType.HIGH_CARD;
+        Map<Card, Integer> frequencies = getFrequencies();
 
-        return HandType.FOUR_OF_A_KIND;
+        Card maxFrequencyCard = Collections.max(frequencies.entrySet(), Map.Entry.comparingByValue()).getKey();
+        int maxFrequency = frequencies.get(maxFrequencyCard);
 
+        if (maxFrequency == 5) {
+            handType = HandType.FIVE_OF_A_KIND;
+        } else if (maxFrequency == 4) {
+            handType = HandType.FOUR_OF_A_KIND;
+        } else if (maxFrequency == 3) {
+            if (checkIfPairExists(frequencies, maxFrequencyCard)) {
+                handType = HandType.FULL_HOUSE;
+            } else {
+                handType = HandType.THREE_OF_A_KIND;
+            }
+        } else if (maxFrequency == 2) {
+            if (checkIfPairExists(frequencies, maxFrequencyCard)) {
+                handType = HandType.TWO_PAIR;
+            } else {
+                handType = HandType.ONE_PAIR;
+            }
+        }
+
+        return handType;
+    }
+
+    private boolean checkIfPairExists(Map<Card, Integer> frequencies, Card ignoreCard) {
+        for (Card card : frequencies.keySet()) {
+            if (frequencies.get(card) == 2 && !card.equals(ignoreCard))
+                return true;
+        }
+
+        return false;
+    }
+
+    private Map<Card, Integer> getFrequencies() {
+        Map<Card, Integer> frequencies = new HashMap<>();
+
+        for (Card card : cards) {
+            frequencies.merge(card, 1, Integer::sum);
+        }
+
+        return frequencies;
     }
 
     @Override
