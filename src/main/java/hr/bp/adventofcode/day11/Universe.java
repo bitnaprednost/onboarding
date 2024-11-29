@@ -14,12 +14,18 @@ public class Universe {
 
     private List<GridCoordinates> galaxyLocations;
 
+    private List<Integer> emptyRows;
+
+    private List<Integer> emptyColumns;
+
     public Universe(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank");
         }
         parseImage(input);
         setGalaxyLocations();
+        getEmptyRowIndexes();
+        getEmptyColumnIndexes();
     }
 
     private void parseImage(String input) {
@@ -49,6 +55,39 @@ public class Universe {
             }
         }
         return sum;
+    }
+
+    public long getSumOfShortestPathsForExpansionFactor(int expansionFactor) {
+        long sum = 0;
+        for (int i = 0; i < galaxyLocations.size() - 1; i++) {
+            for (int j = i + 1; j < galaxyLocations.size(); j++) {
+                sum += getDistanceBetweenGalaxiesForExpansionFactor(galaxyLocations.get(i), galaxyLocations.get(j), expansionFactor);
+            }
+        }
+        return sum;
+    }
+
+    private long getDistanceBetweenGalaxiesForExpansionFactor(GridCoordinates coordinates1, GridCoordinates coordinates2, int expansionFactor) {
+        long emptyColumnsBetween = emptyColumns.stream()
+                .filter(columnIndex -> {
+                    int rightMostGalaxy = Math.max(coordinates1.column(), coordinates2.column());
+                    int leftMostGalaxy = Math.min(coordinates1.column(), coordinates2.column());
+                    return columnIndex > leftMostGalaxy && columnIndex < rightMostGalaxy;
+                }
+                ).count();
+
+        long emptyRowsBetween = emptyRows.stream()
+                .filter(rowIndex -> {
+                            int lowerMostGalaxy = Math.max(coordinates1.row(), coordinates2.row());
+                            int upperMostGalaxy = Math.min(coordinates1.row(), coordinates2.row());
+                            return rowIndex > upperMostGalaxy && rowIndex < lowerMostGalaxy;
+                        }
+                ).count();
+
+        long columnDistance = Math.abs(coordinates1.column() - coordinates2.column());
+        long rowDistance = Math.abs(coordinates1.row() - coordinates2.row());
+
+        return rowDistance + columnDistance - emptyColumnsBetween - emptyRowsBetween + expansionFactor*(emptyRowsBetween + emptyColumnsBetween);
     }
 
     private void setGalaxyLocations() {
@@ -117,6 +156,7 @@ public class Universe {
             }
             if (columnIsEmpty) emptyColumnIndexes.add(column);
         }
+        this.emptyColumns = emptyColumnIndexes;
         return emptyColumnIndexes;
     }
 
@@ -133,6 +173,7 @@ public class Universe {
             }
             if (rowIsEmpty) emptyRowIndexes.add(row);
         }
+        this.emptyRows = emptyRowIndexes;
         return emptyRowIndexes;
     }
 
