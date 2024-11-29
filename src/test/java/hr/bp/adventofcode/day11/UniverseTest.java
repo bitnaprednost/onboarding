@@ -80,7 +80,7 @@ public class UniverseTest {
     }
 
     @Test
-    public void calculateSumOfShortestPathsAfterExpansionBy10_givenTaskInput_correctlyCalculatesTheSum() {
+    public void calculateSumOfShortestPathsAfterExpansionBy10_givenValidInputOne_correctlyCalculatesTheSum() {
         String input = getFirstInput();
         Universe universe = new Universe(input);
         int expansionFactor = 10;
@@ -93,12 +93,25 @@ public class UniverseTest {
     }
 
     @Test
-    public void calculateSumOfShortestPathsAfterExpansionBy100_givenTaskInput_correctlyCalculatesTheSum() {
+    public void calculateSumOfShortestPathsAfterExpansionBy100_givenValidInputOne_correctlyCalculatesTheSum() {
         String input = getFirstInput();
         Universe universe = new Universe(input);
         int expansionFactor = 100;
 
         long expectedSumOfShortestPaths = 8410;
+
+        long actualSumOfShortestPaths = universe.getSumOfShortestPathsForExpansionFactor(expansionFactor);
+
+        Assertions.assertEquals(expectedSumOfShortestPaths, actualSumOfShortestPaths);
+    }
+
+    @Test
+    public void calculateSumOfShortestPathsAfterExpansionBy1000000_givenTaskInput_correctlyCalculatesTheSum() {
+        String input = readInputForDay("day11");
+        Universe universe = new Universe(input);
+        int expansionFactor = 1_000_000;
+
+        long expectedSumOfShortestPaths = 904633799472L;
 
         long actualSumOfShortestPaths = universe.getSumOfShortestPathsForExpansionFactor(expansionFactor);
 
