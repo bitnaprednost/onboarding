@@ -3,6 +3,7 @@ package hr.bp.adventofcode.day11;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static hr.bp.adventofcode.Utils.readInputForDay;
 import static hr.bp.adventofcode.day11.TestUtils.getFirstImageExpanded;
 import static hr.bp.adventofcode.day11.TestUtils.getFirstInput;
 import static hr.bp.adventofcode.day11.TestUtils.getFirstImage;
@@ -59,6 +60,19 @@ public class UniverseTest {
         universe.expand();
 
         int expectedSumOfShortestPaths = 374;
+
+        int actualSumOfShortestPaths = universe.getSumOfShortestPaths();
+
+        Assertions.assertEquals(expectedSumOfShortestPaths, actualSumOfShortestPaths);
+    }
+
+    @Test
+    public void calculateSumOfShortestPaths_givenTaskInput_correctlyCalculatesTheSum() {
+        String input = readInputForDay("day11");
+        Universe universe = new Universe(input);
+        universe.expand();
+
+        int expectedSumOfShortestPaths = 9608724;
 
         int actualSumOfShortestPaths = universe.getSumOfShortestPaths();
 
