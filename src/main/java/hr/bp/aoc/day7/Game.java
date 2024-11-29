@@ -37,9 +37,4 @@ public class Game {
         Game game = (Game) o;
         return Objects.equals(hands, game.hands);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(hands);
-    }
 }

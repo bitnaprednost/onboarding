@@ -136,12 +136,6 @@ public class Hand implements Comparable<Hand> {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(cards, handType, bid);
-    }
-
-
-    @Override
     public int compareTo(Hand hand) {
         if (handType.equals(hand.handType)) {
             return compareCards(hand.cards);
@@ -159,7 +153,6 @@ public class Hand implements Comparable<Hand> {
                     if (this.cards.get(i).equals(Card.J)) {
                         return -1;
                     }
-                    return Integer.compare((this.cards.get(i).getPoints()), cards.get(i).getPoints());
                 }
                 return Integer.compare((this.cards.get(i).getPoints()), cards.get(i).getPoints());
             }
