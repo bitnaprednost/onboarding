@@ -18,6 +18,10 @@ public class Main {
 
         System.out.println(win);
 
+        // Solve task 2
+        CamelCardsWithJoker camelCardsWithJoker = new CamelCardsWithJoker();
+        win = camelCardsWithJoker.calculateWinning(fileContent);
 
+        System.out.println(win);
     }
 }
