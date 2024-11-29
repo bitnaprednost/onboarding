@@ -54,7 +54,7 @@ public class UniverseTest {
 
     @Test
     public void calculateSumOfShortestPaths_givenValidInputOne_correctlyCalculatesTheSum() {
-        String input = getSecondInput();
+        String input = getFirstInput();
         Universe universe = new Universe(input);
         universe.expand();
 
