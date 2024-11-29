@@ -51,4 +51,17 @@ public class UniverseTest {
 
         Assertions.assertArrayEquals(expectedImageAfterExpansion, actualImageAfterExpansion);
     }
+
+    @Test
+    public void calculateSumOfShortestPaths_givenValidInputOne_correctlyCalculatesTheSum() {
+        String input = getSecondInput();
+        Universe universe = new Universe(input);
+        universe.expand();
+
+        int expectedSumOfShortestPaths = 374;
+
+        int actualSumOfShortestPaths = universe.getSumOfShortestPaths();
+
+        Assertions.assertEquals(expectedSumOfShortestPaths, actualSumOfShortestPaths);
+    }
 }
