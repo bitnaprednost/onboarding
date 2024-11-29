@@ -26,10 +26,6 @@ public class Universe {
         }
     }
 
-    public char[][] getImage() {
-        return image;
-    }
-
     public void expand() {
         List<Integer> emptyRowIndexes = getEmptyRowIndexes();
         List<Integer> emptyColumnIndexes = getEmptyColumnIndexes();
@@ -43,21 +39,21 @@ public class Universe {
         expandColumns(newImage, emptyColumnIndexes);
     }
 
-    public void expandColumns(char[][] original, List<Integer> indicesToDuplicate) {
+    public void expandColumns(char[][] original, List<Integer> emptyColumnIndexes) {
         int originalRows = original.length;
         int originalCols = original[0].length;
 
         char[][] expanded = new char[originalRows][originalCols];
 
-        for (int i = 0; i < originalRows; i++) {
+        for (int row = 0; row < originalRows; row++) {
             int newColIndex = 0;
-            for (int j = 0; j < originalCols; j++) {
+            for (int column = 0; column < originalCols; column++) {
                 if (newColIndex + 1 > originalCols) break;
-                expanded[i][newColIndex++] = original[i][j];
+                expanded[row][newColIndex++] = original[row][column];
 
-                for (int index : indicesToDuplicate) {
-                    if (j == index) {
-                        expanded[i][newColIndex++] = original[i][j];
+                for (int index : emptyColumnIndexes) {
+                    if (column == index) {
+                        expanded[row][newColIndex++] = original[row][column];
                         break;
                     }
                 }
@@ -81,8 +77,8 @@ public class Universe {
 
         for (int column = 0; column < image[0].length; column++) {
             boolean columnIsEmpty = true;
-            for (int row = 0; row < image.length; row++) {
-                if (image[row][column] == '#') {
+            for (char[] row : image) {
+                if (row[column] == '#') {
                     columnIsEmpty = false;
                     break;
                 }
@@ -106,5 +102,9 @@ public class Universe {
             if (rowIsEmpty) emptyRowIndexes.add(row);
         }
         return emptyRowIndexes;
+    }
+
+    public char[][] getImage() {
+        return image;
     }
 }
