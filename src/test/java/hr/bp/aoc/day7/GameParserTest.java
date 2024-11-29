@@ -38,7 +38,7 @@ class GameParserTest {
 
     @Test
     public void tooLittleCards_InvalidArgumentException() {
-        List<String> input = tooMuchCardsInput();
+        List<String> input = tooLittleCardsInput();
         GameParser gameParser = new GameParser(input);
 
         assertThrows(IllegalArgumentException.class, gameParser::parseGameString);
