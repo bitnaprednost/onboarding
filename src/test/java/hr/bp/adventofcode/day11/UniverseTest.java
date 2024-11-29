@@ -78,4 +78,17 @@ public class UniverseTest {
 
         Assertions.assertEquals(expectedSumOfShortestPaths, actualSumOfShortestPaths);
     }
+
+    @Test
+    public void calculateSumOfShortestPathsAfterGreatExpansion_givenTaskInput_correctlyCalculatesTheSum() {
+        String input = getFirstInput();
+        Universe universe = new Universe(input);
+        int expansionFactor = 10;
+
+        long expectedSumOfShortestPaths = 8410;
+
+        long actualSumOfShortestPaths = universe.getSumOfShortestPathsForExpansionFactor(expansionFactor);
+
+        Assertions.assertEquals(expectedSumOfShortestPaths, actualSumOfShortestPaths);
+    }
 }
