@@ -98,8 +98,7 @@ public class Hand implements Comparable<Hand> {
         if (handType.equals(hand.handType)) {
             return compareCards(hand.cards);
         }
-
-        return handType.compareTo(hand.handType);
+        return Integer.compare(handType.getPoints(), hand.handType.getPoints());
     }
 
     private int compareCards(List<Card> cards) {
