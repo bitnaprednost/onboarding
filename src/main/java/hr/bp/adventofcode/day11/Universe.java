@@ -24,8 +24,8 @@ public class Universe {
         }
         parseImage(input);
         setGalaxyLocations();
-        getEmptyRowIndexes();
-        getEmptyColumnIndexes();
+        setEmptyRowIndexes();
+        setEmptyColumnIndexes();
     }
 
     private void parseImage(String input) {
@@ -35,26 +35,6 @@ public class Universe {
         for (int i = 0; i < image.length; i++) {
             image[i] = lines[i].toCharArray();
         }
-    }
-
-    public void expand() {
-        List<Integer> emptyRowIndexes = getEmptyRowIndexes();
-        List<Integer> emptyColumnIndexes = getEmptyColumnIndexes();
-
-        char[][] newImage = new char[image.length + emptyRowIndexes.size()][image[0].length + emptyColumnIndexes.size()];
-        expandRowsAndThenColumns(newImage, emptyRowIndexes, emptyColumnIndexes);
-
-        setGalaxyLocations();
-    }
-
-    public int getSumOfShortestPaths() {
-        int sum = 0;
-        for (int i = 0; i < galaxyLocations.size() - 1; i++) {
-            for (int j = i + 1; j < galaxyLocations.size(); j++) {
-                sum += getDistanceBetweenGalaxies(galaxyLocations.get(i), galaxyLocations.get(j));
-            }
-        }
-        return sum;
     }
 
     public long getSumOfShortestPathsForExpansionFactor(int expansionFactor) {
@@ -101,49 +81,7 @@ public class Universe {
         }
     }
 
-    private int getDistanceBetweenGalaxies(GridCoordinates coordinates1, GridCoordinates coordinates2) {
-        return Math.abs(coordinates1.row() - coordinates2.row()) + Math.abs(coordinates1.column() - coordinates2.column());
-    }
-
-    private void expandRowsAndThenColumns(char[][] newImage, List<Integer> emptyRowIndexes, List<Integer> emptyColumnIndexes) {
-        expandRows(newImage, emptyRowIndexes);
-        expandColumns(newImage, emptyColumnIndexes);
-    }
-
-    private void expandColumns(char[][] original, List<Integer> emptyColumnIndexes) {
-        int originalRows = original.length;
-        int originalCols = original[0].length;
-
-        char[][] expanded = new char[originalRows][originalCols];
-
-        for (int row = 0; row < originalRows; row++) {
-            int newColIndex = 0;
-            for (int column = 0; column < originalCols; column++) {
-                if (newColIndex + 1 > originalCols) break;
-                expanded[row][newColIndex++] = original[row][column];
-
-                for (int index : emptyColumnIndexes) {
-                    if (column == index) {
-                        expanded[row][newColIndex++] = original[row][column];
-                        break;
-                    }
-                }
-            }
-        }
-        image = expanded;
-    }
-
-    private void expandRows(char[][] newImage, List<Integer> emptyRowIndexes) {
-        int duplicatedRows = 0;
-        for (int row = 0; row < image.length; row++) {
-            System.arraycopy(image[row], 0, newImage[row + duplicatedRows], 0, image[row].length);
-            if (emptyRowIndexes.contains(row)) {
-                System.arraycopy(image[row], 0, newImage[row + ++duplicatedRows], 0, image[row].length);
-            }
-        }
-    }
-
-    private List<Integer> getEmptyColumnIndexes() {
+    private void setEmptyColumnIndexes() {
         List<Integer> emptyColumnIndexes = new ArrayList<>();
 
         for (int column = 0; column < image[0].length; column++) {
@@ -157,10 +95,9 @@ public class Universe {
             if (columnIsEmpty) emptyColumnIndexes.add(column);
         }
         this.emptyColumns = emptyColumnIndexes;
-        return emptyColumnIndexes;
     }
 
-    private List<Integer> getEmptyRowIndexes() {
+    private void setEmptyRowIndexes() {
         List<Integer> emptyRowIndexes = new ArrayList<>();
 
         for (int row = 0; row < image.length; row++) {
@@ -174,11 +111,9 @@ public class Universe {
             if (rowIsEmpty) emptyRowIndexes.add(row);
         }
         this.emptyRows = emptyRowIndexes;
-        return emptyRowIndexes;
     }
 
     public char[][] getImage() {
         return image;
     }
-
 }

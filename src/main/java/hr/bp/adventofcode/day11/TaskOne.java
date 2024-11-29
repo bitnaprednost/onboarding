@@ -11,9 +11,8 @@ public class TaskOne {
     public static void main(String[] args) {
         String input = readInputForDay("day11");
         Universe universe = new Universe(input);
-        universe.expand();
 
-        int sum = universe.getSumOfShortestPaths();
+        long sum = universe.getSumOfShortestPathsForExpansionFactor(2);
 
         displayResult(sum);
     }
