@@ -7,9 +7,15 @@ import java.util.TreeSet;
 
 public class GameParser {
     private List<String> gameString;
+    private boolean joker;
 
     public GameParser(List<String> gameString) {
+        this(gameString, false);
+    }
+
+    public GameParser(List<String> gameString, boolean joker) {
         this.gameString = gameString;
+        this.joker = joker;
     }
 
     public Game parseGameString() {
@@ -19,7 +25,7 @@ public class GameParser {
             hands.add(getHandFromString(handString));
         }
 
-        return new Game(hands);
+        return new Game(hands, joker);
     }
 
     private Hand getHandFromString(String handString) {
@@ -32,6 +38,6 @@ public class GameParser {
             cards.add(Card.getCard(card));
         }
 
-        return new Hand(cards, bid);
+        return new Hand(cards, bid, joker);
     }
 }

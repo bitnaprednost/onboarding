@@ -6,16 +6,64 @@ public class Hand implements Comparable<Hand> {
     private List<Card> cards;
     private HandType handType;
     private int bid;
+    private boolean joker;
 
     public Hand(List<Card> cards, int bid) {
+        this(cards, bid, false);
+    }
+
+    public Hand(List<Card> cards, int bid, boolean joker) {
         if (cards.size() != 5)
             throw new IllegalArgumentException("Number of cards in hand has to be 5!");
 
         this.cards = cards;
         this.bid = bid;
+        this.joker = joker;
 
         setHandType(findHandType());
+
+        if (joker)
+            setHandType(updateTypeWithJoker());
+
     }
+
+    private HandType updateTypeWithJoker() {
+        Map<Card, Integer> frequencies = getFrequencies();
+        HandType updatedType = handType;
+
+        if (!(frequencies.get(Card.J) == null)) {
+            updatedType = updateType();
+        }
+
+        return updatedType;
+    }
+
+    private HandType updateType() {
+        Map<Card, Integer> frequencies = getFrequencies();
+        HandType updatedType = handType;
+        int numOfJokers = frequencies.get(Card.J);
+
+        if (handType == HandType.FOUR_OF_A_KIND) {
+            updatedType = HandType.FIVE_OF_A_KIND;
+        } else if (handType == HandType.FULL_HOUSE) {
+            updatedType = HandType.FIVE_OF_A_KIND;
+        } else if (handType == HandType.THREE_OF_A_KIND) {
+            updatedType = HandType.FOUR_OF_A_KIND;
+        } else if (handType == HandType.TWO_PAIR) {
+            if (numOfJokers == 2) {
+                updatedType = HandType.FOUR_OF_A_KIND;
+            } else {
+                updatedType = HandType.FULL_HOUSE;
+            }
+        } else if (handType == HandType.ONE_PAIR) {
+            updatedType = HandType.THREE_OF_A_KIND;
+        } else if (handType == HandType.HIGH_CARD) {
+            updatedType = HandType.ONE_PAIR;
+        }
+
+        return updatedType;
+    }
+
 
     public void setHandType(HandType type) {
         this.handType = type;
@@ -104,6 +152,15 @@ public class Hand implements Comparable<Hand> {
     private int compareCards(List<Card> cards) {
         for (int i = 0; i < cards.size(); i++) {
             if (!cards.get(i).equals(this.cards.get(i))) {
+                if (joker) {
+                    if (cards.get(i).equals(Card.J)) {
+                        return 1;
+                    }
+                    if (this.cards.get(i).equals(Card.J)) {
+                        return -1;
+                    }
+                    return Integer.compare((this.cards.get(i).getPoints()), cards.get(i).getPoints());
+                }
                 return Integer.compare((this.cards.get(i).getPoints()), cards.get(i).getPoints());
             }
         }

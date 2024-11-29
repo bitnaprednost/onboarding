@@ -6,9 +6,15 @@ import java.util.TreeSet;
 
 public class Game {
     Set<Hand> hands = new TreeSet<>();
+    private boolean joker;
 
     public Game(Set<Hand> hands) {
+        this(hands, false);
+    }
+
+    public Game(Set<Hand> hands, boolean joker) {
         this.hands = hands;
+        this.joker = joker;
     }
 
     public Long getTotalWinnings() {
@@ -19,7 +25,6 @@ public class Game {
             totalWinnings += hand.getBid() * rank;
             rank++;
         }
-
         return totalWinnings;
     }
 
