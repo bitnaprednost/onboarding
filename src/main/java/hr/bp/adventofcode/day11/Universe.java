@@ -1,5 +1,7 @@
 package hr.bp.adventofcode.day11;
 
+import hr.bp.adventofcode.GridCoordinates;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ import java.util.List;
 public class Universe {
 
     private char[][] image;
+
+    private List<GridCoordinates> galaxyLocations = new ArrayList<>();
 
     public Universe(String input) {
         if (input == null || input.isBlank()) {
@@ -32,6 +36,32 @@ public class Universe {
 
         char[][] newImage = new char[image.length + emptyRowIndexes.size()][image[0].length + emptyColumnIndexes.size()];
         expandRowsAndThenColumns(newImage, emptyRowIndexes, emptyColumnIndexes);
+
+        setGalaxyLocations();
+    }
+
+    private void setGalaxyLocations() {
+        for (int i = 0; i < image.length; i++) {
+            for (int j = 0; j < image[i].length; j++) {
+                if (image[i][j] == '#') {
+                    galaxyLocations.add(new GridCoordinates(i, j));
+                }
+            }
+        }
+    }
+
+    public int getSumOfShortestPaths() {
+        int sum = 0;
+        for (int i = 0; i < galaxyLocations.size() - 1; i++) {
+            for (int j = i + 1; j < galaxyLocations.size(); j++) {
+                sum += getDistanceBetweenGalaxies(galaxyLocations.get(i), galaxyLocations.get(j));
+            }
+        }
+        return sum;
+    }
+
+    private int getDistanceBetweenGalaxies(GridCoordinates coordinates1, GridCoordinates coordinates2) {
+        return Math.abs(coordinates1.row() - coordinates2.row()) + Math.abs(coordinates1.column() - coordinates2.column());
     }
 
     private void expandRowsAndThenColumns(char[][] newImage, List<Integer> emptyRowIndexes, List<Integer> emptyColumnIndexes) {
@@ -39,7 +69,7 @@ public class Universe {
         expandColumns(newImage, emptyColumnIndexes);
     }
 
-    public void expandColumns(char[][] original, List<Integer> emptyColumnIndexes) {
+    private void expandColumns(char[][] original, List<Integer> emptyColumnIndexes) {
         int originalRows = original.length;
         int originalCols = original[0].length;
 
@@ -107,4 +137,5 @@ public class Universe {
     public char[][] getImage() {
         return image;
     }
+
 }
