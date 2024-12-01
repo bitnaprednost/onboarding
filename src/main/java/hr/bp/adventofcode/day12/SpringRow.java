@@ -3,7 +3,9 @@ package hr.bp.adventofcode.day12;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Ivan Tomičić
@@ -25,67 +27,70 @@ public class SpringRow {
     }
 
     public static long countWays(String input, List<Integer> groups) {
-        int n = input.length();
-        int m = groups.size();
-        long[][] dp = new long[n + 1][m + 1];
-        for (long[] row : dp) Arrays.fill(row, -1); // Fill DP table with -1 to indicate uncomputed states
-
-        return helper(input.toCharArray(), groups, 0, 0, dp);
+        // Create cache for dynamic programming
+        Map<String, Long> cache = new HashMap<>();
+        return countWaysHelper(input, 0, groups, 0, cache);
     }
 
-    private static long helper(char[] input, List<Integer> groups, int pos, int groupIndex, long[][] dp) {
+    private static long countWaysHelper(String input, int pos, List<Integer> groups, int groupIndex, Map<String, Long> cache) {
+        // Create cache key
+        String key = pos + "," + groupIndex;
+        if (cache.containsKey(key)) {
+            return cache.get(key);
+        }
+
+        // Base cases
         if (groupIndex == groups.size()) {
-            // If all groups are placed, check if the remaining characters are valid
-            for (int i = pos; i < input.length; i++) {
-                if (input[i] == '#') return 0; // Invalid if any hash sign remains uncovered
+            // Check if there are any remaining hash signs
+            for (int i = pos; i < input.length(); i++) {
+                if (input.charAt(i) == '#') {
+                    return 0; // Invalid case: uncovered hash sign
+                }
             }
-            return 1; // Valid placement
+            return 1; // Valid solution found
         }
 
-        if (pos >= input.length) return 0; // Reached end of string without placing all groups
-
-        if (dp[pos][groupIndex] != -1) return dp[pos][groupIndex]; // Return memoized result
-
-        long ways = 0;
-        int groupSize = groups.get(groupIndex);
-
-        // Try placing the current group at all valid positions starting from `pos`
-        for (int i = pos; i + groupSize - 1 < input.length; i++) {
-            if (canPlaceGroup(input, i, groupSize)) {
-                // Temporarily mark the group as placed
-                markGroup(input, i, groupSize, true);
-                ways += helper(input, groups, i + groupSize + 1, groupIndex + 1, dp);
-                // Unmark the group
-                markGroup(input, i, groupSize, false);
-            }
+        if (pos >= input.length()) {
+            return 0; // Reached end of string but groups remain
         }
 
-        dp[pos][groupIndex] = ways; // Memoize result
-        return ways;
-    }
+        long result = 0;
+        int currentGroup = groups.get(groupIndex);
 
-    private static boolean canPlaceGroup(char[] input, int start, int size) {
-        for (int i = start; i < start + size; i++) {
-            if (input[i] == '.') return false; // Cannot place group over a dot
-        }
-        return true; // Valid placement
-    }
-
-    private static void markGroup(char[] input, int start, int size, boolean mark) {
-        char replacement = mark ? '#' : '?';
-        for (int i = start; i < start + size; i++) {
-            if (input[i] == '?' || input[i] == '#') {
-                input[i] = replacement;
+        // Try placing the current group starting at pos
+        if (canPlaceGroup(input, pos, currentGroup)) {
+            // If we can place the group, we need to ensure there's a dot or question mark after it
+            // (unless it's at the end of the string)
+            if (pos + currentGroup == input.length() ||
+                    input.charAt(pos + currentGroup) != '#') {
+                result += countWaysHelper(input, pos + currentGroup + 1, groups, groupIndex + 1, cache);
             }
         }
+
+        // If current position is not a hash sign, we can skip it
+        if (input.charAt(pos) != '#') {
+            result += countWaysHelper(input, pos + 1, groups, groupIndex, cache);
+        }
+
+        cache.put(key, result);
+        return result;
     }
 
-    public static void main(String[] args) {
-        String input = "#???..?.?.?";
-        List<Integer> groups = Arrays.asList(3, 1, 1);
+    private static boolean canPlaceGroup(String input, int pos, int groupSize) {
+        // Check if there's enough space
+        if (pos + groupSize > input.length()) {
+            return false;
+        }
 
-        long result = countWays(input, groups);
-        System.out.println("Number of ways to place groups: " + result);
+        // Check if all positions can be part of the group
+        for (int i = 0; i < groupSize; i++) {
+            char c = input.charAt(pos + i);
+            if (c == '.') {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public long getDifferentArrangements() {
