@@ -12,7 +12,7 @@ public class SpringRowTest {
 
     @Test
     public void calculateDifferentArrangements_givenInputOne_returnsCorrectResult() {
-        SpringRow springRow = new SpringRow("???.###".chars().mapToObj(c -> (char) c).toList(), List.of(1,1,3));
+        SpringRow springRow = new SpringRow("???.###", List.of(1,1,3));
 
         long expectedDifferentArrangements = 1;
 
@@ -23,7 +23,7 @@ public class SpringRowTest {
 
     @Test
     public void calculateDifferentArrangements_givenInputTwo_returnsCorrectResult() {
-        SpringRow springRow = new SpringRow(".??..??...?##.".chars().mapToObj(c -> (char) c).toList(), List.of(1,1,3));
+        SpringRow springRow = new SpringRow(".??..??...?##.", List.of(1,1,3));
 
         long expectedDifferentArrangements = 4;
 
@@ -34,7 +34,7 @@ public class SpringRowTest {
 
     @Test
     public void calculateDifferentArrangements_givenInputThree_returnsCorrectResult() {
-        SpringRow springRow = new SpringRow("?#?#?#?#?#?#?#?".chars().mapToObj(c -> (char) c).toList(), List.of(1,3,1,6));
+        SpringRow springRow = new SpringRow("?#?#?#?#?#?#?#?", List.of(1,3,1,6));
 
         long expectedDifferentArrangements = 1;
 
@@ -46,7 +46,7 @@ public class SpringRowTest {
 
     @Test
     public void calculateDifferentArrangements_givenInputFour_returnsCorrectResult() {
-        SpringRow springRow = new SpringRow("????.#...#...".chars().mapToObj(c -> (char) c).toList(), List.of(4,1,1));
+        SpringRow springRow = new SpringRow("????.#...#...", List.of(4,1,1));
 
         long expectedDifferentArrangements = 1;
 
@@ -59,7 +59,7 @@ public class SpringRowTest {
 
     @Test
     public void calculateDifferentArrangements_givenInputFive_returnsCorrectResult() {
-        SpringRow springRow = new SpringRow("????.######..#####.".chars().mapToObj(c -> (char) c).toList(), List.of(1,6,5));
+        SpringRow springRow = new SpringRow("????.######..#####.", List.of(1,6,5));
 
         long expectedDifferentArrangements = 4;
 
@@ -70,7 +70,7 @@ public class SpringRowTest {
 
     @Test
     public void calculateDifferentArrangements_givenInputSix_returnsCorrectResult() {
-        SpringRow springRow = new SpringRow("?###????????".chars().mapToObj(c -> (char) c).toList(), List.of(3,2,1));
+        SpringRow springRow = new SpringRow("?###????????", List.of(3,2,1));
 
         long expectedDifferentArrangements = 10;
 
