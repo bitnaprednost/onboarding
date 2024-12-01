@@ -96,4 +96,12 @@ public class SpringRow {
     public long getDifferentArrangements() {
         return differentArrangements;
     }
+
+    public String getSprings() {
+        return springs;
+    }
+
+    public List<Integer> getContiguousGroups() {
+        return contiguousGroups;
+    }
 }
