@@ -18,7 +18,7 @@ public class PatternTest {
 
         SymmetryLine expectedSymmetryLine = new SymmetryLine(4, SymmetryDirection.COLUMN);
 
-        SymmetryLine actualSymmetryLine = pattern.getSymmetryType();
+        SymmetryLine actualSymmetryLine = pattern.getSymmetryLine(true);
 
         Assertions.assertEquals(expectedSymmetryLine, actualSymmetryLine);
     }
@@ -30,7 +30,7 @@ public class PatternTest {
 
         SymmetryLine expectedSymmetryLine = new SymmetryLine(3, SymmetryDirection.ROW);
 
-        SymmetryLine actualSymmetryLine = pattern.getSymmetryType();
+        SymmetryLine actualSymmetryLine = pattern.getSymmetryLine(true);
 
         Assertions.assertEquals(expectedSymmetryLine, actualSymmetryLine);
     }

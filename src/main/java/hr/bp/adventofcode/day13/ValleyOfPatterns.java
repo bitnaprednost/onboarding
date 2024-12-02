@@ -28,7 +28,22 @@ public class ValleyOfPatterns {
 
         for (Pattern pattern : patterns) {
 
-            SymmetryLine symmetryLine = pattern.getSymmetryType();
+            SymmetryLine symmetryLine = pattern.getSymmetryLine(true);
+            if (SymmetryDirection.COLUMN.equals(symmetryLine.direction())) {
+                sum += symmetryLine.index() + 1;
+            } else if (SymmetryDirection.ROW.equals(symmetryLine.direction())) {
+                sum += 100 * (symmetryLine.index() + 1);
+            }
+        }
+        return sum;
+    }
+
+    public int getSummarizationOfNotesWithoutASmudge() {
+        int sum = 0;
+
+        for (Pattern pattern : patterns) {
+
+            SymmetryLine symmetryLine = pattern.getSymmetryLineWithoutSmudge();
             if (SymmetryDirection.COLUMN.equals(symmetryLine.direction())) {
                 sum += symmetryLine.index() + 1;
             } else if (SymmetryDirection.ROW.equals(symmetryLine.direction())) {
