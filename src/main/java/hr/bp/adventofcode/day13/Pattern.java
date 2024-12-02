@@ -49,7 +49,7 @@ public class Pattern {
     }
 
     private Optional<Integer> getSymmetryIndex(List<String> pattern) {
-        for (int i = 1; i < pattern.size() - 1; i++) {
+        for (int i = 0; i < pattern.size() - 1; i++) {
             if (isSymmetricalLineOnIndex(i, pattern)) return Optional.of(i);
         }
         return Optional.empty();
