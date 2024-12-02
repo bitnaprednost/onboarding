@@ -8,35 +8,25 @@ import java.util.List;
  */
 public class Report {
 
-    private List<Integer> levels = new ArrayList<>();
-
-    private Boolean isSafe;
-
-    private Boolean isSafeAfterDamping;
+    private final List<Integer> levels;
 
     public Report(List<Integer> levels) {
         this.levels = levels;
     }
 
     public boolean isSafe() {
-        if (isSafe == null) {
-            setIsSafe();
+        boolean isAscending = levels.get(0) < levels.get(1);
+
+        for (int i = 0; i < levels.size() - 1; i++) {
+            if (orderIsWrongOrDifferenceTooLarge(levels.get(i), levels.get(i+1), isAscending)) {
+                return false;
+            }
         }
-        return isSafe;
+        return true;
     }
 
     public boolean isSafeAfterDamping() {
-        if (isSafeAfterDamping == null) {
-            setIsSafeAfterDamping();
-        }
-        return isSafeAfterDamping;
-    }
-
-    private void setIsSafeAfterDamping() {
-        if (this.isSafe()) {
-            this.isSafeAfterDamping = true;
-            return;
-        }
+        if (this.isSafe()) return true;
 
         for (int i = 0; i < levels.size(); i++) {
             List<Integer> newLevels = new ArrayList<>(levels);
@@ -44,24 +34,9 @@ public class Report {
 
             Report newReport = new Report(newLevels);
 
-            if (newReport.isSafe()) {
-                isSafeAfterDamping = true;
-                return;
-            }
+            if (newReport.isSafe()) return true;
         }
-        isSafeAfterDamping = false;
-    }
-
-    private void setIsSafe() {
-        boolean isAscending = levels.get(0) < levels.get(1);
-
-        for (int i = 0; i < levels.size() - 1; i++) {
-            if (orderIsWrongOrDifferenceTooLarge(levels.get(i), levels.get(i+1), isAscending)) {
-                isSafe = false;
-                return;
-            }
-        }
-        isSafe = true;
+        return false;
     }
 
     private boolean orderIsWrongOrDifferenceTooLarge(Integer levelOne, Integer levelTwo, boolean isAscending) {
@@ -71,13 +46,5 @@ public class Report {
 
         if (isAscending) return levelOne >= levelTwo;
         else return levelOne <= levelTwo;
-    }
-
-    @Override
-    public String toString() {
-        return "Report{" +
-                "levels=" + levels +
-                ", isSafe=" + isSafe +
-                '}';
     }
 }
