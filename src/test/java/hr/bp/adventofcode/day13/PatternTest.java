@@ -24,7 +24,7 @@ public class PatternTest {
     }
 
     @Test
-    public void getSymmetry_givenInputOne_returnsCorrectSymmetry() {
+    public void getSymmetry_givenInputTwo_returnsCorrectSymmetry() {
         String input = getSecondInput();
         Pattern pattern = new Pattern(input);
 
