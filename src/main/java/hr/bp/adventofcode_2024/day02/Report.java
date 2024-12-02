@@ -12,6 +12,8 @@ public class Report {
 
     private Boolean isSafe;
 
+    private Boolean isSafeAfterDamping;
+
     public Report(List<Integer> levels) {
         this.levels = levels;
     }
@@ -21,6 +23,33 @@ public class Report {
             setIsSafe();
         }
         return isSafe;
+    }
+
+    public boolean isSafeAfterDamping() {
+        if (isSafeAfterDamping == null) {
+            setIsSafeAfterDamping();
+        }
+        return isSafeAfterDamping;
+    }
+
+    private void setIsSafeAfterDamping() {
+        if (this.isSafe()) {
+            this.isSafeAfterDamping = true;
+            return;
+        }
+
+        for (int i = 0; i < levels.size(); i++) {
+            List<Integer> newLevels = new ArrayList<>(levels);
+            newLevels.remove(i);
+
+            Report newReport = new Report(newLevels);
+
+            if (newReport.isSafe()) {
+                isSafeAfterDamping = true;
+                return;
+            }
+        }
+        isSafeAfterDamping = false;
     }
 
     private void setIsSafe() {

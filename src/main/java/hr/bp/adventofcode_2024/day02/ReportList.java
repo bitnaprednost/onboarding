@@ -29,4 +29,12 @@ public class ReportList {
         }
         return count;
     }
+
+    public int countSafeReportsAfterDamping() {
+        int count = 0;
+        for (Report report : reports) {
+            count += report.isSafeAfterDamping() ? 1: 0;
+        }
+        return count;
+    }
 }
