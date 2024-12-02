@@ -25,7 +25,7 @@ public class ReportTest {
     public void isReportSafe_givenReportTwo_returnsIsNotSafe() {
         Report report = new Report(List.of(1,2,7,8,9));
 
-        boolean expectedIsSafe = true;
+        boolean expectedIsSafe = false;
 
         boolean actualIsSafe = report.isSafe();
 
@@ -36,7 +36,7 @@ public class ReportTest {
     public void isReportSafe_givenReportThree_returnsIsNotSafe() {
         Report report = new Report(List.of(9,7,6,2,1));
 
-        boolean expectedIsSafe = true;
+        boolean expectedIsSafe = false;
 
         boolean actualIsSafe = report.isSafe();
 
@@ -47,7 +47,7 @@ public class ReportTest {
     public void isReportSafe_givenReportFour_returnsIsNotSafe() {
         Report report = new Report(List.of(1,3,2,4,5));
 
-        boolean expectedIsSafe = true;
+        boolean expectedIsSafe = false;
 
         boolean actualIsSafe = report.isSafe();
 
@@ -58,7 +58,7 @@ public class ReportTest {
     public void isReportSafe_givenReportFive_returnsIsNotSafe() {
         Report report = new Report(List.of(8,6,4,4,1));
 
-        boolean expectedIsSafe = true;
+        boolean expectedIsSafe = false;
 
         boolean actualIsSafe = report.isSafe();
 
