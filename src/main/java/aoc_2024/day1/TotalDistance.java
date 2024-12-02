@@ -3,22 +3,14 @@ package aoc_2024.day1;
 import java.util.*;
 
 public class TotalDistance {
+
+    public ArrayList<Integer> left = new ArrayList<>();
+    public ArrayList<Integer> right = new ArrayList<>();
+
     public int calculateTotalDistance (String locationIDs){
         int totalSum = 0;
 
-        // Split the file content into lines
-        String[] lines = locationIDs.split(System.lineSeparator());
-
-        ArrayList<Integer> left = new ArrayList<Integer>();
-        ArrayList<Integer> right = new ArrayList<Integer>();
-
-        for (String line : lines)
-        {
-            String[] parts = line.split("\\s+");
-
-            left.add(Integer.parseInt(parts[0].trim()));
-            right.add(Integer.parseInt(parts[1].trim()));
-        }
+        setLists(locationIDs);
 
         Collections.sort(left);
         Collections.sort(right);
@@ -29,5 +21,19 @@ public class TotalDistance {
         }
 
         return totalSum;
+    }
+
+    public void setLists (String locationIDs)
+    {
+        // Split the file content into lines
+        String[] lines = locationIDs.split(System.lineSeparator());
+
+        for (String line : lines)
+        {
+            String[] parts = line.split("\\s+");
+
+            this.left.add(Integer.parseInt(parts[0].trim()));
+            this.right.add(Integer.parseInt(parts[1].trim()));
+        }
     }
 }
