@@ -30,6 +30,9 @@
 # Day 11
 - no notes
 
+# Day 12
+- https://claude.ai/chat/50685fb7-ac7a-4fa5-8fcc-23cd8f3055d0
+
 # Day 24
 - ChatGPT help: just asked it to give me a formula for the intersection point of 2 lines if only the slope and 1 point is known, asked it to generate more test data
 
