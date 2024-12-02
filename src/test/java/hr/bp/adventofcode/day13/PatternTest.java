@@ -16,11 +16,11 @@ public class PatternTest {
         String input = getFirstInput();
         Pattern pattern = new Pattern(input);
 
-        SymmetryType expectedSymmetryType = new SymmetryType(4, SymmetryDirection.COLUMN);
+        SymmetryLine expectedSymmetryLine = new SymmetryLine(4, SymmetryDirection.COLUMN);
 
-        SymmetryType actualSymmetryType = pattern.getSymmetryType();
+        SymmetryLine actualSymmetryLine = pattern.getSymmetryType();
 
-        Assertions.assertEquals(expectedSymmetryType, actualSymmetryType);
+        Assertions.assertEquals(expectedSymmetryLine, actualSymmetryLine);
     }
 
     @Test
@@ -28,10 +28,10 @@ public class PatternTest {
         String input = getSecondInput();
         Pattern pattern = new Pattern(input);
 
-        SymmetryType expectedSymmetryType = new SymmetryType(3, SymmetryDirection.ROW);
+        SymmetryLine expectedSymmetryLine = new SymmetryLine(3, SymmetryDirection.ROW);
 
-        SymmetryType actualSymmetryType = pattern.getSymmetryType();
+        SymmetryLine actualSymmetryLine = pattern.getSymmetryType();
 
-        Assertions.assertEquals(expectedSymmetryType, actualSymmetryType);
+        Assertions.assertEquals(expectedSymmetryLine, actualSymmetryLine);
     }
 }

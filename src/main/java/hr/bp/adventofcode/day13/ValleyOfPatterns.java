@@ -28,11 +28,11 @@ public class ValleyOfPatterns {
 
         for (Pattern pattern : patterns) {
 
-            SymmetryType symmetryType = pattern.getSymmetryType();
-            if (SymmetryDirection.COLUMN.equals(symmetryType.direction())) {
-                sum += symmetryType.index() + 1;
-            } else if (SymmetryDirection.ROW.equals(symmetryType.direction())) {
-                sum += 100 * (symmetryType.index() + 1);
+            SymmetryLine symmetryLine = pattern.getSymmetryType();
+            if (SymmetryDirection.COLUMN.equals(symmetryLine.direction())) {
+                sum += symmetryLine.index() + 1;
+            } else if (SymmetryDirection.ROW.equals(symmetryLine.direction())) {
+                sum += 100 * (symmetryLine.index() + 1);
             }
         }
         return sum;

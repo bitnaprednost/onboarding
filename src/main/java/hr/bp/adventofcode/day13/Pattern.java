@@ -32,7 +32,7 @@ public class Pattern {
         }
     }
 
-    public SymmetryType getSymmetryType() {
+    public SymmetryLine getSymmetryType() {
         SymmetryDirection symmetryDirection = SymmetryDirection.ROW;
         Optional<Integer> symmetryIndex = getSymmetryIndex(rows);
 
@@ -45,7 +45,7 @@ public class Pattern {
                 throw new IllegalArgumentException("There is neither row nor column symmetry in the pattern");
             }
         }
-        return new SymmetryType(symmetryIndex.get(), symmetryDirection);
+        return new SymmetryLine(symmetryIndex.get(), symmetryDirection);
     }
 
     private Optional<Integer> getSymmetryIndex(List<String> pattern) {
