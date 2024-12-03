@@ -32,4 +32,14 @@ class NuclearPlantTest {
         Assertions.assertEquals(expectedNumOfSafeReports, nuclearPlant.getNumOfSafeReports());
     }
 
+    @Test
+    void ProblemDampener_numSafeReports_testInput() {
+        ReportsParser parser = new ReportsParser(List.of(getTestInput().split("\\n")));
+
+        NuclearPlant nuclearPlant = new NuclearPlant(parser.parseInput(), true);
+
+        long expectedNumOfSafeReports = 4;
+
+        Assertions.assertEquals(expectedNumOfSafeReports, nuclearPlant.getNumOfSafeReports());
+    }
 }
