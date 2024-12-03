@@ -3,6 +3,7 @@ package hr.bp.adventofcode.day15;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Ivan Tomičić
@@ -15,7 +16,9 @@ public class LensConfiguration {
 
     public LensConfiguration(String input) {
         boxes = new HashMap<>();
+
         String[] sequences = input.replace("\\n", "").split(",");
+
         for (String sequence : sequences) {
             processSequence(sequence);
         }
@@ -43,8 +46,6 @@ public class LensConfiguration {
         } else {
             box.put(label, focusLength);
         }
-
-
     }
 
     private void processDash(String sequence) {
@@ -59,19 +60,14 @@ public class LensConfiguration {
     }
 
     public int getFocusingPower() {
-        return boxes.entrySet().stream().filter(entry -> !entry.getValue().isEmpty())
-                .map(entry -> {
-                    int boxSum = 0;
-                    int order = 1;
-                    for (Map.Entry<String, Integer> stringIntegerEntry : entry.getValue().entrySet()) {
-                        int multiplication = 1;
-                        multiplication *= entry.getKey() + 1;
-                        multiplication *= order;
-                        multiplication *= stringIntegerEntry.getValue();
-                        boxSum += multiplication;
-                        order++;
-                    }
-                    return boxSum;
-                }).reduce(Integer::sum).get();
+        return boxes.values().stream()
+                .filter(box -> !box.isEmpty())
+                .mapToInt(box -> {
+                    AtomicInteger order = new AtomicInteger(1);
+                    return box.entrySet().stream()
+                            .mapToInt(entry -> (hasher.hash(entry.getKey()) + 1) * order.getAndIncrement() * entry.getValue())
+                            .sum();
+                })
+                .sum();
     }
 }

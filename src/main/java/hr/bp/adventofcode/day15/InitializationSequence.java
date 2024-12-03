@@ -19,6 +19,7 @@ public class InitializationSequence {
     public int getSumOfHashes() {
         Hasher hasher = new Hasher();
         int sum = 0;
+
         for (String sequence : sequences) {
             sum += hasher.hash(sequence);
         }
