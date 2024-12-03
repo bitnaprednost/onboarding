@@ -1,13 +1,11 @@
 package hr.bp.adventofcode.day16;
 
 import hr.bp.adventofcode.Move;
-
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import static hr.bp.adventofcode.Move.oppositeDirectionFrom;
 
 /**
@@ -24,7 +22,7 @@ public class Contraption {
     }
 
     private void parseInput(String input) {
-        String[] lines = input.split("\\n");
+        String[] lines = input.split("\\s+");
         grid = new char[lines.length][];
 
         for (int i = 0; i < lines.length; i++) {
