@@ -1,8 +1,12 @@
 package hr.bp.adventofcode.day14;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Ivan Tomičić
@@ -10,8 +14,6 @@ import java.util.List;
 public class Platform {
 
     char[][] grid;
-
-    char[][] initialGrid;
 
     public Platform(String input) {
         if (input == null || input.isBlank()) {
@@ -27,7 +29,6 @@ public class Platform {
         for (int i = 0; i < lines.length; i++) {
             grid[i] = lines[i].toCharArray();
         }
-       initialGrid = deepCopyCharArray(grid);
     }
 
 
@@ -123,25 +124,48 @@ public class Platform {
     }
 
     public int getLoadForNCycles(int numberOfCycles) {
+        HashMap<String, List<Integer>> seenStates = new HashMap<>();
+        boolean cycleProcessed = false;
         for (int i = 0; i < numberOfCycles; i++) {
-            if (i % 100 == 0) {
-                System.out.println("On iteration: " + i);
+
+            if ((i+1) % 10000 == 0 && !cycleProcessed) {
+                Optional<Integer> cycle = detectCycle(seenStates);
+                if (cycle.isPresent()) {
+                    int cycleValue = cycle.get();
+                    i += cycleValue * (((numberOfCycles - i) / cycleValue) - 1);
+                    cycleProcessed = true;
+                }
             }
             tilt(PlatformDirection.NORTH);
             tilt(PlatformDirection.WEST);
             tilt(PlatformDirection.SOUTH);
             tilt(PlatformDirection.EAST);
+
+            String serialized = serializeGrid(grid);
+
+            List<Integer> list = seenStates.getOrDefault(serialized, new ArrayList<>());
+            list.add(i);
+            seenStates.put(serialized, list);
+
         }
         return getLoad();
     }
 
-    public static char[][] deepCopyCharArray(char[][] array) {
-        char[][] copy = new char[array.length][];
-
-        for (int i = 0; i < array.length; i++) {
-            copy[i] = array[i].clone();
+    private Optional<Integer> detectCycle(HashMap<String, List<Integer>> seenStates) {
+        for (Map.Entry<String, List<Integer>> entry : seenStates.entrySet()) {
+            List<Integer> indexes = entry.getValue();
+            if (indexes.size() > 10) {
+                return Optional.of(indexes.get(indexes.size() - 1) - indexes.get(indexes.size() - 2));
+            }
         }
+        return Optional.empty();
+    }
 
-        return copy;
+    private static String serializeGrid(char[][] grid) {
+        StringBuilder sb = new StringBuilder();
+        for (char[] row : grid) {
+            sb.append(Arrays.toString(row));
+        }
+        return sb.toString();
     }
 }
