@@ -14,25 +14,27 @@ public class MemoryParser {
     }
 
     public List<String> getCommands() {
-        Matcher m = Pattern.compile(regex).matcher(memory.get(0));
         List<String> commandsFound = new ArrayList<>();
 
+        for (String commandLine : memory) {
+            Matcher m = Pattern.compile(regex).matcher(commandLine);
+            while (m.find()) {
+                int commandIndStart = m.start();
+                commandsFound.add(findCommandFromStartIndex(commandIndStart, commandLine));
+            }
 
-        while (m.find()) {
-            int commandIndStart = m.start();
-            commandsFound.add(findCommandFromStartIndex(commandIndStart));
         }
 
         return commandsFound;
     }
 
-    private String findCommandFromStartIndex(int startIndex) {
+    private String findCommandFromStartIndex(int startIndex, String commandLine) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        char currChar = memory.get(0).charAt(startIndex);
+        char currChar = commandLine.charAt(startIndex);
         while(currChar != ')') {
             stringBuilder.append(currChar);
-            currChar = memory.get(0).charAt(++startIndex);
+            currChar = commandLine.charAt(++startIndex);
         }
         stringBuilder.append(')');
 
