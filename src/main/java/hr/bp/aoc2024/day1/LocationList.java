@@ -1,6 +1,9 @@
 package hr.bp.aoc2024.day1;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class LocationList {
     private List<Long> left;
@@ -22,5 +25,27 @@ public class LocationList {
         }
 
         return totalDistance;
+    }
+
+    public long getSimilarityScore() {
+        Map<Long, Long> frequencyLeftInRight = getFrequencyLeftInRight();
+
+        long similarityScore = 0;
+
+        for (long numLeft : left) {
+            similarityScore += numLeft * frequencyLeftInRight.get(numLeft);
+        }
+
+        return similarityScore;
+    }
+
+    private Map<Long, Long> getFrequencyLeftInRight() {
+        Map<Long, Long> frequencyMap = new HashMap<>();
+
+        for (Long numLeft : left) {
+            long frequency = right.stream().filter(numRight -> Objects.equals(numLeft, numRight)).count();
+            frequencyMap.putIfAbsent(numLeft, frequency);
+        }
+        return frequencyMap;
     }
 }
