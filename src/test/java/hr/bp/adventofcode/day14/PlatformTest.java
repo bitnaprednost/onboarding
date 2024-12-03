@@ -80,4 +80,17 @@ public class PlatformTest {
 
         Assertions.assertArrayEquals(expectedGrid, actualGrid);
     }
+
+    @Test
+    public void getLoadAfterBillionCycles_givenTaskInput_returnsCorrectLoad() {
+        String input = readInputForDay("day14");
+        Platform platform = new Platform(input);
+        int numberOfCycles = 1_000_000_000;
+
+        int expectedLoad = 100531;
+
+        int actualLoad = platform.getLoadForNCycles(numberOfCycles);
+
+        Assertions.assertEquals(expectedLoad, actualLoad);
+    }
 }
