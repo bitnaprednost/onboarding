@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static hr.bp.adventofcode_2024.Utils.readInputForDay;
+
 /**
  * @author Ivan Tomičić
  */
@@ -34,6 +36,18 @@ public class MemoryTest {
         Memory memory = new Memory(input);
 
         long expectedMultiplicationSum = 161;
+
+        long actualMultiplicationSum = memory.sumMultiplications();
+
+        Assertions.assertEquals(expectedMultiplicationSum, actualMultiplicationSum);
+    }
+
+    @Test
+    public void calculateSum_givenTaskInput_returnsCorrectSum() {
+        String input = readInputForDay("day03");
+        Memory memory = new Memory(input);
+
+        long expectedMultiplicationSum = 166905464;
 
         long actualMultiplicationSum = memory.sumMultiplications();
 
