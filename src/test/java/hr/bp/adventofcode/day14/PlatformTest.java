@@ -51,4 +51,17 @@ public class PlatformTest {
 
         Assertions.assertEquals(expectedLoad, actualLoad);
     }
+
+    @Test
+    public void calculateTotalLoadAfter4Tilts_givenInputOne_returnsCorrectLoad() {
+        String input = getFirstInput();
+        Platform platform = new Platform(input);
+        int numberOfCycles = 1_000_000_000;
+
+        int expectedLoad = 64;
+
+        int actualLoad = platform.getLoadForNCycles(numberOfCycles);
+
+        Assertions.assertEquals(expectedLoad, actualLoad);
+    }
 }
