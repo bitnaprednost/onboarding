@@ -11,6 +11,8 @@ public class Platform {
 
     char[][] grid;
 
+    char[][] initialGrid;
+
     public Platform(String input) {
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException("Input cannot be null or blank");
@@ -25,6 +27,7 @@ public class Platform {
         for (int i = 0; i < lines.length; i++) {
             grid[i] = lines[i].toCharArray();
         }
+       initialGrid = deepCopyCharArray(grid);
     }
 
 
@@ -39,7 +42,13 @@ public class Platform {
     }
 
     private void tiltColumns(PlatformDirection platformDirection) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        for (int i = 0; i < grid.length; i++) {
+            char[] row = grid[i].clone();
+            String[] sections = new String(row).split("#", -1);
+            String[] sortedSections = getSortedSections(sections, platformDirection.getComparator());
+            char[] sectionsJoined = String.join("#", sortedSections).toCharArray();
+            grid[i] = sectionsJoined;
+        }
     }
 
     private void tiltRows(PlatformDirection platformDirection) {
@@ -111,5 +120,28 @@ public class Platform {
             if (c == 'O') count++;
         }
         return count;
+    }
+
+    public int getLoadForNCycles(int numberOfCycles) {
+        for (int i = 0; i < numberOfCycles; i++) {
+            if (i % 100 == 0) {
+                System.out.println("On iteration: " + i);
+            }
+            tilt(PlatformDirection.NORTH);
+            tilt(PlatformDirection.WEST);
+            tilt(PlatformDirection.SOUTH);
+            tilt(PlatformDirection.EAST);
+        }
+        return getLoad();
+    }
+
+    public static char[][] deepCopyCharArray(char[][] array) {
+        char[][] copy = new char[array.length][];
+
+        for (int i = 0; i < array.length; i++) {
+            copy[i] = array[i].clone();
+        }
+
+        return copy;
     }
 }
