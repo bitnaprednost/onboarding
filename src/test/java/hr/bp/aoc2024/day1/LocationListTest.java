@@ -30,4 +30,25 @@ class LocationListTest {
         Assertions.assertEquals(expectedDistance, locationList.getTotalDistance());
     }
 
+    @Test
+    void similarityScoreTestInputTest() {
+        ListParser parser = new ListParser(getTestInput());
+
+        LocationList locationList = new LocationList(parser.parseInput());
+
+        long expectedSimilarityScore = 31;
+
+        Assertions.assertEquals(expectedSimilarityScore, locationList.getSimilarityScore());
+    }
+
+    @Test
+    void similarityScoreFinalInputTest() {
+        ListParser parser = new ListParser(getFinalInput());
+
+        LocationList locationList = new LocationList(parser.parseInput());
+
+        long expectedSimilarityScore = 24941624;
+
+        Assertions.assertEquals(expectedSimilarityScore, locationList.getSimilarityScore());
+    }
 }
