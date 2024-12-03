@@ -1,5 +1,6 @@
 package hr.bp.adventofcode.day10;
 
+import hr.bp.adventofcode.Move;
 import hr.bp.adventofcode.Pair;
 
 import java.util.ArrayList;
