@@ -98,6 +98,18 @@ public class Platform {
     }
 
     public int getLoad() {
-        return 0;
+        int load = 0;
+        for (int i = 0; i < grid.length; i++) {
+            load += countRoundRocksInRow(i) * (grid.length - i);
+        }
+        return load;
+    }
+
+    private int countRoundRocksInRow(int i) {
+        int count = 0;
+        for (char c : grid[i]) {
+            if (c == 'O') count++;
+        }
+        return count;
     }
 }
