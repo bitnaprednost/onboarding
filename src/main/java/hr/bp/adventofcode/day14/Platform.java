@@ -62,10 +62,14 @@ public class Platform {
         }
     }
 
-    private void replaceColumn(char[] newColumn, int columnIndex) {
-        for (int i = 0; i < grid.length; i++) {
-            grid[i][columnIndex] = newColumn[i];
+    private char[] getColumnAt(int i) {
+        char[] column = new char[grid.length];
+        int index = 0;
+
+        for (char[] row : grid) {
+            column[index++] = row[i];
         }
+        return column;
     }
 
     private String[] getSortedSections(String[] sections, Comparator<Character> comparator) {
@@ -77,6 +81,12 @@ public class Platform {
             i++;
         }
         return sortedSections;
+    }
+
+    private void replaceColumn(char[] newColumn, int columnIndex) {
+        for (int i = 0; i < grid.length; i++) {
+            grid[i][columnIndex] = newColumn[i];
+        }
     }
 
     private static void addSortedStringToArray(Comparator<Character> comparator, String section, String[] sortedSections, int i) {
@@ -91,20 +101,6 @@ public class Platform {
             sortedString.append(c);
         }
         sortedSections[i] = sortedString.toString();
-    }
-
-    private char[] getColumnAt(int i) {
-        char[] column = new char[grid.length];
-        int index = 0;
-
-        for (char[] row : grid) {
-            column[index++] = row[i];
-        }
-        return column;
-    }
-
-    public char[][] getGrid() {
-        return this.grid;
     }
 
     public int getLoad() {
@@ -167,5 +163,9 @@ public class Platform {
             sb.append(Arrays.toString(row));
         }
         return sb.toString();
+    }
+
+    public char[][] getGrid() {
+        return this.grid;
     }
 }
