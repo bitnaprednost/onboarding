@@ -42,28 +42,25 @@ public class Contraption {
 
     private void shineBeamOnPositionTowards(BeamKey beamKey) {
         if (beamCache.containsKey(beamKey)) return;
+        if (outsideGrid(beamKey)) return;
 
         int currentRow = beamKey.row();
         int currentColumn = beamKey.column();
         Move directionFrom = beamKey.move();
 
-        if (outsideGrid(currentRow, currentColumn)) return;
-
         beamCache.put(beamKey, true);
 
-        List<Move> nextMoves = new ArrayList<>();
-
-        calculateNextMove(currentRow, currentColumn, directionFrom, nextMoves);
+        List<Move> nextMoves = calculateNextMove(currentRow, currentColumn, directionFrom);
 
         for (Move nextMove : nextMoves) {
             int nextRow = nextMove.getMoveRow().apply(currentRow);
             int nextColumn = nextMove.getMoveColumn().apply(currentColumn);
             shineBeamOnPositionTowards(new BeamKey(nextRow, nextColumn,  oppositeDirectionFrom(nextMove)));
         }
-
     }
 
-    private void calculateNextMove(int currentRow, int currentColumn, Move directionFrom, List<Move> nextMoves) {
+    private List<Move> calculateNextMove(int currentRow, int currentColumn, Move directionFrom) {
+        List<Move> nextMoves = new ArrayList<>();
         switch (grid[currentRow][currentColumn]) {
             case '|' -> {
                 switch (directionFrom) {
@@ -92,9 +89,10 @@ public class Contraption {
                 }
             } case '.' -> nextMoves.add(oppositeDirectionFrom(directionFrom));
         }
+        return nextMoves;
     }
 
-    private boolean outsideGrid(int row, int column) {
-        return row < 0 || row > grid.length - 1 || column < 0 || column > grid[0].length - 1;
+    private boolean outsideGrid(BeamKey beamKey) {
+        return beamKey.row() < 0 ||  beamKey.row() > grid.length - 1 ||  beamKey.column() < 0 || beamKey.column() > grid[0].length - 1;
     }
 }
