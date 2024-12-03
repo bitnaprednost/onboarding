@@ -12,8 +12,8 @@ public class TaskTwo {
         String input = readInputForDay("day14");
 
         Platform platform = new Platform(input);
-        platform.getLoadForNCycles(1_000_000_000);
+        platform.calculateLoadAfterCycles(1_000_000_000);
 
-        displayResult(platform.getLoad());
+        displayResult(platform.calculateTotalLoad());
     }
 }

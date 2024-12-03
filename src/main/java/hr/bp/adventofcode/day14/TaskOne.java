@@ -14,6 +14,6 @@ public class TaskOne {
         Platform platform = new Platform(input);
         platform.tilt(PlatformDirection.NORTH);
 
-        displayResult(platform.getLoad());
+        displayResult(platform.calculateTotalLoad());
     }
 }

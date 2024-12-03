@@ -35,7 +35,7 @@ public class PlatformTest {
 
         int expectedLoad = 136;
 
-        int actualLoad = platform.getLoad();
+        int actualLoad = platform.calculateTotalLoad();
 
         Assertions.assertEquals(expectedLoad, actualLoad);
     }
@@ -48,7 +48,7 @@ public class PlatformTest {
 
         int expectedLoad = 106990;
 
-        int actualLoad = platform.getLoad();
+        int actualLoad = platform.calculateTotalLoad();
 
         Assertions.assertEquals(expectedLoad, actualLoad);
     }
@@ -61,7 +61,7 @@ public class PlatformTest {
 
         int expectedLoad = 64;
 
-        int actualLoad = platform.getLoadForNCycles(numberOfCycles);
+        int actualLoad = platform.calculateLoadAfterCycles(numberOfCycles);
 
         Assertions.assertEquals(expectedLoad, actualLoad);
     }
@@ -72,7 +72,7 @@ public class PlatformTest {
         Platform platform = new Platform(input);
         int numberOfCycles = 1;
 
-        platform.getLoadForNCycles(numberOfCycles);
+        platform.calculateLoadAfterCycles(numberOfCycles);
 
         char[][] expectedGrid = getFirstGridAfterOneCycle();
 
@@ -82,14 +82,14 @@ public class PlatformTest {
     }
 
     @Test
-    public void getLoadAfterBillionCycles_givenTaskInput_returnsCorrectLoad() {
+    public void calculateTotalLoadAfterBillionCycles_givenTaskInput_returnsCorrectLoad() {
         String input = readInputForDay("day14");
         Platform platform = new Platform(input);
         int numberOfCycles = 1_000_000_000;
 
         int expectedLoad = 100531;
 
-        int actualLoad = platform.getLoadForNCycles(numberOfCycles);
+        int actualLoad = platform.calculateLoadAfterCycles(numberOfCycles);
 
         Assertions.assertEquals(expectedLoad, actualLoad);
     }

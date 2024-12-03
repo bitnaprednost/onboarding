@@ -33,16 +33,13 @@ public class Platform {
 
 
     public void tilt(PlatformDirection platformDirection) {
-
-        if (platformDirection.equals(PlatformDirection.NORTH) || platformDirection.equals(PlatformDirection.SOUTH)) {
-            tiltRows(platformDirection);
-
-        } else if (platformDirection.equals(PlatformDirection.WEST) || platformDirection.equals(PlatformDirection.EAST)) {
-            tiltColumns(platformDirection);
+        switch (platformDirection) {
+            case NORTH, SOUTH -> tiltVertically(platformDirection);
+            case EAST, WEST -> tiltHorizontally(platformDirection);
         }
     }
 
-    private void tiltColumns(PlatformDirection platformDirection) {
+    private void tiltHorizontally(PlatformDirection platformDirection) {
         for (int i = 0; i < grid.length; i++) {
             char[] row = grid[i].clone();
             String[] sections = new String(row).split("#", -1);
@@ -52,13 +49,13 @@ public class Platform {
         }
     }
 
-    private void tiltRows(PlatformDirection platformDirection) {
+    private void tiltVertically(PlatformDirection platformDirection) {
         for (int i = 0; i < grid[0].length; i++) {
             char[] column = getColumnAt(i);
             String[] sections = new String(column).split("#", -1);
             String[] sortedSections = getSortedSections(sections, platformDirection.getComparator());
             char[] sectionsJoined = String.join("#", sortedSections).toCharArray();
-            replaceColumn(sectionsJoined, i);
+            updateColumn(sectionsJoined, i);
         }
     }
 
@@ -77,19 +74,19 @@ public class Platform {
         int i = 0;
 
         for (String section : sections) {
-            addSortedStringToArray(comparator, section, sortedSections, i);
+            addSortedSectionToArray(comparator, section, sortedSections, i);
             i++;
         }
         return sortedSections;
     }
 
-    private void replaceColumn(char[] newColumn, int columnIndex) {
+    private void updateColumn(char[] newColumn, int columnIndex) {
         for (int i = 0; i < grid.length; i++) {
             grid[i][columnIndex] = newColumn[i];
         }
     }
 
-    private static void addSortedStringToArray(Comparator<Character> comparator, String section, String[] sortedSections, int i) {
+    private static void addSortedSectionToArray(Comparator<Character> comparator, String section, String[] sortedSections, int i) {
         List<Character> charList = new ArrayList<>();
         for (char c : section.toCharArray()) {
             charList.add(c);
@@ -103,7 +100,7 @@ public class Platform {
         sortedSections[i] = sortedString.toString();
     }
 
-    public int getLoad() {
+    public int calculateTotalLoad() {
         int load = 0;
         for (int i = 0; i < grid.length; i++) {
             load += countRoundRocksInRow(i) * (grid.length - i);
@@ -119,23 +116,20 @@ public class Platform {
         return count;
     }
 
-    public int getLoadForNCycles(int numberOfCycles) {
+    public int calculateLoadAfterCycles(int numberOfCycles) {
         HashMap<String, List<Integer>> seenStates = new HashMap<>();
         boolean cycleProcessed = false;
         for (int i = 0; i < numberOfCycles; i++) {
 
             if ((i+1) % 10000 == 0 && !cycleProcessed) {
-                Optional<Integer> cycle = detectCycle(seenStates);
-                if (cycle.isPresent()) {
-                    int cycleValue = cycle.get();
+                Optional<Integer> cycleLength = findCycleLength(seenStates);
+                if (cycleLength.isPresent()) {
+                    int cycleValue = cycleLength.get();
                     i += cycleValue * (((numberOfCycles - i) / cycleValue) - 1);
                     cycleProcessed = true;
                 }
             }
-            tilt(PlatformDirection.NORTH);
-            tilt(PlatformDirection.WEST);
-            tilt(PlatformDirection.SOUTH);
-            tilt(PlatformDirection.EAST);
+            performCycle();
 
             String serialized = serializeGrid(grid);
 
@@ -144,10 +138,17 @@ public class Platform {
             seenStates.put(serialized, list);
 
         }
-        return getLoad();
+        return calculateTotalLoad();
     }
 
-    private Optional<Integer> detectCycle(HashMap<String, List<Integer>> seenStates) {
+    private void performCycle() {
+        tilt(PlatformDirection.NORTH);
+        tilt(PlatformDirection.WEST);
+        tilt(PlatformDirection.SOUTH);
+        tilt(PlatformDirection.EAST);
+    }
+
+    private Optional<Integer> findCycleLength(HashMap<String, List<Integer>> seenStates) {
         for (Map.Entry<String, List<Integer>> entry : seenStates.entrySet()) {
             List<Integer> indexes = entry.getValue();
             if (indexes.size() > 10) {
