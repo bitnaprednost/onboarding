@@ -3,6 +3,8 @@ package hr.bp.adventofcode.day15;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static hr.bp.adventofcode.Utils.readInputForDay;
+
 /**
  * @author Ivan Tomičić
  */
@@ -14,6 +16,18 @@ public class LensConfigurationTest {
         LensConfiguration lensConfiguration = new LensConfiguration(input);
 
         int expectedFocusingPower = 145;
+
+        int actualFocusingPower = lensConfiguration.getFocusingPower();
+
+        Assertions.assertEquals(expectedFocusingPower, actualFocusingPower);
+    }
+
+    @Test
+    public void calculateFocusingPower_givenTaskInput_returnsCorrectPower() {
+        String input = readInputForDay("day15");
+        LensConfiguration lensConfiguration = new LensConfiguration(input);
+
+        int expectedFocusingPower = 247153;
 
         int actualFocusingPower = lensConfiguration.getFocusingPower();
 
