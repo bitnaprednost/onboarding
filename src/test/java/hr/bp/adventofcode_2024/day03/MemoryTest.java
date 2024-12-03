@@ -55,11 +55,23 @@ public class MemoryTest {
     }
 
     @Test
-    public void calculateSumWithConditionalStatements_givenTaskInput_returnsCorrectSum() {
+    public void calculateSumWithConditionalStatements_givenInputOne_returnsCorrectSum() {
         String input = "xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))";
         Memory memory = new Memory(input);
 
         long expectedMultiplicationSum = 48;
+
+        long actualMultiplicationSum = memory.sumMultiplicationsWithConditions();
+
+        Assertions.assertEquals(expectedMultiplicationSum, actualMultiplicationSum);
+    }
+
+    @Test
+    public void calculateSumWithConditionalStatements_givenTaskInput_returnsCorrectSum() {
+        String input = readInputForDay("day03");
+        Memory memory = new Memory(input);
+
+        long expectedMultiplicationSum = 72948684;
 
         long actualMultiplicationSum = memory.sumMultiplicationsWithConditions();
 
