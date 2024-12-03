@@ -7,34 +7,41 @@ import java.util.regex.Pattern;
 
 public class MemoryParser {
     private final String regex = "mul\\((\\d{1,3}),\\s*(\\d{1,3})\\)";
-    private List<String> memory;
+    private String memory;
 
     public MemoryParser(List<String> memory) {
-        this.memory = memory;
+        this.memory = convertToOneString(memory);
+    }
+
+    private String convertToOneString(List<String> memory) {
+        StringBuilder sb = new StringBuilder();
+
+        for(String s : memory) {
+            sb.append(s.strip());
+        }
+
+        return sb.toString();
     }
 
     public List<String> getCommands() {
         List<String> commandsFound = new ArrayList<>();
 
-        for (String commandLine : memory) {
-            Matcher m = Pattern.compile(regex).matcher(commandLine);
-            while (m.find()) {
-                int commandIndStart = m.start();
-                commandsFound.add(findCommandFromStartIndex(commandIndStart, commandLine));
-            }
-
+        Matcher m = Pattern.compile(regex).matcher(memory);
+        while (m.find()) {
+            int commandIndStart = m.start();
+            commandsFound.add(findCommandFromStartIndex(commandIndStart));
         }
 
         return commandsFound;
     }
 
-    private String findCommandFromStartIndex(int startIndex, String commandLine) {
+    private String findCommandFromStartIndex(int startIndex) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        char currChar = commandLine.charAt(startIndex);
+        char currChar = memory.charAt(startIndex);
         while(currChar != ')') {
             stringBuilder.append(currChar);
-            currChar = commandLine.charAt(++startIndex);
+            currChar = memory.charAt(++startIndex);
         }
         stringBuilder.append(')');
 
