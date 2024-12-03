@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NuclearPlant {
-    List<Report> reports;
+    private List<Report> reports;
+    private boolean testDampner;
 
     public NuclearPlant(List<List<Integer>> reportsInput) {
+        this(reportsInput, false);
+    }
+
+    public NuclearPlant(List<List<Integer>> reportsInput, boolean testDampner) {
+        this.testDampner = testDampner;
         this.reports = getReports(reportsInput);
     }
 
@@ -14,7 +20,7 @@ public class NuclearPlant {
         List<Report> reports = new ArrayList<>();
 
         for (List<Integer> report : reportsInput) {
-            reports.add(new Report(report));
+            reports.add(new Report(report, testDampner));
         }
 
         return reports;
