@@ -1,6 +1,5 @@
 package hr.bp.aoc2024.day1;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
