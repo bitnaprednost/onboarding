@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListParser {
-    private String input;
+    private List<String> input;
 
     public ListParser(String input) {
+        this(List.of(input.split("\\n")));
+    }
+
+    public ListParser(List<String> input) {
         this.input = input;
     }
 
@@ -26,7 +30,7 @@ public class ListParser {
         List<Long> left = new ArrayList<>();
         List<Long> right = new ArrayList<>();
 
-        for (String line : input.split("\\n")) {
+        for (String line : input) {
             String[] numbers = getNumFromLine(line);
             left.add(Long.parseLong(numbers[0]));
             right.add(Long.parseLong(numbers[1]));
