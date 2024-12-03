@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static hr.bp.adventofcode.Utils.readInputForDay;
+import static hr.bp.adventofcode.day14.TestUtils.getFirstGridAfterOneCycle;
 import static hr.bp.adventofcode.day14.TestUtils.getFirstGridAfterTiltNorth;
 import static hr.bp.adventofcode.day14.TestUtils.getFirstInput;
 
@@ -63,5 +64,20 @@ public class PlatformTest {
         int actualLoad = platform.getLoadForNCycles(numberOfCycles);
 
         Assertions.assertEquals(expectedLoad, actualLoad);
+    }
+
+    @Test
+    public void makeOneCycle_givenInputOne_returnsCorrectGrid() {
+        String input = getFirstInput();
+        Platform platform = new Platform(input);
+        int numberOfCycles = 1;
+
+        platform.getLoadForNCycles(numberOfCycles);
+
+        char[][] expectedGrid = getFirstGridAfterOneCycle();
+
+        char[][] actualGrid = platform.getGrid();
+
+        Assertions.assertArrayEquals(expectedGrid, actualGrid);
     }
 }
