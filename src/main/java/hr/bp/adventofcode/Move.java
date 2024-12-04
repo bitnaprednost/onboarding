@@ -1,4 +1,4 @@
-package hr.bp.adventofcode.day10;
+package hr.bp.adventofcode;
 
 import java.util.function.Function;
 
@@ -32,5 +32,20 @@ public enum Move {
 
     public Function<Integer, Integer> getMoveColumn() {
         return moveColumn;
+    }
+
+    public static Move oppositeDirectionFrom(Move move) {
+        switch (move) {
+            case NORTH -> {
+                return SOUTH;
+            } case SOUTH -> {
+                return NORTH;
+            } case EAST -> {
+                return WEST;
+            } case WEST -> {
+                return EAST;
+            }
+        }
+        return UNDEFINED_MOVE;
     }
 }

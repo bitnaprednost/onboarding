@@ -1,5 +1,7 @@
 package hr.bp.adventofcode.day10;
 
+import hr.bp.adventofcode.Move;
+
 import java.util.HashMap;
 import java.util.Map;
 
