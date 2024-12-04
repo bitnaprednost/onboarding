@@ -10,7 +10,6 @@ import static hr.bp.adventofcode.Utils.readInputForDay;
  */
 public class TaskTwo {
 
-    // WARNING: takes about 10 minutes to complete, utilizes all CPU cores.
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         String input = readInputForDay("day16");
 

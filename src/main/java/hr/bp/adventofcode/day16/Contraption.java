@@ -56,8 +56,12 @@ public class Contraption {
             final int row = isColumn ? i : fixedIndex;
             final int column = isColumn ? fixedIndex : i;
 
-            futures.add(executor.submit(() -> shineBeamOnPositionFromDirection(
-                    new BeamKey(row, column, directionFrom), new HashMap<>())));
+            futures.add(executor.submit(() -> {
+                HashMap<BeamKey, Boolean> beamCache = new HashMap<>();
+                shineBeamOnPositionFromDirection(
+                        new BeamKey(row, column, directionFrom), beamCache);
+                return getCountOfEnergizedTiles(beamCache);
+            }));
         }
 
         int maxEnergizeLevel = 0;
@@ -69,7 +73,9 @@ public class Contraption {
     }
 
     public int getEnergizedTilesForUpperLeftBeam() {
-        return shineBeamOnPositionFromDirection(new BeamKey(0, 0, Move.WEST), new HashMap<>());
+        HashMap<BeamKey, Boolean> beamCache = new HashMap<>();
+        shineBeamOnPositionFromDirection(new BeamKey(0, 0, Move.WEST), beamCache);
+        return getCountOfEnergizedTiles(beamCache);
     }
 
     private int getCountOfEnergizedTiles(HashMap<BeamKey, Boolean> beamCache) {
@@ -80,9 +86,9 @@ public class Contraption {
                 .count();
     }
 
-    private int shineBeamOnPositionFromDirection(BeamKey beamKey, HashMap<BeamKey, Boolean> beamCache) {
-        if (beamCache.containsKey(beamKey)) return 0;
-        if (outsideGrid(beamKey)) return 0;
+    private void shineBeamOnPositionFromDirection(BeamKey beamKey, HashMap<BeamKey, Boolean> beamCache) {
+        if (beamCache.containsKey(beamKey)) return;
+        if (outsideGrid(beamKey)) return;
 
         int currentRow = beamKey.row();
         int currentColumn = beamKey.column();
@@ -98,7 +104,6 @@ public class Contraption {
 
             shineBeamOnPositionFromDirection(new BeamKey(nextRow, nextColumn, oppositeDirectionFrom(nextMove)), beamCache);
         }
-        return getCountOfEnergizedTiles(beamCache);
     }
 
     private List<Move> calculateNextMove(int currentRow, int currentColumn, Move directionFrom) {

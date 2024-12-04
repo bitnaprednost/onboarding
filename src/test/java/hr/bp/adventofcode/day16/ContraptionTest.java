@@ -1,7 +1,6 @@
 package hr.bp.adventofcode.day16;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -51,7 +50,6 @@ public class ContraptionTest {
     }
 
     @Test
-    @Disabled("This test takes 10 minutes to complete!")
     public void countEnergizedTilesWhenShineBeamFromAllDirections_givenTaskInput_returnsCorrectEnergizedTiles() throws ExecutionException, InterruptedException {
         String input = readInputForDay("day16");
         Contraption contraption = new Contraption(input);
