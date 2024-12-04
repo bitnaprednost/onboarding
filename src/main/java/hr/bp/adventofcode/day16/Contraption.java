@@ -42,6 +42,7 @@ public class Contraption {
     private int shineBeamOnRowFromDirection(int row, Move directionFrom) {
         int maxEnergizeLevel = 0;
         for (int column = 0; column < grid[0].length; column++) {
+            System.out.println("Running on column: " + column);
             maxEnergizeLevel = Math.max(maxEnergizeLevel, shineBeamOnPositionFromDirection(new BeamKey(row, column, directionFrom), new HashMap<>()));
         }
         return maxEnergizeLevel;
@@ -50,6 +51,7 @@ public class Contraption {
     private int shineBeamOnColumnFromDirection(int column, Move directionFrom) {
         int maxEnergizeLevel = 0;
         for (int row = 0; row < grid.length; row++) {
+            System.out.println("Running on row: " + row);
             maxEnergizeLevel = Math.max(maxEnergizeLevel, shineBeamOnPositionFromDirection(new BeamKey(row, column, directionFrom), new HashMap<>()));
         }
         return maxEnergizeLevel;
