@@ -46,4 +46,16 @@ public class WordCounterTest {
 
         Assertions.assertEquals(expectedOccurrences, actualOccurrences);
     }
+
+    @Test
+    public void countX_MASes_givenTaskInput_returnsCorrectCount() {
+        String input = readInputForDay("day04");
+        WordCounter xmasCounter = new WordCounter(input);
+
+        int expectedOccurrences = 1990;
+
+        int actualOccurrences = xmasCounter.countX_MASes();
+
+        Assertions.assertEquals(expectedOccurrences, actualOccurrences);
+    }
 }
