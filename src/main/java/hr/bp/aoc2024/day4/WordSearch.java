@@ -10,6 +10,48 @@ public class WordSearch {
         this.searchTable = searchTable;
     }
 
+    public int findXMas() {
+        int xMasCount = 0;
+
+        for (int row = 0; row < searchTable.length; row++) {
+            for (int column = 0; column < searchTable[0].length; column++) {
+                String letterFound = searchTable[row][column];
+
+                if (letterFound.equals("A")) {
+                    if (checkDiagonalsForXmas(row, column)) {
+                        xMasCount += 1;
+                    }
+                }
+            }
+        }
+
+        return xMasCount;
+    }
+
+    private boolean checkDiagonalsForXmas(int row, int column) {
+        return checkDiagonalLRForXmas(row, column) && checkDiagonalRL(row, column);
+    }
+
+    private boolean checkDiagonalLRForXmas(int row, int column) {
+        if (row - 1 >= 0 && column - 1 >= 0) {
+            String wordFound = findWordDiagonalLR(row - 1, column - 1, 3);
+            if (wordFound.equals("MAS") || wordFound.equals("SAM"))
+                return true;
+        }
+
+        return false;
+    }
+
+    private boolean checkDiagonalRL(int row, int column) {
+        if (row - 1 >= 0 && column + 1 < searchTable[row].length) {
+            String wordFound = findWordDiagonalRL(row - 1, column + 1, 3);
+            if (wordFound.equals("MAS") || wordFound.equals("SAM"))
+                return true;
+        }
+
+        return false;
+    }
+
     public int findWordInSearchTable() {
         int foundWordCount = 0;
 
