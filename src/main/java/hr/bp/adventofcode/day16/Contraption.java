@@ -1,22 +1,27 @@
 package hr.bp.adventofcode.day16;
 
 import hr.bp.adventofcode.Move;
+
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
 import static hr.bp.adventofcode.Move.oppositeDirectionFrom;
 
-/**
- * @author Ivan Tomičić
- */
 public class Contraption {
 
     private char[][] grid;
+    private final ExecutorService executor;
 
     public Contraption(String input) {
         parseInput(input);
+        executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
     }
 
     private void parseInput(String input) {
@@ -28,37 +33,43 @@ public class Contraption {
         }
     }
 
-    public int countEnergizedTilesWhenBeamEntersAllDirections() {
+    public int countEnergizedTilesWhenBeamEntersAllDirections() throws InterruptedException, ExecutionException {
         int maximumEnergizeLevel = 0;
 
-        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnColumnFromDirection(0, Move.WEST));
-        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnColumnFromDirection(grid[0].length - 1, Move.EAST));
-        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnRowFromDirection(0, Move.NORTH));
-        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnRowFromDirection(grid.length - 1, Move.SOUTH));
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, calculateMaxForDirection(0, Move.WEST, true));
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, calculateMaxForDirection(grid[0].length - 1, Move.EAST, true));
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, calculateMaxForDirection(0, Move.NORTH, false));
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, calculateMaxForDirection(grid.length - 1, Move.SOUTH, false));
+
+        executor.shutdown();
 
         return maximumEnergizeLevel;
     }
 
-    private int shineBeamOnRowFromDirection(int row, Move directionFrom) {
-        int maxEnergizeLevel = 0;
-        for (int column = 0; column < grid[0].length; column++) {
-            System.out.println("Running on column: " + column);
-            maxEnergizeLevel = Math.max(maxEnergizeLevel, shineBeamOnPositionFromDirection(new BeamKey(row, column, directionFrom), new HashMap<>()));
-        }
-        return maxEnergizeLevel;
-    }
+    private int calculateMaxForDirection(int fixedIndex, Move directionFrom, boolean isColumn) throws InterruptedException, ExecutionException {
+        List<Future<Integer>> futures = new ArrayList<>();
 
-    private int shineBeamOnColumnFromDirection(int column, Move directionFrom) {
-        int maxEnergizeLevel = 0;
-        for (int row = 0; row < grid.length; row++) {
-            System.out.println("Running on row: " + row);
-            maxEnergizeLevel = Math.max(maxEnergizeLevel, shineBeamOnPositionFromDirection(new BeamKey(row, column, directionFrom), new HashMap<>()));
+        int range = isColumn ? grid.length : grid[0].length;
+
+        for (int i = 0; i < range; i++) {
+            final int row = isColumn ? i : fixedIndex;
+            final int column = isColumn ? fixedIndex : i;
+            System.out.println("I am on row, column: " + row + ", " + column);
+
+            futures.add(executor.submit(() -> shineBeamOnPositionFromDirection(
+                    new BeamKey(row, column, directionFrom), new HashMap<>())));
         }
+
+        int maxEnergizeLevel = 0;
+        for (Future<Integer> future : futures) {
+            maxEnergizeLevel = Math.max(maxEnergizeLevel, future.get());
+        }
+
         return maxEnergizeLevel;
     }
 
     public int getEnergizedTilesForUpperLeftBeam() {
-        return  shineBeamOnPositionFromDirection(new BeamKey(0,0, Move.WEST), new HashMap<>());
+        return shineBeamOnPositionFromDirection(new BeamKey(0, 0, Move.WEST), new HashMap<>());
     }
 
     private int getCountOfEnergizedTiles(HashMap<BeamKey, Boolean> beamCache) {
@@ -84,7 +95,7 @@ public class Contraption {
         for (Move nextMove : nextMoves) {
             int nextRow = nextMove.getMoveRow().apply(currentRow);
             int nextColumn = nextMove.getMoveColumn().apply(currentColumn);
-            shineBeamOnPositionFromDirection(new BeamKey(nextRow, nextColumn,  oppositeDirectionFrom(nextMove)), beamCache);
+            shineBeamOnPositionFromDirection(new BeamKey(nextRow, nextColumn, oppositeDirectionFrom(nextMove)), beamCache);
         }
         return getCountOfEnergizedTiles(beamCache);
     }
@@ -102,7 +113,6 @@ public class Contraption {
                     case NORTH, SOUTH -> nextMoves.addAll(List.of(Move.EAST, Move.WEST));
                     case EAST, WEST -> nextMoves.add(oppositeDirectionFrom(directionFrom));
                 }
-
             } case '\\' -> {
                 switch (directionFrom) {
                     case NORTH -> nextMoves.add(Move.EAST);
@@ -123,6 +133,6 @@ public class Contraption {
     }
 
     private boolean outsideGrid(BeamKey beamKey) {
-        return beamKey.row() < 0 ||  beamKey.row() > grid.length - 1 ||  beamKey.column() < 0 || beamKey.column() > grid[0].length - 1;
+        return beamKey.row() < 0 || beamKey.row() > grid.length - 1 || beamKey.column() < 0 || beamKey.column() > grid[0].length - 1;
     }
 }
