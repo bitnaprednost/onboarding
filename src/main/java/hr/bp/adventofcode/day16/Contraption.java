@@ -54,7 +54,6 @@ public class Contraption {
         for (int i = 0; i < range; i++) {
             final int row = isColumn ? i : fixedIndex;
             final int column = isColumn ? fixedIndex : i;
-            System.out.println("I am on row, column: " + row + ", " + column);
 
             futures.add(executor.submit(() -> shineBeamOnPositionFromDirection(
                     new BeamKey(row, column, directionFrom), new HashMap<>())));
