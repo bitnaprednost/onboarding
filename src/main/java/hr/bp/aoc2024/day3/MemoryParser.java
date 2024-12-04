@@ -8,15 +8,21 @@ import java.util.regex.Pattern;
 public class MemoryParser {
     private final String regex = "mul\\((\\d{1,3}),\\s*(\\d{1,3})\\)";
     private String memory;
+    private boolean enabledDoDont;
+
+    public MemoryParser(List<String> memory, boolean enabled) {
+        this.memory = convertToOneString(memory);
+        this.enabledDoDont = enabled;
+    }
 
     public MemoryParser(List<String> memory) {
-        this.memory = convertToOneString(memory);
+        this(memory, false);
     }
 
     private String convertToOneString(List<String> memory) {
         StringBuilder sb = new StringBuilder();
 
-        for(String s : memory) {
+        for (String s : memory) {
             sb.append(s.strip());
         }
 
@@ -28,23 +34,40 @@ public class MemoryParser {
 
         Matcher m = Pattern.compile(regex).matcher(memory);
         while (m.find()) {
-            int commandIndStart = m.start();
-            commandsFound.add(findCommandFromStartIndex(commandIndStart));
+            if (!enabledDoDont) {
+                commandsFound.add(m.group());
+            } else {
+                int commandIndStart = m.start();
+                if (checkIfEnabled(commandIndStart)) {
+                    commandsFound.add(m.group());
+                }
+            }
         }
 
         return commandsFound;
     }
 
-    private String findCommandFromStartIndex(int startIndex) {
-        StringBuilder stringBuilder = new StringBuilder();
+    private boolean checkIfEnabled(int commandStartIndex) {
+        String stringBeforeCommand = memory.substring(0, commandStartIndex);
+        Matcher doMatches = Pattern.compile("do\\(\\)").matcher(stringBeforeCommand);
+        Matcher dontMatches = Pattern.compile("don't\\(\\)").matcher(stringBeforeCommand);
 
-        char currChar = memory.charAt(startIndex);
-        while(currChar != ')') {
-            stringBuilder.append(currChar);
-            currChar = memory.charAt(++startIndex);
+        if (dontMatches.find()) {
+            int endIndexDont = dontMatches.end();
+            while(dontMatches.find()) {
+                endIndexDont = dontMatches.end();
+            }
+            if (!doMatches.find()) {
+                return false;
+            } else{
+                int endIndexDo = doMatches.end();
+                while(doMatches.find()) {
+                    endIndexDo = doMatches.end();
+                }
+                return endIndexDo > endIndexDont;
+            }
         }
-        stringBuilder.append(')');
 
-        return stringBuilder.toString();
+        return true;
     }
 }
