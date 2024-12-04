@@ -13,6 +13,6 @@ public class TaskOne {
 
         Contraption contraption = new Contraption(input);
 
-        displayResult(contraption.countEnergizedTiles());
+        displayResult(contraption.getEnergizedTilesForUpperLeftBeam());
     }
 }
