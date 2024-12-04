@@ -125,4 +125,25 @@ public class WordCounter {
     private boolean notOutsideOfBounds(int row, int column) {
         return row < letters.length && row >= 0 && column < letters[0].length && column >= 0;
     }
+
+    public int countX_MASes() {
+        int count = 0;
+        for (int row = 1; row < letters.length - 1; row++) {
+            for (int column = 1; column < letters[0].length - 1; column++) {
+                if (letters[row][column] == 'A') {
+                    if (isXShape(row, column)) count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    private boolean isXShape(int row, int column) {
+        return isMAndS(row-1, column-1, row+1, column+1) && isMAndS(row-1, column+1, row+1, column-1);
+    }
+
+    private boolean isMAndS(int row1, int column1, int row2, int column2) {
+        return (letters[row1][column1] == 'S' && letters[row2][column2] == 'M') ||
+                (letters[row1][column1] == 'M' && letters[row2][column2] == 'S');
+    }
 }
