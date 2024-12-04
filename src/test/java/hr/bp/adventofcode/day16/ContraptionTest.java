@@ -12,25 +12,37 @@ import static hr.bp.adventofcode.day16.TestUtils.getFirstInput;
 public class ContraptionTest {
 
     @Test
-    public void countEnergizedTiles_givenInputOne_returnsCorrectCount() {
+    public void countEnergizedTiles_givenInputOne_returnsCorrectEnergizedTiles() {
         String input = getFirstInput();
         Contraption contraption = new Contraption(input);
 
         int expectedCountOfEnergizedTiles = 46;
 
-        int actualCountOfEnergizedTiles = contraption.countEnergizedTiles();
+        int actualCountOfEnergizedTiles = contraption.getEnergizedTilesForUpperLeftBeam();
 
         Assertions.assertEquals(expectedCountOfEnergizedTiles, actualCountOfEnergizedTiles);
     }
 
     @Test
-    public void countEnergizedTiles_givenTaskInput_returnsCorrectCount() {
+    public void countEnergizedTiles_givenTaskInput_rreturnsCorrectEnergizedTiles() {
         String input = readInputForDay("day16");
         Contraption contraption = new Contraption(input);
 
         int expectedCountOfEnergizedTiles = 7472;
 
-        int actualCountOfEnergizedTiles = contraption.countEnergizedTiles();
+        int actualCountOfEnergizedTiles = contraption.getEnergizedTilesForUpperLeftBeam();
+
+        Assertions.assertEquals(expectedCountOfEnergizedTiles, actualCountOfEnergizedTiles);
+    }
+
+    @Test
+    public void countEnergizedTilesWhenShineBeamFromAllDirections_givenInputOne_returnsCorrectEnergizedTiles() {
+        String input = getFirstInput();
+        Contraption contraption = new Contraption(input);
+
+        int expectedCountOfEnergizedTiles = 51;
+
+        int actualCountOfEnergizedTiles = contraption.countEnergizedTilesWhenBeamEntersAllDirections();
 
         Assertions.assertEquals(expectedCountOfEnergizedTiles, actualCountOfEnergizedTiles);
     }
