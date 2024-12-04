@@ -80,7 +80,7 @@ public class WordCounter {
             count += countOccurrencesOfWordInString(word, diagonalAsString);
         }
 
-        for (int i = 1; i < letters.length; i++) {
+        for (int i = 0; i < letters.length - 1; i++) {
             String diagonalAsString = getDiagonalAsString(i, 0, RL_MOVE_ROW);
             count += countOccurrencesOfWordInString(word, diagonalAsString);
         }
