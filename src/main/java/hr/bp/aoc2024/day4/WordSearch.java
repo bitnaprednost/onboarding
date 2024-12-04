@@ -40,12 +40,12 @@ public class WordSearch {
     }
 
     private int findDiagonalWordRL(int row, int column) {
-        String wordFound = findWordDiagonalRL(row, column);
+        String wordFound = findWordDiagonalRL(row, column, wordToFind.length());
         return ifWordIsFound(wordFound) ? 1 : 0;
     }
 
     private int findDiagonalWordLR(int row, int column) {
-        String wordFound = findWordDiagonalLR(row, column);
+        String wordFound = findWordDiagonalLR(row, column, wordToFind.length());
         return ifWordIsFound(wordFound) ? 1 : 0;
     }
 
@@ -54,11 +54,11 @@ public class WordSearch {
     }
 
 
-    private String findWordDiagonalRL(int row, int column) {
+    private String findWordDiagonalRL(int row, int column, int wordLength) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = row, j = column;
-             i < searchTable.length && j >= 0 && sb.length() < 4;
+             i < searchTable.length && j >= 0 && sb.length() < wordLength;
              i++, j--) {
             sb.append(searchTable[i][j]);
         }
@@ -66,11 +66,11 @@ public class WordSearch {
         return sb.toString();
     }
 
-    private String findWordDiagonalLR(int row, int column) {
+    private String findWordDiagonalLR(int row, int column, int wordLength) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = row, j = column;
-             i < searchTable.length && j < searchTable[row].length && sb.length() < 4;
+             i < searchTable.length && j < searchTable[row].length && sb.length() < wordLength;
              i++, j++) {
             sb.append(searchTable[i][j]);
         }
