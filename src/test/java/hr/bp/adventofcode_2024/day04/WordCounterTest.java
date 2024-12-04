@@ -3,6 +3,7 @@ package hr.bp.adventofcode_2024.day04;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static hr.bp.adventofcode_2024.Utils.readInputForDay;
 import static hr.bp.adventofcode_2024.day04.TestUtils.getFirstInput;
 
 /**
@@ -16,6 +17,18 @@ public class WordCounterTest {
         WordCounter xmasCounter = new WordCounter(input);
 
         int expectedOccurrences = 18;
+
+        int actualOccurrences = xmasCounter.countWordOccurrences("XMAS");
+
+        Assertions.assertEquals(expectedOccurrences, actualOccurrences);
+    }
+
+    @Test
+    public void countXMAS_givenTaskInput_returnsCorrectCount() {
+        String input = readInputForDay("day04");
+        WordCounter xmasCounter = new WordCounter(input);
+
+        int expectedOccurrences = 2654;
 
         int actualOccurrences = xmasCounter.countWordOccurrences("XMAS");
 
