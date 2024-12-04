@@ -1,8 +1,11 @@
 package aoc_2023.day3;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
+
     public static void main(String[] args) {
         // Specify the file name
         String fileName = "src/main/resources/aoc_2023/day3/engine_schematic.txt";
@@ -21,6 +24,8 @@ public class Main {
         SumGearRatio gearRatio = new SumGearRatio();
         int totalSumGearRatio = gearRatio.sumGearRatio(fileContent);
 
-        System.out.println("Total sum of gear ratio is: " + totalSumGearRatio);
+        logger.debug("Total sum of gear ratio is: {}" , totalSumGearRatio);
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }
