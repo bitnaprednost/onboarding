@@ -34,4 +34,22 @@ class WordSearchTest {
         Assertions.assertEquals(expected, wordSearch.findWordInSearchTable());
     }
 
+    @Test
+    void testFind_x_mas_testInput() {
+        WordSearchParser parser = new WordSearchParser(getTestInput());
+        WordSearch wordSearch = new WordSearch(parser.parseWordSearchInput());
+        int expected = 9;
+
+        Assertions.assertEquals(expected, wordSearch.findXMas());
+    }
+
+    @Test
+    void testFind_x_mas_finalInput() {
+        WordSearchParser parser = new WordSearchParser(getFinalInput());
+        WordSearch wordSearch = new WordSearch(parser.parseWordSearchInput());
+        int expected = 1925;
+
+        Assertions.assertEquals(expected, wordSearch.findXMas());
+    }
+
 }
