@@ -34,4 +34,16 @@ public class WordCounterTest {
 
         Assertions.assertEquals(expectedOccurrences, actualOccurrences);
     }
+
+    @Test
+    public void countX_MASes_givenInputOne_returnsCorrectCount() {
+        String input = getFirstInput();
+        WordCounter xmasCounter = new WordCounter(input);
+
+        int expectedOccurrences = 9;
+
+        int actualOccurrences = xmasCounter.countX_MASes();
+
+        Assertions.assertEquals(expectedOccurrences, actualOccurrences);
+    }
 }
