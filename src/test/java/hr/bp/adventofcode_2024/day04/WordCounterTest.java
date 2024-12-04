@@ -17,7 +17,7 @@ public class WordCounterTest {
 
         int expectedOccurrences = 18;
 
-        int actualOccurrences = xmasCounter.countXMASOccurences();
+        int actualOccurrences = xmasCounter.countWordOccurrences("XMAS");
 
         Assertions.assertEquals(expectedOccurrences, actualOccurrences);
     }
