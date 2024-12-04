@@ -15,8 +15,6 @@ public class Contraption {
 
     private char[][] grid;
 
-    private HashMap<BeamKey, Boolean> beamCache = new HashMap<>();
-
     public Contraption(String input) {
         parseInput(input);
     }
@@ -30,9 +28,38 @@ public class Contraption {
         }
     }
 
-    public int countEnergizedTiles() {
-        shineBeamOnPositionTowards(new BeamKey(0,0, Move.WEST));
+    public int countEnergizedTilesWhenBeamEntersAllDirections() {
+        int maximumEnergizeLevel = 0;
 
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnColumnFromDirection(0, Move.WEST));
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnColumnFromDirection(grid[0].length - 1, Move.EAST));
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnRowFromDirection(0, Move.NORTH));
+        maximumEnergizeLevel = Math.max(maximumEnergizeLevel, shineBeamOnRowFromDirection(grid.length - 1, Move.SOUTH));
+
+        return maximumEnergizeLevel;
+    }
+
+    private int shineBeamOnRowFromDirection(int row, Move directionFrom) {
+        int maxEnergizeLevel = 0;
+        for (int column = 0; column < grid[0].length; column++) {
+            maxEnergizeLevel = Math.max(maxEnergizeLevel, shineBeamOnPositionFromDirection(new BeamKey(row, column, directionFrom), new HashMap<>()));
+        }
+        return maxEnergizeLevel;
+    }
+
+    private int shineBeamOnColumnFromDirection(int column, Move directionFrom) {
+        int maxEnergizeLevel = 0;
+        for (int row = 0; row < grid.length; row++) {
+            maxEnergizeLevel = Math.max(maxEnergizeLevel, shineBeamOnPositionFromDirection(new BeamKey(row, column, directionFrom), new HashMap<>()));
+        }
+        return maxEnergizeLevel;
+    }
+
+    public int getEnergizedTilesForUpperLeftBeam() {
+        return  shineBeamOnPositionFromDirection(new BeamKey(0,0, Move.WEST), new HashMap<>());
+    }
+
+    private int getCountOfEnergizedTiles(HashMap<BeamKey, Boolean> beamCache) {
         return (int) beamCache.entrySet().stream()
                 .filter(Map.Entry::getValue)
                 .map(entry -> new AbstractMap.SimpleEntry<>(entry.getKey().row(), entry.getKey().column()))
@@ -40,9 +67,9 @@ public class Contraption {
                 .count();
     }
 
-    private void shineBeamOnPositionTowards(BeamKey beamKey) {
-        if (beamCache.containsKey(beamKey)) return;
-        if (outsideGrid(beamKey)) return;
+    private int shineBeamOnPositionFromDirection(BeamKey beamKey, HashMap<BeamKey, Boolean> beamCache) {
+        if (beamCache.containsKey(beamKey)) return 0;
+        if (outsideGrid(beamKey)) return 0;
 
         int currentRow = beamKey.row();
         int currentColumn = beamKey.column();
@@ -55,8 +82,9 @@ public class Contraption {
         for (Move nextMove : nextMoves) {
             int nextRow = nextMove.getMoveRow().apply(currentRow);
             int nextColumn = nextMove.getMoveColumn().apply(currentColumn);
-            shineBeamOnPositionTowards(new BeamKey(nextRow, nextColumn,  oppositeDirectionFrom(nextMove)));
+            shineBeamOnPositionFromDirection(new BeamKey(nextRow, nextColumn,  oppositeDirectionFrom(nextMove)), beamCache);
         }
+        return getCountOfEnergizedTiles(beamCache);
     }
 
     private List<Move> calculateNextMove(int currentRow, int currentColumn, Move directionFrom) {
