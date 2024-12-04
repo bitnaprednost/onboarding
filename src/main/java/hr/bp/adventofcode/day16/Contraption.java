@@ -17,6 +17,7 @@ import static hr.bp.adventofcode.Move.oppositeDirectionFrom;
 public class Contraption {
 
     private char[][] grid;
+
     private final ExecutorService executor;
 
     public Contraption(String input) {
@@ -94,6 +95,7 @@ public class Contraption {
         for (Move nextMove : nextMoves) {
             int nextRow = nextMove.getMoveRow().apply(currentRow);
             int nextColumn = nextMove.getMoveColumn().apply(currentColumn);
+
             shineBeamOnPositionFromDirection(new BeamKey(nextRow, nextColumn, oppositeDirectionFrom(nextMove)), beamCache);
         }
         return getCountOfEnergizedTiles(beamCache);
@@ -101,6 +103,7 @@ public class Contraption {
 
     private List<Move> calculateNextMove(int currentRow, int currentColumn, Move directionFrom) {
         List<Move> nextMoves = new ArrayList<>();
+
         switch (grid[currentRow][currentColumn]) {
             case '|' -> {
                 switch (directionFrom) {
