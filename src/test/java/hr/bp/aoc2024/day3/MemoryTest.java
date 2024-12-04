@@ -29,4 +29,24 @@ class MemoryTest {
 
         Assertions.assertEquals(expectedMultiplicationSum, memory.getMultiplicationSum());
     }
+
+    @Test
+    void testInputMultiplication_enabled() {
+        MemoryParser parser = new MemoryParser(List.of(getTestInput()), true);
+        Memory memory = new Memory(parser.getCommands());
+
+        long expectedMultiplicationSum = 48;
+
+        Assertions.assertEquals(expectedMultiplicationSum, memory.getMultiplicationSum());
+    }
+
+    @Test
+    void FinalInputMultiplication_enabled() {
+        MemoryParser parser = new MemoryParser(List.of(getFinalInput()), true);
+        Memory memory = new Memory(parser.getCommands());
+
+        long expectedMultiplicationSum = 90044227;
+
+        Assertions.assertEquals(expectedMultiplicationSum, memory.getMultiplicationSum());
+    }
 }
