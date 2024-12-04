@@ -53,4 +53,13 @@ public class Utils {
             throw new RuntimeException("Error reading input file: " + e.getMessage(), e);
         }
     }
+
+    public static char[][] parseGridTo2DArray(String input) {
+        String[] lines = input.split("\\n");
+        char[][] array = new char[lines.length][];
+        for (int i = 0; i < lines.length; i++) {
+            array[i] = lines[i].toCharArray();
+        }
+        return array;
+    }
 }
