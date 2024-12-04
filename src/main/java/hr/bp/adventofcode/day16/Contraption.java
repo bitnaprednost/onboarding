@@ -4,9 +4,9 @@ import hr.bp.adventofcode.Move;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -57,7 +57,7 @@ public class Contraption {
             final int column = isColumn ? fixedIndex : i;
 
             futures.add(executor.submit(() -> {
-                HashMap<BeamKey, Boolean> beamCache = new HashMap<>();
+                HashSet<BeamKey> beamCache = new HashSet<>();
                 shineBeamOnPositionFromDirection(
                         new BeamKey(row, column, directionFrom), beamCache);
                 return getCountOfEnergizedTiles(beamCache);
@@ -73,28 +73,27 @@ public class Contraption {
     }
 
     public int getEnergizedTilesForUpperLeftBeam() {
-        HashMap<BeamKey, Boolean> beamCache = new HashMap<>();
+        HashSet<BeamKey> beamCache = new HashSet<>();
         shineBeamOnPositionFromDirection(new BeamKey(0, 0, Move.WEST), beamCache);
         return getCountOfEnergizedTiles(beamCache);
     }
 
-    private int getCountOfEnergizedTiles(HashMap<BeamKey, Boolean> beamCache) {
-        return (int) beamCache.entrySet().stream()
-                .filter(Map.Entry::getValue)
-                .map(entry -> new AbstractMap.SimpleEntry<>(entry.getKey().row(), entry.getKey().column()))
+    private int getCountOfEnergizedTiles(HashSet<BeamKey> beamCache) {
+        return (int) beamCache.stream()
+                .map(entry -> new AbstractMap.SimpleEntry<>(entry.row(), entry.column()))
                 .distinct()
                 .count();
     }
 
-    private void shineBeamOnPositionFromDirection(BeamKey beamKey, HashMap<BeamKey, Boolean> beamCache) {
-        if (beamCache.containsKey(beamKey)) return;
+    private void shineBeamOnPositionFromDirection(BeamKey beamKey, Set<BeamKey> beamCache) {
+        if (beamCache.contains(beamKey)) return;
         if (outsideGrid(beamKey)) return;
 
         int currentRow = beamKey.row();
         int currentColumn = beamKey.column();
         Move directionFrom = beamKey.move();
 
-        beamCache.put(beamKey, true);
+        beamCache.add(beamKey);
 
         List<Move> nextMoves = calculateNextMove(currentRow, currentColumn, directionFrom);
 
