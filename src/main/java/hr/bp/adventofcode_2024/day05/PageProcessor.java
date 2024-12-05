@@ -11,13 +11,13 @@ import java.util.Map;
  */
 public class PageProcessor {
 
-    private List<Page> pageUpdates;
+    private List<Page> pages;
 
     public PageProcessor(String input) {
         String firstPart = input.split("\\n\\n")[0];
         String secondPart = input.split("\\n\\n")[1];
 
-        pageUpdates = new ArrayList<>();
+        pages = new ArrayList<>();
         Map<Integer, List<Integer>> pageOrderingRules = extractPageOrderingRules(firstPart);
         generatePageUpdates(secondPart, pageOrderingRules);
     }
@@ -38,13 +38,13 @@ public class PageProcessor {
     private void generatePageUpdates(String pageUpdatesInput, Map<Integer, List<Integer>>  pageOrderingRules) {
         for (String pageUpdateInput: pageUpdatesInput.split("\\n")) {
             List<Integer> pagesNumbers = new ArrayList<>(Arrays.stream(pageUpdateInput.split(",")).map(Integer::parseInt).toList());
-            this.pageUpdates.add(new Page(pagesNumbers, pageOrderingRules));
+            this.pages.add(new Page(pagesNumbers, pageOrderingRules));
         }
     }
 
     public int calculateSumOfMiddleNumbers() {
         int sum = 0;
-        for (Page page : pageUpdates) {
+        for (Page page : pages) {
             if (page.hasNumbersInRightOrder()) {
                 sum += page.getMiddleNumber();
             }
@@ -55,7 +55,7 @@ public class PageProcessor {
     public int calculateSumOfMiddleNumbersForUnorderedPages() {
         int sum = 0;
         List<Page> unorderedPages = new ArrayList<>();
-        pageUpdates.forEach(page -> {
+        pages.forEach(page -> {
             if (!page.hasNumbersInRightOrder()) {
                 unorderedPages.add(page.copy());
             }
