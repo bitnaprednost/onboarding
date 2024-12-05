@@ -18,7 +18,7 @@ public class Page {
         this.pageOrderingRules = pageOrderingRules;
     }
 
-    public boolean numbersAreInRightOrder() {
+    public boolean hasNumbersInRightOrder() {
         for (Integer pageNumber : pageNumbers) {
             List<Integer> numbersSucceeding = pageOrderingRules.get(pageNumber);
             if (numbersSucceeding == null) continue;

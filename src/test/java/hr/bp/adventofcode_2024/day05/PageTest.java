@@ -22,7 +22,7 @@ public class PageTest {
 
         boolean expectedAreInRightOrder = true;
 
-        boolean actualAreInRightOrder = page.numbersAreInRightOrder();
+        boolean actualAreInRightOrder = page.hasNumbersInRightOrder();
 
         Assertions.assertEquals(expectedAreInRightOrder, actualAreInRightOrder);
     }
@@ -34,7 +34,7 @@ public class PageTest {
 
         boolean expectedAreInRightOrder = true;
 
-        boolean actualAreInRightOrder = page.numbersAreInRightOrder();
+        boolean actualAreInRightOrder = page.hasNumbersInRightOrder();
 
         Assertions.assertEquals(expectedAreInRightOrder, actualAreInRightOrder);
     }
@@ -46,7 +46,7 @@ public class PageTest {
 
         boolean expectedAreInRightOrder = true;
 
-        boolean actualAreInRightOrder = page.numbersAreInRightOrder();
+        boolean actualAreInRightOrder = page.hasNumbersInRightOrder();
 
         Assertions.assertEquals(expectedAreInRightOrder, actualAreInRightOrder);
     }
@@ -58,7 +58,7 @@ public class PageTest {
 
         boolean expectedAreInRightOrder = false;
 
-        boolean actualAreInRightOrder = page.numbersAreInRightOrder();
+        boolean actualAreInRightOrder = page.hasNumbersInRightOrder();
 
         Assertions.assertEquals(expectedAreInRightOrder, actualAreInRightOrder);
     }
@@ -70,7 +70,7 @@ public class PageTest {
 
         boolean expectedAreInRightOrder = false;
 
-        boolean actualAreInRightOrder = page.numbersAreInRightOrder();
+        boolean actualAreInRightOrder = page.hasNumbersInRightOrder();
 
         Assertions.assertEquals(expectedAreInRightOrder, actualAreInRightOrder);
     }
