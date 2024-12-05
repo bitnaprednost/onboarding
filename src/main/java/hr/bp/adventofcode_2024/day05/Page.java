@@ -12,7 +12,6 @@ public class Page {
 
     private Map<Integer, List<Integer>> pageOrderingRules;
 
-
     public Page(List<Integer> pageNumbers, Map<Integer, List<Integer>> pageOrderingRules) {
         this.pageNumbers = pageNumbers;
         this.pageOrderingRules = pageOrderingRules;
@@ -30,7 +29,22 @@ public class Page {
         return true;
     }
 
+    public void orderNumbers() {
+        while (!hasNumbersInRightOrder()) pageNumbers.sort(this::pageNumberComparator);
+    }
+
+
     public int getMiddleNumber() {
         return pageNumbers.get(pageNumbers.size() / 2);
+    }
+
+    public int pageNumberComparator(int pageNumberOne, int pageNumberTwo) {
+
+        if (pageOrderingRules.get(pageNumberOne) != null && !pageOrderingRules.get(pageNumberOne).isEmpty()) {
+            if (pageOrderingRules.get(pageNumberOne).contains(pageNumberTwo)) return -1;
+        } if (pageOrderingRules.get(pageNumberTwo) != null && !pageOrderingRules.get(pageNumberTwo).isEmpty()) {
+            if (pageOrderingRules.get(pageNumberTwo).contains(pageNumberOne)) return 1;
+        }
+        return 0;
     }
 }
