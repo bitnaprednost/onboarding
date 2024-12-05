@@ -1,5 +1,6 @@
 package hr.bp.adventofcode_2024.day05;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,5 +47,9 @@ public class Page {
             if (pageOrderingRules.get(pageNumberTwo).contains(pageNumberOne)) return 1;
         }
         return 0;
+    }
+
+    public Page copy() {
+        return new Page(new ArrayList<>(this.pageNumbers), this.pageOrderingRules);
     }
 }
