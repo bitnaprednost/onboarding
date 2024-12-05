@@ -1,6 +1,8 @@
 package aoc_2024.day4;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,11 +16,13 @@ public class Main {
         WordSearch search = new WordSearch();
         int totalSum = search.wordSearch(fileContent);
 
-        System.out.println("Total times that XMAS appear is: " + totalSum);
+        logger.debug("Total times that XMAS appear is: {}", totalSum);
 
         WordSearch2 search2 = new WordSearch2();
         totalSum = search2.wordSearch(fileContent);
 
-        System.out.println("Total times that MAS appear is: " + totalSum);
+        logger.debug("Total times that MAS appear is: {}", totalSum);
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }

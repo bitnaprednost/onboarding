@@ -1,6 +1,8 @@
 package aoc_2023.day2;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,12 +18,14 @@ public class Main {
         GameIDSum gameID = new GameIDSum();
         int totalSum = gameID.gameIDSum(fileContent);
 
-        System.out.println("Total sum of game IDs is: " + totalSum);
+        logger.debug("Total sum of game IDs is: {}", totalSum);
 
         // Calculate the power sum
         PowerSum power = new PowerSum();
         int totalPowerSum = power.powerSum(fileContent);
 
-        System.out.println("Total sum of the power of sets: " + totalPowerSum);
+        logger.debug("Total sum of the power of sets: {}", totalPowerSum);
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }

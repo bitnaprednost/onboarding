@@ -1,6 +1,8 @@
 package aoc_2023.day1;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,14 +19,15 @@ public class Main {
         int totalSum = calibration.calibrationSum(fileContent);
 
         // Print the total sum
-        System.out.println("Total sum of calibration values: " + totalSum);
+        logger.debug("Total sum of calibration values: {}" , totalSum);
 
         // Calculate the sum of calibration values with spelled numbers
         CalibrationSumWithSpelling calibrationSpelled = new CalibrationSumWithSpelling();
         int totalSumspelled = calibrationSpelled.calibrationSumWithSpelling(fileContent);
 
         // Print the total sum
-        System.out.println("Total sum of calibration values: " + totalSumspelled);
-
+        logger.debug("Total sum of calibration values: {}" , totalSumspelled);
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }
