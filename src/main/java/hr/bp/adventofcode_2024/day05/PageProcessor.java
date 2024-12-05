@@ -54,7 +54,12 @@ public class PageProcessor {
 
     public int calculateSumOfMiddleNumbersForUnorderedPages() {
         int sum = 0;
-        List<Page> unorderedPages = pageUpdates.stream().filter(page -> !page.hasNumbersInRightOrder()).toList();
+        List<Page> unorderedPages = new ArrayList<>();
+        pageUpdates.forEach(page -> {
+            if (!page.hasNumbersInRightOrder()) {
+                unorderedPages.add(page.copy());
+            }
+        });
         for (Page page : unorderedPages) {
             page.orderNumbers();
             sum += page.getMiddleNumber();
