@@ -1,6 +1,8 @@
 package aoc_2023.day4;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,12 +18,14 @@ public class Main {
         TotalPoint ScratchcardSum = new TotalPoint();
         int totalSum = ScratchcardSum.totalPoint(fileContent);
 
-        System.out.println(totalSum);
+        logger.debug("Total sum for task 1: {}",totalSum);
 
         // Solve task 2
         TotalCardNumber ScratchcardNum = new TotalCardNumber();
         totalSum = ScratchcardNum.totalCardNumber(fileContent);
 
-        System.out.println(totalSum);
+        logger.debug("Total sum for task 1: {}",totalSum);
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }

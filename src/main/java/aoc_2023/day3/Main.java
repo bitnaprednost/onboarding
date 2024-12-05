@@ -18,7 +18,7 @@ public class Main {
         SumPartNumbers partNum = new SumPartNumbers();
         int totalSum = partNum.sumPartNumbers(fileContent);
 
-        System.out.println("Total sum of part numbers is: " + totalSum);
+        logger.debug("Total sum of part numbers is: {}", totalSum);
 
         // Calculate the sum of gear ratios
         SumGearRatio gearRatio = new SumGearRatio();

@@ -2,6 +2,9 @@ package aoc_2023.day6;
 
 import io.ReadFile;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -16,11 +19,13 @@ public class Main {
         Race race = new Race();
         int totalSum = race.calculateWins(fileContent);
 
-        System.out.println(totalSum);
+        logger.debug("Total sum is: {}", totalSum);
 
         // Solve task 2
         totalSum = race.calculateWins2(fileContent);
-        System.out.println(totalSum);
+        logger.debug("Total sum is: {}", totalSum);
 
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }

@@ -1,6 +1,8 @@
 package aoc_2023.day7;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,12 +18,13 @@ public class Main {
         CamelCards camelCards = new CamelCards();
         int win = camelCards.calculateWinning(fileContent);
 
-        System.out.println(win);
+        logger.debug("Total win is: {}",win);
 
         // Solve task 2
         CamelCardsWithJoker camelCardsWithJoker = new CamelCardsWithJoker();
         win = camelCardsWithJoker.calculateWinning(fileContent);
 
-        System.out.println(win);
+        logger.debug("Total win is: {}", win);
     }
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }

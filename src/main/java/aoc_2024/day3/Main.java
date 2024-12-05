@@ -1,6 +1,8 @@
 package aoc_2024.day3;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,13 +17,15 @@ public class Main {
         MulSequence mulSequence = new MulSequence();
         int mulSum = mulSequence.findMulSequence(fileContent, "mul\\((\\d+),(\\d+)\\)");
 
-        System.out.println("Result of multiplication is: " + mulSum);
+        logger.debug("Result of multiplication is: {}", mulSum);
 
         // solve task 2
         MulSequenceWithEnable mulSequenceWithEnable = new MulSequenceWithEnable();
         mulSum = mulSequenceWithEnable.findMulSequence(fileContent, "mul\\((\\d+),(\\d+)\\)|do\\(\\)|don't\\(\\)");
 
-        System.out.println("Result of enabled multiplication is: " + mulSum);
+        logger.debug("Result of enabled multiplication is: {}", mulSum);
 
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }

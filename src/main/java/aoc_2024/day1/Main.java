@@ -1,6 +1,8 @@
 package aoc_2024.day1;
 
 import io.ReadFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,11 +18,13 @@ public class Main {
         TotalDistance totalDistance = new TotalDistance();
         int totalSum = totalDistance.calculateTotalDistance(fileContent);
 
-        System.out.println("Total distance is: " + totalSum);
+        logger.debug("Total distance is: {}", totalSum);
 
         SimilarityScore similarityScore = new SimilarityScore();
         totalSum = similarityScore.calculateSimilarityScore(fileContent);
 
-        System.out.println("Total distance is: " + totalSum);
+        logger.debug("Total distance is: {}", totalSum);
     }
+
+    static final Logger logger = LoggerFactory.getLogger(Main.class);
 }
