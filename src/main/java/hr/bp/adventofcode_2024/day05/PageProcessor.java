@@ -37,7 +37,7 @@ public class PageProcessor {
 
     private void generatePageUpdates(String pageUpdatesInput, Map<Integer, List<Integer>>  pageOrderingRules) {
         for (String pageUpdateInput: pageUpdatesInput.split("\\n")) {
-            List<Integer> pagesNumbers = Arrays.stream(pageUpdateInput.split(",")).map(Integer::parseInt).toList();
+            List<Integer> pagesNumbers = new ArrayList<>(Arrays.stream(pageUpdateInput.split(",")).map(Integer::parseInt).toList());
             this.pageUpdates.add(new Page(pagesNumbers, pageOrderingRules));
         }
     }
@@ -52,4 +52,13 @@ public class PageProcessor {
         return sum;
     }
 
+    public int calculateSumOfMiddleNumbersForUnorderedPages() {
+        int sum = 0;
+        List<Page> unorderedPages = pageUpdates.stream().filter(page -> !page.hasNumbersInRightOrder()).toList();
+        for (Page page : unorderedPages) {
+            page.orderNumbers();
+            sum += page.getMiddleNumber();
+        }
+        return sum;
+    }
 }
