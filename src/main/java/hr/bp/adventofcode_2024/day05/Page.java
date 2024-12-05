@@ -29,4 +29,8 @@ public class Page {
         }
         return true;
     }
+
+    public int getMiddleNumber() {
+        return pageNumbers.get(pageNumbers.size() / 2);
+    }
 }
