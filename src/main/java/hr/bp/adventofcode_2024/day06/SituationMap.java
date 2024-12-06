@@ -67,36 +67,26 @@ public class SituationMap {
     }
 
     private GuardPosition getNextGuardPosition(GuardPosition guardPosition) {
+        boolean isVertical = List.of(Direction.SOUTH, Direction.NORTH).contains(guardPosition.direction());
+        boolean isPositiveDirection = List.of(Direction.SOUTH, Direction.EAST).contains(guardPosition.direction());
+
+        List<Integer> obstaclesCoordinates = (isVertical ? obstaclesOnColumnsMap.get(guardPosition.column()) : obstaclesOnRowsMap.get(guardPosition.row()))
+                .stream()
+                .filter(coordinate -> isPositiveDirection ? coordinate > (isVertical ? guardPosition.row() : guardPosition.column())
+                        : coordinate < (isVertical ? guardPosition.row() : guardPosition.column()))
+                .toList();
+
         int nextRow = guardPosition.row();
         int nextColumn = guardPosition.column();
 
-        if (List.of(Direction.SOUTH, Direction.NORTH).contains(guardPosition.direction())) {
-            List<Integer> possibleObstacles = obstaclesOnColumnsMap.get(guardPosition.column())
-                    .stream()
-                    .filter(obstacleOnColumn -> {
-                        if (Direction.SOUTH.equals(guardPosition.direction())) return obstacleOnColumn > guardPosition.row();
-                        else return obstacleOnColumn < guardPosition.row();
-                    })
-                    .toList();
-            if (Direction.NORTH.equals(guardPosition.direction())) {
-                nextRow = possibleObstacles.isEmpty() ? 0 : possibleObstacles.getLast() + 1;
-            } else {
-                nextRow = possibleObstacles.isEmpty() ? biggestCoordinates.row() : possibleObstacles.getFirst() - 1;
-            }
-
+        if (isVertical) {
+            nextRow = obstaclesCoordinates.isEmpty()
+                    ? (isPositiveDirection ? biggestCoordinates.row() : 0)
+                    : (isPositiveDirection ? obstaclesCoordinates.getFirst() - 1 : obstaclesCoordinates.getLast() + 1);
         } else {
-            List<Integer> possibleObstacles = obstaclesOnRowsMap.get(guardPosition.row())
-                    .stream()
-                    .filter(obstacleOnRow -> {
-                        if (Direction.EAST.equals(guardPosition.direction())) return obstacleOnRow > guardPosition.column();
-                        else return obstacleOnRow < guardPosition.column();
-                    })
-                    .toList();
-            if (Direction.WEST.equals(guardPosition.direction())) {
-                nextColumn = possibleObstacles.isEmpty() ? 0 : possibleObstacles.getLast() + 1;
-            } else {
-                nextColumn = possibleObstacles.isEmpty() ? biggestCoordinates.column() : possibleObstacles.getFirst() - 1;
-            }
+            nextColumn = obstaclesCoordinates.isEmpty()
+                    ? (isPositiveDirection ? biggestCoordinates.column() : 0)
+                    : (isPositiveDirection ? obstaclesCoordinates.getFirst() - 1 : obstaclesCoordinates.getLast() + 1);
         }
 
         return new GuardPosition(nextRow, nextColumn, Direction.turnNinetyDegrees(guardPosition.direction()));
