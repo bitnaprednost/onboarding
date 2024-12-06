@@ -1,0 +1,18 @@
+package hr.bp.adventofcode_2024.day06;
+
+import static hr.bp.adventofcode_2024.Utils.displayResult;
+import static hr.bp.adventofcode_2024.Utils.readInputForDay;
+
+/**
+ * @author Ivan Tomičić
+ */
+public class TaskOne {
+
+    public static void main(String[] args) {
+        String input = readInputForDay("day06");
+
+        SituationMap situationMap = new SituationMap(input);
+
+        displayResult(situationMap.countDistinctPositions());
+    }
+}
