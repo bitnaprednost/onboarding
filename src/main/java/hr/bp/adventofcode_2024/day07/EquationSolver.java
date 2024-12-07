@@ -21,7 +21,7 @@ public class EquationSolver {
         this.numbers = numbers;
     }
 
-    public boolean findSolution() {
+    public boolean hasSolution() {
         return calculateIfConfigurationEqualsToValue(numbers.size() - 1, value);
     }
 
