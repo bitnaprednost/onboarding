@@ -34,4 +34,16 @@ public class SituationMapTest {
 
         Assertions.assertEquals(expectedDistinctPositions, actualDistinctPositions);
     }
+
+    @Test
+    public void calculateWaysToMakeALoop_givenInputOne_returnsCorrectValue() {
+        String input = getFirstInput();
+        SituationMap situationMap = new SituationMap(input);
+
+        int expectedWaysToMakeALoop = 6;
+
+        int actualWaysToMakeALoop = situationMap.countWaysToMakeALoop();
+
+        Assertions.assertEquals(expectedWaysToMakeALoop, actualWaysToMakeALoop);
+    }
 }

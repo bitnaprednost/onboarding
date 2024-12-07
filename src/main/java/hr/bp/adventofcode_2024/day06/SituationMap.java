@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static hr.bp.adventofcode_2024.Utils.parseGridTo2DArray;
@@ -55,9 +56,55 @@ public class SituationMap {
         return distinctPositionsVisited.size();
     }
 
+    public int countWaysToMakeALoop() {
+        int sum = 0;
+        for (int row = 0; row <= biggestCoordinates.row(); row++) {
+            for (int column = 0; column <= biggestCoordinates.column(); column++) {
+                if (guardPosition.row() == row && guardPosition.column() == column) continue;
+                if (obstaclesOnRowsMap.get(row) != null && obstaclesOnRowsMap.get(row).contains(column)) continue;
+                else {
+                    sum += checkIfNewObstacleCausesALoop(row, column) ? 1 : 0;
+                }
+            }
+        }
+
+        return sum;
+    }
+
+    private boolean checkIfNewObstacleCausesALoop(int row, int column) {
+        HashMap<Integer, List<Integer>> deepCopyObstaclesOnRowsMap = new HashMap<>();
+        for (Map.Entry<Integer, List<Integer>> entry : obstaclesOnRowsMap.entrySet()) {
+            deepCopyObstaclesOnRowsMap.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+        }
+
+        HashMap<Integer, List<Integer>> deepCopyObstaclesOnColumnsMap = new HashMap<>();
+        for (Map.Entry<Integer, List<Integer>> entry : obstaclesOnColumnsMap.entrySet()) {
+            deepCopyObstaclesOnColumnsMap.put(entry.getKey(), new ArrayList<>(entry.getValue()));
+        }
+
+        deepCopyObstaclesOnRowsMap.computeIfAbsent(row, k -> new ArrayList<>()).add(column);
+        deepCopyObstaclesOnColumnsMap.computeIfAbsent(column, k -> new ArrayList<>()).add(row);
+
+        deepCopyObstaclesOnRowsMap.get(row).sort(Integer::compareTo);
+        deepCopyObstaclesOnColumnsMap.get(column).sort(Integer::compareTo);
+
+        Set<GuardPosition> guardPositions = new HashSet<>();
+        GuardPosition currentGuardPosition = guardPosition;
+        guardPositions.add(guardPosition);
+
+        while (!isOnBorder(currentGuardPosition)) {
+            GuardPosition nextGuardPosition = getNextGuardPosition(currentGuardPosition, deepCopyObstaclesOnRowsMap, deepCopyObstaclesOnColumnsMap);
+            if (guardPositions.contains(nextGuardPosition)) return true;
+            guardPositions.add(nextGuardPosition);
+            currentGuardPosition = nextGuardPosition;
+
+        }
+        return false;
+    }
+
     private void walkToNextPosition(GuardPosition guardPosition, Set<Pair<Integer, Integer>> distinctPositionsVisited) {
 
-        GuardPosition nextGuardPosition = getNextGuardPosition(guardPosition);
+        GuardPosition nextGuardPosition = getNextGuardPosition(guardPosition, obstaclesOnRowsMap, obstaclesOnColumnsMap);
 
         distinctPositionsVisited.addAll(Pair.getAllIntegerPairsBetween(guardPosition.row(), guardPosition.column(), nextGuardPosition.row(), nextGuardPosition.column()));
 
@@ -66,15 +113,20 @@ public class SituationMap {
         walkToNextPosition(nextGuardPosition, distinctPositionsVisited);
     }
 
-    private GuardPosition getNextGuardPosition(GuardPosition guardPosition) {
+    private GuardPosition getNextGuardPosition(GuardPosition guardPosition, HashMap<Integer, List<Integer>> obstaclesOnRowsMap, HashMap<Integer, List<Integer>> obstaclesOnColumnsMap) {
         boolean isVertical = List.of(Direction.SOUTH, Direction.NORTH).contains(guardPosition.direction());
         boolean isPositiveDirection = List.of(Direction.SOUTH, Direction.EAST).contains(guardPosition.direction());
 
-        List<Integer> obstaclesCoordinates = (isVertical ? obstaclesOnColumnsMap.get(guardPosition.column()) : obstaclesOnRowsMap.get(guardPosition.row()))
-                .stream()
-                .filter(coordinate -> isPositiveDirection ? coordinate > (isVertical ? guardPosition.row() : guardPosition.column())
-                        : coordinate < (isVertical ? guardPosition.row() : guardPosition.column()))
-                .toList();
+        List<Integer> obstaclesCoordinates = (isVertical ? obstaclesOnColumnsMap.get(guardPosition.column()) : obstaclesOnRowsMap.get(guardPosition.row()));
+
+        if (obstaclesCoordinates == null) {
+            obstaclesCoordinates = new ArrayList<>();
+        } else {
+            obstaclesCoordinates= obstaclesCoordinates.stream()
+                    .filter(coordinate -> isPositiveDirection ? coordinate > (isVertical ? guardPosition.row() : guardPosition.column())
+                            : coordinate < (isVertical ? guardPosition.row() : guardPosition.column()))
+                    .toList();
+        }
 
         int nextRow = guardPosition.row();
         int nextColumn = guardPosition.column();
