@@ -30,4 +30,11 @@ public class EquationRunner {
                 .mapToLong(EquationSolver::getValue)
                 .sum();
     }
+
+    public long sumSolvableEquationsWithAdditionalOperator() {
+        return equationSolvers.stream()
+                .filter(EquationSolver::hasSolutionWithTheAdditionalOperator)
+                .mapToLong(EquationSolver::getValue)
+                .sum();
+    }
 }

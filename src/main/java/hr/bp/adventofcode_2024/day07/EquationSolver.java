@@ -17,16 +17,38 @@ public class EquationSolver {
     }
 
     public boolean hasSolution() {
-        return calculateIfConfigurationEqualsToValue(numbers.size() - 1, value);
+        return calculateIfConfigurationIsPossibleWithSumAndMultiply(numbers.size() - 1, value);
     }
 
-    private boolean calculateIfConfigurationEqualsToValue(int index, long value) {
+    public boolean hasSolutionWithTheAdditionalOperator() {
+        return calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(numbers.size() - 1, value);
+    }
+
+    private boolean calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(int index, long value) {
         if (index == 0) return value == numbers.getFirst();
 
         long currentNumber = numbers.get(index);
 
-        return calculateIfConfigurationEqualsToValue(index - 1, value - currentNumber) ||
-                (value % currentNumber == 0 && calculateIfConfigurationEqualsToValue(index - 1, value / currentNumber));
+        long digits = (int) (Math.log10(Math.abs(currentNumber)) + 1);
+
+        long tenRaisedToDigits = 1;
+
+        while (digits-- > 0) tenRaisedToDigits *= 10;
+
+        return calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, value - currentNumber) ||
+                (value % currentNumber == 0 && calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, value / currentNumber)) ||
+                (calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, (value - currentNumber) / tenRaisedToDigits));
+        // minus number and divide by 10**digits ((value - currentNumber) / Math.pow(10, digits)) %
+
+    }
+
+    private boolean calculateIfConfigurationIsPossibleWithSumAndMultiply(int index, long value) {
+        if (index == 0) return value == numbers.getFirst();
+
+        long currentNumber = numbers.get(index);
+
+        return calculateIfConfigurationIsPossibleWithSumAndMultiply(index - 1, value - currentNumber) ||
+                (value % currentNumber == 0 && calculateIfConfigurationIsPossibleWithSumAndMultiply(index - 1, value / currentNumber));
     }
 
     public Long getValue() {
