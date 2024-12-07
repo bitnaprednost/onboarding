@@ -11,8 +11,8 @@ public class TaskOne {
     public static void main(String[] args) {
         String input = readInputForDay("day07");
 
-        EquationRunner equationRunner = new EquationRunner(input);
+        CalibrationProcessor calibrationProcessor = new CalibrationProcessor(input);
 
-        displayResult(equationRunner.sumSolvableEquations(false));
+        displayResult(calibrationProcessor.calculateTotalCalibrationValue(false));
     }
 }
