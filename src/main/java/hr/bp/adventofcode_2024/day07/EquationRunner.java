@@ -24,16 +24,9 @@ public class EquationRunner {
     }
 
 
-    public long sumSolvableEquations() {
+    public long sumSolvableEquations(boolean allowConcatenationOperator) {
         return equationSolvers.stream()
-                .filter(EquationSolver::hasSolution)
-                .mapToLong(EquationSolver::getValue)
-                .sum();
-    }
-
-    public long sumSolvableEquationsWithAdditionalOperator() {
-        return equationSolvers.stream()
-                .filter(EquationSolver::hasSolutionWithTheAdditionalOperator)
+                .filter(e -> e.hasSolution(allowConcatenationOperator))
                 .mapToLong(EquationSolver::getValue)
                 .sum();
     }

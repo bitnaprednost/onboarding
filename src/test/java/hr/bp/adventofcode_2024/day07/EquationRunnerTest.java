@@ -18,7 +18,7 @@ public class EquationRunnerTest {
 
         long expectedSum = 3749;
 
-        long actualSum = equationRunner.sumSolvableEquations();
+        long actualSum = equationRunner.sumSolvableEquations(false);
 
         Assertions.assertEquals(expectedSum, actualSum);
     }
@@ -30,7 +30,7 @@ public class EquationRunnerTest {
 
         long expectedSum = 3598800864292L;
 
-        long actualSum = equationRunner.sumSolvableEquations();
+        long actualSum = equationRunner.sumSolvableEquations(false);
 
         Assertions.assertEquals(expectedSum, actualSum);
     }
@@ -42,7 +42,7 @@ public class EquationRunnerTest {
 
         long expectedSum = 11387;
 
-        long actualSum = equationRunner.sumSolvableEquationsWithAdditionalOperator();
+        long actualSum = equationRunner.sumSolvableEquations(true);
 
         Assertions.assertEquals(expectedSum, actualSum);
     }
@@ -54,7 +54,7 @@ public class EquationRunnerTest {
 
         long expectedSum = 340362529351427L;
 
-        long actualSum = equationRunner.sumSolvableEquationsWithAdditionalOperator();
+        long actualSum = equationRunner.sumSolvableEquations(true);
 
         Assertions.assertEquals(expectedSum, actualSum);
     }

@@ -13,6 +13,6 @@ public class TaskTwo {
 
         EquationRunner equationRunner = new EquationRunner(input);
 
-        displayResult(equationRunner.sumSolvableEquationsWithAdditionalOperator());
+        displayResult(equationRunner.sumSolvableEquations(true));
     }
 }

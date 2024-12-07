@@ -16,39 +16,22 @@ public class EquationSolver {
         this.numbers = numbers;
     }
 
-    public boolean hasSolution() {
-        return calculateIfConfigurationIsPossibleWithSumAndMultiply(numbers.size() - 1, value);
+    public boolean hasSolution(boolean allowConcatenationOperator) {
+        return calculateIfConfigurationIsPossible(numbers.size() - 1, value, allowConcatenationOperator);
     }
 
-    public boolean hasSolutionWithTheAdditionalOperator() {
-        return calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(numbers.size() - 1, value);
-    }
-
-    // 442796525811358 wrong for task 2
-    private boolean calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(int index, long value) {
+    private boolean calculateIfConfigurationIsPossible(int index, long value, boolean allowConcatenationOperator) {
         if (index == 0) return value == numbers.getFirst();
 
         long currentNumber = numbers.get(index);
 
         long digits = (int) (Math.log10(Math.abs(currentNumber)) + 1);
+        long tenRaisedToDigits = (long) Math.pow(10, digits);
 
-        long tenRaisedToDigits = 1;
+        return calculateIfConfigurationIsPossible(index - 1, value - currentNumber, allowConcatenationOperator) ||
+                (value % currentNumber == 0 && calculateIfConfigurationIsPossible(index - 1, value / currentNumber, allowConcatenationOperator)) ||
+                (allowConcatenationOperator && (value - currentNumber) % tenRaisedToDigits == 0 && calculateIfConfigurationIsPossible(index - 1, (value - currentNumber) / tenRaisedToDigits, allowConcatenationOperator));
 
-        while (digits-- > 0) tenRaisedToDigits *= 10;
-
-        return calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, value - currentNumber) ||
-                (value % currentNumber == 0 && calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, value / currentNumber)) ||
-                ((value - currentNumber) % tenRaisedToDigits == 0 && calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, (value - currentNumber) / tenRaisedToDigits));
-
-    }
-
-    private boolean calculateIfConfigurationIsPossibleWithSumAndMultiply(int index, long value) {
-        if (index == 0) return value == numbers.getFirst();
-
-        long currentNumber = numbers.get(index);
-
-        return calculateIfConfigurationIsPossibleWithSumAndMultiply(index - 1, value - currentNumber) ||
-                (value % currentNumber == 0 && calculateIfConfigurationIsPossibleWithSumAndMultiply(index - 1, value / currentNumber));
     }
 
     public Long getValue() {

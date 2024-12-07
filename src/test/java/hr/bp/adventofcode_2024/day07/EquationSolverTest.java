@@ -19,7 +19,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = true;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolution();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(false);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -33,7 +33,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = true;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolution();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(false);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -47,7 +47,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = true;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolution();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(false);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -61,7 +61,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = false;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolution();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(false);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -75,7 +75,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = false;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolution();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(false);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -89,7 +89,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = false;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolution();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(false);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -103,7 +103,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = false;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolution();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(false);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -117,7 +117,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = true;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolutionWithTheAdditionalOperator();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(true);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -131,7 +131,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = true;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolutionWithTheAdditionalOperator();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(true);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
@@ -145,7 +145,7 @@ public class EquationSolverTest {
 
         boolean expectedEquationHasSolution = true;
 
-        boolean actualEquationHasSolution = equationSolver.hasSolutionWithTheAdditionalOperator();
+        boolean actualEquationHasSolution = equationSolver.hasSolution(true);
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }

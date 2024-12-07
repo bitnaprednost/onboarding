@@ -13,6 +13,6 @@ public class TaskOne {
 
         EquationRunner equationRunner = new EquationRunner(input);
 
-        displayResult(equationRunner.sumSolvableEquations());
+        displayResult(equationRunner.sumSolvableEquations(false));
     }
 }
