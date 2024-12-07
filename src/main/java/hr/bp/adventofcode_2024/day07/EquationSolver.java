@@ -26,13 +26,12 @@ public class EquationSolver {
     }
 
     private boolean calculateIfConfigurationEqualsToValue(int index, long value) {
-        if (index < 0) return false;
+        if (index == 0) return value == numbers.get(index);
+
         long subtractedByNumber = value - numbers.get(index);
 
         boolean divisionMakesSense = value % numbers.get(index) == 0;
         long dividedByNumber = value / numbers.get(index);
-
-        if (index == 0 && (dividedByNumber == 1 || subtractedByNumber == 0)) return true;
 
         if (divisionMakesSense) {
             return calculateIfConfigurationEqualsToValue(index - 1, subtractedByNumber) || calculateIfConfigurationEqualsToValue(index - 1, dividedByNumber);

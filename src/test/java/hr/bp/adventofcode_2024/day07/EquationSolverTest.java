@@ -93,4 +93,18 @@ public class EquationSolverTest {
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
+
+    @Test
+    public void findIfHasSolution_givenInputSeven_returnsCorrectResult() {
+        long value = 156;
+        List<Long> numbers = List.of(15L, 6L);
+
+        EquationSolver equationSolver = new EquationSolver(value, numbers);
+
+        boolean expectedEquationHasSolution = false;
+
+        boolean actualEquationHasSolution = equationSolver.hasSolution();
+
+        Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
+    }
 }
