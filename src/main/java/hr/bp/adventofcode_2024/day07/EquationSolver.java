@@ -24,6 +24,7 @@ public class EquationSolver {
         return calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(numbers.size() - 1, value);
     }
 
+    // 442796525811358 wrong for task 2
     private boolean calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(int index, long value) {
         if (index == 0) return value == numbers.getFirst();
 
@@ -37,8 +38,7 @@ public class EquationSolver {
 
         return calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, value - currentNumber) ||
                 (value % currentNumber == 0 && calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, value / currentNumber)) ||
-                (calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, (value - currentNumber) / tenRaisedToDigits));
-        // minus number and divide by 10**digits ((value - currentNumber) / Math.pow(10, digits)) %
+                ((value - currentNumber) % tenRaisedToDigits == 0 && calculateIfConfigurationIsPossibleWithSumAndMultiplyAndConcatenation(index - 1, (value - currentNumber) / tenRaisedToDigits));
 
     }
 
