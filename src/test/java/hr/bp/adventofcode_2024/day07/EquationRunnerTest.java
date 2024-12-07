@@ -21,4 +21,16 @@ public class EquationRunnerTest {
 
         Assertions.assertEquals(expectedSum, actualSum);
     }
+
+    @Test
+    public void findIfEquationHasSolutionWithAdditionalOperator_givenInputOne_returnsCorrectResult() {
+        String input = getFirstInput();
+        EquationRunner equationRunner = new EquationRunner(input);
+
+        long expectedSum = 11387;
+
+        long actualSum = equationRunner.sumSolvableEquationsWithAdditionalOperator();
+
+        Assertions.assertEquals(expectedSum, actualSum);
+    }
 }

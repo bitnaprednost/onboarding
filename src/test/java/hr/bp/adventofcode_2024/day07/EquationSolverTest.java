@@ -107,4 +107,46 @@ public class EquationSolverTest {
 
         Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
     }
+
+    @Test
+    public void findIfHasSolutionWithAdditionalOperator_givenInputSeven_returnsCorrectResult() {
+        long value = 156;
+        List<Long> numbers = List.of(15L, 6L);
+
+        EquationSolver equationSolver = new EquationSolver(value, numbers);
+
+        boolean expectedEquationHasSolution = true;
+
+        boolean actualEquationHasSolution = equationSolver.hasSolutionWithTheAdditionalOperator();
+
+        Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
+    }
+
+    @Test
+    public void findIfHasSolutionWithAdditionalOperator_givenInputEight_returnsCorrectResult() {
+        long value = 7290;
+        List<Long> numbers = List.of(6L, 8L, 6L, 15L);
+
+        EquationSolver equationSolver = new EquationSolver(value, numbers);
+
+        boolean expectedEquationHasSolution = true;
+
+        boolean actualEquationHasSolution = equationSolver.hasSolutionWithTheAdditionalOperator();
+
+        Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
+    }
+
+    @Test
+    public void findIfHasSolutionWithAdditionalOperator_givenInputFive_returnsCorrectResult() {
+        long value = 192;
+        List<Long> numbers = List.of(17L, 8L, 14L);
+
+        EquationSolver equationSolver = new EquationSolver(value, numbers);
+
+        boolean expectedEquationHasSolution = true;
+
+        boolean actualEquationHasSolution = equationSolver.hasSolutionWithTheAdditionalOperator();
+
+        Assertions.assertEquals(expectedEquationHasSolution, actualEquationHasSolution);
+    }
 }
