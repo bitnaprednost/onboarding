@@ -26,17 +26,12 @@ public class EquationSolver {
     }
 
     private boolean calculateIfConfigurationEqualsToValue(int index, long value) {
-        if (index == 0) return value == numbers.get(index);
+        if (index == 0) return value == numbers.getFirst();
 
-        long subtractedByNumber = value - numbers.get(index);
+        long currentNumber = numbers.get(index);
 
-        boolean divisionMakesSense = value % numbers.get(index) == 0;
-        long dividedByNumber = value / numbers.get(index);
-
-        if (divisionMakesSense) {
-            return calculateIfConfigurationEqualsToValue(index - 1, subtractedByNumber) || calculateIfConfigurationEqualsToValue(index - 1, dividedByNumber);
-        }
-        return calculateIfConfigurationEqualsToValue(index - 1, subtractedByNumber);
+        return calculateIfConfigurationEqualsToValue(index - 1, value - currentNumber) ||
+                (value % currentNumber == 0 && calculateIfConfigurationEqualsToValue(index - 1, value / currentNumber));
     }
 
     public Long getValue() {
