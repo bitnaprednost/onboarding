@@ -1,16 +1,11 @@
 package hr.bp.adventofcode_2024.day07;
 
 import java.util.List;
-import java.util.function.BiFunction;
 
 /**
  * @author Ivan Tomičić
  */
 public class EquationSolver {
-
-    BiFunction<Long, Long, Long> ADD = Long::sum;
-
-    BiFunction<Long, Long, Long> MULTIPLY = (a, b) -> a * b;
 
     private final Long value;
 
