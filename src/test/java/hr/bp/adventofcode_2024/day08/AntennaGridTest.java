@@ -46,4 +46,16 @@ public class AntennaGridTest {
 
         Assertions.assertEquals(expectedUniqueAntinodes, actualUniqueAntinodes);
     }
+
+    @Test
+    public void findAntinodesUsingResonantHarmonics_givenTaskInput_returnsCorrectResult() {
+        String input = readInputForDay("day08");
+        AntennaGrid antennaGrid = new AntennaGrid(input);
+
+        int expectedUniqueAntinodes = 1229;
+
+        int actualUniqueAntinodes = antennaGrid.findUniqueAntinodes(true);
+
+        Assertions.assertEquals(expectedUniqueAntinodes, actualUniqueAntinodes);
+    }
 }
