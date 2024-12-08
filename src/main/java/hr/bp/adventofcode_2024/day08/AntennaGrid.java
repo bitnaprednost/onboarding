@@ -35,37 +35,50 @@ public class AntennaGrid {
         biggestCoordinates = new GridCoordinates(lines.length - 1, lines[0].length() - 1);
     }
 
-    public int findUniqueAntinodes() {
+    public int findUniqueAntinodes(boolean useResonantHarmonics) {
         for (List<GridCoordinates> listOfAntennas : antennaCoordinates.values()) {
-            addUniqueAntinodesForList(listOfAntennas);
+            addUniqueAntinodesForList(listOfAntennas, useResonantHarmonics);
         }
         return uniqueAntinodes.size();
     }
 
-    private void addUniqueAntinodesForList(List<GridCoordinates> listOfAntennas) {
+    private void addUniqueAntinodesForList(List<GridCoordinates> listOfAntennas, boolean useResonantHarmonics) {
         for (int i = 0; i < listOfAntennas.size() - 1; i++) {
             for (int j = i + 1; j < listOfAntennas.size(); j++) {
-                addUniqueAntinodesForPair(listOfAntennas.get(i), listOfAntennas.get(j));
+                addUniqueAntinodesForPair(listOfAntennas.get(i), listOfAntennas.get(j), useResonantHarmonics);
             }
         }
     }
 
-    private void addUniqueAntinodesForPair(GridCoordinates antenna1, GridCoordinates antenna2) {
+    private void addUniqueAntinodesForPair(GridCoordinates antenna1, GridCoordinates antenna2, boolean useResonantHarmonics) {
         int dRow = Math.abs(antenna1.row() - antenna2.row());
         int dColumn = antenna1.column() - antenna2.column();
 
         boolean antenna1ComesBeforeAntenna2 = antenna1.row() < antenna2.row();
 
-        GridCoordinates antinode1 = new GridCoordinates(
-                Math.min(antenna1.row(), antenna2.row()) - dRow,
-                antenna1ComesBeforeAntenna2 ? antenna1.column() + dColumn : antenna2.column() + dColumn);
+        int multiplicationFactor = 1;
+        boolean searchExhausted;
 
-        GridCoordinates antinode2 = new GridCoordinates(
-                Math.max(antenna1.row(), antenna2.row()) + dRow,
-                antenna1ComesBeforeAntenna2 ? antenna2.column() - dColumn : antenna1.column() - dColumn);
+        do {
+            GridCoordinates antinode1 = new GridCoordinates(
+                    Math.min(antenna1.row(), antenna2.row()) - dRow * multiplicationFactor,
+                    antenna1ComesBeforeAntenna2 ? antenna1.column() + dColumn * multiplicationFactor : antenna2.column() + dColumn * multiplicationFactor);
 
-        if (isInsideGrid(antinode1)) uniqueAntinodes.add(antinode1);
-        if (isInsideGrid(antinode2)) uniqueAntinodes.add(antinode2);
+            GridCoordinates antinode2 = new GridCoordinates(
+                    Math.max(antenna1.row(), antenna2.row()) + dRow * multiplicationFactor,
+                    antenna1ComesBeforeAntenna2 ? antenna2.column() - dColumn * multiplicationFactor : antenna1.column() - dColumn * multiplicationFactor);
+
+            if (isInsideGrid(antinode1)) uniqueAntinodes.add(antinode1);
+            if (isInsideGrid(antinode2)) uniqueAntinodes.add(antinode2);
+
+            searchExhausted = !isInsideGrid(antinode1) && !isInsideGrid(antinode2);
+            multiplicationFactor += 1;
+
+        } while (useResonantHarmonics && !searchExhausted);
+
+        if (useResonantHarmonics) {
+            uniqueAntinodes.addAll(antennaCoordinates.values().stream().flatMap(List::stream).toList());
+        }
     }
 
     private boolean isInsideGrid(GridCoordinates antinode) {
