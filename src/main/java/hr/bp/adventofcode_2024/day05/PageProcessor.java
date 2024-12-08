@@ -14,8 +14,8 @@ public class PageProcessor {
     private List<Page> pages;
 
     public PageProcessor(String input) {
-        String firstPart = input.split("\\n\\n")[0];
-        String secondPart = input.split("\\n\\n")[1];
+        String firstPart = input.replaceAll("\\r", "").split("\\n\\n")[0];
+        String secondPart = input.replaceAll("\\r", "").split("\\n\\n")[1];
 
         pages = new ArrayList<>();
         Map<Integer, List<Integer>> pageOrderingRules = extractPageOrderingRules(firstPart);
