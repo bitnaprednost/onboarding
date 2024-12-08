@@ -18,7 +18,7 @@ public class AntennaGridTest {
 
         int expectedUniqueAntinodes = 14;
 
-        int actualUniqueAntinodes = antennaGrid.findUniqueAntinodes();
+        int actualUniqueAntinodes = antennaGrid.findUniqueAntinodes(false);
 
         Assertions.assertEquals(expectedUniqueAntinodes, actualUniqueAntinodes);
     }
@@ -30,7 +30,19 @@ public class AntennaGridTest {
 
         int expectedUniqueAntinodes = 371;
 
-        int actualUniqueAntinodes = antennaGrid.findUniqueAntinodes();
+        int actualUniqueAntinodes = antennaGrid.findUniqueAntinodes(false);
+
+        Assertions.assertEquals(expectedUniqueAntinodes, actualUniqueAntinodes);
+    }
+
+    @Test
+    public void findAntinodesUsingResonantHarmonics_givenInputOne_returnsCorrectResult() {
+        String input = getFirstInput();
+        AntennaGrid antennaGrid = new AntennaGrid(input);
+
+        int expectedUniqueAntinodes = 34;
+
+        int actualUniqueAntinodes = antennaGrid.findUniqueAntinodes(true);
 
         Assertions.assertEquals(expectedUniqueAntinodes, actualUniqueAntinodes);
     }
