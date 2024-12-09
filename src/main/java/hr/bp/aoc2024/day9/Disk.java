@@ -15,8 +15,9 @@ public class Disk {
 
         long checksum = 0;
 
-        for (int index = 0; index < disk.size() && disk.get(index) != -1; index++) {
-            checksum += (long) index * disk.get(index);
+        for (int index = 0; index < disk.size(); index++) {
+            if (disk.get(index) != -1)
+                checksum += (long) index * disk.get(index);
         }
 
         return checksum;
