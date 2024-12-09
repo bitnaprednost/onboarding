@@ -28,4 +28,24 @@ class DiskTest {
 
         Assertions.assertEquals(expectedValue, disk.getFileSystemChecksum());
     }
+
+    @Test
+    void getFileSystemChecksum_testInput_wholeFiles() {
+        long expected = 2858;
+
+        DiskParser diskParser = new DiskParser(getTestInput());
+        disk = new Disk(diskParser);
+
+        Assertions.assertEquals(expected, disk.getFileSystemChecksum_filesMoved());
+    }
+
+    @Test
+    void getFileSystemChecksum_finalInput_wholeFiles() {
+        long expected = 6265268809555L;
+
+        DiskParser diskParser = new DiskParser(getFinalInput());
+        disk = new Disk(diskParser);
+
+        Assertions.assertEquals(expected, disk.getFileSystemChecksum_filesMoved());
+    }
 }
