@@ -25,48 +25,53 @@ public class TopographicalMap {
         for (int x = 0; x < topographicalMap.length; x++) {
             for (int y = 0; y < topographicalMap[0].length; y++) {
                 if (topographicalMap[x][y] == 0) {
-                    trailheadScore += getTrailheadScore(x, y);
+                    trailheadScore += getTrailheadScore(new Coordinate(x, y));
                 }
             }
         }
         return trailheadScore;
     }
 
-    private int getTrailheadScore(int x, int y) {
+    private int getTrailheadScore(Coordinate coordinateOfZero) {
         int trailheadScore = 0;
         List<Coordinate> trailheadsFoundCoordinates = new ArrayList<>();
 
-        trailheadScore += findTrailhead(x, y, trailheadsFoundCoordinates);
+        trailheadScore += findTrailhead(coordinateOfZero, trailheadsFoundCoordinates);
 
-        log.debug("for trail start at x={} y={} found {} trailheads", x, y, trailheadScore);
+        log.debug("for trail start at x={} y={} found {} trailheads",
+                coordinateOfZero.getX(),
+                coordinateOfZero.getY(),
+                trailheadScore);
 
         return trailheadScore;
 
     }
 
-    private int findTrailhead(int x, int y, List<Coordinate> trailheadsFoundCoordinates) {
-        int currentHeight = topographicalMap[x][y];
+    private int findTrailhead(Coordinate coordinate, List<Coordinate> trailheadsFoundCoordinates) {
+        int currentHeight = topographicalMap[coordinate.getX()][coordinate.getY()];
 
         if (currentHeight == 9) {
-            Coordinate trailheadCoordinate = new Coordinate(x,y);
-            if (trailheadsFoundCoordinates.contains(trailheadCoordinate)) {
+            if (trailheadsFoundCoordinates.contains(coordinate)) {
                 return 0;
             }
-            trailheadsFoundCoordinates.add(trailheadCoordinate);
+            trailheadsFoundCoordinates.add(coordinate);
             return 1;
         }
         int trailheadsFound = 0;
+        int x = coordinate.getX();
+        int y = coordinate.getY();
+
         if (checkDirection(x, y + 1, currentHeight)) {
-            trailheadsFound += findTrailhead(x, y + 1, trailheadsFoundCoordinates);
+            trailheadsFound += findTrailhead(new Coordinate(x, y + 1), trailheadsFoundCoordinates);
         }
         if (checkDirection(x, y - 1, currentHeight)) {
-            trailheadsFound += findTrailhead(x, y - 1, trailheadsFoundCoordinates);
+            trailheadsFound += findTrailhead(new Coordinate(x, y - 1), trailheadsFoundCoordinates);
         }
         if (checkDirection(x + 1, y, currentHeight)) {
-            trailheadsFound += findTrailhead(x + 1, y, trailheadsFoundCoordinates);
+            trailheadsFound += findTrailhead(new Coordinate(x + 1, y), trailheadsFoundCoordinates);
         }
         if (checkDirection(x - 1, y, currentHeight)) {
-            trailheadsFound += findTrailhead(x - 1, y, trailheadsFoundCoordinates);
+            trailheadsFound += findTrailhead(new Coordinate(x - 1, y), trailheadsFoundCoordinates);
         }
 
         return trailheadsFound;
