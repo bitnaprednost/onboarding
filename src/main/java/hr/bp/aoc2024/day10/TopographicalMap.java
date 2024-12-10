@@ -10,13 +10,23 @@ public class TopographicalMap {
     private static final Logger log = LoggerFactory.getLogger(TopographicalMap.class);
 
     private int[][] topographicalMap;
+    private boolean distinctTrails;
+
+    public TopographicalMap(int[][] topographicalMap, boolean distinctTrails) {
+        this.topographicalMap = topographicalMap;
+        this.distinctTrails = distinctTrails;
+    }
 
     public TopographicalMap(int[][] topographicalMap) {
-        this.topographicalMap = topographicalMap;
+        this(topographicalMap, false);
     }
 
     public TopographicalMap(TopographicMapParser parser) {
         this(parser.getTopographicalMap());
+    }
+
+    public TopographicalMap(TopographicMapParser parser, boolean distinctTrails) {
+        this(parser.getTopographicalMap(), distinctTrails);
     }
 
     public int calculateTrailheadScore() {
@@ -51,12 +61,9 @@ public class TopographicalMap {
         int currentHeight = topographicalMap[coordinate.getX()][coordinate.getY()];
 
         if (currentHeight == 9) {
-            if (trailheadsFoundCoordinates.contains(coordinate)) {
-                return 0;
-            }
-            trailheadsFoundCoordinates.add(coordinate);
-            return 1;
+            return getDistinctTrail(coordinate, trailheadsFoundCoordinates);
         }
+
         int trailheadsFound = 0;
         int x = coordinate.getX();
         int y = coordinate.getY();
@@ -75,6 +82,18 @@ public class TopographicalMap {
         }
 
         return trailheadsFound;
+    }
+
+    private int getDistinctTrail(Coordinate coordinate, List<Coordinate> trailheadsFoundCoordinates) {
+        if (distinctTrails) {
+            return 1;
+        } else {
+            if (trailheadsFoundCoordinates.contains(coordinate)) {
+                return 0;
+            }
+            trailheadsFoundCoordinates.add(coordinate);
+            return 1;
+        }
     }
 
     private boolean checkDirection(int x, int y, int current) {
