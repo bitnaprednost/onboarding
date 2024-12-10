@@ -10,11 +10,9 @@ public class TopographicalMap {
     private static final Logger log = LoggerFactory.getLogger(TopographicalMap.class);
 
     private int[][] topographicalMap;
-    private List<Coordinate> trailheadsFound;
 
     public TopographicalMap(int[][] topographicalMap) {
         this.topographicalMap = topographicalMap;
-        trailheadsFound = new ArrayList<>();
     }
 
     public TopographicalMap(TopographicMapParser parser) {
@@ -36,9 +34,9 @@ public class TopographicalMap {
 
     private int getTrailheadScore(int x, int y) {
         int trailheadScore = 0;
-        trailheadsFound.clear();
+        List<Coordinate> trailheadsFoundCoordinates = new ArrayList<>();
 
-        trailheadScore += findTrailhead(x, y);
+        trailheadScore += findTrailhead(x, y, trailheadsFoundCoordinates);
 
         log.debug("for trail start at x={} y={} found {} trailheads", x, y, trailheadScore);
 
@@ -46,29 +44,29 @@ public class TopographicalMap {
 
     }
 
-    private int findTrailhead(int x, int y) {
+    private int findTrailhead(int x, int y, List<Coordinate> trailheadsFoundCoordinates) {
         int currentHeight = topographicalMap[x][y];
 
         if (currentHeight == 9) {
             Coordinate trailheadCoordinate = new Coordinate(x,y);
-            if (trailheadsFound.contains(trailheadCoordinate)) {
+            if (trailheadsFoundCoordinates.contains(trailheadCoordinate)) {
                 return 0;
             }
-            trailheadsFound.add(trailheadCoordinate);
+            trailheadsFoundCoordinates.add(trailheadCoordinate);
             return 1;
         }
         int trailheadsFound = 0;
         if (checkDirection(x, y + 1, currentHeight)) {
-            trailheadsFound += findTrailhead(x, y + 1);
+            trailheadsFound += findTrailhead(x, y + 1, trailheadsFoundCoordinates);
         }
         if (checkDirection(x, y - 1, currentHeight)) {
-            trailheadsFound += findTrailhead(x, y - 1);
+            trailheadsFound += findTrailhead(x, y - 1, trailheadsFoundCoordinates);
         }
         if (checkDirection(x + 1, y, currentHeight)) {
-            trailheadsFound += findTrailhead(x + 1, y);
+            trailheadsFound += findTrailhead(x + 1, y, trailheadsFoundCoordinates);
         }
         if (checkDirection(x - 1, y, currentHeight)) {
-            trailheadsFound += findTrailhead(x - 1, y);
+            trailheadsFound += findTrailhead(x - 1, y, trailheadsFoundCoordinates);
         }
 
         return trailheadsFound;
