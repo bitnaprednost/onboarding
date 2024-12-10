@@ -39,6 +39,9 @@ public class TopographicalMap {
                 }
             }
         }
+
+        log.info("final trailhead score is {}, distinctTrails= {} ", trailheadScore, distinctTrails);
+
         return trailheadScore;
     }
 
