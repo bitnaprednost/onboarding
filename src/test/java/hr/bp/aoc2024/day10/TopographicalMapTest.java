@@ -46,4 +46,20 @@ class TopographicalMapTest {
 
         Assertions.assertEquals(550, map.calculateTrailheadScore());
     }
+
+    @Test
+    void getTrailheadScore_distinct_13() {
+        TopographicMapParser parser = new TopographicMapParser(getFourTrailheadsInput());
+        TopographicalMap map = new TopographicalMap(parser, true);
+
+        Assertions.assertEquals(13, map.calculateTrailheadScore());
+    }
+
+    @Test
+    void getTrailheadScore_distinct_finalInput() {
+        TopographicMapParser parser = new TopographicMapParser(getFinalTrailheadsInput());
+        TopographicalMap map = new TopographicalMap(parser, true);
+
+        Assertions.assertEquals(1255, map.calculateTrailheadScore());
+    }
 }
