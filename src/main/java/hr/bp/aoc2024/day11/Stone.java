@@ -63,4 +63,10 @@ public class Stone {
         Stone stone = (Stone) o;
         return number == stone.number;
     }
+
+    @Override
+    public String toString() {
+        return "Stone "
+                 + number;
+    }
 }
