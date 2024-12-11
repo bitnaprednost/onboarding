@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class StoneLine {
@@ -24,16 +25,22 @@ public class StoneLine {
     }
 
     public void blink(int numBlinks) {
-        List<Stone> stoneLineAfterBlink = new ArrayList<>();
+        HashMap<Integer, Stone> rightStones = new HashMap<>();
 
-        log.debug("StoneLine before blink {} ", stoneLine);
+//        log.debug("StoneLine before blink {} ", stoneLine);
 
         for (int i = 0; i < numBlinks; i++) {
-            stoneLine.forEach(stone -> stoneLineAfterBlink.addAll(stone.blink()));
-            stoneLine = List.copyOf(stoneLineAfterBlink);
-            stoneLineAfterBlink.clear();
+            for (int stoneIndex = 0; stoneIndex < stoneLine.size(); stoneIndex++) {
+                Stone rightStone = stoneLine.get(stoneIndex).blink();
+                if (rightStone != null)
+                    rightStones.put(stoneIndex+1, rightStone);
+            }
+            for (int stoneIndex : rightStones.keySet()) {
+                stoneLine.add(stoneIndex, rightStones.get(stoneIndex));
+            }
+            rightStones.clear();
 
-            log.debug("StoneLine after blink {} ", stoneLine);
+//            log.debug("StoneLine after blink {} ", stoneLine);
         }
     }
 

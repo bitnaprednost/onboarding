@@ -1,7 +1,5 @@
 package hr.bp.aoc2024.day11;
 
-import java.util.List;
-
 public class Stone {
     private long number;
 
@@ -9,16 +7,16 @@ public class Stone {
         this.number = number;
     }
 
-    public List<Stone> blink() {
+    public Stone blink() {
         if (number == 0) {
             engraveOne();
-            return List.of(this);
+            return null;
         }
         if (ifNumberEvenDigits()) {
-            return List.of(this, splitStoneInTwo());
+            return splitStoneInTwo();
         }
         multiplyBy2024();
-        return List.of(this);
+        return null;
     }
 
     private void engraveOne() {
@@ -66,7 +64,7 @@ public class Stone {
 
     @Override
     public String toString() {
-        return "Stone "
-                 + number;
+        return " Stone "
+                + number;
     }
 }
