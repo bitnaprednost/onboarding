@@ -7,7 +7,7 @@ public class HikingTrail {
     private int rows;
     private int cols;
 
-    private ArrayList<int[]> heightMap = new ArrayList<>();
+    private final ArrayList<int[]> heightMap = new ArrayList<>();
 
     public long findHikingTrailScore(String input) {
 
