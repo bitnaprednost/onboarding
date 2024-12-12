@@ -48,9 +48,14 @@ class StonesTest {
     @Test
     void getStonesNumber_input_puzzle2() {
 
-        String input = "2701";
+        // Specify the file name
+        String fileName = "src/main/resources/aoc_2024/day11/Stones.txt";
+
+        // Read the file
+        ReadFile readFile = new ReadFile();
+        String fileContent = readFile.readFile(fileName);
 
         stones.setNumberOfBlinks(75);
-        assertEquals(198075, stones.getStonesNumber(input));
+        assertEquals(235571309320764L, stones.getStonesNumber(fileContent));
     }
 }
