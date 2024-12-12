@@ -1,15 +1,20 @@
 package aoc_2024.day11;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Stones {
 
-    private int stoneNumber = 0;
+    private long stoneNumber = 0;
     private int NumberOfBlinks;
+
+    private final Map<String, Long> memo = new HashMap<>();
 
     public void setNumberOfBlinks(int NumberOfBlinks){
         this.NumberOfBlinks = NumberOfBlinks;
     }
 
-    public int getStonesNumber(String input){
+    public long getStonesNumber(String input){
         String[] stones = input.split("\\s+");
 
         for (String stone : stones){
@@ -21,10 +26,20 @@ public class Stones {
 
     private void applyRules(Long stone, int count){
 
-        if (count == NumberOfBlinks){
-            stoneNumber++;
+        String memoKey = stone + "," + count;
+        if (memo.containsKey(memoKey)) {
+            stoneNumber += memo.get(memoKey);
             return;
         }
+
+
+        if (count == NumberOfBlinks){
+            stoneNumber++;
+            memo.put(memoKey, 1L);
+            return;
+        }
+
+        long originalStoneNumber = stoneNumber;
 
         if (stone == 0)
         {
@@ -46,5 +61,8 @@ public class Stones {
             stone = stone*2024;
             applyRules(stone, count + 1);
         }
+
+        long stonesAdded = stoneNumber - originalStoneNumber;
+        memo.put(memoKey, stonesAdded);
     }
 }
