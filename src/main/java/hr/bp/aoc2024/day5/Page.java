@@ -12,12 +12,16 @@ public class Page {
     }
 
     public boolean isPagePrintedInRightOrder(List<Integer> pagesToBePrintedAfter) {
+        return findBrokenRule(pagesToBePrintedAfter) == -1;
+    }
+
+    public int findBrokenRule(List<Integer> pagesToBePrintedAfter) {
         for (int page : pagesToBePrintedAfter) {
             if (orderingRules.contains(page))
-                return false;
+                return page;
         }
 
-        return true;
+        return -1;
     }
 
     public int getPageNumber() {
