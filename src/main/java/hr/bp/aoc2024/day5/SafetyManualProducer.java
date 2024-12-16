@@ -6,11 +6,26 @@ import java.util.List;
 
 public class SafetyManualProducer {
     private List<Page> pages;
-    private List<List<Integer>> producingOrders;
+    private List<ArrayList<Integer>> producingOrders;
 
-    public SafetyManualProducer(HashMap<Integer, List<Integer>> pagesParsed, List<List<Integer>> producingOrders) {
+    public SafetyManualProducer(HashMap<Integer, List<Integer>> pagesParsed, List<ArrayList<Integer>> producingOrders) {
         this.pages = getPagesFromParsed(pagesParsed);
         this.producingOrders = producingOrders;
+    }
+
+    private static void moveIfCurrPageBrokeRule(Page currPage, ArrayList<Integer> correctOrder, int index) {
+        if (currPage != null && !currPage.isPagePrintedInRightOrder(correctOrder.subList(index + 1,
+                correctOrder.size()))) {
+
+            int brokenRulePage = currPage.findBrokenRule(correctOrder.subList(index + 1, correctOrder.size()));
+            int brokenRulePageIndex = correctOrder.indexOf(brokenRulePage);
+
+            boolean didPageBreakRule = brokenRulePage != -1;
+            if (didPageBreakRule) {
+                correctOrder.set(index, brokenRulePage);
+                correctOrder.set(brokenRulePageIndex, currPage.getPageNumber());
+            }
+        }
     }
 
     private List<Page> getPagesFromParsed(HashMap<Integer, List<Integer>> pagesParsed) {
@@ -33,6 +48,35 @@ public class SafetyManualProducer {
         }
 
         return middlePageSum;
+    }
+
+    public long getMiddlePageSumIncorrectOrder() {
+        long middlePageSum = 0;
+
+        for (ArrayList<Integer> order : producingOrders) {
+            if (!isInCorrectOrder(order)) {
+                ArrayList<Integer> correctOrder = putInCorrectOrder(order);
+
+                middlePageSum += getMiddlePage(correctOrder);
+            }
+        }
+
+        return middlePageSum;
+    }
+
+    private ArrayList<Integer> putInCorrectOrder(ArrayList<Integer> order) {
+        ArrayList<Integer> correctOrder = (ArrayList<Integer>) order.clone();
+
+        do {
+            for (int index = 0; index < order.size() - 1; index++) {
+                Page currPage = getCurrentPage(correctOrder.get(index));
+
+                moveIfCurrPageBrokeRule(currPage, correctOrder, index);
+
+            }
+        } while (!isInCorrectOrder(correctOrder));
+
+        return correctOrder;
     }
 
     private boolean isInCorrectOrder(List<Integer> order) {
