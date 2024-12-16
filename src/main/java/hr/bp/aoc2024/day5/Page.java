@@ -28,5 +28,3 @@ public class Page {
         return pageNumber;
     }
 }
-
-

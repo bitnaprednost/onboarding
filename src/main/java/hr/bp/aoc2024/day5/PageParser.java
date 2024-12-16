@@ -8,10 +8,6 @@ public class PageParser {
 
     private List<String> input;
 
-    public PageParser(String input) {
-        this(List.of(input.split("\\n")));
-    }
-
     public PageParser(List<String> input) {
         this.input = input;
     }
