@@ -1,10 +1,15 @@
 package hr.bp.aoc2024.day5;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class SafetyManualProducer {
+    private static Logger log = LoggerFactory.getLogger(SafetyManualProducer.class);
+
     private List<Page> pages;
     private List<ArrayList<Integer>> producingOrders;
 
@@ -43,6 +48,9 @@ public class SafetyManualProducer {
 
         for (List<Integer> order : producingOrders) {
             if (isInCorrectOrder(order)) {
+
+                log.debug("Production order correct {}", order);
+
                 middlePageSum += getMiddlePage(order);
             }
         }
@@ -55,7 +63,12 @@ public class SafetyManualProducer {
 
         for (ArrayList<Integer> order : producingOrders) {
             if (!isInCorrectOrder(order)) {
+
+                log.debug("Production order incorrect {}", order);
+
                 ArrayList<Integer> correctOrder = putInCorrectOrder(order);
+
+                log.debug("Production order correct {}", correctOrder);
 
                 middlePageSum += getMiddlePage(correctOrder);
             }
