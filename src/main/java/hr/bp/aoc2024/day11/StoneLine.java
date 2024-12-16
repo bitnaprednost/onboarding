@@ -10,7 +10,11 @@ import java.util.List;
 public class StoneLine {
     private static final Logger log = LoggerFactory.getLogger(StoneLine.class);
 
+    HashMap<Stone, HashMap<Integer, Long>> memo = new HashMap<>();
+
     List<Stone> stoneLine;
+    private long numberOfStones = 0;
+    private int numOfBlinks;
 
     public StoneLine(List<String> stoneLineString) {
         this.stoneLine = createStoneLine(stoneLineString);
@@ -25,37 +29,53 @@ public class StoneLine {
     }
 
     public void blink(int numBlinks) {
-        HashMap<Integer, Stone> rightStones = new HashMap<>();
+        numOfBlinks = numBlinks;
 
-//        log.debug("StoneLine before blink {} ", stoneLine);
-
-        for (int i = 0; i < numBlinks; i++) {
-            for (int stoneIndex = 0; stoneIndex < stoneLine.size(); stoneIndex++) {
-                Stone rightStone = stoneLine.get(stoneIndex).blink();
-                if (rightStone != null)
-                    rightStones.put(stoneIndex+1, rightStone);
-            }
-            for (int stoneIndex : rightStones.keySet()) {
-                stoneLine.add(stoneIndex, rightStones.get(stoneIndex));
-            }
-            rightStones.clear();
-
-//            log.debug("StoneLine after blink {} ", stoneLine);
+        for (Stone stone : stoneLine) {
+            blinkHelper(stone, 0);
         }
     }
 
-    public List<Stone> getStoneLine() {
-        return stoneLine;
+    private void blinkHelper(Stone stone, int count) {
+        if (isStoneInMemo(stone, count)) {
+            numberOfStones += memo.get(stone).get(count);
+            return;
+        }
+
+        if (count == numOfBlinks) {
+            numberOfStones++;
+            addStoneToMemo(stone, count, 1L);
+            return;
+        }
+
+        long numberOfStonesBeforeBlinking = numberOfStones;
+        Stone stoneBeforeBlinking = new Stone(stone.getNumber());
+
+        Stone rightStone = stone.blink();
+        if (rightStone != null) {
+            blinkHelper(rightStone, count + 1);
+        }
+        blinkHelper(stone, count + 1);
+
+        long stonesAddedAfterBlinking = numberOfStones - numberOfStonesBeforeBlinking;
+        addStoneToMemo(stoneBeforeBlinking, count, stonesAddedAfterBlinking);
     }
 
-    public int getNumberOfStones() {
-        return stoneLine.size();
+    private void addStoneToMemo(Stone stone, int count, long value) {
+        memo.putIfAbsent(stone, new HashMap<>());
+        memo.get(stone).put(count, value);
+    }
+
+    private boolean isStoneInMemo(Stone stone, int count) {
+        return memo.containsKey(stone) && memo.get(stone).containsKey(count);
+    }
+
+    public long getNumberOfStones() {
+        return numberOfStones;
     }
 
     @Override
     public String toString() {
-        return "StoneLine{" +
-                "stoneLine=" + stoneLine +
-                '}';
+        return "StoneLine{" + "stoneLine=" + stoneLine + '}';
     }
 }
