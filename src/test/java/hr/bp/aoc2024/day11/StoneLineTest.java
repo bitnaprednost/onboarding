@@ -14,9 +14,9 @@ class StoneLineTest {
 
         stoneLine.blink(1);
 
-        StoneLine expected = new StoneLine(getStoneLine_1blink());
+        long expectedNumStones = 7;
 
-        Assertions.assertEquals(expected.getStoneLine(), stoneLine.getStoneLine());
+        Assertions.assertEquals(expectedNumStones, stoneLine.getNumberOfStones());
     }
 
     @Test
@@ -55,16 +55,15 @@ class StoneLineTest {
         Assertions.assertEquals(expectedNumStones, stoneLine.getNumberOfStones());
     }
 
-//    @Test
-//    void testInputAfter_75blinks_final() {
-//        StoneParser parser = new StoneParser(getFinalInput());
-//        StoneLine stoneLine = new StoneLine(parser.parseInput());
-//
-//        stoneLine.blink(75);
-//
-//        int expectedNumStones = 199986;
-//
-//        Assertions.assertEquals(expectedNumStones, stoneLine.getNumberOfStones());
-//    }
+    @Test
+    void testInputAfter_75blinks_final() {
+        StoneParser parser = new StoneParser(getFinalInput());
+        StoneLine stoneLine = new StoneLine(parser.parseInput());
 
+        stoneLine.blink(75);
+
+        long expectedNumStones = 236804088748754L;
+
+        Assertions.assertEquals(expectedNumStones, stoneLine.getNumberOfStones());
+    }
 }
