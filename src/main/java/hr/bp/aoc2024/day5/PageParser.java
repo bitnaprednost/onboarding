@@ -16,14 +16,14 @@ public class PageParser {
         this.input = input;
     }
 
-    public List<List<Integer>> getProducingOrder() {
-        List<List<Integer>> producingOrder = new ArrayList<>();
+    public List<ArrayList<Integer>> getProducingOrder() {
+        List<ArrayList<Integer>> producingOrder = new ArrayList<>();
 
         Iterator<String> iterator = input.iterator();
         goToProducingOrder(iterator);
 
         while (iterator.hasNext()) {
-            producingOrder.add(Arrays.stream(iterator.next().strip().split(",")).map(Integer::parseInt).toList());
+            producingOrder.add(new ArrayList<>(Arrays.stream(iterator.next().strip().split(",")).map(Integer::parseInt).toList()));
         }
         return producingOrder;
     }
