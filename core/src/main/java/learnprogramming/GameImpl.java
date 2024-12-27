@@ -5,14 +5,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class GameImpl implements Game{
     private static final Logger log = LoggerFactory.getLogger(GameImpl.class);
 
-    @Autowired
-    private NumberGenerator numberGenerator;
-    private int guessCount = 10;
+    private final NumberGenerator numberGenerator;
+    private final int guessCount;
+
     private int number;
     private int guess;
     private int smallest;
@@ -20,11 +21,17 @@ public class GameImpl implements Game{
     private int remainingGuesses;
     private boolean validNumberRange = true;
 
+    @Autowired
+    public GameImpl(NumberGenerator numberGenerator, @GuessCount int guessCount) {
+        this.numberGenerator = numberGenerator;
+        this.guessCount = guessCount;
+    }
+
     @PostConstruct
     @Override
     public void reset() {
-        smallest = 0;
-        guess = 0;
+        smallest = numberGenerator.getMinNumber();
+        guess = numberGenerator.getMinNumber();
         remainingGuesses = guessCount;
         biggest = numberGenerator.getMaxNumber();
         number = numberGenerator.next();
@@ -64,6 +71,11 @@ public class GameImpl implements Game{
     @Override
     public int getRemainingGuesses() {
         return remainingGuesses;
+    }
+
+    @Override
+    public int getGuessCount() {
+        return guessCount;
     }
 
     @Override
