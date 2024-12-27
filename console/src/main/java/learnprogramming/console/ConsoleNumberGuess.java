@@ -2,6 +2,7 @@ package learnprogramming.console;
 
 import learnprogramming.Game;
 import learnprogramming.MessageGenerator;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,8 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 
 @Component
+@Slf4j
 public class ConsoleNumberGuess {
-
-    private static final Logger log = LoggerFactory.getLogger(ConsoleNumberGuess.class);
 
     private final Game game;
 
@@ -42,7 +42,7 @@ public class ConsoleNumberGuess {
 
             if(game.isGameWon() || game.isGameLost()){
                 System.out.println(messageGenerator.getResultMessage());
-                System.out.println("Plat again y/n?");
+                System.out.println("Play again y/n?");
 
                 String playAgainString = scanner.nextLine().trim();
                 if(!playAgainString.equalsIgnoreCase("y")){
