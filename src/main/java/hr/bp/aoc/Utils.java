@@ -1,4 +1,4 @@
-package hr.bp.aoc.day1;
+package hr.bp.aoc;
 
 import java.io.BufferedReader;
 import java.io.File;
