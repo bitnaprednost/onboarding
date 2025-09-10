@@ -9,12 +9,8 @@ public class Day1 {
   private static String DATA_RELATIVE_PATH = "../../../../../resources/aoc/day1/input.txt";
   private BufferedReader reader;
 
-  public Day1() {
-    try {
-      this.reader = new BufferedReader(new FileReader(DATA_RELATIVE_PATH));
-    } catch (FileNotFoundException e) {
-      System.out.println("Please enter valid path.");
-    }
+  public Day1() throws FileNotFoundException {
+    this.reader = new BufferedReader(new FileReader(DATA_RELATIVE_PATH));
   }
 
   public int getMaxCalories() {
