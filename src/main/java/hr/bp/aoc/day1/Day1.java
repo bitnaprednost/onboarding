@@ -1,16 +1,19 @@
 package hr.bp.aoc.day1;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.List;
 
 public class Day1 {
-  private static String DATA_RELATIVE_PATH = "../../../../../resources/aoc/day1/input.txt";
+  private static Path InputDataPath = Paths.get("src/main/resources/aoc/day1/input.txt");
   private BufferedReader reader;
 
   public Day1() throws FileNotFoundException {
-    this.reader = new BufferedReader(new FileReader(DATA_RELATIVE_PATH));
+    this.reader = new BufferedReader(new FileReader(new File(InputDataPath.toString())));
   }
 
   public int getMaxCalories() {
