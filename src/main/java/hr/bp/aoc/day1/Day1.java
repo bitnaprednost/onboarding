@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.nio.file.Paths;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Day1 {
   private static Path InputDataPath = Paths.get("src/main/resources/aoc/day1/input.txt");
@@ -33,5 +36,26 @@ public class Day1 {
     }
 
     return max;
+  }
+
+  public int getMaxThreeCaloriesTotal() {
+    List<Integer> top3 = new ArrayList<>();
+    int currCalories = 0;
+
+    List<String> lines = reader.lines().toList();
+
+    for (String line : lines) {
+      if (line.equals("")) {
+        top3.add(currCalories);
+        top3.sort(Comparator.naturalOrder());
+
+        top3.remove(-1);
+        currCalories = 0;
+      }
+
+      currCalories += Integer.parseInt(line);
+    }
+
+    return top3.stream().reduce(0, (sum, cal) -> sum + cal);
   }
 }
