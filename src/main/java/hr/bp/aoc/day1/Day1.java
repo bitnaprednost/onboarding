@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -13,19 +14,19 @@ import java.util.stream.Stream;
 
 public class Day1 {
   private static Path InputDataPath = Paths.get("src/main/resources/aoc/day1/input.txt");
-  private BufferedReader reader;
+  private List<String> inputLines;
 
-  public Day1() throws FileNotFoundException {
-    this.reader = new BufferedReader(new FileReader(new File(InputDataPath.toString())));
+  public Day1() throws FileNotFoundException, IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(new File(InputDataPath.toString())));
+    inputLines = reader.lines().toList();
+    reader.close();
   }
 
   public int getMaxCalories() {
     int max = 0;
     int currCalories = 0;
 
-    List<String> lines = reader.lines().toList();
-
-    for (String line : lines) {
+    for (String line : inputLines) {
       if (line.equals("")) {
         max = Math.max(max, currCalories);
         currCalories = 0;
@@ -42,15 +43,17 @@ public class Day1 {
     List<Integer> top3 = new ArrayList<>();
     int currCalories = 0;
 
-    List<String> lines = reader.lines().toList();
-
-    for (String line : lines) {
+    for (String line : inputLines) {
       if (line.equals("")) {
         top3.add(currCalories);
         top3.sort(Comparator.naturalOrder());
 
-        top3.remove(-1);
+        if (top3.size() > 3) {
+          top3.remove(-1);
+        }
+
         currCalories = 0;
+        continue;
       }
 
       currCalories += Integer.parseInt(line);
