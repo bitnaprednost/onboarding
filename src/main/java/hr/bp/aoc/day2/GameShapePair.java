@@ -1,10 +1,10 @@
 package hr.bp.aoc.day2;
 
-public class Pair {
-  String playerShape;
-  String opponentShape;
+public class GameShapePair {
+  GameShape playerShape;
+  GameShape opponentShape;
 
-  public Pair(String playerShape, String opponentShape) {
+  public GameShapePair(GameShape playerShape, GameShape opponentShape) {
     this.playerShape = playerShape;
     this.opponentShape = opponentShape;
   }
@@ -16,7 +16,7 @@ public class Pair {
 
   @Override
   public boolean equals(Object obj) {
-    Pair otherPair = (Pair) obj;
+    GameShapePair otherPair = (GameShapePair) obj;
     return playerShape.equals(otherPair.playerShape) && opponentShape.equals(otherPair.opponentShape);
   }
 }
