@@ -14,19 +14,20 @@ import java.util.Map;
 public class Day2 {
   private static Path InputPath = Paths.get("src/main/resources/aoc/day2/strategy-guide.txt");
   private List<String> inputLines;
+  private Map<String, Integer> shapeScoreMapping = new HashMap<>();
+  private Map<String, Integer> gameOutcomeScoreMapping = new HashMap<>();
+  private Map<Pair, String> shapePairsGameOutcomeMapping = new HashMap<>();
+  private Map<String, String> strategyCharShapeMapping = new HashMap<>();
 
   public Day2() throws FileNotFoundException, IOException {
-    Map<String, Integer> shapeScoreMapping = new HashMap<>();
     shapeScoreMapping.put("Rock", 1);
     shapeScoreMapping.put("Paper", 2);
     shapeScoreMapping.put("Scissors", 3);
 
-    Map<String, Integer> gameOutcomeScoreMapping = new HashMap<>();
     gameOutcomeScoreMapping.put("Win", 6);
     gameOutcomeScoreMapping.put("Draw", 3);
     gameOutcomeScoreMapping.put("Lose", 0);
 
-    Map<Pair, String> shapePairsGameOutcomeMapping = new HashMap<>();
     shapePairsGameOutcomeMapping.put(new Pair("Rock", "Rock"), "Draw");
     shapePairsGameOutcomeMapping.put(new Pair("Rock", "Scissors"), "Win");
     shapePairsGameOutcomeMapping.put(new Pair("Rock", "Paper"), "Lose");
@@ -37,7 +38,6 @@ public class Day2 {
     shapePairsGameOutcomeMapping.put(new Pair("Scissors", "Paper"), "Win");
     shapePairsGameOutcomeMapping.put(new Pair("Scissors", "Rock"), "Lose");
 
-    Map<String, String> strategyCharShapeMapping = new HashMap<>();
     strategyCharShapeMapping.put("A", "Rock");
     strategyCharShapeMapping.put("B", "Paper");
     strategyCharShapeMapping.put("C", "Scissors");
