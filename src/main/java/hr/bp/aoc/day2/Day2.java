@@ -28,14 +28,14 @@ public class Day2 {
     gameOutcomeScoreMapping.put("Draw", 3);
     gameOutcomeScoreMapping.put("Lose", 0);
 
-    shapePairsGameOutcomeMapping.put(new Pair("Rock", "Rock"), "Draw");
     shapePairsGameOutcomeMapping.put(new Pair("Rock", "Scissors"), "Win");
-    shapePairsGameOutcomeMapping.put(new Pair("Rock", "Paper"), "Lose");
-    shapePairsGameOutcomeMapping.put(new Pair("Paper", "Paper"), "Draw");
     shapePairsGameOutcomeMapping.put(new Pair("Paper", "Rock"), "Win");
-    shapePairsGameOutcomeMapping.put(new Pair("Paper", "Scissors"), "Lose");
-    shapePairsGameOutcomeMapping.put(new Pair("Scissors", "Scissors"), "Draw");
     shapePairsGameOutcomeMapping.put(new Pair("Scissors", "Paper"), "Win");
+    shapePairsGameOutcomeMapping.put(new Pair("Rock", "Rock"), "Draw");
+    shapePairsGameOutcomeMapping.put(new Pair("Paper", "Paper"), "Draw");
+    shapePairsGameOutcomeMapping.put(new Pair("Scissors", "Scissors"), "Draw");
+    shapePairsGameOutcomeMapping.put(new Pair("Rock", "Paper"), "Lose");
+    shapePairsGameOutcomeMapping.put(new Pair("Paper", "Scissors"), "Lose");
     shapePairsGameOutcomeMapping.put(new Pair("Scissors", "Rock"), "Lose");
 
     strategyCharShapeMapping.put("A", "Rock");
@@ -56,13 +56,14 @@ public class Day2 {
     int result = 0;
 
     for (String line : inputLines) {
-      String firstChar = line.split(" ")[0];
-      String secondChar = line.split(" ")[1];
-      String firstShape = strategyCharShapeMapping.get(firstChar);
-      String secondShape = strategyCharShapeMapping.get(secondChar);
-      result += shapeScoreMapping.get(secondShape);
+      String opponentChar = line.split(" ")[0];
+      String playerChar = line.split(" ")[1];
+      String opponentShape = strategyCharShapeMapping.get(opponentChar);
+      String playerShape = strategyCharShapeMapping.get(playerChar);
+      result += shapeScoreMapping.get(playerShape);
 
-      String gameOutcome = shapePairsGameOutcomeMapping.get(new Pair(secondShape, firstShape));
+      Pair shapePair = new Pair(playerShape, opponentShape);
+      String gameOutcome = shapePairsGameOutcomeMapping.get(shapePair);
       result += gameOutcomeScoreMapping.get(gameOutcome);
     }
 
