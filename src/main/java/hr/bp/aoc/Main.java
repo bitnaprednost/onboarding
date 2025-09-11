@@ -10,6 +10,6 @@ public class Main {
     Day1 day1Solution = new Day1();
 
     System.out.println("Solution is: " + day1Solution.getMaxCalories());
-    System.out.println("Part two solution is: " + day1Solution.getMaxThreeCaloriesTotal());
+    System.out.println("Part two solution is: " + day1Solution.getThreeTotalMaxCalories());
   }
 }

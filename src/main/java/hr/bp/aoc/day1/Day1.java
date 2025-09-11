@@ -22,33 +22,24 @@ public class Day1 {
   }
 
   public int getMaxCalories() {
-    int max = 0;
-    int currCalories = 0;
-
-    for (String line : inputLines) {
-      if (line.equals("")) {
-        max = Math.max(max, currCalories);
-        currCalories = 0;
-        continue;
-      }
-
-      currCalories += Integer.parseInt(line);
-    }
-
-    return max;
+    return getNthTotalMaxCalories(1);
   }
 
-  public int getMaxThreeCaloriesTotal() {
-    List<Integer> top3 = new ArrayList<>();
+  public int getThreeTotalMaxCalories() {
+    return getNthTotalMaxCalories(3);
+  }
+
+  public int getNthTotalMaxCalories(int numberOfCaloriesIncluded) {
+    List<Integer> max = new ArrayList<>();
     int currCalories = 0;
 
     for (String line : inputLines) {
       if (line.equals("")) {
-        top3.add(currCalories);
-        top3.sort(Comparator.reverseOrder());
+        max.add(currCalories);
+        max.sort(Comparator.reverseOrder());
 
-        if (top3.size() > 3) {
-          top3.remove(3);
+        if (max.size() > numberOfCaloriesIncluded) {
+          max.remove(numberOfCaloriesIncluded);
         }
 
         currCalories = 0;
@@ -58,6 +49,6 @@ public class Day1 {
       currCalories += Integer.parseInt(line);
     }
 
-    return top3.stream().reduce(0, (sum, cal) -> sum + cal);
+    return max.stream().reduce(0, (sum, cal) -> sum + cal);
   }
 }
