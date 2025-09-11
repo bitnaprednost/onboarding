@@ -10,7 +10,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class Day2 {
   private static Path InputPath = Paths.get("src/main/resources/aoc/day2/strategy-guide.txt");
