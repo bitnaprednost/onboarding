@@ -27,8 +27,8 @@ public class Day2 {
     int result = 0;
 
     for (String line : inputLines) {
-      String opponentChar = line.split(" ")[0];
-      String playerChar = line.split(" ")[1];
+      char opponentChar = line.split(" ")[0].charAt(0);
+      char playerChar = line.split(" ")[1].charAt(0);
       GameShape opponentShape = CharShapeDecoder.getGameShape(opponentChar);
       GameShape playerShape = CharShapeDecoder.getGameShape(playerChar);
       result += GamePoints.getShapePoints(playerShape);
