@@ -9,6 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import hr.bp.aoc.day2.game.GameOutcome;
+import hr.bp.aoc.day2.game.GamePoints;
+import hr.bp.aoc.day2.game.GameReferee;
+import hr.bp.aoc.day2.game.GameShape;
 import hr.bp.aoc.day2.reader.CharShapeDecoder;
 
 public class Day2 {

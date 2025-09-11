@@ -1,4 +1,4 @@
-package hr.bp.aoc.day2;
+package hr.bp.aoc.day2.game;
 
 public class GameShapePair {
   GameShape playerShape;

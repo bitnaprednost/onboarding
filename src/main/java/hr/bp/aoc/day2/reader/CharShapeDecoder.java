@@ -2,7 +2,7 @@ package hr.bp.aoc.day2.reader;
 
 import java.util.Map;
 
-import hr.bp.aoc.day2.GameShape;
+import hr.bp.aoc.day2.game.GameShape;
 
 public class CharShapeDecoder {
   private static Map<Character, GameShape> strategyCharShapeMapping = Map.of(
