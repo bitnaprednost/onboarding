@@ -27,21 +27,6 @@ public class Day2 {
     gameOutcomeScoreMapping.put("Draw", 3);
     gameOutcomeScoreMapping.put("Lose", 0);
 
-    class Pair {
-      String firstShape;
-      String secondShape;
-
-      public Pair(String firstShape, String secondShape) {
-        this.firstShape = firstShape;
-        this.secondShape = secondShape;
-      }
-
-      @Override
-      public int hashCode() {
-        return firstShape.hashCode() + secondShape.hashCode();
-      }
-    }
-
     Map<Pair, String> shapePairsGameOutcomeMapping = new HashMap<>();
     shapePairsGameOutcomeMapping.put(new Pair("Rock", "Rock"), "Draw");
     shapePairsGameOutcomeMapping.put(new Pair("Rock", "Scissors"), "Win");
