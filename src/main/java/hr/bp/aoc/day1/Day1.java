@@ -45,10 +45,10 @@ public class Day1 {
     for (String line : inputLines) {
       if (line.equals("")) {
         top3.add(currCalories);
-        top3.sort(Comparator.naturalOrder());
+        top3.sort(Comparator.reverseOrder());
 
         if (top3.size() > 3) {
-          top3.remove(-1);
+          top3.remove(3);
         }
 
         currCalories = 0;
