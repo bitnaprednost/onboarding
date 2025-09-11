@@ -8,12 +8,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 public class Day2 {
   private static Path InputPath = Paths.get("src/main/resources/aoc/day2/strategy-guide.txt");
-  private Stream<String> inputLines;
+  private List<String> inputLines;
 
   public Day2() throws FileNotFoundException, IOException {
     Map<String, Integer> shapeScoreMapping = new HashMap<>();
@@ -62,8 +63,19 @@ public class Day2 {
 
     BufferedReader reader = new BufferedReader(
         new FileReader(new File(InputPath.toString())));
-    Stream<String> inputLines = reader.lines();
+    inputLines = reader.lines().toList();
 
     reader.close();
+  }
+
+  public int getStrategyGuideScore() {
+    int result = 0;
+
+    for (String line : inputLines) {
+      String firstChar = line.split(" ")[0];
+      String secondChar = line.split(" ")[1];
+    }
+
+    return result;
   }
 }
