@@ -58,6 +58,12 @@ public class Day2 {
     for (String line : inputLines) {
       String firstChar = line.split(" ")[0];
       String secondChar = line.split(" ")[1];
+      String firstShape = strategyCharShapeMapping.get(firstChar);
+      String secondShape = strategyCharShapeMapping.get(secondChar);
+      result += shapeScoreMapping.get(secondShape);
+
+      String gameOutcome = shapePairsGameOutcomeMapping.get(new Pair(secondShape, firstShape));
+      result += gameOutcomeScoreMapping.get(gameOutcome);
     }
 
     return result;
