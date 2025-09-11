@@ -16,7 +16,8 @@ public class Day1 {
   private List<String> inputLines;
 
   public Day1() throws FileNotFoundException, IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(new File(InputDataPath.toString())));
+    BufferedReader reader = new BufferedReader(
+        new FileReader(new File(InputDataPath.toString())));
     inputLines = reader.lines().toList();
     reader.close();
   }
