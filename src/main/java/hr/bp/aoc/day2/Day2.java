@@ -24,19 +24,20 @@ public class Day2 {
   }
 
   public int getStrategyGuideScore() {
-    int result = 0;
+    int score = 0;
 
     for (String line : inputLines) {
       char opponentChar = line.split(" ")[0].charAt(0);
       char playerChar = line.split(" ")[1].charAt(0);
-      GameShape opponentShape = CharShapeDecoder.getGameShape(opponentChar);
-      GameShape playerShape = CharShapeDecoder.getGameShape(playerChar);
-      result += GamePoints.getShapePoints(playerShape);
 
-      GameOutcome gameOutcome = GameReferee.getGameOutcome(playerShape, opponentShape);
-      result += GamePoints.getGameOutcomePoints(gameOutcome);
+      GameShape opponentGameShape = CharShapeDecoder.getGameShape(opponentChar);
+      GameShape playerGameShape = CharShapeDecoder.getGameShape(playerChar);
+      score += GamePoints.getShapePoints(playerGameShape);
+
+      GameOutcome gameOutcome = GameReferee.getGameOutcome(playerGameShape, opponentGameShape);
+      score += GamePoints.getGameOutcomePoints(gameOutcome);
     }
 
-    return result;
+    return score;
   }
 }
