@@ -13,4 +13,9 @@ public class Pair {
   public int hashCode() {
     return firstShape.hashCode() + secondShape.hashCode();
   }
+
+  public boolean equals(Object obj) {
+    Pair otherPair = (Pair) obj;
+    return firstShape.equals(otherPair.firstShape) && secondShape.equals(otherPair.secondShape);
+  }
 }
