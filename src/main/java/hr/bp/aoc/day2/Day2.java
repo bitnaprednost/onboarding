@@ -15,8 +15,8 @@ public class Day2 {
   private static Path InputPath = Paths.get("src/main/resources/aoc/day2/strategy-guide.txt");
   private List<String> inputLines;
   private Map<GameShape, Integer> shapeScoreMapping = new HashMap<>();
-  private Map<String, Integer> gameOutcomeScoreMapping = new HashMap<>();
-  private Map<GameShapePair, String> shapePairsGameOutcomeMapping = new HashMap<>();
+  private Map<GameOutcome, Integer> gameOutcomeScoreMapping = new HashMap<>();
+  private Map<GameShapePair, GameOutcome> shapePairsGameOutcomeMapping = new HashMap<>();
   private Map<String, GameShape> strategyCharShapeMapping = new HashMap<>();
 
   public Day2() throws FileNotFoundException, IOException {
@@ -24,19 +24,19 @@ public class Day2 {
     shapeScoreMapping.put(GameShape.PAPER, 2);
     shapeScoreMapping.put(GameShape.SCISSORS, 3);
 
-    gameOutcomeScoreMapping.put("Win", 6);
-    gameOutcomeScoreMapping.put("Draw", 3);
-    gameOutcomeScoreMapping.put("Lose", 0);
+    gameOutcomeScoreMapping.put(GameOutcome.WIN, 6);
+    gameOutcomeScoreMapping.put(GameOutcome.DRAW, 3);
+    gameOutcomeScoreMapping.put(GameOutcome.LOSE, 0);
 
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.SCISSORS), "Win");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.ROCK), "Win");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.PAPER), "Win");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.ROCK), "Draw");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.PAPER), "Draw");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.SCISSORS), "Draw");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.PAPER), "Lose");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.SCISSORS), "Lose");
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.ROCK), "Lose");
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.SCISSORS), GameOutcome.WIN);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.ROCK), GameOutcome.WIN);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.PAPER), GameOutcome.WIN);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.ROCK), GameOutcome.DRAW);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.PAPER), GameOutcome.DRAW);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.SCISSORS), GameOutcome.DRAW);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.PAPER), GameOutcome.LOSE);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.SCISSORS), GameOutcome.LOSE);
+    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.ROCK), GameOutcome.LOSE);
 
     strategyCharShapeMapping.put("A", GameShape.ROCK);
     strategyCharShapeMapping.put("B", GameShape.PAPER);
@@ -63,7 +63,7 @@ public class Day2 {
       result += shapeScoreMapping.get(playerShape);
 
       GameShapePair shapePair = new GameShapePair(playerShape, opponentShape);
-      String gameOutcome = shapePairsGameOutcomeMapping.get(shapePair);
+      GameOutcome gameOutcome = shapePairsGameOutcomeMapping.get(shapePair);
       result += gameOutcomeScoreMapping.get(gameOutcome);
     }
 
