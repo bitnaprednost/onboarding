@@ -14,6 +14,7 @@ public class Pair {
     return firstShape.hashCode() + secondShape.hashCode();
   }
 
+  @Override
   public boolean equals(Object obj) {
     Pair otherPair = (Pair) obj;
     return firstShape.equals(otherPair.firstShape) && secondShape.equals(otherPair.secondShape);
