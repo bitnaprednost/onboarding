@@ -14,20 +14,9 @@ import java.util.Map;
 public class Day2 {
   private static Path InputPath = Paths.get("src/main/resources/aoc/day2/strategy-guide.txt");
   private List<String> inputLines;
-  private Map<GameShapePair, GameOutcome> shapePairsGameOutcomeMapping = new HashMap<>();
   private Map<String, GameShape> strategyCharShapeMapping = new HashMap<>();
 
   public Day2() throws FileNotFoundException, IOException {
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.SCISSORS), GameOutcome.WIN);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.ROCK), GameOutcome.WIN);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.PAPER), GameOutcome.WIN);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.ROCK), GameOutcome.DRAW);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.PAPER), GameOutcome.DRAW);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.SCISSORS), GameOutcome.DRAW);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.ROCK, GameShape.PAPER), GameOutcome.LOSE);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.PAPER, GameShape.SCISSORS), GameOutcome.LOSE);
-    shapePairsGameOutcomeMapping.put(new GameShapePair(GameShape.SCISSORS, GameShape.ROCK), GameOutcome.LOSE);
-
     strategyCharShapeMapping.put("A", GameShape.ROCK);
     strategyCharShapeMapping.put("B", GameShape.PAPER);
     strategyCharShapeMapping.put("C", GameShape.SCISSORS);
@@ -52,8 +41,7 @@ public class Day2 {
       GameShape playerShape = strategyCharShapeMapping.get(playerChar);
       result += GamePoints.getShapePoints(playerShape);
 
-      GameShapePair shapePair = new GameShapePair(playerShape, opponentShape);
-      GameOutcome gameOutcome = shapePairsGameOutcomeMapping.get(shapePair);
+      GameOutcome gameOutcome = GameReferee.getGameOutcome(playerShape, opponentShape);
       result += GamePoints.getGameOutcomePoints(gameOutcome);
     }
 
