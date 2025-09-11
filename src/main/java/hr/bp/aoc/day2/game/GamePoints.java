@@ -4,7 +4,7 @@ import java.util.Map;
 
 public final class GamePoints {
   private static Map<GameShape, Integer> shapeScoreMapping = Map.of(
-      GameShape.ROCK, 3, GameShape.PAPER, 2, GameShape.SCISSORS, 1);
+      GameShape.ROCK, 1, GameShape.PAPER, 2, GameShape.SCISSORS, 3);
   private static Map<GameOutcome, Integer> gameOutcomeScoreMapping = Map.of(
       GameOutcome.WIN, 6, GameOutcome.DRAW, 3, GameOutcome.LOSE, 0);
 
