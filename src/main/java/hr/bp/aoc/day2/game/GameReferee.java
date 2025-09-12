@@ -31,7 +31,7 @@ public class GameReferee {
         return selectedShape;
     }
 
-    return null;
+    throw new IllegalStateException("No matching shape found!");
   }
 
 }
