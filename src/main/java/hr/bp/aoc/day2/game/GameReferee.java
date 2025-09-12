@@ -16,8 +16,6 @@ public class GameReferee {
 
   public static GameOutcome getGameOutcome(GameShape playerGameShape,
       GameShape opponentGameShape) {
-    if (playerGameShape.equals(opponentGameShape))
-      return GameOutcome.DRAW;
     GameShapePair gameShapePair = new GameShapePair(playerGameShape, opponentGameShape);
 
     return gameOutcomeShapeMapping.get(gameShapePair);
