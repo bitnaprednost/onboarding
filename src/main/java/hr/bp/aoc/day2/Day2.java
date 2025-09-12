@@ -44,4 +44,24 @@ public class Day2 {
 
     return score;
   }
+
+  public int getRightStrategyGuideScore() {
+    int score = 0;
+
+    for (String line : inputLines) {
+      char opponentChar = line.split(" ")[0].charAt(0);
+      char outcomeChar = line.split(" ")[1].charAt(0);
+
+      GameShape opponentGameShape = CharShapeDecoder.getGameShape(opponentChar);
+      GameOutcome desiredGameOutcome = CharShapeDecoder.getGameOutcome(outcomeChar);
+
+      score += GamePoints.getGameOutcomePoints(desiredGameOutcome);
+
+      GameShape playerGameShape = GameReferee.getShapeForDesiredOutcome(
+          desiredGameOutcome, opponentGameShape);
+      score += GamePoints.getShapePoints(playerGameShape);
+    }
+
+    return score;
+  }
 }
