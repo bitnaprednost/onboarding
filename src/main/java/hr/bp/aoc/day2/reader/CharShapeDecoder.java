@@ -11,7 +11,7 @@ public class CharShapeDecoder {
       'X', GameShape.ROCK, 'Y', GameShape.PAPER, 'Z', GameShape.SCISSORS);
 
   private static Map<Character, GameOutcome> strategyCharGameOutcomeMapping = Map.of(
-      'X', GameOutcome.LOSE, 'Y', GameOutcome.DRAW, 'Z', GameOutcome.LOSE);
+      'X', GameOutcome.LOSE, 'Y', GameOutcome.DRAW, 'Z', GameOutcome.WIN);
 
   public static GameShape getGameShape(char inputChar) {
     return strategyCharShapeMapping.get(inputChar);
