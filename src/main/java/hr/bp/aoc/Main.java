@@ -17,5 +17,6 @@ public class Main {
 
     System.out.println("---DAY 2---");
     System.out.println("Solution is: " + day2Solution.getStrategyGuideScore());
+    System.out.println("Part two solution is: " + day2Solution.getRightStrategyGuideScore());
   }
 }
