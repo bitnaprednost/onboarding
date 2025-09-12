@@ -2,6 +2,7 @@ package hr.bp.aoc.day2.reader;
 
 import java.util.Map;
 
+import hr.bp.aoc.day2.game.GameOutcome;
 import hr.bp.aoc.day2.game.GameShape;
 
 public class CharShapeDecoder {
@@ -9,7 +10,14 @@ public class CharShapeDecoder {
       'A', GameShape.ROCK, 'B', GameShape.PAPER, 'C', GameShape.SCISSORS,
       'X', GameShape.ROCK, 'Y', GameShape.PAPER, 'Z', GameShape.SCISSORS);
 
+  private static Map<Character, GameOutcome> strategyCharGameOutcomeMapping = Map.of(
+      'X', GameOutcome.LOSE, 'Y', GameOutcome.DRAW, 'Z', GameOutcome.LOSE);
+
   public static GameShape getGameShape(char inputChar) {
     return strategyCharShapeMapping.get(inputChar);
+  }
+
+  public static GameOutcome getGameOutcome(char inputChar) {
+    return strategyCharGameOutcomeMapping.get(inputChar);
   }
 }
