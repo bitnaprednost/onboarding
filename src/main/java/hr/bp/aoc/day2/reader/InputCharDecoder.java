@@ -5,7 +5,7 @@ import java.util.Map;
 import hr.bp.aoc.day2.game.GameOutcome;
 import hr.bp.aoc.day2.game.GameShape;
 
-public class CharShapeDecoder {
+public class InputCharDecoder {
   private static Map<Character, GameShape> strategyCharShapeMapping = Map.of(
       'A', GameShape.ROCK, 'B', GameShape.PAPER, 'C', GameShape.SCISSORS,
       'X', GameShape.ROCK, 'Y', GameShape.PAPER, 'Z', GameShape.SCISSORS);

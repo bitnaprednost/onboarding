@@ -13,7 +13,7 @@ import hr.bp.aoc.day2.game.GameOutcome;
 import hr.bp.aoc.day2.game.GamePoints;
 import hr.bp.aoc.day2.game.GameReferee;
 import hr.bp.aoc.day2.game.GameShape;
-import hr.bp.aoc.day2.reader.CharShapeDecoder;
+import hr.bp.aoc.day2.reader.InputCharDecoder;
 
 public class Day2 {
   private static Path InputPath = Paths.get("src/main/resources/aoc/day2/strategy-guide.txt");
@@ -34,8 +34,8 @@ public class Day2 {
       char opponentChar = line.split(" ")[0].charAt(0);
       char playerChar = line.split(" ")[1].charAt(0);
 
-      GameShape opponentGameShape = CharShapeDecoder.getGameShape(opponentChar);
-      GameShape playerGameShape = CharShapeDecoder.getGameShape(playerChar);
+      GameShape opponentGameShape = InputCharDecoder.getGameShape(opponentChar);
+      GameShape playerGameShape = InputCharDecoder.getGameShape(playerChar);
       score += GamePoints.getShapePoints(playerGameShape);
 
       GameOutcome gameOutcome = GameReferee.getGameOutcome(playerGameShape, opponentGameShape);
@@ -52,8 +52,8 @@ public class Day2 {
       char opponentChar = line.split(" ")[0].charAt(0);
       char outcomeChar = line.split(" ")[1].charAt(0);
 
-      GameShape opponentGameShape = CharShapeDecoder.getGameShape(opponentChar);
-      GameOutcome desiredGameOutcome = CharShapeDecoder.getGameOutcome(outcomeChar);
+      GameShape opponentGameShape = InputCharDecoder.getGameShape(opponentChar);
+      GameOutcome desiredGameOutcome = InputCharDecoder.getGameOutcome(outcomeChar);
 
       score += GamePoints.getGameOutcomePoints(desiredGameOutcome);
 
