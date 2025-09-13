@@ -28,9 +28,9 @@ public class Day3 {
 
     for (String rucksack : inputLines) {
       int rucksackSize = rucksack.length();
-      int halfRucksackSize = rucksackSize / 2;
-      String firstCompartment = rucksack.substring(0, halfRucksackSize);
-      String secondCompartment = rucksack.substring(halfRucksackSize, rucksackSize);
+      int compartmentSize = rucksackSize / 2;
+      String firstCompartment = rucksack.substring(0, compartmentSize);
+      String secondCompartment = rucksack.substring(compartmentSize, rucksackSize);
 
       Set<Character> itemsInFirstCompartment = new HashSet<>();
 
