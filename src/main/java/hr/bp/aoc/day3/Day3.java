@@ -7,10 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Day3 {
-  private static Path InputPath = Paths.get("src/main/resources/aoc/day2/strategy-guide.txt");
+  private static Path InputPath = Paths.get("src/main/resources/aoc/day3/rucksacks.txt");
   private List<String> inputLines;
 
   public Day3() throws FileNotFoundException, IOException {
@@ -21,4 +23,36 @@ public class Day3 {
     reader.close();
   }
 
+  public int getBothCompartmentsPrioritySum() {
+    int prioritySum = 0;
+
+    for (String rucksack : inputLines) {
+      int rucksackSize = rucksack.length();
+      int halfRucksackSize = rucksackSize / 2;
+      String firstCompartment = rucksack.substring(0, halfRucksackSize);
+      String secondCompartment = rucksack.substring(halfRucksackSize, rucksackSize);
+
+      Set<Character> itemsInFirstCompartment = new HashSet<>();
+
+      for (int i = 0; i < halfRucksackSize; i++) {
+        itemsInFirstCompartment.add(firstCompartment.charAt(i));
+      }
+
+      for (int j = 0; j < halfRucksackSize; j++) {
+        char secondCompartmentChar = secondCompartment.charAt(j);
+
+        if (itemsInFirstCompartment.contains(secondCompartmentChar)) {
+          if (secondCompartmentChar >= 'a' && secondCompartmentChar <= 'z') {
+            prioritySum += secondCompartmentChar - 'a' + 1;
+          } else {
+            prioritySum += secondCompartmentChar - 'A' + 27;
+          }
+
+          itemsInFirstCompartment.remove(secondCompartmentChar);
+        }
+      }
+    }
+
+    return prioritySum;
+  }
 }
