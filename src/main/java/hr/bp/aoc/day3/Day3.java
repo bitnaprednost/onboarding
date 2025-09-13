@@ -49,4 +49,37 @@ public class Day3 {
 
     return prioritySum;
   }
+
+  public int getBadgesPrioritySum() {
+    int prioritySum = 0;
+
+    for (int g = 0; g < inputLines.size(); g += 3) {
+      String firstRucksack = inputLines.get(g);
+      String secondRucksack = inputLines.get(g + 1);
+      String thirdRucksack = inputLines.get(g + 2);
+
+      Set<Character> possibeBadges = new HashSet<>();
+
+      for (char firstRucksackPossibeBadge : firstRucksack.toCharArray()) {
+        possibeBadges.add(firstRucksackPossibeBadge);
+      }
+
+      Set<Character> tempBadges = new HashSet<>(possibeBadges);
+      possibeBadges = new HashSet<>();
+      for (char secondRucksackPossibleBadge : secondRucksack.toCharArray()) {
+        if (tempBadges.contains(secondRucksackPossibleBadge)) {
+          possibeBadges.add(secondRucksackPossibleBadge);
+        }
+      }
+
+      for (char thirdRucksackBadge : thirdRucksack.toCharArray()) {
+        if (possibeBadges.contains(thirdRucksackBadge)) {
+          prioritySum += PriorityCalculator.getPriority(thirdRucksackBadge);
+          break;
+        }
+      }
+    }
+
+    return prioritySum;
+  }
 }
