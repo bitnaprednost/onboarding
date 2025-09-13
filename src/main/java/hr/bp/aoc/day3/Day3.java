@@ -1,30 +1,34 @@
 package hr.bp.aoc.day3;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
-public class Day3 {
-  private static Path InputPath = Paths.get("src/main/resources/aoc/day3/rucksacks.txt");
-  private List<String> inputLines;
+import hr.bp.aoc.DaySolution;
 
+public class Day3 extends DaySolution {
   public Day3() throws FileNotFoundException, IOException {
-    BufferedReader reader = new BufferedReader(
-        new FileReader(new File(InputPath.toString())));
-    inputLines = reader.lines().toList();
+    super();
+  }
 
-    reader.close();
+  @Override
+  public String getInputFileName() {
+    return "rucksacks.txt";
+  }
+
+  @Override
+  public int getPart1Solution() {
+    return getBothCompartmentsPrioritySum();
+  }
+
+  @Override
+  public int getPart2Solution() {
+    return getBadgesPrioritySum();
   }
 
   public int getBothCompartmentsPrioritySum() {
     int prioritySum = 0;
 
-    for (String rucksack : inputLines) {
+    for (String rucksack : getInputLines()) {
       int rucksackSize = rucksack.length();
       int compartmentSize = rucksackSize / 2;
       String firstCompartment = rucksack.substring(0, compartmentSize);
@@ -42,10 +46,10 @@ public class Day3 {
   public int getBadgesPrioritySum() {
     int prioritySum = 0;
 
-    for (int g = 0; g < inputLines.size(); g += 3) {
-      String firstRucksack = inputLines.get(g);
-      String secondRucksack = inputLines.get(g + 1);
-      String thirdRucksack = inputLines.get(g + 2);
+    for (int g = 0; g < getInputLines().size(); g += 3) {
+      String firstRucksack = getInputLines().get(g);
+      String secondRucksack = getInputLines().get(g + 1);
+      String thirdRucksack = getInputLines().get(g + 2);
 
       prioritySum += PriorityCalculator.getPriority(
           CharacterDistinguisher.getDuplicateCharacters(

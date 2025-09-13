@@ -1,25 +1,31 @@
 package hr.bp.aoc.day1;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Day1 {
-  private static Path InputDataPath = Paths.get("src/main/resources/aoc/day1/input.txt");
-  private List<String> inputLines;
+import hr.bp.aoc.DaySolution;
 
+public class Day1 extends DaySolution {
   public Day1() throws FileNotFoundException, IOException {
-    BufferedReader reader = new BufferedReader(
-        new FileReader(new File(InputDataPath.toString())));
-    inputLines = reader.lines().toList();
-    reader.close();
+    super();
+  }
+
+  @Override
+  public String getInputFileName() {
+    return "input.txt";
+  }
+
+  @Override
+  public int getPart1Solution() {
+    return getMaxCalories();
+  }
+
+  @Override
+  public int getPart2Solution() {
+    return getThreeTotalMaxCalories();
   }
 
   public int getMaxCalories() {
@@ -34,7 +40,7 @@ public class Day1 {
     List<Integer> max = new ArrayList<>();
     int currCalories = 0;
 
-    for (String line : inputLines) {
+    for (String line : getInputLines()) {
       if (line.equals("")) {
         max.add(currCalories);
         max.sort(Comparator.reverseOrder());
