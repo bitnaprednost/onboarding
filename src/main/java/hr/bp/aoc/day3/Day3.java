@@ -34,13 +34,11 @@ public class Day3 {
 
       Set<Character> itemsInFirstCompartment = new HashSet<>();
 
-      for (int i = 0; i < halfRucksackSize; i++) {
-        itemsInFirstCompartment.add(firstCompartment.charAt(i));
+      for (char firstCompartmentChar : firstCompartment.toCharArray()) {
+        itemsInFirstCompartment.add(firstCompartmentChar);
       }
 
-      for (int j = 0; j < halfRucksackSize; j++) {
-        char secondCompartmentChar = secondCompartment.charAt(j);
-
+      for (char secondCompartmentChar : secondCompartment.toCharArray()) {
         if (itemsInFirstCompartment.contains(secondCompartmentChar)) {
           prioritySum += PriorityCalculator.getPriority(secondCompartmentChar);
 
