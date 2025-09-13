@@ -42,11 +42,7 @@ public class Day3 {
         char secondCompartmentChar = secondCompartment.charAt(j);
 
         if (itemsInFirstCompartment.contains(secondCompartmentChar)) {
-          if (secondCompartmentChar >= 'a' && secondCompartmentChar <= 'z') {
-            prioritySum += secondCompartmentChar - 'a' + 1;
-          } else {
-            prioritySum += secondCompartmentChar - 'A' + 27;
-          }
+          prioritySum += PriorityCalculator.getPriority(secondCompartmentChar);
 
           itemsInFirstCompartment.remove(secondCompartmentChar);
         }
