@@ -23,6 +23,7 @@ public class Main {
 
     System.out.println("---DAY 3---");
     System.out.println("Solution is: " + day3Solution.getBothCompartmentsPrioritySum());
+    System.out.println("Part two solution is: " + day3Solution.getBadgesPrioritySum());
 
   }
 }
