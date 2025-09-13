@@ -7,9 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Day3 {
   private static Path InputPath = Paths.get("src/main/resources/aoc/day3/rucksacks.txt");
@@ -32,18 +30,9 @@ public class Day3 {
       String firstCompartment = rucksack.substring(0, compartmentSize);
       String secondCompartment = rucksack.substring(compartmentSize, rucksackSize);
 
-      Set<Character> itemsInFirstCompartment = new HashSet<>();
-
-      for (char firstCompartmentChar : firstCompartment.toCharArray()) {
-        itemsInFirstCompartment.add(firstCompartmentChar);
-      }
-
-      for (char secondCompartmentChar : secondCompartment.toCharArray()) {
-        if (itemsInFirstCompartment.contains(secondCompartmentChar)) {
-          prioritySum += PriorityCalculator.getPriority(secondCompartmentChar);
-
-          itemsInFirstCompartment.remove(secondCompartmentChar);
-        }
+      for (char duplicate : CharacterDistinguisher.getDuplicateCharacters(firstCompartment.toCharArray(),
+          secondCompartment.toCharArray())) {
+        prioritySum += PriorityCalculator.getPriority(duplicate);
       }
     }
 
@@ -58,26 +47,11 @@ public class Day3 {
       String secondRucksack = inputLines.get(g + 1);
       String thirdRucksack = inputLines.get(g + 2);
 
-      Set<Character> possibeBadges = new HashSet<>();
-
-      for (char firstRucksackPossibeBadge : firstRucksack.toCharArray()) {
-        possibeBadges.add(firstRucksackPossibeBadge);
-      }
-
-      Set<Character> tempBadges = new HashSet<>(possibeBadges);
-      possibeBadges = new HashSet<>();
-      for (char secondRucksackPossibleBadge : secondRucksack.toCharArray()) {
-        if (tempBadges.contains(secondRucksackPossibleBadge)) {
-          possibeBadges.add(secondRucksackPossibleBadge);
-        }
-      }
-
-      for (char thirdRucksackBadge : thirdRucksack.toCharArray()) {
-        if (possibeBadges.contains(thirdRucksackBadge)) {
-          prioritySum += PriorityCalculator.getPriority(thirdRucksackBadge);
-          break;
-        }
-      }
+      prioritySum += PriorityCalculator.getPriority(
+          CharacterDistinguisher.getDuplicateCharacters(
+              firstRucksack.toCharArray(),
+              secondRucksack.toCharArray(),
+              thirdRucksack.toCharArray()).toArray(new Character[1])[0]);
     }
 
     return prioritySum;
