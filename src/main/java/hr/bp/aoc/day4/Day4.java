@@ -34,16 +34,18 @@ public class Day4 extends DaySolution {
       SectionAssignment firstAssignment = assignmentPair.getFirstSectionAssignment();
       SectionAssignment secondAssignment = assignmentPair.getSecondSectionAssignment();
 
-      if (firstAssignment.getStartingSectionID() > secondAssignment.getStartingSectionID() ||
-          (firstAssignment.getStartingSectionID() == secondAssignment.getStartingSectionID() &&
-              firstAssignment.getEndingSectionID() < secondAssignment.getEndingSectionID())) {
+      boolean isSupposedToSwap = (firstAssignment.getStartingSectionID() >= secondAssignment.getStartingSectionID() &&
+          firstAssignment.getEndingSectionID() <= secondAssignment.getEndingSectionID());
+      if (isSupposedToSwap) {
         SectionAssignment temp = firstAssignment;
         firstAssignment = secondAssignment;
         secondAssignment = temp;
       }
 
-      if (firstAssignment.getStartingSectionID() <= secondAssignment.getStartingSectionID() &&
-          firstAssignment.getEndingSectionID() >= secondAssignment.getEndingSectionID()) {
+      boolean isFirstContainingSecond = (firstAssignment.getStartingSectionID() <= secondAssignment
+          .getStartingSectionID() &&
+          firstAssignment.getEndingSectionID() >= secondAssignment.getEndingSectionID());
+      if (isFirstContainingSecond) {
         fullyContainingPairs++;
       }
     }
