@@ -8,12 +8,14 @@ import java.util.List;
 import hr.bp.aoc.day1.Day1;
 import hr.bp.aoc.day2.Day2;
 import hr.bp.aoc.day3.Day3;
+import hr.bp.aoc.day4.Day4;
 
 public class DaySolutionController {
   private List<DaySolution> solutions;
 
   public DaySolutionController() throws FileNotFoundException, IOException {
-    solutions = Arrays.asList(new Day1(), new Day2(), new Day3());
+    solutions = Arrays.asList(new Day1(), new Day2(), new Day3(),
+        new Day4());
   }
 
   public void printAllSolutions() {
