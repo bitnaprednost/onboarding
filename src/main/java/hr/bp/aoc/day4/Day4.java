@@ -3,6 +3,7 @@ package hr.bp.aoc.day4;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 import hr.bp.aoc.DaySolution;
 import hr.bp.aoc.utils.Pair;
@@ -19,38 +20,63 @@ public class Day4 extends DaySolution {
 
   @Override
   public int getPart1Solution() {
-    return getNumberOfFullyContainingPairs();
+    return getNumberOfPredicateMatchingPairs(new FullyContainingPairsPredicate());
   }
 
   @Override
   public int getPart2Solution() {
-    return 0;
+    return getNumberOfPredicateMatchingPairs(new PartialyContainingPairsPredicate());
   }
 
-  private int getNumberOfFullyContainingPairs() {
-    int fullyContainingPairs = 0;
+  private int getNumberOfPredicateMatchingPairs(BiPredicate<SectionAssignment, SectionAssignment> overlapingCondition) {
+    int matchingPairs = 0;
     List<Pair<SectionAssignment>> assignmentPairs = AssignmentsPairsDecoder.decodeAssignemtsPairs(getInputLines());
 
     for (Pair<SectionAssignment> assignmentPair : assignmentPairs) {
       SectionAssignment firstAssignment = assignmentPair.getFirstPair();
       SectionAssignment secondAssignment = assignmentPair.getSecondPair();
 
-      boolean isSupposedToSwap = (firstAssignment.getStartingSectionID() >= secondAssignment.getStartingSectionID() &&
+      if (overlapingCondition.test(firstAssignment, secondAssignment))
+        matchingPairs++;
+    }
+
+    return matchingPairs;
+  }
+
+  private class FullyContainingPairsPredicate
+      implements BiPredicate<SectionAssignment, SectionAssignment> {
+
+    @Override
+    public boolean test(SectionAssignment firstAssignment, SectionAssignment secondAssignment) {
+      boolean isSecondWider = (firstAssignment.getStartingSectionID() >= secondAssignment
+          .getStartingSectionID()
+          &&
           firstAssignment.getEndingSectionID() <= secondAssignment.getEndingSectionID());
-      if (isSupposedToSwap) {
+
+      if (isSecondWider) {
         SectionAssignment temp = firstAssignment;
         firstAssignment = secondAssignment;
         secondAssignment = temp;
       }
 
-      boolean isFirstContainingSecond = (firstAssignment.getStartingSectionID() <= secondAssignment
+      return (firstAssignment.getStartingSectionID() <= secondAssignment
           .getStartingSectionID() &&
           firstAssignment.getEndingSectionID() >= secondAssignment.getEndingSectionID());
-      if (isFirstContainingSecond) {
-        fullyContainingPairs++;
-      }
-    }
+    };
+  }
 
-    return fullyContainingPairs;
+  private class PartialyContainingPairsPredicate
+      implements BiPredicate<SectionAssignment, SectionAssignment> {
+    public boolean test(SectionAssignment firstAssignment, SectionAssignment secondAssignment) {
+      boolean firstContainsSecond = ((firstAssignment.getEndingSectionID() >= secondAssignment.getStartingSectionID())
+          &&
+          (firstAssignment.getStartingSectionID() <= secondAssignment.getStartingSectionID()));
+
+      boolean secondContainsFirst = ((secondAssignment.getEndingSectionID() >= firstAssignment.getStartingSectionID())
+          &&
+          (secondAssignment.getStartingSectionID() <= firstAssignment.getStartingSectionID()));
+
+      return firstContainsSecond || secondContainsFirst;
+    };
   }
 }
