@@ -64,6 +64,8 @@ public class Day4 extends DaySolution {
 
   private class PartialyContainingPairsPredicate
       implements BiPredicate<SectionAssignment, SectionAssignment> {
+
+    @Override
     public boolean test(SectionAssignment firstAssignment, SectionAssignment secondAssignment) {
       boolean firstContainsSecond = ((firstAssignment.getEndingSectionID() >= secondAssignment.getStartingSectionID())
           &&
