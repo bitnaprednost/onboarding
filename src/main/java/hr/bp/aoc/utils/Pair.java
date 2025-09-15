@@ -16,4 +16,19 @@ public class Pair<P> {
   public P getSecondPair() {
     return secondPair;
   }
+
+  @Override
+  public int hashCode() {
+    return firstPair.hashCode() + secondPair.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!(obj instanceof Pair<?> other))
+      return false;
+
+    return (firstPair.equals(other.getFirstPair()) && secondPair.equals(other.getSecondPair()));
+  }
 }
