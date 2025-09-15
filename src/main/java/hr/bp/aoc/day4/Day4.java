@@ -48,12 +48,9 @@ public class Day4 extends DaySolution {
 
     @Override
     public boolean test(SectionAssignment firstAssignment, SectionAssignment secondAssignment) {
-      boolean isSecondWider = (firstAssignment.getStartingSectionID() >= secondAssignment
-          .getStartingSectionID()
-          &&
-          firstAssignment.getEndingSectionID() <= secondAssignment.getEndingSectionID());
+      boolean isSecondAssigmentBigger = (firstAssignment.getSize() - secondAssignment.getSize() < 0);
 
-      if (isSecondWider) {
+      if (isSecondAssigmentBigger) {
         SectionAssignment temp = firstAssignment;
         firstAssignment = secondAssignment;
         secondAssignment = temp;

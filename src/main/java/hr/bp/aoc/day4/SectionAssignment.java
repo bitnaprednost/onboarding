@@ -16,4 +16,8 @@ public class SectionAssignment {
   public int getEndingSectionID() {
     return endingSectionID;
   }
+
+  public int getSize() {
+    return endingSectionID - startingSectionID + 1;
+  }
 }
