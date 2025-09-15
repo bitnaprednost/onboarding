@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import hr.bp.aoc.DaySolution;
+import hr.bp.aoc.utils.Pair;
 
 public class Day4 extends DaySolution {
   public Day4() throws FileNotFoundException, IOException {
@@ -28,11 +29,11 @@ public class Day4 extends DaySolution {
 
   private int getNumberOfFullyContainingPairs() {
     int fullyContainingPairs = 0;
-    List<SectionAssignmentPair> assignmentPairs = AssignmentsPairsDecoder.decodeAssignemtsPairs(getInputLines());
+    List<Pair<SectionAssignment>> assignmentPairs = AssignmentsPairsDecoder.decodeAssignemtsPairs(getInputLines());
 
-    for (SectionAssignmentPair assignmentPair : assignmentPairs) {
-      SectionAssignment firstAssignment = assignmentPair.getFirstSectionAssignment();
-      SectionAssignment secondAssignment = assignmentPair.getSecondSectionAssignment();
+    for (Pair<SectionAssignment> assignmentPair : assignmentPairs) {
+      SectionAssignment firstAssignment = assignmentPair.getFirstPair();
+      SectionAssignment secondAssignment = assignmentPair.getSecondPair();
 
       boolean isSupposedToSwap = (firstAssignment.getStartingSectionID() >= secondAssignment.getStartingSectionID() &&
           firstAssignment.getEndingSectionID() <= secondAssignment.getEndingSectionID());
