@@ -7,21 +7,21 @@ public class Crane {
   private static int FROM_STACK_INDEX_SPLIT = 3;
   private static int TO_STACK_INDEX_SPLIT = 5;
 
-  public static void moveCrates(List<String> actions, Ship ship) {
+  public static <T> void moveCrates(List<String> actions, StackList<T> stackList) {
     for (int i = 0; i < actions.size(); i++) {
       String[] words = actions.get(i).split(" ");
       int count = Integer.parseInt(words[COUNT_INDEX_SPLIT]);
       int fromStackIndex = Integer.parseInt(words[FROM_STACK_INDEX_SPLIT]) - 1;
       int toStackIndex = Integer.parseInt(words[TO_STACK_INDEX_SPLIT]) - 1;
 
-      moveCrate(count, fromStackIndex, toStackIndex, ship);
+      moveCrate(count, fromStackIndex, toStackIndex, stackList);
     }
   }
 
-  public static void moveCrate(int count, int fromStackIndex, int toStackIndex, Ship ship) {
+  public static <T> void moveCrate(int count, int fromStackIndex, int toStackIndex, StackList<T> stackList) {
     for (int i = 0; i < count; i++) {
-      char movingChar = ship.getStacks().get(fromStackIndex).pop();
-      ship.getStacks().get(toStackIndex).push(movingChar);
+      T movingChar = stackList.getStacks().get(fromStackIndex).pop();
+      stackList.getStacks().get(toStackIndex).push(movingChar);
     }
   }
 }

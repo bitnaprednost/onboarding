@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class Ship {
+public class Ship implements StackList<Character> {
   private static int STACK_NUMBER = 9;
   private static int CRATE_GAP = 4;
   private static int CRATE_COL_START_OFFSET = 1;
@@ -36,6 +36,7 @@ public class Ship {
     return ship;
   }
 
+  @Override
   public List<Stack<Character>> getStacks() {
     return stacks;
   }
