@@ -21,9 +21,9 @@ public class DaySolutionController {
     for (int i = 0; i < solutions.size(); i++) {
       DaySolution<? extends Object, ? extends Object> currDay = solutions.get(i);
 
-      System.out.println(String.format("----Day %d----", i + 1));
-      System.out.println(String.format("Part 1 solution: %d", currDay.getPart1Solution()));
-      System.out.println(String.format("Part 2 solution: %d", currDay.getPart2Solution()));
+      System.out.println(String.format("----Day %s----", i + 1));
+      System.out.println(String.format("Part 1 solution: %s", currDay.getPart1Solution()));
+      System.out.println(String.format("Part 2 solution: %s", currDay.getPart2Solution()));
       System.out.println();
     }
   }
