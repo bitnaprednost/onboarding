@@ -1,12 +1,11 @@
 package hr.bp.aoc.day3;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import hr.bp.aoc.DaySolution;
 
 public class Day3 extends DaySolution {
-  public Day3() throws FileNotFoundException, IOException {
+  public Day3() throws IOException {
     super();
   }
 

@@ -2,7 +2,6 @@ package hr.bp.aoc;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -19,7 +18,7 @@ public abstract class DaySolution {
 
   private List<String> inputLines;
 
-  public DaySolution() throws FileNotFoundException, IOException {
+  public DaySolution() throws IOException {
     BufferedReader reader = new BufferedReader(
         new FileReader(new File(inputPath.toString())));
     inputLines = reader.lines().toList();

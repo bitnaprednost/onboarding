@@ -1,6 +1,5 @@
 package hr.bp.aoc;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +12,7 @@ import hr.bp.aoc.day4.Day4;
 public class DaySolutionController {
   private List<DaySolution> solutions;
 
-  public DaySolutionController() throws FileNotFoundException, IOException {
+  public DaySolutionController() throws IOException {
     solutions = Arrays.asList(new Day1(), new Day2(), new Day3(),
         new Day4());
   }

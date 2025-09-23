@@ -1,6 +1,5 @@
 package hr.bp.aoc.day2;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import hr.bp.aoc.DaySolution;
@@ -11,7 +10,7 @@ import hr.bp.aoc.day2.game.GameShape;
 import hr.bp.aoc.day2.reader.InputCharDecoder;
 
 public class Day2 extends DaySolution {
-  public Day2() throws FileNotFoundException, IOException {
+  public Day2() throws IOException {
     super();
   }
 

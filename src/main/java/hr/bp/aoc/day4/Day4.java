@@ -1,6 +1,5 @@
 package hr.bp.aoc.day4;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -9,7 +8,7 @@ import hr.bp.aoc.DaySolution;
 import hr.bp.aoc.utils.Pair;
 
 public class Day4 extends DaySolution {
-  public Day4() throws FileNotFoundException, IOException {
+  public Day4() throws IOException {
     super();
   }
 

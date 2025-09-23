@@ -1,6 +1,5 @@
 package hr.bp.aoc.day1;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,7 +8,7 @@ import java.util.List;
 import hr.bp.aoc.DaySolution;
 
 public class Day1 extends DaySolution {
-  public Day1() throws FileNotFoundException, IOException {
+  public Day1() throws IOException {
     super();
   }
 
