@@ -19,11 +19,13 @@ public class Day5 extends DaySolution<String, String> {
   public String getPart1Solution() {
     int CRATE_ROW_START_OFFSET = 7;
     List<String> inputLines = getInputLines();
-    Ship ship = Ship.parseShip(inputLines.subList(0, CRATE_ROW_START_OFFSET + 1));
+    List<String> shipString = inputLines.subList(0, CRATE_ROW_START_OFFSET + 1);
+    Ship ship = Ship.parseShip(shipString);
 
     int ACTIONS_OFFSET = CRATE_ROW_START_OFFSET + 3;
 
-    Crane.moveCrates(inputLines.subList(ACTIONS_OFFSET, inputLines.size()), ship);
+    List<String> actionsString = inputLines.subList(ACTIONS_OFFSET, inputLines.size());
+    Crane.moveCrates(actionsString, ship);
 
     return ship.getTopCrates();
   }
