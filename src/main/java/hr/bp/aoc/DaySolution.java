@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public abstract class DaySolution {
+public abstract class DaySolution<T, U> {
   private static final String COMMON_PATH_PARENT_DIR = "src/main/resources/aoc/";
   private Path inputPath = Paths.get(
       String.format("%s/%s/%s",
@@ -29,9 +29,9 @@ public abstract class DaySolution {
     return inputLines;
   }
 
-  public abstract int getPart1Solution();
+  public abstract T getPart1Solution();
 
-  public abstract int getPart2Solution();
+  public abstract U getPart2Solution();
 
   public abstract String getInputFileName();
 }
