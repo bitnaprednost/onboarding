@@ -13,7 +13,7 @@ public class CrateMover9001 extends Crane {
     }
 
     while (linkedList.size() > 0) {
-      stackList.getStacks().get(toStackIndex).push(linkedList.removeFirst());
+      stackList.getStacks().get(toStackIndex).push(linkedList.removeLast());
     }
   }
 
