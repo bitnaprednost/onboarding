@@ -1,6 +1,8 @@
-package hr.bp.aoc.day5;
+package hr.bp.aoc.day5.cranes;
 
 import java.util.LinkedList;
+
+import hr.bp.aoc.day5.StackList;
 
 public class CrateMover9001 extends Crane {
   @Override

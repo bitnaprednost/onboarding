@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import hr.bp.aoc.DaySolution;
+import hr.bp.aoc.day5.cranes.Crane;
+import hr.bp.aoc.day5.cranes.CrateMover9000;
+import hr.bp.aoc.day5.cranes.CrateMover9001;
 
 public class Day5 extends DaySolution<String, String> {
   public Day5() throws IOException {

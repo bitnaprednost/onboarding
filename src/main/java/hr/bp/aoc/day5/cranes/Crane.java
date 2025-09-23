@@ -1,6 +1,8 @@
-package hr.bp.aoc.day5;
+package hr.bp.aoc.day5.cranes;
 
 import java.util.List;
+
+import hr.bp.aoc.day5.StackList;
 
 public abstract class Crane {
   private static int COUNT_INDEX_SPLIT = 1;
