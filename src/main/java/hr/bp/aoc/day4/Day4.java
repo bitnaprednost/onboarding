@@ -7,7 +7,7 @@ import java.util.function.BiPredicate;
 import hr.bp.aoc.DaySolution;
 import hr.bp.aoc.utils.Pair;
 
-public class Day4 extends DaySolution {
+public class Day4 extends DaySolution<Integer, Integer> {
   public Day4() throws IOException {
     super();
   }
@@ -18,12 +18,12 @@ public class Day4 extends DaySolution {
   }
 
   @Override
-  public int getPart1Solution() {
+  public Integer getPart1Solution() {
     return getNumberOfPredicateMatchingPairs(new FullyContainingPairsPredicate());
   }
 
   @Override
-  public int getPart2Solution() {
+  public Integer getPart2Solution() {
     return getNumberOfPredicateMatchingPairs(new PartialyContainingPairsPredicate());
   }
 

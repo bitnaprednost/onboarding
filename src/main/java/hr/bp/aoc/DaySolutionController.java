@@ -10,7 +10,7 @@ import hr.bp.aoc.day3.Day3;
 import hr.bp.aoc.day4.Day4;
 
 public class DaySolutionController {
-  private List<DaySolution> solutions;
+  private List<DaySolution<? extends Object, ? extends Object>> solutions;
 
   public DaySolutionController() throws IOException {
     solutions = Arrays.asList(new Day1(), new Day2(), new Day3(),
@@ -19,7 +19,7 @@ public class DaySolutionController {
 
   public void printAllSolutions() {
     for (int i = 0; i < solutions.size(); i++) {
-      DaySolution currDay = solutions.get(i);
+      DaySolution<? extends Object, ? extends Object> currDay = solutions.get(i);
 
       System.out.println(String.format("----Day %d----", i + 1));
       System.out.println(String.format("Part 1 solution: %d", currDay.getPart1Solution()));

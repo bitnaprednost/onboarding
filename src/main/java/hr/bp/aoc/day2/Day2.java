@@ -9,7 +9,7 @@ import hr.bp.aoc.day2.game.GameReferee;
 import hr.bp.aoc.day2.game.GameShape;
 import hr.bp.aoc.day2.reader.InputCharDecoder;
 
-public class Day2 extends DaySolution {
+public class Day2 extends DaySolution<Integer, Integer> {
   public Day2() throws IOException {
     super();
   }
@@ -20,12 +20,12 @@ public class Day2 extends DaySolution {
   }
 
   @Override
-  public int getPart1Solution() {
+  public Integer getPart1Solution() {
     return getStrategyGuideScore();
   }
 
   @Override
-  public int getPart2Solution() {
+  public Integer getPart2Solution() {
     return getRightStrategyGuideScore();
   }
 

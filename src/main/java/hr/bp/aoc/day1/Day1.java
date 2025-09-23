@@ -7,7 +7,7 @@ import java.util.List;
 
 import hr.bp.aoc.DaySolution;
 
-public class Day1 extends DaySolution {
+public class Day1 extends DaySolution<Integer, Integer> {
   public Day1() throws IOException {
     super();
   }
@@ -18,12 +18,12 @@ public class Day1 extends DaySolution {
   }
 
   @Override
-  public int getPart1Solution() {
+  public Integer getPart1Solution() {
     return getMaxCalories();
   }
 
   @Override
-  public int getPart2Solution() {
+  public Integer getPart2Solution() {
     return getThreeTotalMaxCalories();
   }
 

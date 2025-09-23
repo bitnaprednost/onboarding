@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import hr.bp.aoc.DaySolution;
 
-public class Day3 extends DaySolution {
+public class Day3 extends DaySolution<Integer, Integer> {
   public Day3() throws IOException {
     super();
   }
@@ -15,12 +15,12 @@ public class Day3 extends DaySolution {
   }
 
   @Override
-  public int getPart1Solution() {
+  public Integer getPart1Solution() {
     return getBothCompartmentsPrioritySum();
   }
 
   @Override
-  public int getPart2Solution() {
+  public Integer getPart2Solution() {
     return getBadgesPrioritySum();
   }
 
