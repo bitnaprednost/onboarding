@@ -24,33 +24,42 @@ public class Day6 extends DaySolution<Integer, Integer> {
 
   @Override
   public Integer getPart2Solution() {
-    return 0;
+    return findFirstStartOfTheMessage();
   }
 
   private int findFirstStartOfThePacket() {
+    int CONSECUTIVE_CHARACTERS_FOR_THE_PACKET = 4;
+    return findFirstStartOfTheMarker(CONSECUTIVE_CHARACTERS_FOR_THE_PACKET);
+  }
+
+  private int findFirstStartOfTheMessage() {
+    int CONSECUTIVE_CHARACTERS_FOR_THE_MESSAGE = 14;
+    return findFirstStartOfTheMarker(CONSECUTIVE_CHARACTERS_FOR_THE_MESSAGE);
+  }
+
+  private int findFirstStartOfTheMarker(int neededConsecutiveCharacters) {
     String buffer = getInputLines().get(0);
-    int NEEDED_CONSECUTIVE_CHARACTERS = 4;
     Map<Character, Integer> currPreMarkerChars = new HashMap<>();
 
     // Prerequisiste (makes main algorithm easier to write)
-    for (int i = 0; i < NEEDED_CONSECUTIVE_CHARACTERS; i++) {
+    for (int i = 0; i < neededConsecutiveCharacters; i++) {
       Character currChar = buffer.charAt(i);
       currPreMarkerChars.put(currChar, currPreMarkerChars.getOrDefault(currChar, 0) + 1);
     }
 
     // Earliest edge case
-    if (currPreMarkerChars.size() == NEEDED_CONSECUTIVE_CHARACTERS)
-      return NEEDED_CONSECUTIVE_CHARACTERS;
+    if (currPreMarkerChars.size() == neededConsecutiveCharacters)
+      return neededConsecutiveCharacters;
 
-    for (int j = NEEDED_CONSECUTIVE_CHARACTERS; j < buffer.length(); j++) {
-      Character charToRemove = buffer.charAt(j - NEEDED_CONSECUTIVE_CHARACTERS);
+    for (int j = neededConsecutiveCharacters; j < buffer.length(); j++) {
+      Character charToRemove = buffer.charAt(j - neededConsecutiveCharacters);
       currPreMarkerChars.put(charToRemove, currPreMarkerChars.get(charToRemove) - 1);
       if (currPreMarkerChars.get(charToRemove) == 0)
         currPreMarkerChars.remove(charToRemove);
 
       Character charToAdd = buffer.charAt(j);
       currPreMarkerChars.put(charToAdd, currPreMarkerChars.getOrDefault(charToAdd, 0) + 1);
-      if (currPreMarkerChars.size() == NEEDED_CONSECUTIVE_CHARACTERS)
+      if (currPreMarkerChars.size() == neededConsecutiveCharacters)
         return j + 1;
     }
 
