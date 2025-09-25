@@ -2,7 +2,6 @@ package hr.bp.aoc.day7;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Dir {
@@ -23,17 +22,14 @@ public class Dir {
     return children.get(name);
   }
 
-  public void parseChildren(List<String> ls) {
+  public void parseLsLine(String line) {
+    String prefix = line.split(" ")[0];
+    String name = line.split(" ")[1];
 
-    for (String line : ls) {
-      String prefix = line.split(" ")[0];
-      String name = line.split(" ")[1];
-
-      if ("dir".equals(prefix)) {
-        children.put(name, new Dir(this, name));
-      } else {
-        fileSize += Integer.parseInt(prefix);
-      }
+    if ("dir".equals(prefix)) {
+      children.put(name, new Dir(this, name));
+    } else {
+      fileSize += Integer.parseInt(prefix);
     }
   }
 

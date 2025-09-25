@@ -15,28 +15,7 @@ public class FileManager {
 
     int i = 1;
     while (i < terminalLines.size()) {
-      String[] splited = terminalLines.get(i).split(" ");
-
-      boolean isCommand = "$".equals(splited[0]);
-
-      if (isCommand) {
-        boolean isCd = "cd".equals(splited[1]);
-        if (isCd) {
-          curr = operateCd(curr, splited[2]);
-        } else {
-          i++;
-          int startingDirIndex = i;
-          boolean isEndOfDirLs;
-          do {
-            i++;
-            isEndOfDirLs = i == terminalLines.size() || "$".equals(terminalLines.get(i).split(" ")[0]);
-          } while (!isEndOfDirLs);
-
-          curr.parseChildren(terminalLines.subList(startingDirIndex, i));
-          i--;
-        }
-      }
-
+      curr = operateTerminalLine(terminalLines.get(i), curr);
       i++;
     }
   }
@@ -55,6 +34,23 @@ public class FileManager {
     }
 
     return sum;
+  }
+
+  public static Dir operateTerminalLine(String line, Dir curr) {
+    String[] splited = line.split(" ");
+
+    boolean isCommand = "$".equals(splited[0]);
+
+    if (isCommand) {
+      boolean isCd = "cd".equals(splited[1]);
+      if (!isCd)
+        return curr;
+      curr = operateCd(curr, splited[2]);
+    } else {
+      curr.parseLsLine(line);
+    }
+
+    return curr;
   }
 
   public static Dir operateCd(Dir curr, String destination) {
