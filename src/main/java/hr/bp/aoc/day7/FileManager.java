@@ -22,13 +22,7 @@ public class FileManager {
       if (isCommand) {
         boolean isCd = "cd".equals(splited[1]);
         if (isCd) {
-          String destination = splited[2];
-          boolean isReturning = "..".equals(destination);
-          if (isReturning) {
-            curr = curr.getParent();
-          } else {
-            curr = curr.getChild(destination);
-          }
+          curr = operateCd(curr, splited[2]);
         } else {
           i++;
           int startingDirIndex = i;
@@ -61,5 +55,16 @@ public class FileManager {
     }
 
     return sum;
+  }
+
+  public static Dir operateCd(Dir curr, String destination) {
+    boolean isReturning = "..".equals(destination);
+    if (isReturning) {
+      curr = curr.getParent();
+    } else {
+      curr = curr.getChild(destination);
+    }
+
+    return curr;
   }
 }
