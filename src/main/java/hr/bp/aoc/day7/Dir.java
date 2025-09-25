@@ -37,12 +37,12 @@ public class Dir {
     if (fullSize != -1)
       return fullSize;
 
-    int dirSize = 0;
+    int childrenDirSizeSum = 0;
     for (Dir child : children.values()) {
-      dirSize += child.getFullSize();
+      childrenDirSizeSum += child.getFullSize();
     }
 
-    return dirSize + fileSize;
+    return childrenDirSizeSum + fileSize;
   }
 
   public Collection<Dir> getChildren() {
