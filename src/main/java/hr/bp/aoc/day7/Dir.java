@@ -10,7 +10,7 @@ public class Dir {
   private int fullSize = -1;
   private Map<String, Dir> children = new HashMap<>();
 
-  public Dir(Dir parent, String name) {
+  public Dir(Dir parent) {
     this.parent = parent;
   }
 
@@ -27,7 +27,7 @@ public class Dir {
     String name = line.split(" ")[1];
 
     if ("dir".equals(prefix)) {
-      children.put(name, new Dir(this, name));
+      children.put(name, new Dir(this));
     } else {
       fileSize += Integer.parseInt(prefix);
     }

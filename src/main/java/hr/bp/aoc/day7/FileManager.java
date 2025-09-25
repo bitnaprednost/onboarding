@@ -7,7 +7,7 @@ public class FileManager {
   private Dir head;
 
   public FileManager() {
-    head = new Dir(null, "/");
+    head = new Dir(null);
   }
 
   public void createFilesystemFromTerminal(List<String> terminalLines) {
