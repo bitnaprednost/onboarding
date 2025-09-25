@@ -24,6 +24,9 @@ public class Day7 extends DaySolution<Integer, Integer> {
 
   @Override
   public Integer getPart2Solution() {
-    return 0;
+    FileManager fileManager = new FileManager();
+    fileManager.createFilesystemFromTerminal(getInputLines());
+
+    return fileManager.sizeOfSmallesDirNeededToDelete();
   }
 }

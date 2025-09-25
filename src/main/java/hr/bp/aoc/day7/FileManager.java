@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Stack;
 
 public class FileManager {
+  private static int TOTAL_DISK_SPACE = 70000000;
+  private static int MIN_UPDATE_SIZE = 30000000;
   private Dir head;
 
   public FileManager() {
@@ -32,6 +34,27 @@ public class FileManager {
     }
 
     return sum;
+  }
+
+  public int sizeOfSmallesDirNeededToDelete() {
+    Stack<Dir> stack = new Stack<>();
+    stack.push(head);
+
+    int currMinSize = Integer.MAX_VALUE;
+    int neededSpace = Math.min(MIN_UPDATE_SIZE, MIN_UPDATE_SIZE - (TOTAL_DISK_SPACE - head.getFullSize()));
+
+    while (!stack.empty()) {
+      Dir currCandidate = stack.pop();
+      int currDirSize = currCandidate.getFullSize();
+      if (currDirSize > neededSpace) {
+        currMinSize = Math.min(currMinSize, currDirSize);
+        for (Dir child : currCandidate.getChildren()) {
+          stack.push(child);
+        }
+      }
+    }
+
+    return currMinSize;
   }
 
   public static Dir operateTerminalLine(String line, Dir curr) {
