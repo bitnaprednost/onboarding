@@ -52,10 +52,10 @@ public class FileManager {
     Stack<Dir> stack = new Stack<>();
     stack.push(head);
     while (!stack.empty()) {
-      Dir currCounting = stack.pop();
-      if (currCounting.getFullSize() <= 100000)
-        sum += currCounting.getFullSize();
-      for (Dir child : currCounting.getChildren()) {
+      Dir currCandidate = stack.pop();
+      if (currCandidate.getFullSize() <= 100000)
+        sum += currCandidate.getFullSize();
+      for (Dir child : currCandidate.getChildren()) {
         stack.push(child);
       }
     }
