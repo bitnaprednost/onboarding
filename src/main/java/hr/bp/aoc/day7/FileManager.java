@@ -13,10 +13,8 @@ public class FileManager {
   public void createFilesystemFromTerminal(List<String> terminalLines) {
     Dir curr = head;
 
-    int i = 1;
-    while (i < terminalLines.size()) {
+    for (int i = 1; i < terminalLines.size(); i++) {
       curr = operateTerminalLine(terminalLines.get(i), curr);
-      i++;
     }
   }
 
