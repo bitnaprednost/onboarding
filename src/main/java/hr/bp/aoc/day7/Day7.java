@@ -5,6 +5,8 @@ import java.io.IOException;
 import hr.bp.aoc.DaySolution;
 
 public class Day7 extends DaySolution<Integer, Integer> {
+  private FileManager fileManager = new FileManager();
+
   public Day7() throws IOException {
     super();
   }
@@ -16,7 +18,6 @@ public class Day7 extends DaySolution<Integer, Integer> {
 
   @Override
   public Integer getPart1Solution() {
-    FileManager fileManager = new FileManager();
     fileManager.createFilesystemFromTerminal(getInputLines());
 
     return fileManager.sumOfSizesSmallerThan100000();
@@ -24,7 +25,6 @@ public class Day7 extends DaySolution<Integer, Integer> {
 
   @Override
   public Integer getPart2Solution() {
-    FileManager fileManager = new FileManager();
     fileManager.createFilesystemFromTerminal(getInputLines());
 
     return fileManager.sizeOfSmallesDirNeededToDelete();
