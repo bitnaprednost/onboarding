@@ -2,10 +2,13 @@ package hr.bp.aoc.day8;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import hr.bp.aoc.DaySolution;
+import hr.bp.aoc.utils.Pair;
 
 public class Day8 extends DaySolution<Integer, Integer> {
   public Day8() throws IOException {
@@ -14,6 +17,11 @@ public class Day8 extends DaySolution<Integer, Integer> {
 
   @Override
   public String getInputFileName() {
+    return "treemap.txt";
+  }
+
+  @Override
+  public Integer getPart1Solution() {
     List<List<Integer>> trees = new ArrayList<>();
 
     for (String line : getInputLines()) {
@@ -21,11 +29,24 @@ public class Day8 extends DaySolution<Integer, Integer> {
       trees.add(stringTreesRow.stream().map(Integer::parseInt).collect(Collectors.toList()));
     }
 
-    return "treemap.txt";
-  }
+    Set<Pair<Integer>> foundVisible = new HashSet<>();
+    for (int r = 0; r < trees.size(); r++) {
+      int prevHeighest = Integer.MIN_VALUE;
 
-  @Override
-  public Integer getPart1Solution() {
+      for (int c = 0; c < trees.get(0).size(); c++) {
+        if (trees.get(r).get(c) > prevHeighest) {
+          foundVisible.add(new Pair<Integer>(r, c));
+        }
+      }
+
+      prevHeighest = Integer.MIN_VALUE;
+      for (int c = trees.get(0).size() - 1; c >= 0; c--) {
+        if (trees.get(r).get(c) > prevHeighest) {
+          foundVisible.add(new Pair<Integer>(r, c));
+        }
+      }
+    }
+
     return 0;
   }
 
