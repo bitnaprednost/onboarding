@@ -47,6 +47,23 @@ public class Day8 extends DaySolution<Integer, Integer> {
       }
     }
 
+    for (int c = 0; c < trees.get(0).size(); c++) {
+      int prevHeighest = Integer.MIN_VALUE;
+
+      for (int r = 0; r < trees.size(); r++) {
+        if (trees.get(r).get(c) > prevHeighest) {
+          foundVisible.add(new Pair<Integer>(r, c));
+        }
+      }
+
+      prevHeighest = Integer.MIN_VALUE;
+      for (int r = trees.size() - 1; r >= 0; r--) {
+        if (trees.get(r).get(c) > prevHeighest) {
+          foundVisible.add(new Pair<Integer>(r, c));
+        }
+      }
+    }
+
     return 0;
   }
 
