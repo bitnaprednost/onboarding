@@ -11,13 +11,14 @@ import hr.bp.aoc.day4.Day4;
 import hr.bp.aoc.day5.Day5;
 import hr.bp.aoc.day6.Day6;
 import hr.bp.aoc.day7.Day7;
+import hr.bp.aoc.day8.Day8;
 
 public class DaySolutionController {
   private List<DaySolution<? extends Object, ? extends Object>> solutions;
 
   public DaySolutionController() throws IOException {
     solutions = Arrays.asList(new Day1(), new Day2(), new Day3(),
-        new Day4(), new Day5(), new Day6(), new Day7());
+        new Day4(), new Day5(), new Day6(), new Day7(), new Day8());
   }
 
   public void printAllSolutions() {

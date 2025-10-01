@@ -64,7 +64,7 @@ public class Day8 extends DaySolution<Integer, Integer> {
       }
     }
 
-    return 0;
+    return foundVisible.size();
   }
 
   @Override
