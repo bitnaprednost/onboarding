@@ -19,20 +19,9 @@ public class CaloriesCounter {
             System.out.println(elf);
         }
 
+        ElfCaloriesAnalyzer elfCaloriesAnalyzer = new ElfCaloriesAnalyzer(elves);
         /*Printing the elf with the maximum number of calories*/
-        System.out.println("The elf with maximum number of calories is " + getMaximumCaloriesElf(elves));
-    }
-
-    private static Elf getMaximumCaloriesElf(List<Elf> elves) {
-        Elf maximumCaloriesElf = elves.get(0);
-
-        for (Elf elf : elves) {
-            if (elf.numberOfCalories() >= maximumCaloriesElf.numberOfCalories()) {
-                maximumCaloriesElf = elf;
-            }
-        }
-
-        return maximumCaloriesElf;
+        System.out.println("The elf with maximum number of calories is " + elfCaloriesAnalyzer.getMaximumCaloriesElf());
     }
 }
 

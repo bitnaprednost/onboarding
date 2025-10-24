@@ -1,6 +1,5 @@
 package com.bp.aoc.day1;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,16 +16,17 @@ public class ThreeElvesCounter {
 
         List<Elf> elves = ElfCaloriesLoader.loadElves(nameOfTheFile);
 
-        elves.sort(Comparator.comparingInt(Elf::numberOfCalories).reversed());
-
         /*Printing elves and the number of calories*/
         for (Elf elf : elves) {
             System.out.println(elf);
         }
 
+        ElfCaloriesAnalyzer elfCaloriesAnalyzer = new ElfCaloriesAnalyzer(elves);
+
+        List<Elf> topThreeElves = elfCaloriesAnalyzer.getTopThreeElves();
         /*Calculating the total and printing the first three elves who have the largest number of calories*/
-        for (int i = 0; i < 3 && i < elves.size(); i++) {
-            Elf elf = elves.get(i);
+        for (int i = 0; i < topThreeElves.size(); i++) {
+            Elf elf = topThreeElves.get(i);
             total += elf.numberOfCalories();
             System.out.println(i + 1 + " elf carrying the most calories is " + elf);
         }
