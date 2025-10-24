@@ -22,13 +22,11 @@ public class ElfCaloriesApp {
         for (Elf elf : elves) {
             System.out.println(elf);
         }
+
         ElfCaloriesAnalyzer elfCaloriesAnalyzer = new ElfCaloriesAnalyzer(elves);
 
         switch (mode) {
-            case "1" -> {
-                System.out.println("The elf with maximum number of calories is " + elfCaloriesAnalyzer.getMaximumCaloriesElf());
-                break;
-            }
+            case "1" -> System.out.println("The elf with maximum number of calories is " + elfCaloriesAnalyzer.getMaximumCaloriesElf());
             case "2" -> {
                 List<Elf> topThreeElves = elfCaloriesAnalyzer.getTopThreeElves();
                 int total = 0;
@@ -41,9 +39,7 @@ public class ElfCaloriesApp {
 
                 System.out.println("The top three elves carrying the most calories are in total carrying: " + total);
             }
-            default -> {
-                System.out.println("Invalid mode");
-            }
+            default -> System.out.println("Invalid mode");
         }
     }
 }

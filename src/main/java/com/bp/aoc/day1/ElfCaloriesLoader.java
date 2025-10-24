@@ -31,7 +31,7 @@ public class ElfCaloriesLoader {
             addElf(elves, counter, calories);
 
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            throw new RuntimeException("Error loading elves from file: " + e.getMessage(), e);
         }
 
         return elves;

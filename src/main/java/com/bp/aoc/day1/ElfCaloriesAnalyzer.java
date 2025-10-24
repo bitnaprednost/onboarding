@@ -15,21 +15,16 @@ public class ElfCaloriesAnalyzer {
     }
 
     public Elf getMaximumCaloriesElf() {
-        Elf maximumCaloriesElf = elves.get(0);
-
-        for (Elf elf : elves) {
-            if (elf.numberOfCalories() >= maximumCaloriesElf.numberOfCalories()) {
-                maximumCaloriesElf = elf;
-            }
-        }
-
-        return maximumCaloriesElf;
+        return elves.stream()
+                .max(Comparator.comparingInt(Elf::numberOfCalories))
+                .orElseThrow(() -> new IllegalStateException("No elves available."));
     }
 
     public List<Elf> getTopThreeElves() {
-        elves.sort(Comparator.comparingInt(Elf::numberOfCalories).reversed());
-
-        return elves.subList(0, 3);
+        return elves.stream()
+                .sorted(Comparator.comparingInt(Elf::numberOfCalories).reversed())
+                .limit(3)
+                .toList();
     }
 
 }
