@@ -30,6 +30,7 @@ public class RockPaperScissorsApp {
 
         for (String line : lines) {
             line = line.replaceAll("\\s", "");
+
             if (line.length() != 2) {
                 throw new IllegalArgumentException("Error: Line must contain two characters");
             }
@@ -38,9 +39,11 @@ public class RockPaperScissorsApp {
             secondColumn.add(String.valueOf(line.charAt(1)));
         }
 
+        Tournament tournament = new Tournament(firstColumn, secondColumn);
+
         switch (mode) {
-            case "1" -> totalScore = Tournament.play(firstColumn, secondColumn, true);
-            case "2" -> totalScore = Tournament.play(firstColumn, secondColumn, false);
+            case "1" -> totalScore = tournament.play(true);
+            case "2" -> totalScore = tournament.play(false);
             default -> System.out.println("Invalid mode");
         }
 
