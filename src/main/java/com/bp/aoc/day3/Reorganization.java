@@ -1,33 +1,57 @@
 package com.bp.aoc.day3;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Ivona Pavela
  */
-
-
 public class Reorganization {
 
-    public static final int differenceFromUppercase = 38;
-    public static final int differenceFromLowercase = 96;
+    private static final int OFFSET_UPPERCASE = 38;
+    private static final int OFFSET_LOWERCASE = 96;
 
-    public static int reorganization(String... lines) {
-        int priority = 0;
-        StringBuilder duplicates = new StringBuilder();
+    public static int sumPrioritiesOfCommonItems(String... lines) {
+        validateInput(lines);
 
-        for (char letter : lines[0].toCharArray()) {
-            boolean inAll = Arrays.stream(lines, 1, lines.length)
-                    .allMatch(line -> line.indexOf(letter) != -1);
+        Set<Character> common = toCharSet(lines[0]);
 
-            if (inAll && duplicates.toString().indexOf(letter) == -1) {
-                duplicates.append(letter);
-                priority += Character.isUpperCase(letter)
-                        ? (letter - differenceFromUppercase)
-                        : (letter - differenceFromLowercase);
-            }
+        for (int i = 1; i < lines.length && !common.isEmpty(); i++) {
+            common.retainAll(toCharSet(lines[i]));
         }
 
-        return priority;
+        int total = 0;
+        for (char c : common) {
+            total += priorityOf(c);
+        }
+
+        return total;
+    }
+
+    private static int priorityOf(char c) {
+        if (c >= 'a' && c <= 'z') return c - OFFSET_LOWERCASE;
+        if (c >= 'A' && c <= 'Z') return c - OFFSET_UPPERCASE;
+        throw new IllegalArgumentException("Unsupported character for priority: '" + c + "'");
+    }
+
+    private static void validateInput(String... lines) {
+        if (lines == null || lines.length == 0) {
+            throw new IllegalArgumentException("At least one line is required");
+        }
+
+        for (int i = 0; i < lines.length; i++) {
+            Objects.requireNonNull(lines[i], "Line at index " + i + " is null");
+        }
+    }
+
+    private static Set<Character> toCharSet(String s) {
+        Set<Character> set = new HashSet<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            set.add(s.charAt(i));
+        }
+
+        return set;
     }
 }
