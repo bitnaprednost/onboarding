@@ -23,7 +23,7 @@ public class ReorganizationApp {
 
         switch (mode) {
             case "1" -> {
-                for(String line: lines){
+                for (String line : lines) {
                     int mid = line.length() / 2;
                     sumOfPriorities += Reorganization.reorganization(line.substring(0, mid), line.substring(mid));
                 }

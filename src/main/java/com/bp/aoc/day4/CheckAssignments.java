@@ -5,15 +5,13 @@ import java.util.List;
 /**
  * @author Ivona Pavela
  */
-
-
 public class CheckAssignments {
 
     static int checkAssignments(List<String> lines, boolean checkFullyContained) {
 
         int counter = 0;
 
-        for(String line: lines){
+        for (String line : lines) {
             int comma = line.indexOf(",");
 
             String[] firstRange = line.substring(0, comma).split("-");
