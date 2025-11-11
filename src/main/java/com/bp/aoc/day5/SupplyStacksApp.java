@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * @author Ivona Pavela
+ */
+
 public class SupplyStacksApp {
 
     public static void main(String[] args) {
@@ -24,12 +28,13 @@ public class SupplyStacksApp {
         List<String> stackLines = lines.subList(0, indexOfBlankLine);
         List<String> rearrangementProcedure = lines.subList(indexOfBlankLine + 1, lines.size());
 
-        Map<Integer, Deque<Character>> stacksOfCrates = CratesInStacks.storingCratesInStacks(stackLines);
+        CratesInStacks.storingCratesInStacks(stackLines);
+        Map<Integer, Deque<Character>> stacksOfCrates = CratesInStacks.getStacksOfCrates();
 
 
         switch (mode) {
-            case "1" -> RearrangementProcedure.rearrangeCrates(rearrangementProcedure, stacksOfCrates, false);
-            case "2" -> RearrangementProcedure.rearrangeCrates(rearrangementProcedure, stacksOfCrates, true);
+            case "1" -> RearrangementProcedure.rearrangeCratesOneByOne(rearrangementProcedure, stacksOfCrates);
+            case "2" -> RearrangementProcedure.rearrangeCratesInOrder(rearrangementProcedure, stacksOfCrates);
             default -> System.out.println("Invalid mode");
         }
     }
