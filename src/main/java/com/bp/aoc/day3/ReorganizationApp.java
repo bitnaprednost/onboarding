@@ -28,6 +28,7 @@ public class ReorganizationApp {
             case "1" -> {
                 for (String line : lines) {
                     int mid = line.length() / 2;
+                    System.out.println("First compartment: " + line.substring(0,mid) + " second: " + line.substring(mid));
                     sumOfPriorities += Reorganization.sumPrioritiesOfCommonItems(line.substring(0, mid), line.substring(mid));
                 }
             }

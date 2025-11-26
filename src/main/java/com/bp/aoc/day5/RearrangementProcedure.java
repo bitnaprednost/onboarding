@@ -53,7 +53,7 @@ public class RearrangementProcedure {
 
     private static void printTopCrates(Map<Integer, Deque<Character>> stacks){
         for(int i = 1; i <= stacks.size(); i++){
-            System.out.print(stacks.get(i).pop());
+            System.out.print(stacks.get(i).peek());
         }
     }
 
